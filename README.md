@@ -34,7 +34,7 @@ python tools\validate_resources.py
 
 ## 当前模块
 
-- GitHub: https://github.com/xxsxjt/earth-online
+- GitHub: https://github.com/xxsxjt/xxsx-mc-earth-online
 - `neoforge-26.2/` — NeoForge `26.2.0.7-beta` / Minecraft `26.2`，Java 25。
 - 构建产物：`neoforge-26.2/build/libs/earth-online-neoforge-26.2-0.1.0.jar`
 - 测试部署：`D:\_dx\_Games\MC\xxxxxx\.minecraft\versions\26.2-NeoForge_26.2.0.7-beta\mods`
