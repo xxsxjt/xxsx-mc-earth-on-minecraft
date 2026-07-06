@@ -50,7 +50,26 @@
     "activated carbon filtration",
     "wastewater neutralization",
     "tailings stabilization",
-    "sludge cake sintering"
+    "sludge cake sintering",
+    "natural latex and rubber vulcanization",
+    "rubber compounding and gaskets",
+    "ethanol fermentation",
+    "acetic acid and acetone solvents",
+    "phenolic resin",
+    "epoxy resin",
+    "stainless steel alloying",
+    "aluminum alloying",
+    "ferrochrome and ferromanganese",
+    "titanium chloride and sponge titanium",
+    "metallurgical silicon",
+    "chlorosilane purification",
+    "polysilicon and silicon wafers",
+    "semiconductor dopants",
+    "photoresist precursor",
+    "monazite and bastnasite rare earth processing",
+    "mixed rare earth oxide",
+    "neodymium magnet material",
+    "industrial catalysts"
   ],
   "note": "Java ProcessingMachineBlock owns executable recipes; this manifest documents implemented industry families for handbook, JEI and future data-driven migration."
 }

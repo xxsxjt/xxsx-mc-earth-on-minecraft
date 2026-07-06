@@ -348,6 +348,44 @@ neutral_salt: mixed white gray neutralization salt crystals
 activated_carbon_filter: black activated carbon filter cartridge
 lime_treatment_residue: off-white chalky lime treatment residue clump
 stabilized_tailings: gray stabilized tailings aggregate blocky lump
+natural_latex: milky white natural latex in a small sample cup
+raw_rubber: pale tan raw rubber lump
+vulcanized_rubber: dark vulcanized rubber slab
+rubber_compound: black rubber compound sheet with carbon filler
+rubber_gasket: small black rubber gasket ring
+ethanol: clear ethanol vial with faint blue highlight
+acetic_acid: clear acetic acid vial with sharp white shine
+acetone: clear solvent vial with pale purple tint
+phenol: pale amber phenol crystals in a small jar
+phenolic_resin: dark red brown phenolic resin pellets
+epoxy_resin: golden translucent epoxy resin droplet
+industrial_solvent: clear industrial solvent canister
+chromite_dust: dark brown black chromite mineral powder
+ferrochrome: dark metallic ferrochrome alloy lump
+ferromanganese: gray metallic ferromanganese alloy lump
+stainless_steel_bloom: bright silver stainless steel billet
+aluminum_alloy_billet: pale silver aluminum alloy billet
+magnesium_dust: bright pale magnesium metal powder
+titanium_slag: dark blue gray titanium slag chunk
+titanium_tetrachloride: smoky pale titanium tetrachloride vial
+titanium_sponge: porous silver gray titanium sponge lump
+metallurgical_silicon: dark silver metallurgical silicon chunk
+chlorosilane: clear chlorosilane chemical vial
+high_purity_silicon: bright reflective high purity silicon shard
+polysilicon: blue gray polysilicon crystal chunks
+silicon_wafer: thin shiny circular silicon wafer
+dopant_dust: tiny violet red semiconductor dopant powder
+photoresist_precursor: amber photoresist precursor vial
+monazite_sand: orange brown monazite heavy mineral sand
+bastnasite_dust: tan rare earth bastnasite powder
+mixed_rare_earth_oxide: pale cream mixed rare earth oxide powder
+neodymium_salt: pink purple neodymium salt crystals
+ndfeb_magnet: small dark metallic neodymium magnet
+rare_earth_tailings: gray tan rare earth tailings residue
+iron_catalyst: dark iron catalyst pellets
+vanadium_catalyst: orange vanadium catalyst pellets
+nickel_catalyst: green nickel catalyst pellets
+platinum_group_catalyst: silver platinum group catalyst grains
 ```
 
 ### 气体单元

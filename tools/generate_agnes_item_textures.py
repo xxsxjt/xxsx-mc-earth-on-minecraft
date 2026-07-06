@@ -64,6 +64,44 @@ ITEMS = {
     "activated_carbon_filter": ("活性炭滤料", "Activated Carbon Filter", "black activated carbon filter cartridge"),
     "lime_treatment_residue": ("石灰处理渣", "Lime Treatment Residue", "off-white chalky lime treatment residue clump"),
     "stabilized_tailings": ("稳定化尾矿", "Stabilized Tailings", "gray stabilized tailings aggregate blocky lump"),
+    "natural_latex": ("天然胶乳", "Natural Latex", "milky white natural latex in a small sample cup"),
+    "raw_rubber": ("粗橡胶", "Raw Rubber", "pale tan raw rubber lump"),
+    "vulcanized_rubber": ("硫化橡胶", "Vulcanized Rubber", "dark vulcanized rubber slab"),
+    "rubber_compound": ("橡胶复合料", "Rubber Compound", "black rubber compound sheet with carbon filler"),
+    "rubber_gasket": ("橡胶密封圈", "Rubber Gasket", "small black rubber gasket ring"),
+    "ethanol": ("乙醇 C2H5OH", "Ethanol C2H5OH", "clear ethanol vial with faint blue highlight"),
+    "acetic_acid": ("乙酸 CH3COOH", "Acetic Acid CH3COOH", "clear acetic acid vial with sharp white shine"),
+    "acetone": ("丙酮 C3H6O", "Acetone C3H6O", "clear solvent vial with pale purple tint"),
+    "phenol": ("苯酚 C6H5OH", "Phenol C6H5OH", "pale amber phenol crystals in a small jar"),
+    "phenolic_resin": ("酚醛树脂", "Phenolic Resin", "dark red brown phenolic resin pellets"),
+    "epoxy_resin": ("环氧树脂", "Epoxy Resin", "golden translucent epoxy resin droplet"),
+    "industrial_solvent": ("工业溶剂", "Industrial Solvent", "clear industrial solvent canister"),
+    "chromite_dust": ("铬铁矿粉 FeCr2O4", "Chromite Dust FeCr2O4", "dark brown black chromite mineral powder"),
+    "ferrochrome": ("铬铁 FeCr", "Ferrochrome FeCr", "dark metallic ferrochrome alloy lump"),
+    "ferromanganese": ("锰铁 FeMn", "Ferromanganese FeMn", "gray metallic ferromanganese alloy lump"),
+    "stainless_steel_bloom": ("不锈钢坯", "Stainless Steel Bloom", "bright silver stainless steel billet"),
+    "aluminum_alloy_billet": ("铝合金坯", "Aluminum Alloy Billet", "pale silver aluminum alloy billet"),
+    "magnesium_dust": ("镁粉 Mg", "Magnesium Dust Mg", "bright pale magnesium metal powder"),
+    "titanium_slag": ("钛渣", "Titanium Slag", "dark blue gray titanium slag chunk"),
+    "titanium_tetrachloride": ("四氯化钛 TiCl4", "Titanium Tetrachloride TiCl4", "smoky pale titanium tetrachloride vial"),
+    "titanium_sponge": ("海绵钛", "Titanium Sponge", "porous silver gray titanium sponge lump"),
+    "metallurgical_silicon": ("冶金级硅", "Metallurgical Silicon", "dark silver metallurgical silicon chunk"),
+    "chlorosilane": ("氯硅烷", "Chlorosilane", "clear chlorosilane chemical vial"),
+    "high_purity_silicon": ("高纯硅", "High Purity Silicon", "bright reflective high purity silicon shard"),
+    "polysilicon": ("多晶硅", "Polysilicon", "blue gray polysilicon crystal chunks"),
+    "silicon_wafer": ("硅晶圆", "Silicon Wafer", "thin shiny circular silicon wafer"),
+    "dopant_dust": ("掺杂剂粉", "Dopant Dust", "tiny violet red semiconductor dopant powder"),
+    "photoresist_precursor": ("光刻胶前驱体", "Photoresist Precursor", "amber photoresist precursor vial"),
+    "monazite_sand": ("独居石砂", "Monazite Sand", "orange brown monazite heavy mineral sand"),
+    "bastnasite_dust": ("氟碳铈矿粉", "Bastnasite Dust", "tan rare earth bastnasite powder"),
+    "mixed_rare_earth_oxide": ("混合稀土氧化物", "Mixed Rare Earth Oxide", "pale cream mixed rare earth oxide powder"),
+    "neodymium_salt": ("钕盐", "Neodymium Salt", "pink purple neodymium salt crystals"),
+    "ndfeb_magnet": ("钕铁硼磁材", "NdFeB Magnet", "small dark metallic neodymium magnet"),
+    "rare_earth_tailings": ("稀土尾渣", "Rare Earth Tailings", "gray tan rare earth tailings residue"),
+    "iron_catalyst": ("铁基催化剂", "Iron Catalyst", "dark iron catalyst pellets"),
+    "vanadium_catalyst": ("钒基催化剂", "Vanadium Catalyst", "orange vanadium catalyst pellets"),
+    "nickel_catalyst": ("镍基催化剂", "Nickel Catalyst", "green nickel catalyst pellets"),
+    "platinum_group_catalyst": ("铂族催化剂", "Platinum Group Catalyst", "silver platinum group catalyst grains"),
 }
 
 
@@ -143,6 +181,25 @@ def update_resource_metadata() -> None:
         "wastewater neutralization",
         "tailings stabilization",
         "sludge cake sintering",
+        "natural latex and rubber vulcanization",
+        "rubber compounding and gaskets",
+        "ethanol fermentation",
+        "acetic acid and acetone solvents",
+        "phenolic resin",
+        "epoxy resin",
+        "stainless steel alloying",
+        "aluminum alloying",
+        "ferrochrome and ferromanganese",
+        "titanium chloride and sponge titanium",
+        "metallurgical silicon",
+        "chlorosilane purification",
+        "polysilicon and silicon wafers",
+        "semiconductor dopants",
+        "photoresist precursor",
+        "monazite and bastnasite rare earth processing",
+        "mixed rare earth oxide",
+        "neodymium magnet material",
+        "industrial catalysts",
     ]:
         if entry not in industries:
             industries.append(entry)
@@ -211,9 +268,20 @@ def request_image(key: str, item_id: str, descriptor: str, attempts: int = 5) ->
     parsed = urllib.parse.urlparse(url)
     if not parsed.scheme:
         raise RuntimeError(f"Invalid image url for {item_id}: {url}")
-    download = requests.get(url, timeout=300)
-    download.raise_for_status()
-    return download.content
+    last_error: Exception | None = None
+    for attempt in range(1, attempts + 1):
+        try:
+            download = requests.get(url, timeout=300)
+            download.raise_for_status()
+            return download.content
+        except requests.RequestException as exc:
+            last_error = exc
+            if attempt >= attempts:
+                raise
+            wait = min(90, 8 * attempt)
+            print(f"  download failed for {item_id}, retry {attempt}/{attempts} after {wait}s: {exc}", flush=True)
+            time.sleep(wait)
+    raise RuntimeError(f"Agnes image download failed for {item_id}: {last_error}")
 
 
 def remove_flat_background(image: Image.Image) -> Image.Image:
