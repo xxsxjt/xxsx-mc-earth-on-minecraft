@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="earth_on_minecraft"
-version="0.1.4"
+version="0.1.5"
 displayName="Earth on Minecraft / 我的地球"
 description='''
 In-development beta for Minecraft 26.2 + NeoForge 26.2.0.7-beta.

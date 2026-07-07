@@ -46,6 +46,11 @@
     "earth_on_minecraft:copper_power_cable",
     "earth_on_minecraft:heavy_copper_power_cable",
     "earth_on_minecraft:battery_box",
-    "earth_on_minecraft:conveyor_belt"
+    "earth_on_minecraft:conveyor_belt",
+    "earth_on_minecraft:bauxite_laterite_deposit",
+    "earth_on_minecraft:phosphorite_bed",
+    "earth_on_minecraft:evaporite_salt_bed",
+    "earth_on_minecraft:cassiterite_placer_deposit",
+    "earth_on_minecraft:rare_earth_carbonatite"
   ]
 }

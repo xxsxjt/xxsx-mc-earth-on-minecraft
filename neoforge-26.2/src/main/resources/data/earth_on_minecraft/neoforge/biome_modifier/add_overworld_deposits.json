@@ -19,7 +19,12 @@
     "earth_on_minecraft:diamondiferous_kimberlite_pipe",
     "earth_on_minecraft:lapis_lazuli_body",
     "earth_on_minecraft:redstone_mineral_body",
-    "earth_on_minecraft:cinnabar_vein"
+    "earth_on_minecraft:cinnabar_vein",
+    "earth_on_minecraft:bauxite_laterite_deposit",
+    "earth_on_minecraft:phosphorite_bed",
+    "earth_on_minecraft:evaporite_salt_bed",
+    "earth_on_minecraft:cassiterite_placer_deposit",
+    "earth_on_minecraft:rare_earth_carbonatite"
   ],
   "step": "underground_ores"
 }

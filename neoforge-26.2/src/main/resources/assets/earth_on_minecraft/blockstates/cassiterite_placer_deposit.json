@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "earth_on_minecraft:block/cassiterite_placer_deposit"
+      },
+      {
+        "model": "earth_on_minecraft:block/cassiterite_placer_deposit",
+        "y": 90
+      },
+      {
+        "model": "earth_on_minecraft:block/cassiterite_placer_deposit",
+        "y": 180
+      },
+      {
+        "model": "earth_on_minecraft:block/cassiterite_placer_deposit",
+        "y": 270
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "deposit": "earth_on_minecraft:evaporite_salt_bed",
+  "shape": "bed",
+  "y": [
+    -16,
+    96
+  ],
+  "composition_note": "evaporite salt layer for chlor-alkali, brine, potash, gypsum, and borate routes",
+  "main_block": "earth_on_minecraft:evaporite_salt_bed",
+  "formula": "NaCl + KCl + CaSO4.2H2O + Mg/Ca salts"
+}

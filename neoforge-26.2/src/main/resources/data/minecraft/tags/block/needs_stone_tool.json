@@ -15,6 +15,10 @@
     "earth_on_minecraft:leaching_tank",
     "earth_on_minecraft:thin_copper_power_cable",
     "earth_on_minecraft:copper_power_cable",
-    "earth_on_minecraft:heavy_copper_power_cable"
+    "earth_on_minecraft:heavy_copper_power_cable",
+    "earth_on_minecraft:bauxite_laterite_deposit",
+    "earth_on_minecraft:phosphorite_bed",
+    "earth_on_minecraft:evaporite_salt_bed",
+    "earth_on_minecraft:cassiterite_placer_deposit"
   ]
 }

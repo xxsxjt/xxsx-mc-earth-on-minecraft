@@ -148,6 +148,11 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.CINNABAR_VEIN::get, "辰砂矿脉粗碎", out(EarthOnMinecraft.CINNABAR_CHUNK::get, 4), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.BITUMINOUS_COAL_SEAM::get, "烟煤含煤岩破碎与挥发分回收", out(EarthOnMinecraft.COAL_DUST::get, 4), out(EarthOnMinecraft.COAL_TAR::get, 1), out(EarthOnMinecraft.COAL_GAS_CELL::get, 1), out(EarthOnMinecraft.CRUDE_OIL_SAMPLE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.ANTHRACITE_COAL_SEAM::get, "无烟煤含煤岩破碎与高碳富集", out(EarthOnMinecraft.COAL_DUST::get, 7), out(EarthOnMinecraft.GRAPHITE_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.BAUXITE_LATERITE_DEPOSIT::get, "铝土矿风化壳破碎", out(EarthOnMinecraft.BAUXITE_DUST::get, 5), out(EarthOnMinecraft.HEMATITE_DUST::get, 1), out(EarthOnMinecraft.KAOLIN_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.PHOSPHORITE_BED::get, "磷块岩沉积层破碎", out(EarthOnMinecraft.PHOSPHATE_ROCK_DUST::get, 5), out(EarthOnMinecraft.CALCITE_DUST::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.EVAPORITE_SALT_BED::get, "蒸发岩盐层破碎", out(EarthOnMinecraft.SALT_DUST::get, 5), out(EarthOnMinecraft.GYPSUM_DUST::get, 1), out(EarthOnMinecraft.BRINE_CRYSTAL::get, 1), out(EarthOnMinecraft.POTASSIUM_CHLORIDE::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.CASSITERITE_PLACER_DEPOSIT::get, "锡石砂矿预碎洗选", out(EarthOnMinecraft.CASSITERITE_DUST::get, 3), out(EarthOnMinecraft.SILICA_DUST::get, 2), out(EarthOnMinecraft.TITANIUM_DIOXIDE::get, 1), out(EarthOnMinecraft.MONAZITE_SAND::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.RARE_EARTH_CARBONATITE::get, "稀土碳酸岩破碎", out(EarthOnMinecraft.BASTNASITE_DUST::get, 3), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.CALCITE_DUST::get, 2), out(EarthOnMinecraft.URANINITE_DUST::get, 1), out(EarthOnMinecraft.RARE_EARTH_TAILINGS::get, 1)));
 
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.MAGNETITE_CHUNK::get, "磁铁矿球磨", out(EarthOnMinecraft.MAGNETITE_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CHALCOPYRITE_CHUNK::get, "黄铜矿球磨", out(EarthOnMinecraft.CHALCOPYRITE_DUST::get, 3), out(EarthOnMinecraft.PYRITE_DUST::get, 1)));
@@ -179,6 +184,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.SIEVE, EarthOnMinecraft.AURIFEROUS_QUARTZ_CHUNK::get, "含金石英碎块筛分", out(EarthOnMinecraft.GOLD_DUST::get, 1), out(EarthOnMinecraft.QUARTZ_DUST::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.SIEVE, EarthOnMinecraft.MICA_DUST::get, "云母片状矿物筛分", out(EarthOnMinecraft.ALUMINOSILICATE_DUST::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 1)));
         recipes.add(r(Kind.SIEVE, EarthOnMinecraft.FELDSPAR_DUST::get, "长石粉筛分除杂", out(EarthOnMinecraft.ALUMINOSILICATE_DUST::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 1), out(EarthOnMinecraft.BASTNASITE_DUST::get, 1)));
+        recipes.add(r(Kind.SIEVE, EarthOnMinecraft.CASSITERITE_PLACER_DEPOSIT::get, "锡石砂矿重矿物筛分", out(EarthOnMinecraft.CASSITERITE_DUST::get, 2), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.SIEVE, EarthOnMinecraft.EVAPORITE_SALT_BED::get, "蒸发岩硼钾伴生筛分", out(EarthOnMinecraft.BORATE_MINERAL_DUST::get, 1), out(EarthOnMinecraft.POTASSIUM_CHLORIDE::get, 1), out(EarthOnMinecraft.SALT_DUST::get, 2)));
 
         recipes.add(r(Kind.MAGNETIC_SEPARATOR, EarthOnMinecraft.MAGNETITE_DUST::get, "磁选铁精矿", out(EarthOnMinecraft.IRON_CONCENTRATE::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.MAGNETIC_SEPARATOR, EarthOnMinecraft.HEMATITE_DUST::get, "赤铁矿弱磁分选", out(EarthOnMinecraft.IRON_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
@@ -211,6 +218,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.MERCURY_DROPLET::get, "汞齐法金回收的安全化近似", out(EarthOnMinecraft.GOLD_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.BRINE_CRYSTAL::get, "盐卤锂钾富集", out(EarthOnMinecraft.LITHIUM_SALT::get, 1), out(EarthOnMinecraft.POTASSIUM_CHLORIDE::get, 1), out(EarthOnMinecraft.SALT_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.MAFIC_SILICATE_DUST::get, "镁铁质硅酸盐镍伴生浸出", out(EarthOnMinecraft.NICKEL_PRECURSOR::get, 1), out(EarthOnMinecraft.IRON_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.RARE_EARTH_CARBONATITE::get, "稀土碳酸岩酸浸", out(EarthOnMinecraft.MIXED_RARE_EARTH_OXIDE::get, 2), out(EarthOnMinecraft.CALCIUM_CHLORIDE::get, 1), out(EarthOnMinecraft.RARE_EARTH_TAILINGS::get, 2)));
+        recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.BAUXITE_LATERITE_DEPOSIT::get, "铝土矿风化壳碱浸", out(EarthOnMinecraft.ALUMINUM_HYDROXIDE::get, 2), out(EarthOnMinecraft.HEMATITE_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 2)));
 
         recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.COPPER_CONCENTRATE::get, "铜精矿电积", out(() -> Items.COPPER_INGOT, 1), out(EarthOnMinecraft.SULFUR_DUST::get, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.GOLD_CONCENTRATE::get, "金精矿电解精炼", out(() -> Items.GOLD_INGOT, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));

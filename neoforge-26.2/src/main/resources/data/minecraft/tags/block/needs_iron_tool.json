@@ -31,6 +31,7 @@
     "earth_on_minecraft:combustion_generator",
     "earth_on_minecraft:steam_turbine_generator",
     "earth_on_minecraft:battery_box",
-    "earth_on_minecraft:conveyor_belt"
+    "earth_on_minecraft:conveyor_belt",
+    "earth_on_minecraft:rare_earth_carbonatite"
   ]
 }

@@ -58,6 +58,11 @@ public class EarthOnMinecraft {
     public static final DeferredBlock<Block> EMERALD_BERYL_VEIN = oreBlock("emerald_beryl_vein", MapColor.EMERALD, 3.5F);
     public static final DeferredBlock<Block> REDSTONE_MINERAL_ORE = oreBlock("redstone_mineral_ore", MapColor.COLOR_RED, 3.2F);
     public static final DeferredBlock<Block> CINNABAR_VEIN = oreBlock("cinnabar_vein", MapColor.COLOR_RED, 2.6F);
+    public static final DeferredBlock<Block> BAUXITE_LATERITE_DEPOSIT = oreBlock("bauxite_laterite_deposit", MapColor.TERRACOTTA_ORANGE, 2.8F);
+    public static final DeferredBlock<Block> PHOSPHORITE_BED = oreBlock("phosphorite_bed", MapColor.SAND, 2.6F);
+    public static final DeferredBlock<Block> EVAPORITE_SALT_BED = oreBlock("evaporite_salt_bed", MapColor.QUARTZ, 2.2F);
+    public static final DeferredBlock<Block> CASSITERITE_PLACER_DEPOSIT = oreBlock("cassiterite_placer_deposit", MapColor.SAND, 2.4F);
+    public static final DeferredBlock<Block> RARE_EARTH_CARBONATITE = oreBlock("rare_earth_carbonatite", MapColor.TERRACOTTA_WHITE, 3.4F);
 
     public static final DeferredBlock<ProcessingMachineBlock> JAW_CRUSHER = machineBlock("jaw_crusher", ProcessingMachineBlock.Kind.CRUSHER);
     public static final DeferredBlock<ProcessingMachineBlock> BALL_MILL = machineBlock("ball_mill", ProcessingMachineBlock.Kind.BALL_MILL);

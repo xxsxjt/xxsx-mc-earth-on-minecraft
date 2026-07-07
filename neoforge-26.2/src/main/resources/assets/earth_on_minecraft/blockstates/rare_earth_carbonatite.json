@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "earth_on_minecraft:block/rare_earth_carbonatite"
+      },
+      {
+        "model": "earth_on_minecraft:block/rare_earth_carbonatite",
+        "y": 90
+      },
+      {
+        "model": "earth_on_minecraft:block/rare_earth_carbonatite",
+        "y": 180
+      },
+      {
+        "model": "earth_on_minecraft:block/rare_earth_carbonatite",
+        "y": 270
+      }
+    ]
+  }
+}

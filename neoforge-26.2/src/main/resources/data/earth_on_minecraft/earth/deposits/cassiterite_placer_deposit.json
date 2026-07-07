@@ -1,0 +1,11 @@
+{
+  "deposit": "earth_on_minecraft:cassiterite_placer_deposit",
+  "shape": "placer",
+  "y": [
+    32,
+    128
+  ],
+  "composition_note": "heavy-mineral placer deposit for tin, titanium dioxide, and monazite byproducts",
+  "main_block": "earth_on_minecraft:cassiterite_placer_deposit",
+  "formula": "SnO2 + SiO2 + heavy minerals"
+}

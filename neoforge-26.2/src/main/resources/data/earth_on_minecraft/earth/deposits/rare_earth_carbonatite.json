@@ -1,0 +1,11 @@
+{
+  "deposit": "earth_on_minecraft:rare_earth_carbonatite",
+  "shape": "intrusive_body",
+  "y": [
+    -48,
+    48
+  ],
+  "composition_note": "rare carbonatite body with bastnasite, monazite, carbonate, phosphate, and trace uranium minerals",
+  "main_block": "earth_on_minecraft:rare_earth_carbonatite",
+  "formula": "(Ce,La)CO3F + (Ce,La,Nd,Th)PO4 + calcite/apatite"
+}

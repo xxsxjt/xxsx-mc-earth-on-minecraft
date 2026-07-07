@@ -50,6 +50,7 @@ public class FieldGeologyNotebookScreen extends Screen {
             new PageSpec("iron_copper", RED),
             new PageSpec("valuables", GOLD),
             new PageSpec("rocks", GREEN),
+            new PageSpec("natural_deposits", BLUE),
             new PageSpec("chemical_industry", BLUE),
             new PageSpec("fertilizer", GREEN),
             new PageSpec("plastics", GOLD),
@@ -411,6 +412,14 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "玄武岩、黑石这类镁铁质岩石会给镁铁质硅酸盐粉，并可能分出少量磁铁矿或赤铁矿。",
                 "现实分离不会 100% 纯净；MC 世界允许机器把它整理成可堆叠的纯粉末，避免玩家背包变成实验室垃圾场。"));
 
+        result.add(page("矿源", "8+. 新增自然矿床来源", BLUE,
+                "铝土矿风化壳：近地表风化残积矿，破碎出铝土矿粉、赤铁矿粉和高岭土粉，是铝工业更直接的自然入口。",
+                "磷块岩沉积层：沉积磷矿来源，破碎后得到磷矿粉、方解石粉和石膏粉，接磷酸、过磷酸钙和复合肥。",
+                "蒸发岩盐层：干旱盆地盐类沉积，给盐粉、石膏、盐卤结晶、氯化钾和硼酸盐，是氯碱、肥料、电池盐的入口。",
+                "锡石砂矿：河流/冲积重矿物富集，给锡石粉、硅粉、钛白粉和少量独居石砂，接焊料与铅锌锡路线。",
+                "稀土碳酸岩：稀土、碳酸盐、磷酸盐和少量铀矿物共生，接氟碳铈矿粉、独居石、混合稀土氧化物和安全化核燃料链。",
+                "这些先用稳定 placed feature 表达；更真实的同一空间矿体会在后续专用矿床生成器里继续升级。"));
+
         result.add(page("化工", "9. 常见化学工业入口", BLUE,
                 "氯碱工业：盐粉 -> 电解槽 -> 烧碱 + 氯气单元 + 氢气单元。",
                 "硫酸工业：硫粉 -> 化学反应釜 -> 硫酸。",
@@ -701,6 +710,13 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "Granite can yield quartz dust, feldspar dust, mica dust, monazite sand, and tailings.",
                 "Calcite and dripstone mainly represent CaCO3 routes.",
                 "Minecraft machines are allowed to organize mixtures into clean stackable powders so the inventory stays playable."));
+        result.add(page("Deposits", "7+. New natural deposit sources", BLUE,
+                "Bauxite laterite: near-surface weathering crust. It gives bauxite dust, hematite, kaolin, and tailings for the aluminum route.",
+                "Phosphorite bed: sedimentary phosphate source. It gives phosphate rock dust, calcite, and gypsum for phosphoric acid and fertilizer.",
+                "Evaporite salt bed: dry-basin salt deposit. It gives salt, gypsum, brine crystals, potassium chloride, and borate minerals.",
+                "Cassiterite placer: heavy-mineral placer deposit. It gives cassiterite, silica, titanium dioxide, and minor monazite sand for tin and solder.",
+                "Rare-earth carbonatite: rare-earth carbonate/phosphate source with trace uranium minerals. It feeds bastnasite, monazite, rare earth oxides, and the safe nuclear material chain.",
+                "These are stable placed-feature deposits first. A future custom generator can bind main ore, companion minerals, and halo rock into one coherent body."));
         result.add(page("Chem", "8. Common chemical industry", BLUE,
                 "Chlor-alkali: salt -> electrolysis -> sodium hydroxide, chlorine, and hydrogen.",
                 "Fertilizer: ammonia, nitric acid, phosphate rock, potash, and urea routes.",

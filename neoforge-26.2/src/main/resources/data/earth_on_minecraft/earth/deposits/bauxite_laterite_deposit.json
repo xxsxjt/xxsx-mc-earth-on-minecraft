@@ -1,0 +1,11 @@
+{
+  "deposit": "earth_on_minecraft:bauxite_laterite_deposit",
+  "shape": "weathering_crust",
+  "y": [
+    48,
+    160
+  ],
+  "composition_note": "near-surface lateritic weathering crust, aluminum source with iron oxides and kaolin byproducts",
+  "main_block": "earth_on_minecraft:bauxite_laterite_deposit",
+  "formula": "AlOOH/Al(OH)3 + Fe2O3 + kaolinite"
+}

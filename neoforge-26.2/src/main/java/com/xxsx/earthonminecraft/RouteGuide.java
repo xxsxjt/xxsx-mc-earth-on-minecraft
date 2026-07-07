@@ -79,6 +79,16 @@ public final class RouteGuide {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.bituminous").withStyle(ChatFormatting.YELLOW));
         } else if (item == EarthOnMinecraft.ANTHRACITE_COAL_SEAM.get().asItem()) {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.anthracite").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.BAUXITE_LATERITE_DEPOSIT.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.bauxite").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.PHOSPHORITE_BED.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.phosphorite").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.EVAPORITE_SALT_BED.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.evaporite").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.CASSITERITE_PLACER_DEPOSIT.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.cassiterite").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.RARE_EARTH_CARBONATITE.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.rare_earth").withStyle(ChatFormatting.YELLOW));
         } else if (item == EarthOnMinecraft.COAL_DUST.get().asItem()) {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.fuel.coal_dust").withStyle(ChatFormatting.YELLOW));
         } else if (item == EarthOnMinecraft.COKE.get().asItem()) {

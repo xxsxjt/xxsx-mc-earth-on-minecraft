@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "earth_on_minecraft:block/phosphorite_bed"
+      },
+      {
+        "model": "earth_on_minecraft:block/phosphorite_bed",
+        "y": 90
+      },
+      {
+        "model": "earth_on_minecraft:block/phosphorite_bed",
+        "y": 180
+      },
+      {
+        "model": "earth_on_minecraft:block/phosphorite_bed",
+        "y": 270
+      }
+    ]
+  }
+}

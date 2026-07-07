@@ -1,0 +1,11 @@
+{
+  "deposit": "earth_on_minecraft:phosphorite_bed",
+  "shape": "bed",
+  "y": [
+    8,
+    112
+  ],
+  "composition_note": "sedimentary phosphate bed with carbonate and silica gangue, fertilizer source",
+  "main_block": "earth_on_minecraft:phosphorite_bed",
+  "formula": "Ca5(PO4)3(F,Cl,OH) + CaCO3 + SiO2"
+}
