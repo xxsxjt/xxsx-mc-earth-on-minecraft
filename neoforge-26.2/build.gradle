@@ -3,7 +3,7 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.140'
 }
 
-version = '0.1.5'
+version = '0.1.6'
 group = 'com.xxsx.earthonminecraft'
 base.archivesName = 'earth-on-minecraft-neoforge-26.2'
 

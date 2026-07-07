@@ -35,6 +35,7 @@ import java.util.List;
 @Mod(EarthOnMinecraft.MODID)
 public class EarthOnMinecraft {
     public static final String MODID = "earth_on_minecraft";
+    private static final String LEGACY_MODID = "earth_online";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
@@ -372,6 +373,7 @@ public class EarthOnMinecraft {
     public static final DeferredItem<FieldGeologyNotebookItem> FIELD_GEOLOGY_NOTEBOOK = notebookItem("field_geology_notebook");
 
     public EarthOnMinecraft(IEventBus modBus) {
+        addLegacyAliases();
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         BLOCK_ENTITY_TYPES.register(modBus);
@@ -382,6 +384,20 @@ public class EarthOnMinecraft {
             EarthOnMinecraftClient.register(modBus);
         }
         LOGGER.info("[Earth on Minecraft] NeoForge 26.2 module loaded");
+    }
+
+    private static void addLegacyAliases() {
+        addLegacyAliases(BLOCKS);
+        addLegacyAliases(ITEMS);
+        addLegacyAliases(BLOCK_ENTITY_TYPES);
+        addLegacyAliases(MENUS);
+    }
+
+    private static <T> void addLegacyAliases(DeferredRegister<T> registry) {
+        for (DeferredHolder<T, ? extends T> holder : registry.getEntries()) {
+            Identifier current = holder.getId();
+            registry.addAlias(Identifier.fromNamespaceAndPath(LEGACY_MODID, current.getPath()), current);
+        }
     }
 
     private static DeferredBlock<Block> oreBlock(String id, MapColor color, float strength) {
