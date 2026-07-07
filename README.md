@@ -29,7 +29,7 @@
 - [贴图 AI 提示词](docs/asset-prompts.md)
 - [扩展路线图：核能、电网、自动化和科幻附属边界](docs/earth-on-minecraft-expanded-roadmap.md)
 - [科幻附属路线图](docs/scifi-addon-roadmap.md)
-- [0.1.3 Beta 发布说明](docs/release-notes-0.1.3-beta.md)
+- [0.1.4 Beta 发布说明](docs/release-notes-0.1.4-beta.md)
 - [地质生成与世界高度计划](docs/geology-worldgen-notes.md)
 
 ## 本体与附属边界
@@ -51,9 +51,9 @@ python tools\validate_resources.py
 
 - GitHub: https://github.com/xxsxjt/xxsx-mc-earth-on-minecraft
 - `neoforge-26.2/` — NeoForge `26.2.0.7-beta` / Minecraft `26.2`，Java 25。
-- 构建产物：`neoforge-26.2/build/libs/earth-on-minecraft-neoforge-26.2-0.1.3.jar`
+- 构建产物：`neoforge-26.2/build/libs/earth-on-minecraft-neoforge-26.2-0.1.4.jar`
 - 测试部署：`D:\_dx\_Games\MC\xxxxxx\.minecraft\versions\26.2-NeoForge_26.2.0.7-beta\mods`
-- 发布状态：`0.1.3` 是开发中测试版，用于验证现实矿床、围岩/伴生特征、工业机器、电力、手册、JEI 联动和可复现打包流程。
+- 发布状态：`0.1.4` 是开发中测试版，用于验证现实矿床、围岩/伴生特征、工业机器、电力、手册、JEI 联动和可复现打包流程。
 
 第一版已实现：
 
@@ -73,7 +73,7 @@ python tools\validate_resources.py
 - 第二轮后半大扩展：木材/石化进入天然胶乳、硫化橡胶和密封圈；小麦/糖/苯/丙烯进入乙醇、乙酸、丙酮、苯酚、酚醛树脂、环氧树脂；黑石/钢/铝/钛白粉进入铬铁、锰铁、不锈钢、铝合金和海绵钛；硅石进入氯硅烷、多晶硅、晶圆和光刻胶前驱体；砂/花岗岩/长石进入稀土氧化物、钕盐、钕铁硼磁材和催化剂路线。
 - 第二轮第三批猛加：盐/氯气/烧碱进入次氯酸钠、漂白粉和过氧化氢；种子/皂基进入表面活性剂和洗涤剂；乙烯/丙烯/甲醛进入 ABS、亚克力、聚氨酯和脲醛树脂；铜、玻纤、环氧、光刻胶和焊料进入 PCB；尾粉/砂进入闪锌矿、方铅矿、锡石、锌、铅、锡和焊料；黏土/高岭土进入瓷坯、陶瓷绝缘件、耐火砖和矿物棉。
 - 移除主世界原版矿物生成，并额外禁用原版大矿脉的 `ore_veininess` 噪声，避免自然生成原版铜矿、铁矿和粗矿块。
-- 改用 Earth on Minecraft 的稀疏大矿床 placed features，并追加围岩/伴生地质特征，如磁铁矿-凝灰岩、黄铜矿-花岗质围岩、含金石英-方解石、金伯利岩-凝灰质角砾等。
+- 改用 Earth on Minecraft 的稀疏大矿床 placed features，并追加围岩/伴生地质特征，如磁铁矿-凝灰岩、黄铜矿-花岗质围岩、含金石英-方解石、金伯利岩-凝灰质角砾、烟煤-砂岩围岩、无烟煤-深板岩围岩等。
 - 保留原版物品生态：矿物处理最终输出 `minecraft:iron_ingot`、`minecraft:copper_ingot`、`minecraft:gold_ingot`、`minecraft:diamond` 等。
 - 使用 26.2 新版 `assets/<modid>/items/*.json` 物品模型定义。
 - 已用 Agnes 生成并接入机器、新材料和精矿贴图；同时覆盖部分原版岩石视觉以强化真实岩石体系。新增贴图可用 `tools/generate_agnes_item_textures.py` 续跑。
