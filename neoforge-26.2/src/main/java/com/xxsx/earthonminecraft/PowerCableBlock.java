@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
 public class PowerCableBlock extends Block {
     public static final BooleanProperty DOWN = BlockStateProperties.DOWN;
@@ -53,7 +54,11 @@ public class PowerCableBlock extends Block {
     }
 
     @Override
+    @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        if (!RealitySupportRules.canPlace(context.getLevel(), context.getClickedPos())) {
+            return null;
+        }
         BlockState state = defaultBlockState();
         LevelReader level = context.getLevel();
         BlockPos pos = context.getClickedPos();

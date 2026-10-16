@@ -33,7 +33,11 @@ public class MachineInterfaceBlock extends SupportPartBlock implements EntityBlo
     }
 
     @Override
+    @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        if (!RealitySupportRules.canPlace(context.getLevel(), context.getClickedPos())) {
+            return null;
+        }
         return defaultBlockState().setValue(FACING, context.getNearestLookingDirection().getOpposite());
     }
 

@@ -77,7 +77,8 @@ public final class EnergyNetwork {
                 storages.add(storage);
             }
 
-            if (PowerCableBlock.isCable(level.getBlockState(pos))) {
+            if (PowerCableBlock.isCable(level.getBlockState(pos))
+                    && RealitySupportRules.isCableOperational(level, pos)) {
                 for (Direction direction : Direction.values()) {
                     BlockPos next = pos.relative(direction);
                     if (!visited.contains(next)) {

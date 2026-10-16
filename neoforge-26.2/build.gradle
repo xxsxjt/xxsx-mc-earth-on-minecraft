@@ -51,7 +51,7 @@ neoForge {
 
 def jeiSearchDirs = [
         file('libs'),
-        file('D:/_dx/_Games/MC/xxxxxx/.minecraft/versions/26.2-NeoForge_26.2.0.7-beta/mods')
+        file('E:/_dx/_Games/MC/xxxxxx/.minecraft/versions/26.2-NeoForge_26.2.0.7-beta/mods')
 ]
 def localJeiJar = jeiSearchDirs
         .findAll { it.exists() }

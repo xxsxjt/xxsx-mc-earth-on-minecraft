@@ -76,6 +76,21 @@ public class EnergyGeneratorBlockEntity extends BaseContainerBlockEntity impleme
         }
         generator.active = false;
 
+        if (!RealitySupportRules.isOperational(level, pos)) {
+            if (generator.burnTime != 0) {
+                generator.burnTime = 0;
+                generator.burnTimeTotal = 0;
+                changed = true;
+            }
+            if (generator.syncActiveState(level, pos, state)) {
+                changed = true;
+            }
+            if (changed) {
+                generator.setChanged();
+            }
+            return;
+        }
+
         int capacity = generator.generatorCapacity();
         if (generator.energy > capacity) {
             generator.energy = capacity;

@@ -32,6 +32,8 @@ final class EarthGameTests {
     private static final Identifier LOGISTICS_INSERT = EarthOnMinecraft.id("logistics_insert");
     private static final Identifier GEOLOGY_QUERY = EarthOnMinecraft.id("geology_query");
     private static final Identifier STRUCTURE_FAULT_STATE = EarthOnMinecraft.id("structure_fault_state");
+    private static final Identifier REALITY_SUPPORT = EarthOnMinecraft.id("reality_support");
+    private static final Identifier REALITY_UTILITIES = EarthOnMinecraft.id("reality_utilities");
     private static final Identifier SCREENSHOT_FIELD = EarthOnMinecraft.id("quality_screenshot_field");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
@@ -41,6 +43,8 @@ final class EarthGameTests {
             LOGISTICS_INSERT, EarthGameTests::logisticsInsert,
             GEOLOGY_QUERY, EarthGameTests::geologyQuery,
             STRUCTURE_FAULT_STATE, EarthGameTests::structureFaultState,
+            REALITY_SUPPORT, EarthGameTests::realitySupport,
+            REALITY_UTILITIES, EarthGameTests::realityUtilities,
             SCREENSHOT_FIELD, EarthGameTests::screenshotField);
 
     static {
@@ -63,6 +67,8 @@ final class EarthGameTests {
         event.registerTest(LOGISTICS_INSERT, test(LOGISTICS_INSERT, environment, 40, true));
         event.registerTest(GEOLOGY_QUERY, test(GEOLOGY_QUERY, environment, 40, true));
         event.registerTest(STRUCTURE_FAULT_STATE, test(STRUCTURE_FAULT_STATE, environment, 60, true));
+        event.registerTest(REALITY_SUPPORT, test(REALITY_SUPPORT, environment, 40, true));
+        event.registerTest(REALITY_UTILITIES, test(REALITY_UTILITIES, environment, 40, true));
         TestData<Holder<TestEnvironmentDefinition<?>>> screenshotData = new TestData<>(
                 environment, EMPTY_STRUCTURE, 200, 1, false, Rotation.NONE, true, 1, 1, true, 24);
         event.registerTest(SCREENSHOT_FIELD, new DirectGameTestInstance(SCREENSHOT_FIELD, screenshotData));
@@ -147,6 +153,42 @@ final class EarthGameTests {
             helper.assertBlockProperty(pos, ProcessingMachineBlock.ACTIVE, false);
             helper.succeed();
         });
+    }
+
+    private static void realitySupport(GameTestHelper helper) {
+        BlockPos floating = new BlockPos(1, 2, 1);
+        helper.setBlock(new BlockPos(1, 1, 1), Blocks.AIR);
+        helper.assertFalse(RealitySupportRules.canPlace(helper.getLevel(), helper.absolutePos(floating)),
+                "floating infrastructure must not be placeable");
+
+        helper.setBlock(new BlockPos(1, 1, 1), Blocks.SMOOTH_STONE);
+        helper.assertTrue(RealitySupportRules.canPlace(helper.getLevel(), helper.absolutePos(floating)),
+                "a solid foundation must support infrastructure");
+
+        BlockPos conveyor = new BlockPos(3, 2, 1);
+        helper.setBlock(new BlockPos(3, 1, 1), Blocks.SMOOTH_STONE);
+        helper.setBlock(conveyor, EarthOnMinecraft.CONVEYOR_BELT.get());
+        helper.assertTrue(RealitySupportRules.isOperational(helper.getLevel(), helper.absolutePos(conveyor)),
+                "grounded conveyor must be operational");
+        helper.setBlock(new BlockPos(3, 1, 1), Blocks.AIR);
+        helper.assertFalse(RealitySupportRules.isOperational(helper.getLevel(), helper.absolutePos(conveyor)),
+                "conveyor without foundation must stop being operational");
+        helper.succeed();
+    }
+
+    private static void realityUtilities(GameTestHelper helper) {
+        BlockPos cable = new BlockPos(1, 1, 1);
+        BlockPos battery = new BlockPos(2, 1, 1);
+        helper.setBlock(new BlockPos(1, 0, 1), Blocks.SMOOTH_STONE);
+        helper.setBlock(new BlockPos(2, 0, 1), Blocks.SMOOTH_STONE);
+        helper.setBlock(cable, EarthOnMinecraft.COPPER_POWER_CABLE.get());
+        helper.setBlock(battery, EarthOnMinecraft.BATTERY_BOX.get());
+        helper.assertTrue(RealitySupportRules.isCableOperational(helper.getLevel(), helper.absolutePos(cable)),
+                "supported cable connected to a battery must be operational");
+        helper.setBlock(battery, Blocks.AIR);
+        helper.assertFalse(RealitySupportRules.isCableOperational(helper.getLevel(), helper.absolutePos(cable)),
+                "isolated cable must be treated as disconnected");
+        helper.succeed();
     }
 
     private static void screenshotField(GameTestHelper helper) {

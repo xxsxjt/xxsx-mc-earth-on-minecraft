@@ -31,6 +31,10 @@ public class ConveyorBeltBlockEntity extends BlockEntity implements Container {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, ConveyorBeltBlockEntity conveyor) {
+        if (!RealitySupportRules.isOperational(level, pos)) {
+            conveyor.progress = 0;
+            return;
+        }
         if (conveyor.cargo().isEmpty()) {
             conveyor.progress = 0;
             return;

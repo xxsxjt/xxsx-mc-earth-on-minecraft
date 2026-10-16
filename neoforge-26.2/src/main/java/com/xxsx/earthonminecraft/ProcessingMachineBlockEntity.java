@@ -109,7 +109,8 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         machine.gridPowered = false;
 
         if (!machine.assemblySynced || machine.structureCheckCooldown-- <= 0) {
-            boolean completeStructure = MachineMultiblock.isComplete(level, pos, machine.kind());
+            boolean completeStructure = RealitySupportRules.isOperational(level, pos)
+                    && MachineMultiblock.isComplete(level, pos, machine.kind());
             if (!machine.assemblySynced || machine.lastAssemblyComplete != completeStructure) {
                 MachineMultiblock.syncAssembly(level, pos, machine.kind(), completeStructure);
                 machine.assemblySynced = true;

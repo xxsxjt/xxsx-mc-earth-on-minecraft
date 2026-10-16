@@ -30,7 +30,11 @@ public class BatteryBoxBlock extends Block implements EntityBlock {
     }
 
     @Override
+    @org.jetbrains.annotations.Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        if (!RealitySupportRules.canPlace(context.getLevel(), context.getClickedPos())) {
+            return null;
+        }
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 

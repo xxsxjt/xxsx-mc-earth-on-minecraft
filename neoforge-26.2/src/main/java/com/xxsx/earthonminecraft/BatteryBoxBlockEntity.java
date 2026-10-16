@@ -64,6 +64,9 @@ public class BatteryBoxBlockEntity extends BaseContainerBlockEntity implements E
 
     @Override
     public int receiveEnergy(int amount, boolean simulate) {
+        if (level != null && !RealitySupportRules.isOperational(level, worldPosition)) {
+            return 0;
+        }
         int accepted = Math.min(Math.min(Math.max(0, amount), TRANSFER_LIMIT), CAPACITY - energy);
         if (!simulate && accepted > 0) {
             energy += accepted;
@@ -74,6 +77,9 @@ public class BatteryBoxBlockEntity extends BaseContainerBlockEntity implements E
 
     @Override
     public int extractEnergy(int amount, boolean simulate) {
+        if (level != null && !RealitySupportRules.isOperational(level, worldPosition)) {
+            return 0;
+        }
         int extracted = Math.min(Math.min(Math.max(0, amount), TRANSFER_LIMIT), energy);
         if (!simulate && extracted > 0) {
             energy -= extracted;

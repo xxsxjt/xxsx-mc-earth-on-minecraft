@@ -6,9 +6,9 @@
 
 设计纲领：
 
-> 保留 MC 的物品生态和合成魔法，但把自然界来源、矿物组成、处理流程和矿床形态尽量真实化。
+> 保留 MC 的物品生态和合成魔法，但把自然来源、物质流程、工具使用、空间关系和基础设施因果尽量真实化。
 
-这个项目的目标不是把 Minecraft 变成纯现实模拟器，而是重做“自然界从哪里来”这部分：原版锭、宝石和合成体系尽量保留，矿石、岩石、粉末、选矿、冶炼和矿床生成改成更符合现代地质学和化学直觉的系统。
+这个项目的目标不是把 Minecraft 变成纯现实模拟器，而是建立一个有现实因果的地球内容层：原版锭、宝石和合成体系尽量保留，矿石、岩石、工具、建筑、能源、运输、测量和工业流程改成更符合现实直觉的系统。现实规则优先于 Minecraft 的默认便利；例如普通方块不能凭空悬浮，工具不能隔空完成不具备接触和支撑条件的工作。完整边界见 [现实仿真原则](docs/reality-simulation-principles.md)。
 
 ## 第一版目标
 
@@ -22,6 +22,7 @@
 ## 文档
 
 - [设计方案](docs/design-plan.md)
+- [现实仿真原则](docs/reality-simulation-principles.md)
 - [近现代化工扩展计划](docs/modern-chemical-industry-plan.md)
 - [第二轮工业扩展计划](docs/round-2-industrial-expansion-plan.md)
 - [本体与附属边界](docs/core-and-addons-boundary.md)

@@ -33,6 +33,9 @@ public class ControlPanelBlock extends SupportPartBlock {
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos pos = context.getClickedPos();
+        if (!RealitySupportRules.canPlace(context.getLevel(), pos)) {
+            return null;
+        }
         for (Direction front : Direction.Plane.HORIZONTAL) {
             if (context.getLevel().getBlockEntity(pos.relative(front.getOpposite())) instanceof ProcessingMachineBlockEntity) {
                 return defaultBlockState().setValue(FACING, front);

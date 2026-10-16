@@ -38,7 +38,11 @@ public class EnergyGeneratorBlock extends Block implements EntityBlock {
     }
 
     @Override
+    @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        if (!RealitySupportRules.canPlace(context.getLevel(), context.getClickedPos())) {
+            return null;
+        }
         return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
