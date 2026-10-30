@@ -36,11 +36,11 @@
 
 ## Verification
 
-- `compileJava` and `verifyStaticQuality` pass. The final resource pass reports 4045 JSON files, 1698 PNGs, 119 blocks, 1312 items, 3268 models and 61 machine sound events.
+- `compileJava`, `verifyStaticQuality` and `jar` pass. The final resource pass reports 4054 JSON files, 1698 PNGs, 119 blocks, 1312 items, 3268 models and 61 machine sound events; the material catalog validator accepts all 8 records.
 - All 136 herb and 129 crop routes, plus the drink and medicine chains, were validated against the spec item list: zero unregistered items, zero unknown machine kinds.
 - No client, server or GameTest process was launched while producing this build. Runtime behaviour of the bore head, quarry, depletion and the new chains is **unverified in game**.
 - In-world survival timing and balance were not measured for this build.
 
 Artifact: `earth-on-minecraft-neoforge-26.1.2-0.1.16.jar`
 
-SHA256: `1F278216C419BC10857BA116FD31030488900B70906DFD2C94875B63F3F7C32B`
+SHA256: `5459ECBA6075D744913980C0C3FF0F7103CD8D535E03A7976D26D1F95373966D`
