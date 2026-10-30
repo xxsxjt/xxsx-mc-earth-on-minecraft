@@ -108,12 +108,14 @@ def verifyAssetInventory = registerPythonVerification(
         'verifyAssetInventory', 'audit_assets.py', ['--check'])
 def verifyResources = registerPythonVerification(
         'verifyResources', 'validate_resources.py')
+def verifyMaterials = registerPythonVerification(
+        'verifyMaterials', 'validate_materials.py')
 
 def verifyStaticQuality = tasks.register('verifyStaticQuality') {
     group = 'verification'
     description = 'Runs all non-Minecraft resource, model, audio, API, and asset gates.'
     dependsOn verifyGeologyAssets, verifyItemAssets, verifyBlockbenchAssets,
-            verifyMachineAudio, verifyAssetInventory, verifyResources
+            verifyMachineAudio, verifyAssetInventory, verifyResources, verifyMaterials
 }
 
 tasks.register('verifyGuiPreviews', Exec) {

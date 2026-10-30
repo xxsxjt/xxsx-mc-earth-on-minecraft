@@ -633,5 +633,15 @@ public final class MaterialChemistry {
 
     public record Descriptor(String formula, String categoryKey, String formKey, String sourceKey,
                              String processKey, String useKey, String simplificationKey) {
+        public String compositionBasis() {
+            if (simplificationKey.endsWith(".mixture")) {
+                return "mixture";
+            }
+            return formula.contains("+") || formula.contains("/") ? "mixture" : "ideal_formula";
+        }
+
+        public String energyPolicy() {
+            return "chemical";
+        }
     }
 }

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:spirit_stone_matrix",
+  "kind": "mixture",
+  "formula": "SiO2 + KAlSi3O8 + KAl2(AlSi3O10)(OH)2 + Fe2O3",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    { "species": "SiO2", "fraction": 0.80 },
+    { "species": "KAlSi3O8", "fraction": 0.15 },
+    { "species": "KAl2(AlSi3O10)(OH)2", "fraction": 0.04 },
+    { "species": "Fe2O3", "fraction": 0.01 }
+  ],
+  "source": ["standardized_game_batch"],
+  "simplification": "game_batch",
+  "certainty": "game_simplified",
+  "display_key": "material.earth_on_minecraft.spirit_stone_matrix",
+  "notes": "Standard game matrix for the Xuanhuan Earth spirit stone. It is a multiphase solid, not a compound, and its mass fractions do not change when the stone stores field charge."
+}
+
+\n

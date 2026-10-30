@@ -231,6 +231,20 @@ final class EarthGameTests {
         helper.assertValueEqual(sample.formula(), "Fe3O4", "magnetite formula");
         helper.assertValueEqual(sample.role(), com.xxsx.earthonminecraft.api.v1.GeologyQueryApi.DepositRole.ORE,
                 "magnetite deposit role");
+        var material = EarthOnMinecraftApi.materials()
+                .find(Identifier.fromNamespaceAndPath(EarthOnMinecraft.MODID, "magnetite"))
+                .orElseThrow(() -> helper.assertionException("material query returned empty"));
+        helper.assertValueEqual(material.compositionBasis(), "ideal_formula", "magnetite composition basis");
+        helper.assertValueEqual(material.energyPolicy(), "chemical", "chemical material must not expose arcane energy");
+        var matrix = com.xxsx.earthonminecraft.MaterialCatalog.find(
+                        Identifier.fromNamespaceAndPath(EarthOnMinecraft.MODID, "spirit_stone_matrix"))
+                .orElseThrow(() -> helper.assertionException("spirit stone matrix record missing"));
+        helper.assertTrue(matrix.isMixture(), "spirit stone matrix must stay a mixture record");
+        helper.assertValueEqual(matrix.constituents().size(), 4, "spirit stone matrix phase count");
+        helper.assertValueEqual(matrix.constituents().get(0).fraction(), 0.80D,
+                "spirit stone quartz mass fraction");
+        helper.assertValueEqual(matrix.energyPolicy(), "chemical",
+                "the real matrix must not claim arcane storage");
         helper.succeed();
     }
 

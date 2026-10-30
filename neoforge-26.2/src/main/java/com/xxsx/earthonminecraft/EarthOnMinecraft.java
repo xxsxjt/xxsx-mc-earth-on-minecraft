@@ -487,6 +487,7 @@ public class EarthOnMinecraft {
         modBus.addListener(this::registerCreativeTab);
         NeoForge.EVENT_BUS.addListener(EarthOnMinecraftTooltips::addVanillaTooltips);
         NeoForge.EVENT_BUS.addListener(SettlementDataManager::registerReloadListeners);
+        NeoForge.EVENT_BUS.addListener(MaterialCatalog::register);
         NeoForge.EVENT_BUS.addListener(ResidentProfileManager::onEntityJoin);
         NeoForge.EVENT_BUS.addListener(ResidentProfileManager::onEntityTick);
         NeoForge.EVENT_BUS.addListener(ResidentProfileManager::onEntityInteract);

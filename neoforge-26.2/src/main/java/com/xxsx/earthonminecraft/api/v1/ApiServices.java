@@ -3,6 +3,7 @@ package com.xxsx.earthonminecraft.api.v1;
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
 import com.xxsx.earthonminecraft.MachineMultiblock;
 import com.xxsx.earthonminecraft.MaterialChemistry;
+import com.xxsx.earthonminecraft.MaterialCatalog;
 import com.xxsx.earthonminecraft.ProcessingMachineBlock;
 import java.util.Arrays;
 import java.util.List;
@@ -30,9 +31,23 @@ final class ApiServices {
     }
 
     private static Optional<MaterialPropertyApi.MaterialProperties> material(Identifier id) {
-        return MaterialChemistry.describe(id).map(info -> new MaterialPropertyApi.MaterialProperties(
-                id, info.formula(), info.categoryKey(), info.formKey(), info.sourceKey(),
-                info.processKey(), info.useKey(), info.simplificationKey()));
+        Optional<MaterialPropertyApi.MaterialProperties> known = MaterialChemistry.describe(id)
+                .map(info -> new MaterialPropertyApi.MaterialProperties(
+                        id, info.formula(), info.categoryKey(), info.formKey(), info.sourceKey(),
+                        info.processKey(), info.useKey(), info.simplificationKey()));
+        if (known.isPresent()) {
+            return known;
+        }
+        return MaterialCatalog.find(id)
+                .map(record -> new MaterialPropertyApi.MaterialProperties(
+                        id, record.formula(), "tooltip.earth_on_minecraft.chem.detail.mineral",
+                        "tooltip.earth_on_minecraft.chem.form.natural_block",
+                        "tooltip.earth_on_minecraft.chem.source.mineral",
+                        "tooltip.earth_on_minecraft.chem.process.mineral",
+                        "tooltip.earth_on_minecraft.chem.use.general",
+                        record.isMixture()
+                                ? "tooltip.earth_on_minecraft.chem.simplify.mixture"
+                                : "tooltip.earth_on_minecraft.chem.simplify.stackable"));
     }
 
     private static Optional<EnergyApi.EnergyPort> energyPort(Level level, BlockPos pos, Direction side) {

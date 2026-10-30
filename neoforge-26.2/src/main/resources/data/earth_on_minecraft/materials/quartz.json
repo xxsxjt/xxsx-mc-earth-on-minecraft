@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:quartz",
+  "kind": "mineral",
+  "formula": "SiO2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 60.08,
+  "constituents": [{ "species": "SiO2", "fraction": 1.0 }],
+  "source": ["igneous", "metamorphic", "hydrothermal"],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.quartz",
+  "notes": "Alpha-quartz end member; chert, flint and quartzite add texture, not chemistry."
+}
+
+\n

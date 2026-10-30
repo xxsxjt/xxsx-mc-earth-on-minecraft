@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:chalcopyrite",
+  "kind": "mineral",
+  "formula": "CuFeS2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 183.52,
+  "constituents": [{ "species": "CuFeS2", "fraction": 1.0 }],
+  "source": ["hydrothermal", "magmatic_sulfide"],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.chalcopyrite",
+  "notes": "Natural copper ore is an intergrowth with pyrite and silicate gangue."
+}
