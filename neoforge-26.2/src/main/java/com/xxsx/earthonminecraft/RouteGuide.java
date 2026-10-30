@@ -6,25 +6,57 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public final class RouteGuide {
-    private static final Map<Item, RouteInfo> ROUTES_BY_ITEM = createRoutesByItem();
+    private static volatile Map<Item, RouteInfo> routesByItem;
+    private static final ThreadLocal<Boolean> BUILDING_ROUTE_INDEX = ThreadLocal.withInitial(() -> false);
 
     private RouteGuide() {
     }
 
     public static Map<Item, RouteInfo> buildRoutesByItem() {
-        return ROUTES_BY_ITEM;
+        return routeIndex();
+    }
+
+    private static Map<Item, RouteInfo> routeIndex() {
+        Map<Item, RouteInfo> current = routesByItem;
+        if (current != null) {
+            return current;
+        }
+        // JEI registration can request item tooltips while this index is being constructed.
+        // A reentrant lookup must see an empty snapshot rather than recursively initializing the
+        // class or observing a half-built map.
+        if (BUILDING_ROUTE_INDEX.get()) {
+            return Map.of();
+        }
+        synchronized (RouteGuide.class) {
+            current = routesByItem;
+            if (current != null) {
+                return current;
+            }
+            BUILDING_ROUTE_INDEX.set(true);
+            try {
+                current = Collections.unmodifiableMap(createRoutesByItem());
+                routesByItem = current;
+                return current;
+            } finally {
+                BUILDING_ROUTE_INDEX.remove();
+            }
+        }
     }
 
     private static Map<Item, RouteInfo> createRoutesByItem() {
         Map<Item, RouteInfo> routes = new LinkedHashMap<>();
         for (ProcessingMachineBlock.Recipe recipe : ProcessingMachineBlock.recipes()) {
-            routes.computeIfAbsent(recipe.input().get().asItem(), ignored -> new RouteInfo()).next.add(recipe);
+            // Fluid-only routes are selected from the machine tank and have no item key to index.
+            if (recipe.hasItemInput()) {
+                routes.computeIfAbsent(recipe.input().get().asItem(), ignored -> new RouteInfo()).next.add(recipe);
+            }
             for (ProcessingMachineBlock.Output output : recipe.outputs()) {
                 routes.computeIfAbsent(output.item().get().asItem(), ignored -> new RouteInfo()).sources.add(recipe);
             }
@@ -33,7 +65,7 @@ public final class RouteGuide {
     }
 
     public static RouteInfo routeFor(Item item) {
-        return ROUTES_BY_ITEM.getOrDefault(item, RouteInfo.EMPTY);
+        return routeIndex().getOrDefault(item, RouteInfo.EMPTY);
     }
 
     public static void addRouteTips(ItemStack stack, Consumer<Component> lines) {
@@ -101,7 +133,11 @@ public final class RouteGuide {
     }
 
     private static void addDirectUseTips(Item item, Consumer<Component> lines) {
-        if (item == EarthOnMinecraft.STEEL_BLOOM.get().asItem()) {
+        if (item == EarthOnMinecraft.SPONGE_IRON.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.use.sponge_iron").withStyle(ChatFormatting.GREEN));
+        } else if (item == EarthOnMinecraft.WROUGHT_IRON.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.use.wrought_iron").withStyle(ChatFormatting.GREEN));
+        } else if (item == EarthOnMinecraft.STEEL_BLOOM.get().asItem()) {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.use.steel_bloom").withStyle(ChatFormatting.GREEN));
         } else if (item == EarthOnMinecraft.PRINTED_CIRCUIT_BOARD.get().asItem()) {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.use.printed_circuit_board").withStyle(ChatFormatting.GREEN));
@@ -157,7 +193,11 @@ public final class RouteGuide {
     public static String joinSources(List<ProcessingMachineBlock.Recipe> recipes, int limit) {
         List<String> names = new ArrayList<>();
         for (ProcessingMachineBlock.Recipe recipe : recipes) {
-            String input = recipe.inputStack().getItemName().getString();
+            // `inputStack()` is empty for fluid-only routes; naming them by their fluid instead of
+            // showing an empty input keeps the tooltip readable.
+            String input = recipe.hasItemInput()
+                    ? recipe.inputStack().getItemName().getString()
+                    : describeFluidInputs(recipe);
             String name = recipe.kind().localizedDisplayName() + ": " + input;
             if (!names.contains(name)) {
                 names.add(name);
@@ -167,6 +207,14 @@ public final class RouteGuide {
             }
         }
         return String.join("；", names);
+    }
+
+    private static String describeFluidInputs(ProcessingMachineBlock.Recipe recipe) {
+        List<String> fluids = new ArrayList<>();
+        for (ProcessingMachineBlock.FluidInput input : recipe.fluidInputs()) {
+            fluids.add(input.amount() + " mB " + input.fluidId());
+        }
+        return fluids.isEmpty() ? "?" : String.join(" + ", fluids);
     }
 
     public static String describeOutputs(ProcessingMachineBlock.Recipe recipe) {

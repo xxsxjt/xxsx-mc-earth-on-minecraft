@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "bloomery_controller",
+  "model_identifier": "earth_on_minecraft:bloomery_controller",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "plinth",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        2,
+        15
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "95ed0fec-98f6-5f68-a2e0-11c5e91cd1a6",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            14,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            14,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            1,
+            14,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            1,
+            14,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "shaft_low",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        2,
+        3
+      ],
+      "to": [
+        13,
+        8,
+        13
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "6646ad3a-4d65-5ce6-81eb-f4853a4bb9aa",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            8,
+            13,
+            14
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            8,
+            13,
+            14
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            8,
+            13,
+            14
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            8,
+            13,
+            14
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "shaft_high",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        8,
+        4
+      ],
+      "to": [
+        12,
+        13,
+        12
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "bd4129e6-83ba-5509-b072-8ebe9bd6f4ff",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            3,
+            12,
+            8
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            3,
+            12,
+            8
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            3,
+            12,
+            8
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            3,
+            12,
+            8
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "tuyere",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        4,
+        6
+      ],
+      "to": [
+        4,
+        7,
+        10
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "fc96451e-614d-5629-a099-93181b4531c2",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            9,
+            4,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12,
+            9,
+            16,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            9,
+            10,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            9,
+            10,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "tap_arch",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        2,
+        0
+      ],
+      "to": [
+        11,
+        5,
+        4
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "a63700dc-be99-595c-8677-ba9db5092ae2",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            11,
+            11,
+            14
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            11,
+            11,
+            14
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            12,
+            11,
+            16,
+            14
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            0,
+            11,
+            4,
+            14
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            0,
+            11,
+            4
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            12,
+            11,
+            16
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "flue",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        13,
+        5
+      ],
+      "to": [
+        11,
+        15,
+        11
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "90d7c06f-f3f7-58ca-a186-2c5cde9446af",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            1,
+            11,
+            3
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            1,
+            11,
+            3
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            1,
+            11,
+            3
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            1,
+            11,
+            3
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "95ed0fec-98f6-5f68-a2e0-11c5e91cd1a6",
+    "6646ad3a-4d65-5ce6-81eb-f4853a4bb9aa",
+    "bd4129e6-83ba-5509-b072-8ebe9bd6f4ff",
+    "fc96451e-614d-5629-a099-93181b4531c2",
+    "a63700dc-be99-595c-8677-ba9db5092ae2",
+    "90d7c06f-f3f7-58ca-a186-2c5cde9446af"
+  ],
+  "textures": [
+    {
+      "name": "bloomery_controller.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "688a6f65-2f65-5154-8e83-61167f529b7a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/bloomery_controller.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "clay-and-stone shaft furnace with a tuyere and tap arch",
+    "silhouette": "tapered clay shaft on a squat stone plinth",
+    "faces": {
+      "front": "tuyere and slag notch",
+      "back": "bellows linkage",
+      "left": "charging mouth",
+      "right": "tap arch",
+      "top": "flue opening",
+      "bottom": "ash pit"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/bloomery_controller",
+        "front": "earth_on_minecraft:block/bloomery_controller",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/bloomery_controller_active",
+        "front": "earth_on_minecraft:block/bloomery_controller_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/bloomery_controller",
+        "front": "earth_on_minecraft:block/bloomery_controller",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

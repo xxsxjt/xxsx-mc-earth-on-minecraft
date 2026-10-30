@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BIB",
+    "BBB"
+  ],
+  "key": {
+    "B": "minecraft:brick",
+    "I": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "earth_on_minecraft:tea_kiln",
+    "count": 1
+  }
+}

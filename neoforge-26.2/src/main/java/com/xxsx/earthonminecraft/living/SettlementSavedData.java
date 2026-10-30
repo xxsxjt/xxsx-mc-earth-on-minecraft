@@ -52,6 +52,27 @@ public final class SettlementSavedData extends SavedData {
         return snapshot(record);
     }
 
+    public SettlementSnapshot getOrCreate(ServerLevel level, BlockPos pos, Identifier profileId, String nameKey) {
+        String dimension = level.dimension().identifier().toString();
+        String requestedProfileId = profileId.toString();
+        Optional<SettlementRecord> matching = settlements.values().stream()
+                .filter(record -> record.dimension.equals(dimension))
+                .filter(record -> record.profileId.equals(requestedProfileId))
+                .filter(record -> horizontalDistanceSq(record.center(), pos)
+                        <= (long) DEFAULT_SETTLEMENT_RADIUS * DEFAULT_SETTLEMENT_RADIUS)
+                .min(Comparator.comparingLong(record -> horizontalDistanceSq(record.center(), pos)));
+        SettlementRecord record = matching.orElseGet(() -> nearestRecord(dimension, pos, DEFAULT_SETTLEMENT_RADIUS)
+                .filter(candidate -> isAutoProfile(candidate.profileId))
+                .orElseGet(() -> create(level, pos, dimension, profileId, nameKey)));
+        if (!record.profileId.equals(requestedProfileId)) {
+            record.profileId = profileId.toString();
+            record.nameKey = nameKey;
+            record.updatedAt = level.getGameTime();
+            setDirty();
+        }
+        return snapshot(record);
+    }
+
     public Optional<SettlementSnapshot> nearest(ServerLevel level, BlockPos pos, int radius) {
         return nearestRecord(level.dimension().identifier().toString(), pos, radius).map(this::snapshot);
     }
@@ -72,8 +93,17 @@ public final class SettlementSavedData extends SavedData {
 
     public SettlementSnapshot registerResident(ServerLevel level, BlockPos pos, UUID residentId, String roleId,
                                                String nameKey, int skill) {
-        SettlementRecord record = nearestRecord(level.dimension().identifier().toString(), pos, DEFAULT_SETTLEMENT_RADIUS)
-                .orElseGet(() -> create(level, pos, level.dimension().identifier().toString()));
+        return registerResident(level, pos, residentId, roleId, nameKey, skill, "");
+    }
+
+    public SettlementSnapshot registerResident(ServerLevel level, BlockPos pos, UUID residentId, String roleId,
+                                                String nameKey, int skill, String settlementId) {
+        String dimension = level.dimension().identifier().toString();
+        SettlementRecord record = settlements.get(settlementId);
+        if (record == null || !record.dimension.equals(dimension)) {
+            record = nearestRecord(dimension, pos, DEFAULT_SETTLEMENT_RADIUS)
+                    .orElseGet(() -> create(level, pos, dimension));
+        }
         String residentKey = residentId.toString();
         boolean changed = !roleId.equals(record.residentRoles.put(residentKey, roleId));
         changed |= !nameKey.equals(record.residentNames.put(residentKey, nameKey));
@@ -100,8 +130,16 @@ public final class SettlementSavedData extends SavedData {
     }
 
     public SettlementSnapshot registerFacility(ServerLevel level, BlockPos pos, String facilityId) {
-        SettlementRecord record = nearestRecord(level.dimension().identifier().toString(), pos, DEFAULT_SETTLEMENT_RADIUS)
-                .orElseGet(() -> create(level, pos, level.dimension().identifier().toString()));
+        return registerFacility(level, pos, facilityId, "");
+    }
+
+    public SettlementSnapshot registerFacility(ServerLevel level, BlockPos pos, String facilityId, String settlementId) {
+        String dimension = level.dimension().identifier().toString();
+        SettlementRecord record = settlements.get(settlementId);
+        if (record == null || !record.dimension.equals(dimension)) {
+            record = nearestRecord(dimension, pos, DEFAULT_SETTLEMENT_RADIUS)
+                    .orElseGet(() -> create(level, pos, dimension));
+        }
         if (record.facilityPositions.computeIfAbsent(facilityId, ignored -> new LinkedHashSet<>()).add(pos.asLong())) {
             record.updatedAt = level.getGameTime();
             setDirty();
@@ -110,16 +148,23 @@ public final class SettlementSavedData extends SavedData {
     }
 
     public void unregisterFacility(ServerLevel level, BlockPos pos, String facilityId) {
-        nearestRecord(level.dimension().identifier().toString(), pos, DEFAULT_SETTLEMENT_RADIUS).ifPresent(record -> {
-            LinkedHashSet<Long> positions = record.facilityPositions.get(facilityId);
-            if (positions != null && positions.remove(pos.asLong())) {
-                if (positions.isEmpty()) {
-                    record.facilityPositions.remove(facilityId);
-                }
-                record.updatedAt = level.getGameTime();
-                setDirty();
-            }
-        });
+        String dimension = level.dimension().identifier().toString();
+        long position = pos.asLong();
+        settlements.values().stream()
+                .filter(record -> record.dimension.equals(dimension))
+                .filter(record -> record.facilityPositions.getOrDefault(facilityId, new LinkedHashSet<>())
+                        .contains(position))
+                .findFirst()
+                .ifPresent(record -> {
+                    LinkedHashSet<Long> positions = record.facilityPositions.get(facilityId);
+                    if (positions.remove(position)) {
+                        if (positions.isEmpty()) {
+                            record.facilityPositions.remove(facilityId);
+                        }
+                        record.updatedAt = level.getGameTime();
+                        setDirty();
+                    }
+                });
     }
 
     private SettlementRecord create(ServerLevel level, BlockPos pos, String dimension) {
@@ -127,13 +172,18 @@ public final class SettlementSavedData extends SavedData {
         SettlementDataManager.ProfileSelection selection = SettlementDataManager.chooseProfile(seed);
         SettlementDataManager.SettlementProfile profile = selection.profile();
         String nameKey = profile.nameKeys().get(Math.floorMod((int) SettlementDataManager.mix(seed ^ 0x73A9B41DL), profile.nameKeys().size()));
+        return create(level, pos, dimension, selection.id(), nameKey);
+    }
+
+    private SettlementRecord create(ServerLevel level, BlockPos pos, String dimension, Identifier profileId,
+                                    String nameKey) {
         String baseId = dimension + "@" + Math.floorDiv(pos.getX(), 32) + "," + Math.floorDiv(pos.getZ(), 32);
         String id = baseId;
         int suffix = 2;
         while (settlements.containsKey(id)) {
             id = baseId + "-" + suffix++;
         }
-        SettlementRecord record = new SettlementRecord(id, dimension, pos.asLong(), selection.id().toString(), nameKey,
+        SettlementRecord record = new SettlementRecord(id, dimension, pos.asLong(), profileId.toString(), nameKey,
                 Map.of(), Map.of(), Map.of(), Map.of(), level.getGameTime(), level.getGameTime(), 50, 0);
         settlements.put(id, record);
         setDirty();
@@ -146,6 +196,12 @@ public final class SettlementSavedData extends SavedData {
                 .filter(record -> record.dimension.equals(dimension))
                 .filter(record -> horizontalDistanceSq(record.center(), pos) <= radiusSq)
                 .min(Comparator.comparingLong(record -> horizontalDistanceSq(record.center(), pos)));
+    }
+
+    private static boolean isAutoProfile(String profileId) {
+        return profileId.equals(EarthOnMinecraft.id("agricultural_village").toString())
+                || profileId.equals(EarthOnMinecraft.id("resource_village").toString())
+                || profileId.equals(EarthOnMinecraft.id("mechanized_town").toString());
     }
 
     private SettlementSnapshot snapshot(SettlementRecord record) {
@@ -218,8 +274,8 @@ public final class SettlementSavedData extends SavedData {
         private final String id;
         private final String dimension;
         private final long center;
-        private final String profileId;
-        private final String nameKey;
+        private String profileId;
+        private String nameKey;
         private final Map<String, String> residentRoles;
         private final Map<String, String> residentNames;
         private final Map<String, Integer> residentSkills;

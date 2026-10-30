@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "smokehouse",
+  "model_identifier": "earth_on_minecraft:smokehouse",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "smoke_chamber",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        3,
+        3
+      ],
+      "to": [
+        14,
+        14,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "3d954100-99a0-53be-a7e6-5698fb03578a",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            2,
+            14,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            2,
+            14,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            2,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            2,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "gabled_roof",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        14,
+        2
+      ],
+      "to": [
+        15,
+        16,
+        14
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "e4b48202-30e7-56a9-9907-7228348ba894",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            0,
+            15,
+            2
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            0,
+            15,
+            2
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            0,
+            14,
+            2
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            0,
+            14,
+            2
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "firebox",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        0,
+        4
+      ],
+      "to": [
+        13,
+        4,
+        12
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "1f7a2abf-cc43-5718-b75f-6921f4cdcb69",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            12,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            12,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "meat_rail",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        9,
+        5
+      ],
+      "to": [
+        13,
+        11,
+        11
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "0b30f26e-0a71-57e3-8657-ef23df9cec85",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            5,
+            13,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            5,
+            13,
+            7
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            5,
+            11,
+            7
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            5,
+            11,
+            7
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "draft_vent",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        13,
+        5,
+        6
+      ],
+      "to": [
+        16,
+        9,
+        10
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "634afe91-a144-5f5d-9899-82bd8b483e65",
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            7,
+            16,
+            11
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            7,
+            3,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            7,
+            10,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            7,
+            10,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            13,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            13,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "ash_pit",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        0,
+        12
+      ],
+      "to": [
+        12,
+        2,
+        15
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "be5dbe39-a6f3-5926-be2c-be937aea6481",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            1,
+            14,
+            4,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            12,
+            14,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            12,
+            12,
+            15
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            1,
+            12,
+            4
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "3d954100-99a0-53be-a7e6-5698fb03578a",
+    "e4b48202-30e7-56a9-9907-7228348ba894",
+    "1f7a2abf-cc43-5718-b75f-6921f4cdcb69",
+    "0b30f26e-0a71-57e3-8657-ef23df9cec85",
+    "634afe91-a144-5f5d-9899-82bd8b483e65",
+    "be5dbe39-a6f3-5926-be2c-be937aea6481"
+  ],
+  "textures": [
+    {
+      "name": "smokehouse.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "fdc79130-2802-521e-87fe-c7d281f026d1",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/smokehouse.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "offset firebox smokehouse",
+    "silhouette": "small gabled shed with a firebox attached at the base",
+    "faces": {
+      "front": "smoke chamber door",
+      "back": "firebox damper",
+      "left": "meat rail",
+      "right": "draft vent",
+      "top": "smoke flue",
+      "bottom": "ash pit"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/smokehouse",
+        "front": "earth_on_minecraft:block/smokehouse",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/smokehouse_active",
+        "front": "earth_on_minecraft:block/smokehouse_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/smokehouse",
+        "front": "earth_on_minecraft:block/smokehouse",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

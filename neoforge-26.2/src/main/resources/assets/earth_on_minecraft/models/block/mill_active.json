@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/mill_active",
+    "front": "earth_on_minecraft:block/mill_active",
+    "back": "earth_on_minecraft:block/modern_machine_side",
+    "left": "earth_on_minecraft:block/modern_machine_side",
+    "right": "earth_on_minecraft:block/modern_machine_side",
+    "top": "earth_on_minecraft:block/modern_machine_top",
+    "bottom": "earth_on_minecraft:block/modern_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "meal_bin",
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        5,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            11,
+            14,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            11,
+            14,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            2,
+            11,
+            14,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            11,
+            14,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "stone_housing",
+      "from": [
+        3,
+        5,
+        3
+      ],
+      "to": [
+        13,
+        11,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "runner_stone",
+      "from": [
+        4,
+        11,
+        4
+      ],
+      "to": [
+        12,
+        14,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "grain_hopper",
+      "from": [
+        5,
+        14,
+        5
+      ],
+      "to": [
+        11,
+        16,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "flour_spout",
+      "from": [
+        11,
+        4,
+        6
+      ],
+      "to": [
+        16,
+        8,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            11,
+            8,
+            16,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            8,
+            5,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            8,
+            10,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            6,
+            8,
+            10,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            11,
+            6,
+            16,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            11,
+            6,
+            16,
+            10
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "sack_hoist",
+      "from": [
+        0,
+        7,
+        5
+      ],
+      "to": [
+        4,
+        14,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            2,
+            4,
+            9
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            12,
+            2,
+            16,
+            9
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            2,
+            11,
+            9
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            2,
+            11,
+            9
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            4,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            4,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

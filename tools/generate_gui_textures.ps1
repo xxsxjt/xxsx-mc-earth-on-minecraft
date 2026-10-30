@@ -3,44 +3,12 @@ param(
 )
 
 Add-Type -AssemblyName System.Drawing
-Add-Type -AssemblyName System.IO.Compression.FileSystem
 
 $canvasWidth = 256
 $canvasHeight = 256
 $guiWidth = 176
-$guiHeight = 166
-
-function Get-VanillaContainerBase {
-    $artifactRoot = Join-Path $PSScriptRoot '..\neoforge-26.2\build\moddev\artifacts'
-    $jar = Get-ChildItem -LiteralPath $artifactRoot -Filter 'minecraft-patched-*.jar' -ErrorAction SilentlyContinue |
-        Select-Object -First 1
-    if ($null -eq $jar) {
-        return $null
-    }
-
-    $archive = [System.IO.Compression.ZipFile]::OpenRead($jar.FullName)
-    try {
-        $entry = $archive.GetEntry('assets/minecraft/textures/gui/container/furnace.png')
-        if ($null -eq $entry) {
-            return $null
-        }
-        $stream = $entry.Open()
-        try {
-            $source = [System.Drawing.Image]::FromStream($stream)
-            try {
-                return [System.Drawing.Bitmap]::new($source)
-            } finally {
-                $source.Dispose()
-            }
-        } finally {
-            $stream.Dispose()
-        }
-    } finally {
-        $archive.Dispose()
-    }
-}
-
-$vanillaContainerBase = Get-VanillaContainerBase
+$guiHeight = 186
+$inventoryY = 104
 
 function Color([string]$hex) {
     return [System.Drawing.ColorTranslator]::FromHtml($hex)
@@ -63,20 +31,20 @@ function Draw-Slot($graphics, [int]$itemX, [int]$itemY) {
     Fill-Rect $graphics '#8B8B8B' ($x + 1) ($y + 1) 16 16
 }
 
-function Draw-Base($graphics) {
-    Fill-Rect $graphics '#C6C6C6' 0 0 $guiWidth $guiHeight
+function Draw-Base($graphics, [int]$height, [int]$inventoryTop) {
+    Fill-Rect $graphics '#C6C6C6' 0 0 $guiWidth $height
     Fill-Rect $graphics '#FFFFFF' 0 0 $guiWidth 1
-    Fill-Rect $graphics '#FFFFFF' 0 0 1 $guiHeight
-    Fill-Rect $graphics '#555555' 0 ($guiHeight - 1) $guiWidth 1
-    Fill-Rect $graphics '#555555' ($guiWidth - 1) 0 1 $guiHeight
+    Fill-Rect $graphics '#FFFFFF' 0 0 1 $height
+    Fill-Rect $graphics '#555555' 0 ($height - 1) $guiWidth 1
+    Fill-Rect $graphics '#555555' ($guiWidth - 1) 0 1 $height
 
     for ($row = 0; $row -lt 3; $row++) {
         for ($col = 0; $col -lt 9; $col++) {
-            Draw-Slot $graphics (8 + $col * 18) (84 + $row * 18)
+            Draw-Slot $graphics (8 + $col * 18) ($inventoryTop + $row * 18)
         }
     }
     for ($col = 0; $col -lt 9; $col++) {
-        Draw-Slot $graphics (8 + $col * 18) 142
+        Draw-Slot $graphics (8 + $col * 18) ($inventoryTop + 58)
     }
 }
 
@@ -87,7 +55,7 @@ function Draw-Arrow($graphics, [int]$x, [int]$y) {
     Fill-Rect $graphics '#8B8B8B' ($x + 21) ($y + 6) 3 4
 }
 
-function New-Gui([string]$name, [scriptblock]$drawTop) {
+function New-Gui([string]$name, [int]$height, [int]$inventoryTop, [scriptblock]$drawTop) {
     $bitmap = [System.Drawing.Bitmap]::new(
         $canvasWidth,
         $canvasHeight,
@@ -98,12 +66,7 @@ function New-Gui([string]$name, [scriptblock]$drawTop) {
         $graphics.SmoothingMode = [System.Drawing.Drawing2D.SmoothingMode]::None
         $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::NearestNeighbor
         $graphics.PixelOffsetMode = [System.Drawing.Drawing2D.PixelOffsetMode]::Half
-        if ($null -ne $vanillaContainerBase) {
-            $graphics.DrawImageUnscaled($vanillaContainerBase, 0, 0)
-            Fill-Rect $graphics '#C6C6C6' 2 2 172 80
-        } else {
-            Draw-Base $graphics
-        }
+        Draw-Base $graphics $height $inventoryTop
         & $drawTop $graphics
 
         [System.IO.Directory]::CreateDirectory($OutputRoot) | Out-Null
@@ -116,10 +79,15 @@ function New-Gui([string]$name, [scriptblock]$drawTop) {
     }
 }
 
-New-Gui 'processing_machine.png' {
+New-Gui 'processing_machine.png' $guiHeight $inventoryY {
     param($graphics)
     Draw-Slot $graphics 38 35
     Draw-Slot $graphics 38 57
+    Draw-Slot $graphics 8 76
+    Draw-Slot $graphics 26 76
+    Draw-Slot $graphics 44 76
+    Draw-Slot $graphics 62 76
+    Draw-Slot $graphics 80 76
     foreach ($slot in @(
         @(102, 20), @(120, 20), @(138, 20), @(156, 20),
         @(111, 42), @(129, 42), @(147, 42)
@@ -129,15 +97,11 @@ New-Gui 'processing_machine.png' {
     Draw-Arrow $graphics 64 38
 }
 
-New-Gui 'energy_generator.png' {
+New-Gui 'energy_generator.png' 166 84 {
     param($graphics)
     Draw-Slot $graphics 38 57
 }
 
-New-Gui 'battery_box.png' {
+New-Gui 'battery_box.png' 166 84 {
     param($graphics)
-}
-
-if ($null -ne $vanillaContainerBase) {
-    $vanillaContainerBase.Dispose()
 }

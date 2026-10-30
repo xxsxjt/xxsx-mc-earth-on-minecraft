@@ -1,0 +1,609 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "tannery",
+  "model_identifier": "earth_on_minecraft:tannery",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "soak_vat",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        5,
+        12
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "25faf967-7e61-583e-a14e-3151cc75501b",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            11,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            11,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            11,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            11,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            2,
+            15,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            4,
+            15,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "tanning_pit",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        0,
+        12
+      ],
+      "to": [
+        13,
+        3,
+        16
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "d8d6ba55-b31f-5877-8d62-6ae1d58424d6",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            4,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            12,
+            13,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            0,
+            13,
+            4
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "fleshing_beam",
+      "box_uv": false,
+      "rescale": true,
+      "locked": false,
+      "from": [
+        2,
+        5,
+        4
+      ],
+      "to": [
+        14,
+        9,
+        9
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        7,
+        7
+      ],
+      "uuid": "e89a0c22-0ceb-5845-a40a-c8b902715f1a",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            7,
+            14,
+            11
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            7,
+            14,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            7,
+            7,
+            12,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            7,
+            9,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            4,
+            14,
+            9
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            7,
+            14,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "rotation": [
+        0.0,
+        0.0,
+        -18.0
+      ]
+    },
+    {
+      "name": "hide_rack",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        10,
+        4
+      ],
+      "to": [
+        14,
+        15,
+        6
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "1d5e48a3-eed5-546c-9062-64159308ba97",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            1,
+            14,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            1,
+            14,
+            6
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            10,
+            1,
+            12,
+            6
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            1,
+            6,
+            6
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            4,
+            14,
+            6
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            10,
+            14,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "liquor_pump",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        2,
+        4
+      ],
+      "to": [
+        4,
+        8,
+        10
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "161c6c56-e70d-5c7c-b455-8b01f969e56b",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            4,
+            14
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12,
+            8,
+            16,
+            14
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            8,
+            12,
+            14
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            8,
+            10,
+            14
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            4,
+            4,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            6,
+            4,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "drain_gutter",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        0,
+        9
+      ],
+      "to": [
+        12,
+        2,
+        12
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "cab79a74-dab4-5498-a52e-330dbc297b35",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            14,
+            7,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            9,
+            14,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            9,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "25faf967-7e61-583e-a14e-3151cc75501b",
+    "d8d6ba55-b31f-5877-8d62-6ae1d58424d6",
+    "e89a0c22-0ceb-5845-a40a-c8b902715f1a",
+    "1d5e48a3-eed5-546c-9062-64159308ba97",
+    "161c6c56-e70d-5c7c-b455-8b01f969e56b",
+    "cab79a74-dab4-5498-a52e-330dbc297b35"
+  ],
+  "textures": [
+    {
+      "name": "tannery.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc7cda80-4965-5594-8c48-853d2e87f8e9",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/tannery.png"
+    },
+    {
+      "name": "wet_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "31a85def-7245-5aaf-baff-46b21859fe59",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/wet_machine_side.png"
+    },
+    {
+      "name": "wet_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "86ed510c-65cf-56b6-a264-51bde1430d2c",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/wet_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "tanning pit with fleshing beam",
+    "silhouette": "sunken vat beside a slanted beam and a hide rack",
+    "faces": {
+      "front": "tanning pit and beam",
+      "back": "liquor pump",
+      "left": "hide rack",
+      "right": "fleshing beam",
+      "top": "soak vat",
+      "bottom": "drain gutter"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/tannery",
+        "front": "earth_on_minecraft:block/tannery",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/tannery_active",
+        "front": "earth_on_minecraft:block/tannery_active",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/tannery",
+        "front": "earth_on_minecraft:block/tannery",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

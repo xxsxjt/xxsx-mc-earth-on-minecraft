@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "steamer_basket",
+  "model_identifier": "earth_on_minecraft:steamer_basket",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "water_pot",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        4,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "2cbd67e7-8407-5439-97cf-5d1f96633f7d",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "lower_tier",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        4,
+        3
+      ],
+      "to": [
+        13,
+        8,
+        13
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "28cd0b88-00fe-5ea3-9b28-0b7f215ca3a8",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "middle_tier",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        8,
+        3
+      ],
+      "to": [
+        13,
+        12,
+        13
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "f2388b87-68c0-5c0d-b984-def07a1eda03",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "upper_tier",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        12,
+        3
+      ],
+      "to": [
+        13,
+        15,
+        13
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "72dd708a-cfbd-597c-b5fb-f88e7164ff80",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "bamboo_lid",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        15,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "b12e031b-ec29-511f-a7b2-8a977fc3fbb4",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "steam_inlet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        4,
+        5
+      ],
+      "to": [
+        3,
+        8,
+        11
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "b3e1f8c7-313e-5165-92e3-c0f537d95d18",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            3,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            13,
+            8,
+            16,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            8,
+            11,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            8,
+            11,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "2cbd67e7-8407-5439-97cf-5d1f96633f7d",
+    "28cd0b88-00fe-5ea3-9b28-0b7f215ca3a8",
+    "f2388b87-68c0-5c0d-b984-def07a1eda03",
+    "72dd708a-cfbd-597c-b5fb-f88e7164ff80",
+    "b12e031b-ec29-511f-a7b2-8a977fc3fbb4",
+    "b3e1f8c7-313e-5165-92e3-c0f537d95d18"
+  ],
+  "textures": [
+    {
+      "name": "steamer_basket.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "82d6ad5b-35aa-5712-973b-0cb11ef45c74",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/steamer_basket.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "stacked bamboo steamer baskets",
+    "silhouette": "cylindrical stack of woven trays with a domed lid",
+    "faces": {
+      "front": "stacked basket tiers",
+      "back": "bamboo lid",
+      "left": "steam inlet",
+      "right": "condensate drip",
+      "top": "top tier rim",
+      "bottom": "water pot"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/steamer_basket",
+        "front": "earth_on_minecraft:block/steamer_basket",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/steamer_basket_active",
+        "front": "earth_on_minecraft:block/steamer_basket_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/steamer_basket",
+        "front": "earth_on_minecraft:block/steamer_basket",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

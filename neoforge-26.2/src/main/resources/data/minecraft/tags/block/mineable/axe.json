@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "earth_on_minecraft:bar_counter",
+    "earth_on_minecraft:campfire",
+    "earth_on_minecraft:carpentry_bench",
+    "earth_on_minecraft:curing_barn",
+    "earth_on_minecraft:herb_processing_table",
+    "earth_on_minecraft:loom",
+    "earth_on_minecraft:mill",
+    "earth_on_minecraft:noodle_press",
+    "earth_on_minecraft:oil_press",
+    "earth_on_minecraft:rice_huller",
+    "earth_on_minecraft:smokehouse",
+    "earth_on_minecraft:steamer_basket",
+    "earth_on_minecraft:stone_mill",
+    "earth_on_minecraft:tannery"
+  ]
+}

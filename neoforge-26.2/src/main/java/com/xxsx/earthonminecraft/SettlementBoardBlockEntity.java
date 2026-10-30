@@ -27,16 +27,28 @@ public class SettlementBoardBlockEntity extends BlockEntity implements MenuProvi
             return;
         }
         boolean firstIndex = settlementId.isBlank();
-        SettlementSavedData.SettlementSnapshot snapshot = SettlementSavedData.get(serverLevel)
-                .byId(settlementId)
-                .orElseGet(() -> SettlementSavedData.get(serverLevel).getOrCreate(serverLevel, worldPosition));
+        SettlementSavedData savedData = SettlementSavedData.get(serverLevel);
+        SettlementSavedData.SettlementSnapshot snapshot = savedData.byId(settlementId).orElse(null);
+        if (snapshot == null) {
+            var addonAnchor = SettlementFacilities.nearbyAddonSettlement(serverLevel, worldPosition, 24);
+            if (addonAnchor.isPresent()) {
+                var anchor = addonAnchor.get();
+                long seed = com.xxsx.earthonminecraft.living.SettlementDataManager.mix(
+                        serverLevel.getSeed() ^ anchor.pos().asLong() ^ anchor.profileId().hashCode());
+                String nameKey = com.xxsx.earthonminecraft.living.SettlementDataManager
+                        .chooseSettlementNameKey(anchor.profileId(), seed);
+                snapshot = savedData.getOrCreate(serverLevel, anchor.pos(), anchor.profileId(), nameKey);
+            } else {
+                snapshot = savedData.getOrCreate(serverLevel, worldPosition);
+            }
+        }
         if (!snapshot.id().equals(settlementId)) {
             settlementId = snapshot.id();
             setChanged();
         }
-        SettlementFacilities.registerBoard(serverLevel, worldPosition);
+        SettlementFacilities.registerBoard(serverLevel, worldPosition, snapshot.id());
         if (firstIndex) {
-            SettlementFacilities.indexNearby(serverLevel, worldPosition, 24, 10);
+            SettlementFacilities.indexNearby(serverLevel, worldPosition, 24, 10, snapshot.id());
         }
     }
 

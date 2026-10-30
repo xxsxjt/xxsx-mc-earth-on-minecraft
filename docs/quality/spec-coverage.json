@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "spec": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "items": {
+    "spec": 1304,
+    "registered": 1302,
+    "missing": [
+      "antibiotic",
+      "painkiller"
+    ]
+  },
+  "blocks": {
+    "spec": 65,
+    "registered": 65,
+    "missing": []
+  },
+  "machines": {
+    "spec": 66,
+    "registered": 61,
+    "missing": [
+      "autoclave",
+      "electrolysis_brine",
+      "herb_dryer",
+      "pharmacy_table",
+      "sorter"
+    ]
+  },
+  "vanilla_recipes": {
+    "spec": 85,
+    "item_ready": 85
+  },
+  "machine_recipes": {
+    "spec": 949,
+    "item_and_machine_ready": 949,
+    "generated_spec_routes": 669,
+    "curated_code_routes": 0
+  },
+  "families": {
+    "herb": 144,
+    "chemical": 270,
+    "medicine": 92,
+    "food": 209,
+    "drink": 87,
+    "life": 257,
+    "metal": 27,
+    "raw_material": 40,
+    "container": 49,
+    "power": 4,
+    "intermediate": 27,
+    "ore": 5,
+    "weapon": 14,
+    "tobacco": 14,
+    "misc": 22,
+    "armor": 10,
+    "tool": 22,
+    "item": 2,
+    "gem": 3,
+    "machine_part": 3,
+    "agriculture": 3
+  }
+}

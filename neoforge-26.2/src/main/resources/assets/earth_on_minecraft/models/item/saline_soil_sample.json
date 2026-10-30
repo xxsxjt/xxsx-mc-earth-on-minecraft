@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:block/rooted_dirt"
+    "layer0": "earth_on_minecraft:item/saline_soil_sample"
   }
 }

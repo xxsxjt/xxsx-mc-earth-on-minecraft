@@ -28,12 +28,25 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     public static final int SLOT_FUEL = 1;
     public static final int SLOT_OUTPUT_START = 2;
     public static final int OUTPUT_SLOT_COUNT = 7;
-    public static final int SLOT_COUNT = SLOT_OUTPUT_START + OUTPUT_SLOT_COUNT;
-    public static final int DATA_COUNT = 16;
+    public static final int SLOT_SECONDARY_START = SLOT_OUTPUT_START + OUTPUT_SLOT_COUNT;
+    public static final int SECONDARY_INPUT_SLOTS = 4;
+    public static final int SLOT_REAGENT = SLOT_SECONDARY_START + SECONDARY_INPUT_SLOTS;
+    public static final int SLOT_COUNT = SLOT_REAGENT + 1;
+    public static final int DATA_COUNT = 20;
+    public static final int DATA_REQUIRED_SECONDARY = 16;
+    public static final int DATA_AVAILABLE_SECONDARY = 17;
+    public static final int DATA_TANK_AMOUNT = 18;
+    public static final int DATA_TANK_CAPACITY = 19;
+    /** Fluid tank size in mB. One bucket is 1000 mB and a spec ingot cast is 144 mB. */
+    public static final int TANK_CAPACITY = 8000;
+    private static final int LAYOUT_VERSION = 2;
     private static final String HAS_FUEL_SLOT_KEY = "HasFuelSlotV1";
+    private static final String LAYOUT_VERSION_KEY = "SlotLayoutVersion";
+    private static final String TANK_AMOUNT_KEY = "TankAmount";
+    private static final String TANK_FLUID_KEY = "TankFluid";
     private static final int[] EMPTY_SLOTS = new int[0];
-    private static final int[] MATERIAL_INPUT_SLOTS = {SLOT_INPUT};
-    private static final int[] INPUT_SLOTS = {SLOT_INPUT, SLOT_FUEL};
+    private static final int[] MATERIAL_INPUT_SLOTS = createMaterialInputSlots();
+    private static final int[] INPUT_SLOTS = createInputSlots();
     private static final int[] OUTPUT_SLOTS = createOutputSlots();
     private static final int[] ALL_AUTOMATION_SLOTS = createAllAutomationSlots();
     private static final int[] AUTOMATION_SLOTS_WITHOUT_FUEL = createAutomationSlotsWithoutFuel();
@@ -43,7 +56,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         public int get(int index) {
             return switch (index) {
                 case 0 -> progress;
-                case 1 -> kind().processTicks();
+                case 1 -> activeRecipe == null ? kind().processTicks() : activeRecipe.processTicks();
                 case 2 -> redstoneMode.id;
                 case 3 -> active ? 1 : 0;
                 case 4 -> structureValid ? 1 : 0;
@@ -53,6 +66,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 case 8, 9, 10, 11, 12, 13 -> sideModes[index - 8].id;
                 case 14 -> selectedRouteIndex;
                 case 15 -> currentRouteCount();
+                case DATA_REQUIRED_SECONDARY -> activeRecipe == null ? 0 : requiredSecondaryCount(activeRecipe);
+                case DATA_AVAILABLE_SECONDARY -> availableSecondaryCount();
+                case DATA_TANK_AMOUNT -> tankAmount;
+                case DATA_TANK_CAPACITY -> TANK_CAPACITY;
                 default -> 0;
             };
         }
@@ -94,10 +111,18 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     private int structureCheckCooldown;
     private int selectedRouteIndex;
     private ItemStack lastRouteInput = ItemStack.EMPTY;
+    private String lastRouteFluid = "";
+    private ProcessingMachineBlock.Recipe activeRecipe;
     private final SideMode[] sideModes = createDefaultSideModes();
+    private final MachineFluidTank tank = new MachineFluidTank(TANK_CAPACITY);
+    private int tankAmount;
+    /** Fluid id currently held in the tank; empty when the tank is dry. */
+    private String tankFluid = "";
 
     public ProcessingMachineBlockEntity(BlockPos pos, BlockState state) {
         super(EarthOnMinecraft.PROCESSING_MACHINE_BLOCK_ENTITY.get(), pos, state);
+        // Pipes and buckets mutate the tank directly, so mirror it into the synced slots here.
+        tank.setListener(this::syncTankState);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, ProcessingMachineBlockEntity machine) {
@@ -143,6 +168,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
 
         ItemStack input = machine.items.get(SLOT_INPUT);
         List<ProcessingMachineBlock.Recipe> routes = ProcessingMachineBlock.matchingRecipes(machine.kind(), input);
+        if (routes.isEmpty() && input.isEmpty() && !machine.tank.isEmpty()) {
+            // Fluid-only routes have no primary item, so the tank contents select the route.
+            routes = ProcessingMachineBlock.fluidOnlyRecipes(machine.kind(), machine.tank.fluidId());
+        }
         machine.syncSelectedRoute(input, routes.size());
         Optional<ProcessingMachineBlock.Recipe> match = routes.isEmpty()
                 ? Optional.empty()
@@ -157,49 +186,256 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         }
 
         ProcessingMachineBlock.Recipe recipe = match.get();
+        if (!machine.hasSecondaryInputs(recipe)) {
+            if (machine.progress != 0 || machine.activeRecipe != recipe) {
+                machine.progress = 0;
+                changed = true;
+            }
+            machine.activeRecipe = recipe;
+            machine.finishTick(level, pos, state, changed);
+            return;
+        }
+        ItemStack reagent = machine.items.get(SLOT_REAGENT);
+        if (recipe.requiresCoke() && (reagent.isEmpty() || reagent.getItem() != EarthOnMinecraft.COKE.get())) {
+            if (machine.progress != 0) {
+                machine.progress = 0;
+                changed = true;
+            }
+            machine.activeRecipe = recipe;
+            machine.finishTick(level, pos, state, changed);
+            return;
+        }
         if (!machine.canFitOutputs(recipe.outputStacks())) {
+            machine.activeRecipe = recipe;
+            machine.finishTick(level, pos, state, changed);
+            return;
+        }
+        if (!machine.hasFluidInputs(recipe)) {
+            if (machine.progress != 0) {
+                machine.progress = 0;
+                changed = true;
+            }
+            machine.activeRecipe = recipe;
+            machine.finishTick(level, pos, state, changed);
+            return;
+        }
+        if (!machine.canStoreFluidOutputs(recipe)) {
+            machine.activeRecipe = recipe;
             machine.finishTick(level, pos, state, changed);
             return;
         }
 
         ProcessingMachineBlock.Kind kind = machine.kind();
-        if (EnergyNetwork.consume(level, pos, kind.energyPerTick())) {
+        ProcessingMachineBlock.PowerMode powerMode = kind.powerMode();
+        int energyCost = recipe.energyPerTickEffective();
+        boolean supplied = false;
+        if (powerMode.passive()) {
+            // Ambient process: fermentation and curing run without fuel or grid.
+            supplied = true;
+        } else if (energyCost > 0 && powerMode.grid() && EnergyNetwork.consume(level, pos, energyCost)) {
             machine.gridPowered = true;
-        } else if (kind.acceptsLocalFuel()) {
+            supplied = true;
+        }
+        if (!supplied && powerMode.manualFallback()) {
+            // Hand, crank, water wheel or animal drive. Checked before the fuel fallback so a manual
+            // station never burns fuel it does not need.
+            supplied = true;
+        }
+        if (!supplied && energyCost > 0 && powerMode.allowsLocalFuel()) {
+            // Local fuel is the fallback for a grid-capable machine that has no grid connection.
             if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
                 changed = true;
             }
-            if (machine.burnTime <= 0) {
-                machine.burnTimeTotal = 0;
-                machine.finishTick(level, pos, state, changed);
-                return;
+            if (machine.burnTime > 0) {
+                machine.burnTime--;
+                supplied = true;
             }
-            machine.burnTime--;
-        } else {
+        }
+        if (!supplied && powerMode.requiresFuel()) {
+            // Heat process: keep the fire going even when the route draws no electricity.
+            if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
+                changed = true;
+            }
+            if (machine.burnTime > 0) {
+                machine.burnTime--;
+                supplied = true;
+            }
+        }
+        if (!supplied && energyCost <= 0 && !powerMode.requiresFuel()) {
+            // A route that declares no electric draw and needs no fire runs without a supply.
+            supplied = true;
+        }
+        if (!supplied) {
             if (machine.burnTime != 0 || machine.burnTimeTotal != 0) {
                 machine.burnTime = 0;
                 machine.burnTimeTotal = 0;
                 changed = true;
             }
+            machine.activeRecipe = recipe;
             machine.finishTick(level, pos, state, changed);
             return;
         }
+        if (machine.burnTime <= 0 && machine.burnTimeTotal != 0) {
+            machine.burnTimeTotal = 0;
+            changed = true;
+        }
 
         machine.active = true;
+        machine.activeRecipe = recipe;
         machine.progress++;
         changed = true;
 
-        if (machine.progress >= kind.processTicks()) {
-            input.shrink(1);
+        if (machine.progress >= recipe.processTicks()) {
+            if (recipe.requiresCoke()) {
+                reagent.shrink(1);
+                if (reagent.isEmpty()) {
+                    machine.items.set(SLOT_REAGENT, ItemStack.EMPTY);
+                }
+            }
+            machine.consumeSecondaryInputs(recipe);
+            machine.consumeFluidInputs(recipe);
+            if (!input.isEmpty()) {
+                input.shrink(recipe.primaryCount());
+            }
             if (input.isEmpty()) {
                 machine.items.set(SLOT_INPUT, ItemStack.EMPTY);
             }
             machine.insertOutputs(recipe.outputStacks());
+            machine.produceFluidOutputs(recipe);
             machine.progress = 0;
             MachineFeedback.playComplete(level, pos, kind);
         }
 
         machine.finishTick(level, pos, state, changed);
+    }
+
+    /**
+     * Checks that every secondary input demanded by the route is stocked in the secondary slots.
+     * A secondary entry may be satisfied by any slot; counts are matched across slots.
+     */
+    private boolean hasSecondaryInputs(ProcessingMachineBlock.Recipe recipe) {
+        return countAvailable(recipe) >= requiredSecondaryCount(recipe);
+    }
+
+    /** True when the tank holds every fluid the route consumes. */
+    private boolean hasFluidInputs(ProcessingMachineBlock.Recipe recipe) {
+        for (ProcessingMachineBlock.FluidInput fluid : recipe.fluidInputs()) {
+            if (!tank.holds(fluid.fluidId(), fluid.amount())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * True when the tank can accept the route's fluid outputs. A route may only add a fluid that
+     * matches whatever is already stored, so a full or mismatched tank blocks the process instead
+     * of voiding the product.
+     */
+    private boolean canStoreFluidOutputs(ProcessingMachineBlock.Recipe recipe) {
+        if (recipe.fluidOutputs().isEmpty()) {
+            return true;
+        }
+        // A single tank can only hold one fluid, so every output must agree with the stored fluid
+        // (or with the first output if the tank is empty) and must fit in the remaining room.
+        String stored = tank.fluidId();
+        int room = tank.capacity() - tank.amount();
+        for (ProcessingMachineBlock.FluidOutput output : recipe.fluidOutputs()) {
+            if (stored.isEmpty()) {
+                stored = output.fluidId();
+            } else if (!stored.equals(output.fluidId())) {
+                return false;
+            }
+            if (output.amount() > room) {
+                return false;
+            }
+            room -= output.amount();
+        }
+        return true;
+    }
+
+    private void consumeFluidInputs(ProcessingMachineBlock.Recipe recipe) {
+        for (ProcessingMachineBlock.FluidInput fluid : recipe.fluidInputs()) {
+            tank.drain(fluid.fluidId(), fluid.amount());
+        }
+        syncTankState();
+    }
+
+    private void produceFluidOutputs(ProcessingMachineBlock.Recipe recipe) {
+        for (ProcessingMachineBlock.FluidOutput output : recipe.fluidOutputs()) {
+            tank.fill(output.fluidId(), output.amount());
+        }
+        syncTankState();
+    }
+
+    private void syncTankState() {
+        this.tankAmount = tank.amount();
+        this.tankFluid = tank.fluidId();
+        setChanged();
+    }
+    public MachineFluidTank tank() {
+        return tank;
+    }
+
+    public int tankAmount() {
+        return tank.amount();
+    }
+
+    public String tankFluidId() {
+        return tank.fluidId();
+    }
+
+    private int requiredSecondaryCount(ProcessingMachineBlock.Recipe recipe) {
+        int required = 0;
+        for (ProcessingMachineBlock.Input input : recipe.secondaryInputs()) {
+            required += Math.max(1, input.count());
+        }
+        return required;
+    }
+
+    private int availableSecondaryCount() {
+        int total = 0;
+        for (int slot = SLOT_SECONDARY_START; slot < SLOT_SECONDARY_START + SECONDARY_INPUT_SLOTS; slot++) {
+            total += items.get(slot).getCount();
+        }
+        return total;
+    }
+
+    private int countAvailable(ProcessingMachineBlock.Recipe recipe) {
+        int matched = 0;
+        for (ProcessingMachineBlock.Input input : recipe.secondaryInputs()) {
+            int need = Math.max(1, input.count());
+            int available = 0;
+            for (int slot = SLOT_SECONDARY_START; slot < SLOT_SECONDARY_START + SECONDARY_INPUT_SLOTS; slot++) {
+                ItemStack stack = items.get(slot);
+                if (!stack.isEmpty() && stack.getItem() == input.item().get().asItem()) {
+                    available += stack.getCount();
+                }
+            }
+            if (available < need) {
+                return -1;
+            }
+            matched += need;
+        }
+        return matched;
+    }
+
+    private void consumeSecondaryInputs(ProcessingMachineBlock.Recipe recipe) {
+        for (ProcessingMachineBlock.Input input : recipe.secondaryInputs()) {
+            int remaining = Math.max(1, input.count());
+            for (int slot = SLOT_SECONDARY_START; slot < SLOT_SECONDARY_START + SECONDARY_INPUT_SLOTS && remaining > 0; slot++) {
+                ItemStack stack = items.get(slot);
+                if (stack.isEmpty() || stack.getItem() != input.item().get().asItem()) {
+                    continue;
+                }
+                int taken = Math.min(remaining, stack.getCount());
+                stack.shrink(taken);
+                remaining -= taken;
+                if (stack.isEmpty()) {
+                    items.set(slot, ItemStack.EMPTY);
+                }
+            }
+        }
     }
 
     public ProcessingMachineBlock.Kind kind() {
@@ -234,7 +470,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     }
 
     public int energyPerTick() {
-        return kind().energyPerTick();
+        return activeRecipe != null ? activeRecipe.energyPerTickEffective() : kind().energyPerTick();
     }
 
     public void cycleRedstoneMode() {
@@ -280,9 +516,38 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
         if (slot == SLOT_INPUT) {
-            return ProcessingMachineBlock.findRecipe(kind(), stack).isPresent();
+            return ProcessingMachineBlock.acceptsInput(kind(), stack);
+        }
+        if (isSecondaryInputSlot(slot)) {
+            return acceptsSecondaryInput(stack);
+        }
+        if (slot == SLOT_REAGENT) {
+            return kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
+                    && stack.getItem() == EarthOnMinecraft.COKE.get();
         }
         return slot == SLOT_FUEL && kind().acceptsLocalFuel() && getFuelTicks(stack) > 0;
+    }
+
+    /**
+     * Secondary slots accept any item that some route of this machine consumes as a secondary
+     * input. Coke stays reserved for the dedicated reagent slot so the two never compete.
+     */
+    public boolean acceptsSecondaryInput(ItemStack stack) {
+        if (stack.isEmpty() || stack.getItem() == EarthOnMinecraft.COKE.get()) {
+            return false;
+        }
+        for (ProcessingMachineBlock.Recipe recipe : ProcessingMachineBlock.recipesFor(kind())) {
+            for (ProcessingMachineBlock.Input input : recipe.secondaryInputs()) {
+                if (stack.getItem() == input.item().get().asItem()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isSecondaryInputSlot(int slot) {
+        return slot >= SLOT_SECONDARY_START && slot < SLOT_SECONDARY_START + SECONDARY_INPUT_SLOTS;
     }
 
     @Override
@@ -329,11 +594,18 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     protected void loadAdditional(ValueInput input) {
         super.loadAdditional(input);
         boolean hasFuelSlot = input.getBooleanOr(HAS_FUEL_SLOT_KEY, false);
+        int layoutVersion = input.getIntOr(LAYOUT_VERSION_KEY, 1);
         this.items = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(input, this.items);
+        NonNullList<ItemStack> loaded = NonNullList.withSize(SLOT_COUNT, ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(input, loaded);
         if (!hasFuelSlot) {
-            migrateLegacyOutputSlots();
+            migrateLegacyOutputSlots(loaded);
+            layoutVersion = 1;
         }
+        if (layoutVersion < LAYOUT_VERSION) {
+            migrateReagentSlot(loaded);
+        }
+        this.items = loaded;
         this.progress = input.getIntOr("Progress", 0);
         this.burnTime = input.getIntOr("BurnTime", 0);
         this.burnTimeTotal = input.getIntOr("BurnTimeTotal", burnTime);
@@ -342,6 +614,9 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         for (int i = 0; i < sideModes.length; i++) {
             this.sideModes[i] = SideMode.byId(input.getIntOr("SideMode" + i, SideMode.BOTH.id));
         }
+        tank.set(input.getStringOr(TANK_FLUID_KEY, ""), input.getIntOr(TANK_AMOUNT_KEY, 0));
+        this.tankAmount = tank.amount();
+        this.tankFluid = tank.fluidId();
     }
 
     @Override
@@ -349,6 +624,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         super.saveAdditional(output);
         ContainerHelper.saveAllItems(output, this.items);
         output.putBoolean(HAS_FUEL_SLOT_KEY, true);
+        output.putInt(LAYOUT_VERSION_KEY, LAYOUT_VERSION);
         output.putInt("Progress", this.progress);
         output.putInt("BurnTime", this.burnTime);
         output.putInt("BurnTimeTotal", this.burnTimeTotal);
@@ -357,13 +633,28 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         for (int i = 0; i < sideModes.length; i++) {
             output.putInt("SideMode" + i, this.sideModes[i].id);
         }
+        output.putString(TANK_FLUID_KEY, tank.fluidId());
+        output.putInt(TANK_AMOUNT_KEY, tank.amount());
     }
 
-    private void migrateLegacyOutputSlots() {
-        for (int i = SLOT_COUNT - 1; i >= SLOT_OUTPUT_START; i--) {
-            this.items.set(i, this.items.get(i - 1));
+    private void migrateLegacyOutputSlots(NonNullList<ItemStack> loaded) {
+        for (int i = SLOT_OUTPUT_START + OUTPUT_SLOT_COUNT - 1; i >= SLOT_OUTPUT_START; i--) {
+            loaded.set(i, loaded.get(i - 1));
         }
-        this.items.set(SLOT_FUEL, ItemStack.EMPTY);
+        loaded.set(SLOT_FUEL, ItemStack.EMPTY);
+    }
+
+    /**
+     * Pre-v2 saves stored the coke reagent directly after the output row. In v2 that same index
+     * is the first secondary input slot, so shift it into the new reagent position.
+     */
+    private void migrateReagentSlot(NonNullList<ItemStack> loaded) {
+        int legacyReagentSlot = SLOT_OUTPUT_START + OUTPUT_SLOT_COUNT;
+        ItemStack legacy = loaded.get(legacyReagentSlot);
+        if (!legacy.isEmpty()) {
+            loaded.set(legacyReagentSlot, ItemStack.EMPTY);
+            loaded.set(SLOT_REAGENT, legacy);
+        }
     }
 
     public static int getFuelTicks(ItemStack stack) {
@@ -438,8 +729,11 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     }
 
     private void syncSelectedRoute(ItemStack input, int routeCount) {
-        if (!ItemStack.isSameItemSameComponents(input, lastRouteInput)) {
+        boolean inputChanged = !ItemStack.isSameItemSameComponents(input, lastRouteInput);
+        boolean fluidChanged = !tank.fluidId().equals(lastRouteFluid);
+        if (inputChanged || fluidChanged) {
             this.lastRouteInput = input.isEmpty() ? ItemStack.EMPTY : input.copyWithCount(1);
+            this.lastRouteFluid = tank.fluidId();
             this.selectedRouteIndex = 0;
             this.progress = 0;
         }
@@ -536,6 +830,29 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         return slots;
     }
 
+    private static int[] createMaterialInputSlots() {
+        int[] slots = new int[1 + SECONDARY_INPUT_SLOTS + 1];
+        int index = 0;
+        slots[index++] = SLOT_INPUT;
+        for (int i = 0; i < SECONDARY_INPUT_SLOTS; i++) {
+            slots[index++] = SLOT_SECONDARY_START + i;
+        }
+        slots[index] = SLOT_REAGENT;
+        return slots;
+    }
+
+    private static int[] createInputSlots() {
+        int[] slots = new int[4 + SECONDARY_INPUT_SLOTS];
+        int index = 0;
+        slots[index++] = SLOT_INPUT;
+        slots[index++] = SLOT_FUEL;
+        for (int i = 0; i < SECONDARY_INPUT_SLOTS; i++) {
+            slots[index++] = SLOT_SECONDARY_START + i;
+        }
+        slots[index] = SLOT_REAGENT;
+        return slots;
+    }
+
     private static int[] createAllAutomationSlots() {
         int[] slots = new int[SLOT_COUNT];
         for (int i = 0; i < slots.length; i++) {
@@ -546,9 +863,11 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
 
     private static int[] createAutomationSlotsWithoutFuel() {
         int[] slots = new int[SLOT_COUNT - 1];
-        slots[0] = SLOT_INPUT;
-        for (int i = 1; i < slots.length; i++) {
-            slots[i] = SLOT_OUTPUT_START + i - 1;
+        int index = 0;
+        for (int slot = 0; slot < SLOT_COUNT; slot++) {
+            if (slot != SLOT_FUEL) {
+                slots[index++] = slot;
+            }
         }
         return slots;
     }

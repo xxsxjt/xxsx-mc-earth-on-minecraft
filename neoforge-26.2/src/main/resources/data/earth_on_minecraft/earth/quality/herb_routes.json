@@ -1,0 +1,3140 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "routes": [
+    {
+      "id": "herb/abalone_shell",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:abalone_shell",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:abalone_shell",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/aconite",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:aconite",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:aconite",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/aconitum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:aconitum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:aconitum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/agarwood",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:agarwood",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:agarwood",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/agrimony",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:agrimony",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:agrimony",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/alum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:alum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:alum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "mineral herb: propagate on a potash bed"
+    },
+    {
+      "id": "herb/amomum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:amomum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:amomum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/angelica",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:angelica",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:angelica",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/angelica_pubescens",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:angelica_pubescens",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:angelica_pubescens",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/apricot_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:apricot_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:apricot_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/arisaema",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:arisaema",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:arisaema",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/artemisia_annua",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:artemisia_annua",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:artemisia_annua",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/artemisia_capillaris",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:artemisia_capillaris",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:artemisia_capillaris",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/astragalus",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:astragalus",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:astragalus",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/atractylodes",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:atractylodes",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:atractylodes",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/atractylodes_lancea",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:atractylodes_lancea",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:atractylodes_lancea",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/beeswax",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:beeswax",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:beeswax",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/benzoin",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:benzoin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:benzoin",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/biota_leaf",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:biota_leaf",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:biota_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/biota_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:biota_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:biota_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/bitter_orange",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:bitter_orange",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bitter_orange",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/borax_ore",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:borax_ore",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:borax_ore",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "mineral herb: propagate on a potash bed"
+    },
+    {
+      "id": "herb/borneol",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:borneol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:borneol",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/bupleurum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:bupleurum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bupleurum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/camphor",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:camphor",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:camphor",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/cardamom",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cardamom",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cardamom",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/cassia_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cassia_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cassia_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/centipede_dried",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:centipede_dried",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:centipede_dried",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/chicken_gizzard",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:chicken_gizzard",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chicken_gizzard",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/chrysanthemum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:chrysanthemum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chrysanthemum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/cicada_shell",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cicada_shell",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cicada_shell",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/cinnabar_ore",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cinnabar_ore",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cinnabar_ore",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "mineral herb: propagate on a potash bed"
+    },
+    {
+      "id": "herb/cinnamon_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cinnamon_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cinnamon_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/cinnamon_twig",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cinnamon_twig",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cinnamon_twig",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/codonopsis",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:codonopsis",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:codonopsis",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/coix_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coix_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coix_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/coptis",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coptis",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coptis",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/cornus",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cornus",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cornus",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/corydalis",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:corydalis",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:corydalis",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/cuttlebone",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cuttlebone",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cuttlebone",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/dandelion",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:dandelion",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:dandelion",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/dioscorea",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:dioscorea",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:dioscorea",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/dragons_blood",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:dragons_blood",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:dragons_blood",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/dried_tangerine_peel",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:dried_tangerine_peel",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:dried_tangerine_peel",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/earthworm_dried",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:earthworm_dried",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:earthworm_dried",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/emodin",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:emodin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:emodin",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/ephedra",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ephedra",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:ephedra",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/eucommia_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:eucommia_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:eucommia_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/eucommia_leaf",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:eucommia_leaf",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:eucommia_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/euryale",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:euryale",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:euryale",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/evodia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:evodia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:evodia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/finger_citron",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:finger_citron",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:finger_citron",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/forsythia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:forsythia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:forsythia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/fossil_bone",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:fossil_bone",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:fossil_bone",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/foxnut",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:foxnut",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:foxnut",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/frankincense",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:frankincense",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:frankincense",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/gastrodia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:gastrodia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:gastrodia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/ginseng",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ginseng",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:ginseng",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/goji",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:goji",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:goji",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/green_tangerine_peel",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:green_tangerine_peel",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:green_tangerine_peel",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/gypsum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:gypsum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:gypsum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "mineral herb: propagate on a potash bed"
+    },
+    {
+      "id": "herb/hawthorn_fruit",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hawthorn_fruit",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:hawthorn_fruit",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/hematite_ore",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hematite_ore",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:hematite_ore",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/honeycomb",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:honeycomb",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:honeycomb",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/honeysuckle",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:honeysuckle",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:honeysuckle",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/houttuynia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:houttuynia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:houttuynia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/imperata",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:imperata",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:imperata",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/isatis_root",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:isatis_root",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:isatis_root",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/jujube_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:jujube_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:jujube_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/kudzu_root",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:kudzu_root",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:kudzu_root",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/leonurus",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:leonurus",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:leonurus",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/licorice",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:licorice",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:licorice",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/ligusticum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ligusticum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:ligusticum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/lophatherum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lophatherum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lophatherum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/loquat_leaf",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:loquat_leaf",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:loquat_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/lotus_leaf",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lotus_leaf",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lotus_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/lotus_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lotus_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lotus_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/lycium_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lycium_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lycium_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/lysimachia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lysimachia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lysimachia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/magnolia_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:magnolia_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:magnolia_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/magnolia_flower",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:magnolia_flower",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:magnolia_flower",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mantis_egg",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mantis_egg",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mantis_egg",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/melia_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:melia_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:melia_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mint",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mint",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mint",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mirabilite",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mirabilite",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mirabilite",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "mineral herb: propagate on a potash bed"
+    },
+    {
+      "id": "herb/mosla",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mosla",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mosla",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/moutan_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:moutan_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:moutan_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mugwort",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mugwort",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mugwort",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mulberry_bark",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mulberry_bark",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mulberry_bark",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mulberry_leaf",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mulberry_leaf",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mulberry_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/mustard_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mustard_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mustard_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/myrrh",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:myrrh",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:myrrh",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/notopterygium",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:notopterygium",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:notopterygium",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/oyster_shell",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:oyster_shell",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:oyster_shell",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/panax_notoginseng",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:panax_notoginseng",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:panax_notoginseng",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/papaya_fruit",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:papaya_fruit",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:papaya_fruit",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/peach_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:peach_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:peach_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/pearl_shell",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pearl_shell",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pearl_shell",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/pepperweed_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pepperweed_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pepperweed_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/perilla",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:perilla",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:perilla",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/phellodendron",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phellodendron",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:phellodendron",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/pine_resin",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pine_resin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pine_resin",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/pinellia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pinellia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pinellia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/plantago",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:plantago",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:plantago",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/platycodon",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:platycodon",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:platycodon",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/polygonum_multiflorum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:polygonum_multiflorum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:polygonum_multiflorum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/purslane",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:purslane",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:purslane",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/radish_seed",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:radish_seed",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:radish_seed",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/realgar_ore",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:realgar_ore",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:realgar_ore",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/red_peony",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:red_peony",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:red_peony",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/reed_root",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:reed_root",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:reed_root",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/rehmannia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rehmannia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rehmannia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/rhubarb",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rhubarb",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rhubarb",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/rosa_laevigata",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rosa_laevigata",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rosa_laevigata",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/rose",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rose",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rose",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/rosewood",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rosewood",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rosewood",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/safflower",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:safflower",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:safflower",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/salvia_miltiorrhiza",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:salvia_miltiorrhiza",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:salvia_miltiorrhiza",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/sandalwood",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sandalwood",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sandalwood",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/saposhnikovia",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:saposhnikovia",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:saposhnikovia",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/sappanwood",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sappanwood",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sappanwood",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "woody herb: propagate on a bone meal bed"
+    },
+    {
+      "id": "herb/schisandra",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:schisandra",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:schisandra",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/schizonepeta",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:schizonepeta",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:schizonepeta",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/scorpion_dried",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:scorpion_dried",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:scorpion_dried",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/scutellaria",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:scutellaria",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:scutellaria",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/sedum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sedum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sedum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/silkworm_dried",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:silkworm_dried",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:silkworm_dried",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/smoked_plum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:smoked_plum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:smoked_plum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/snake_slough",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:snake_slough",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:snake_slough",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/sophora_flower",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sophora_flower",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sophora_flower",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/talc",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:talc",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:talc",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "mineral herb: propagate on a potash bed"
+    },
+    {
+      "id": "herb/tortoise_shell",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tortoise_shell",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tortoise_shell",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/tsaoko",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tsaoko",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tsaoko",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/turtle_shell",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:turtle_shell",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:turtle_shell",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/white_peony",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:white_peony",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:white_peony",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "herb/wild_chrysanthemum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:wild_chrysanthemum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:wild_chrysanthemum",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "propagate a cutting on a bone meal bed"
+    }
+  ],
+  "counts": {
+    "total": 136,
+    "machines": [
+      "herb_processing_table"
+    ]
+  }
+}

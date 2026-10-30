@@ -1,0 +1,1672 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "routes": [
+    {
+      "id": "drink/bitters",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:vodka",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bitter_orange",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bitters",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 0,
+      "note": "infuse at the bar"
+    },
+    {
+      "id": "drink/bloody_mary",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:vodka",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:tomato_juice",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bloody_mary",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/coffee_liqueur",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:vodka",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:coffee",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coffee_liqueur",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 0,
+      "note": "infuse at the bar"
+    },
+    {
+      "id": "drink/daiquiri",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:lemonade",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:daiquiri",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/eggnog",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rum",
+          "count": 1
+        },
+        {
+          "item": "minecraft:milk",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:eggnog",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/gin_tonic",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:gin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:tonic_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:gin_tonic",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/highball",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:whisky",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:soda_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:highball",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/margarita",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tequila",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:lemonade",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:margarita",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/martini",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:gin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:vermouth",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:martini",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/mint_julep",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:whisky",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:mint",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mint_julep",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/mocktail",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:juice",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:soda_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mocktail",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/mojito",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:mint",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mojito",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/mulled_wine",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:wine",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:cinnamon",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mulled_wine",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/old_fashioned",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:whisky",
+          "count": 1
+        },
+        {
+          "item": "minecraft:sugar",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:old_fashioned",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/orange_liqueur",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:brandy",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bitter_orange",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:orange_liqueur",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 0,
+      "note": "infuse at the bar"
+    },
+    {
+      "id": "drink/paloma",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tequila",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bitter_orange",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:paloma",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/sidecar",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:brandy",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:lemonade",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sidecar",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/vermouth",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:wine",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:mint",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:vermouth",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 0,
+      "note": "infuse at the bar"
+    },
+    {
+      "id": "drink/white_russian",
+      "machine": "bar_counter",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:vodka",
+          "count": 1
+        },
+        {
+          "item": "minecraft:milk",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:white_russian",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 0,
+      "note": "build at the bar"
+    },
+    {
+      "id": "drink/americano",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:americano",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 6,
+      "note": "brew the ground coffee"
+    },
+    {
+      "id": "drink/cappuccino",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cappuccino",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 6,
+      "note": "brew the ground coffee"
+    },
+    {
+      "id": "drink/coffee",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coffee",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 6,
+      "note": "brew the ground coffee"
+    },
+    {
+      "id": "drink/coffee_grounds",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:roasted_coffee_bean",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 8,
+      "note": "roast and grind the bean"
+    },
+    {
+      "id": "drink/cold_brew",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cold_brew",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 6,
+      "note": "brew the ground coffee"
+    },
+    {
+      "id": "drink/espresso",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:espresso",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 6,
+      "note": "brew the ground coffee"
+    },
+    {
+      "id": "drink/latte",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_grounds",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:latte",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 6,
+      "note": "brew the ground coffee"
+    },
+    {
+      "id": "drink/roasted_coffee_bean",
+      "machine": "coffee_roaster",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_bean",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:roasted_coffee_bean",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 8,
+      "note": "roast and grind the bean"
+    },
+    {
+      "id": "drink/baijiu",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sorghum",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:baijiu",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/beer",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:barley",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:beer",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/cherry_wine",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coffee_cherry",
+          "count": 5
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cherry_wine",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/cider",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:apple",
+          "count": 5
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cider",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/huangjiu",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glutinous_rice",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:huangjiu",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/kumis",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:milk",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:kumis",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/kvass",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rye_bread",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:kvass",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/lager",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:barley",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lager",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/mead",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:honey",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mead",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/palm_wine",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coconut_water",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:palm_wine",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/perry",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:pear",
+          "count": 5
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:perry",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/plum_wine",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:smoked_plum",
+          "count": 5
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:plum_wine",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/rice_wine",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:rice",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rice_wine",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/sake",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:rice",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sake",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/stout",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:barley",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:stout",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/wheat_beer",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:wheat",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:wheat_beer",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/wine",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:grape",
+          "count": 5
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:wine",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "ferment in the crock"
+    },
+    {
+      "id": "drink/almond_milk",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:almond_milk",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/coconut_water",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coconut",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coconut_water",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/juice",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "minecraft:apple",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:juice",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/lemonade",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "minecraft:lemon",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lemonade",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/oat_milk",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "minecraft:oat",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:oat_milk",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/rice_milk",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "minecraft:rice",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rice_milk",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/soy_milk",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/tomato_juice",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tomato",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tomato_juice",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/vegetable_juice",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "minecraft:carrot",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:vegetable_juice",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "press the juice out"
+    },
+    {
+      "id": "drink/cocoa",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cocoa_powder",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "minecraft:cocoa",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 6,
+      "note": "press and refine the cocoa"
+    },
+    {
+      "id": "drink/cocoa_bean",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "minecraft:cocoa",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cocoa_bean",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 6,
+      "note": "press and refine the cocoa"
+    },
+    {
+      "id": "drink/cocoa_powder",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cocoa_bean",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cocoa_powder",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 6,
+      "note": "press and refine the cocoa"
+    },
+    {
+      "id": "drink/brandy",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:wine",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:brandy",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/gin",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "minecraft:wheat",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:gin",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/grappa",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "minecraft:grape",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:grappa",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/plum_brandy",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:plum_wine",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:plum_brandy",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/rum",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "minecraft:sugar",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rum",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/tequila",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sorghum",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tequila",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/vodka",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "minecraft:potato",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:vodka",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/whisky",
+      "machine": "still",
+      "inputs": [
+        {
+          "item": "minecraft:barley",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:whisky",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "distill in the still"
+    },
+    {
+      "id": "drink/black_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:black_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/dark_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:dark_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/green_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:green_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/matcha",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:matcha",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/oolong_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:oolong_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/pu_er_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pu_er_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/scented_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:scented_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/white_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:white_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/yellow_tea",
+      "machine": "tea_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tea_fresh_leaf",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:yellow_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "fix the leaf in the tea kiln"
+    },
+    {
+      "id": "drink/butter_tea",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:butter_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/drinking_yogurt",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:drinking_yogurt",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/ginger_ale",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:ginger_ale",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/hot_chocolate",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:hot_chocolate",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/milk_tea",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:milk_tea",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/mineral_water",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mineral_water",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/soda_water",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:soda_water",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/sparkling_water",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sparkling_water",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/tonic_water",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tonic_water",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    },
+    {
+      "id": "drink/water_bottle",
+      "machine": "water_treatment_unit",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:softened_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:water_bottle",
+          "count": 1
+        }
+      ],
+      "ticks": 40,
+      "energy": 4,
+      "note": "treat and carbonate the water"
+    }
+  ],
+  "counts": {
+    "total": 83,
+    "machines": [
+      "bar_counter",
+      "coffee_roaster",
+      "fermenting_crock",
+      "filter_press",
+      "mixer",
+      "still",
+      "tea_kiln",
+      "water_treatment_unit"
+    ]
+  }
+}

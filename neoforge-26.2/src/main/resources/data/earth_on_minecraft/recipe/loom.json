@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "P P",
+    "P P"
+  ],
+  "key": {
+    "S": "minecraft:string",
+    "P": "minecraft:oak_planks"
+  },
+  "result": {
+    "id": "earth_on_minecraft:loom",
+    "count": 1
+  }
+}

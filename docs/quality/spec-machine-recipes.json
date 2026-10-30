@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "routes": 1084,
+  "skipped": {
+    "retired": 51,
+    "foreign_machine": 0,
+    "fluid_only": 0,
+    "no_item_input": 0,
+    "too_many_inputs": 0,
+    "unknown_item": 0,
+    "unknown_fluid": 0,
+    "curated_route": 311,
+    "no_item_output": 0
+  }
+}

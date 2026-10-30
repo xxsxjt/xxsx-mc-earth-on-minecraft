@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "coffee_roaster",
+  "model_identifier": "earth_on_minecraft:coffee_roaster",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "burner_base",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        3
+      ],
+      "to": [
+        15,
+        5,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "53f549e8-d81d-5878-a9e1-16f03dbcf666",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            11,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            11,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            11,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            11,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "roast_drum",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        4,
+        4
+      ],
+      "to": [
+        13,
+        12,
+        12
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "22bae460-5c4a-509c-b8ce-74f2ea36a388",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "drum_sight_glass",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        6,
+        6,
+        2
+      ],
+      "to": [
+        10,
+        10,
+        5
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "d5250403-6e4e-5e21-859b-1ba09d16389b",
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            11,
+            6,
+            14,
+            10
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            6,
+            5,
+            10
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            6,
+            2,
+            10,
+            5
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            6,
+            11,
+            10,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "bean_hopper",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        12,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        10
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "159ed80b-c55c-5f53-ae16-d87ab0fa434c",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            0,
+            12,
+            4
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            10,
+            4
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            6,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "exhaust_hood",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        12,
+        10
+      ],
+      "to": [
+        11,
+        15,
+        14
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "70ca60fb-fc1c-56bf-b603-9f0f779dbfb5",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            1,
+            11,
+            4
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            1,
+            11,
+            4
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            1,
+            6,
+            4
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            10,
+            1,
+            14,
+            4
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            10,
+            11,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            2,
+            11,
+            6
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "cooling_tray",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        13
+      ],
+      "to": [
+        9,
+        3,
+        16
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "5819151c-3277-5450-863d-dbc15ac776fd",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            13,
+            9,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7,
+            13,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            13,
+            13,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            13,
+            9,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            0,
+            9,
+            3
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "53f549e8-d81d-5878-a9e1-16f03dbcf666",
+    "22bae460-5c4a-509c-b8ce-74f2ea36a388",
+    "d5250403-6e4e-5e21-859b-1ba09d16389b",
+    "159ed80b-c55c-5f53-ae16-d87ab0fa434c",
+    "70ca60fb-fc1c-56bf-b603-9f0f779dbfb5",
+    "5819151c-3277-5450-863d-dbc15ac776fd"
+  ],
+  "textures": [
+    {
+      "name": "coffee_roaster.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "c56653b7-c44b-5c9c-859b-0f57f70dfdf4",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/coffee_roaster.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "drum coffee roaster with cooling tray",
+    "silhouette": "horizontal drum over a burner with a round cooling tray beside it",
+    "faces": {
+      "front": "roast drum and sight glass",
+      "back": "chaff collector",
+      "left": "green bean hopper",
+      "right": "cooling tray",
+      "top": "exhaust hood",
+      "bottom": "burner base"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/coffee_roaster",
+        "front": "earth_on_minecraft:block/coffee_roaster",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/coffee_roaster_active",
+        "front": "earth_on_minecraft:block/coffee_roaster_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/coffee_roaster",
+        "front": "earth_on_minecraft:block/coffee_roaster",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

@@ -112,7 +112,9 @@ public class PowerCableBlock extends Block {
         return block instanceof PowerCableBlock
                 || block instanceof EnergyGeneratorBlock
                 || block instanceof BatteryBoxBlock
-                || block instanceof ProcessingMachineBlock;
+                || block instanceof ProcessingMachineBlock
+                || block instanceof MinerBlock
+                || block instanceof QuarryBlock;
     }
 
     private static BooleanProperty propertyFor(Direction direction) {

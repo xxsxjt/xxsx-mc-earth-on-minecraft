@@ -2,7 +2,9 @@ package com.xxsx.earthonminecraft;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.locale.Language;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -12,6 +14,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -42,7 +45,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
     public static final BooleanProperty FAULT = BooleanProperty.create("fault");
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
-    private static final List<Recipe> RECIPES = createRecipes();
+    private static List<Recipe> recipes;
 
     private final Kind kind;
 
@@ -130,20 +133,47 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
     }
 
     public static List<Recipe> recipes() {
-        return RECIPES;
+        return recipeTable();
     }
 
     public static List<Recipe> recipesFor(Kind kind) {
-        return RECIPES.stream().filter(recipe -> recipe.kind == kind).toList();
+        return recipeTable().stream().filter(recipe -> recipe.kind == kind).toList();
     }
 
     public static List<Recipe> matchingRecipes(Kind kind, ItemStack stack) {
         if (stack.isEmpty()) {
             return List.of();
         }
-        return RECIPES.stream()
-                .filter(recipe -> recipe.kind == kind && stack.getItem() == recipe.input.get().asItem())
+        return recipeTable().stream()
+                .filter(recipe -> recipe.kind == kind)
+                .filter(recipe -> recipe.hasItemInput()
+                        && stack.getItem() == recipe.inputStack().getItem())
                 .toList();
+    }
+
+    /**
+     * Routes whose only input is a fluid. These cannot be selected by an item in the input slot,
+     * so the block entity resolves them from the machine tank instead.
+     */
+    public static List<Recipe> fluidOnlyRecipes(Kind kind, String fluidId) {
+        if (fluidId == null || fluidId.isEmpty()) {
+            return List.of();
+        }
+        return recipeTable().stream()
+                .filter(recipe -> recipe.kind == kind)
+                .filter(recipe -> !recipe.hasItemInput())
+                .filter(recipe -> !recipe.fluidInputs().isEmpty())
+                .filter(recipe -> recipe.fluidInputs().stream()
+                        .anyMatch(input -> input.fluidId().equals(fluidId)))
+                .toList();
+    }
+
+    /**
+     * Routes that could run if the given item were the primary input, ignoring secondary stock.
+     * Used by automation and slot filters, which cannot see the whole inventory.
+     */
+    public static boolean acceptsInput(Kind kind, ItemStack stack) {
+        return !matchingRecipes(kind, stack).isEmpty();
     }
 
     public static Optional<Recipe> findRecipe(Kind kind, ItemStack stack) {
@@ -185,6 +215,96 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
             names.add(output.count + "x " + stack.getItemName().getString());
         }
         return String.join(" + ", names);
+    }
+
+    /**
+     * Builds the route table lazily. Spec routes resolve registry entries by id, so the table
+     * cannot be built while item registration is still running.
+     */
+    private static synchronized List<Recipe> recipeTable() {
+        if (recipes == null) {
+            List<Recipe> table = new ArrayList<>(createRecipes());
+            table.addAll(createSpecRecipes());
+            recipes = List.copyOf(table);
+        }
+        return recipes;
+    }
+
+    private static List<Recipe> createSpecRecipes() {
+        List<Recipe> table = new ArrayList<>();
+        for (SpecMachineRecipes.Route route : SpecMachineRecipes.ROUTES) {
+            Kind kind;
+            try {
+                kind = Kind.valueOf(route.kind());
+            } catch (IllegalArgumentException ignored) {
+                continue;
+            }
+            List<Input> inputs = new ArrayList<>();
+            for (int i = 0; i < route.inputs().length; i++) {
+                Supplier<? extends ItemLike> supplier = vanillaOrModItem(route.inputs()[i]);
+                if (supplier == null) {
+                    inputs = null;
+                    break;
+                }
+                inputs.add(new Input(supplier, route.inputCounts()[i]));
+            }
+            if (inputs == null) {
+                continue;
+            }
+            List<Output> outputs = new ArrayList<>();
+            for (int i = 0; i < route.outputs().length; i++) {
+                Supplier<? extends ItemLike> supplier = vanillaOrModItem(route.outputs()[i]);
+                if (supplier == null) {
+                    outputs = null;
+                    break;
+                }
+                outputs.add(new Output(supplier, route.outputCounts()[i]));
+            }
+            if (outputs == null) {
+                continue;
+            }
+            // The generator stores fully-qualified fluid ids, so they must not be prefixed again.
+            // Double-prefixing turned every fluid route into "earth_on_minecraft:earth_on_minecraft:
+            // molten_iron", which never matched the tank contents and silently disabled them all.
+            List<FluidInput> fluidInputs = new ArrayList<>();
+            for (int i = 0; i < route.fluidInputs().length; i++) {
+                fluidInputs.add(new FluidInput(qualifyFluid(route.fluidInputs()[i]),
+                        route.fluidInputAmounts()[i]));
+            }
+            List<FluidOutput> fluidOutputs = new ArrayList<>();
+            for (int i = 0; i < route.fluidOutputs().length; i++) {
+                fluidOutputs.add(new FluidOutput(qualifyFluid(route.fluidOutputs()[i]),
+                        route.fluidOutputAmounts()[i]));
+            }
+            if (outputs.isEmpty() && fluidOutputs.isEmpty()) {
+                continue;
+            }
+            table.add(new Recipe(kind, inputs, route.note(), outputs, false,
+                    route.ticks(), route.energy(), route.sourceId(), fluidInputs, fluidOutputs));
+        }
+        return table;
+    }
+
+    /** Fluid ids are stored fully qualified; add the namespace only when it is missing. */
+    private static String qualifyFluid(String id) {
+        return id.indexOf(':') >= 0 ? id : "earth_on_minecraft:" + id;
+    }
+
+    @Nullable
+    private static Supplier<? extends ItemLike> vanillaOrModItem(String id) {
+        Identifier identifier = Identifier.tryParse(id);
+        if (identifier == null) {
+            return null;
+        }
+        if (BuiltInRegistries.ITEM.containsKey(identifier)) {
+            Item item = BuiltInRegistries.ITEM.getValue(identifier);
+            return item == null || item == Items.AIR ? null : () -> item;
+        }
+        if (BuiltInRegistries.BLOCK.containsKey(identifier)) {
+            Block block = BuiltInRegistries.BLOCK.getValue(identifier);
+            return block == null || block == Blocks.AIR ? null : () -> block;
+        }
+        return null;
     }
 
     private static List<Recipe> createRecipes() {
@@ -255,7 +375,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.ROASTER, EarthOnMinecraft.CALCITE_DUST::get, "碳酸盐煅烧", out(EarthOnMinecraft.LIME_DUST::get, 1)));
         recipes.add(r(Kind.ROASTER, EarthOnMinecraft.PETROLEUM_COKE::get, "石油焦高温石墨化近似路线", out(EarthOnMinecraft.GRAPHITE_DUST::get, 1), out(EarthOnMinecraft.ACTIVATED_CARBON::get, 1)));
 
-        recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.IRON_CONCENTRATE::get, "铁精矿碳热还原", out(() -> Items.IRON_INGOT, 1), out(EarthOnMinecraft.SLAG::get, 1)));
+        recipes.add(rWithCoke(Kind.REDUCTION_FURNACE, EarthOnMinecraft.IRON_CONCENTRATE::get,
+                "铁精矿焦炭还原；需要焦炭装料", out(EarthOnMinecraft.SPONGE_IRON::get, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.ROASTED_COPPER_CONCENTRATE::get, "焙烧铜精矿还原", out(() -> Items.COPPER_INGOT, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.GOLD_CONCENTRATE::get, "金精矿熔炼", out(() -> Items.GOLD_INGOT, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.COAL_DUST::get, "煤粉压焦近似处理", out(() -> Items.COAL, 1)));
@@ -350,10 +471,10 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.SLAG::get, "矿渣水泥掺合料", out(EarthOnMinecraft.CEMENT_RAW_MEAL::get, 1), out(EarthOnMinecraft.CEMENT_POWDER::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.POTASH::get, "钾肥复合肥混合", out(EarthOnMinecraft.FERTILIZER_BLEND::get, 2)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.ALUMINOSILICATE_DUST::get, "铝硅酸盐陶瓷坯料混合", out(EarthOnMinecraft.CEMENT_RAW_MEAL::get, 1), out(EarthOnMinecraft.CLAY_DUST::get, 1)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.TITANIUM_DIOXIDE::get, "钛白粉白色涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.DYE.white(), 2)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.IRON_OXIDE_PIGMENT::get, "氧化铁红涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.DYE.red(), 2)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.CARBON_BLACK::get, "炭黑补强与黑色涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.DYE.black(), 2)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.PAINT_BASE::get, "通用涂料调和", out(() -> Items.DYE.white(), 1), out(() -> Items.DYE.red(), 1), out(() -> Items.DYE.black(), 1)));
+        recipes.add(r(Kind.MIXER, EarthOnMinecraft.TITANIUM_DIOXIDE::get, "钛白粉白色涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.WHITE_DYE, 2)));
+        recipes.add(r(Kind.MIXER, EarthOnMinecraft.IRON_OXIDE_PIGMENT::get, "氧化铁红涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.RED_DYE, 2)));
+        recipes.add(r(Kind.MIXER, EarthOnMinecraft.CARBON_BLACK::get, "炭黑补强与黑色涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.BLACK_DYE, 2)));
+        recipes.add(r(Kind.MIXER, EarthOnMinecraft.PAINT_BASE::get, "通用涂料调和", out(() -> Items.WHITE_DYE, 1), out(() -> Items.RED_DYE, 1), out(() -> Items.BLACK_DYE, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.GRAPHITE_DUST::get, "石墨负极浆料混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.BATTERY_CARBON::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, "锰系正极材料混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.NICKEL_PRECURSOR::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.NICKEL_PRECURSOR::get, "镍系正极前驱体混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1)));
@@ -401,7 +522,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.POLYETHYLENE_RESIN::get, "聚乙烯拉丝成纤维", out(() -> Items.STRING, 2)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.POLYPROPYLENE_RESIN::get, "聚丙烯拉丝成纤维", out(() -> Items.STRING, 2)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.PVC_RESIN::get, "PVC 树脂压制为弹性兼容材料", out(() -> Items.SLIME_BALL, 1)));
-        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.POLYSTYRENE_RESIN::get, "聚苯乙烯泡沫化兼容材料", out(() -> Items.SLIME_BALL, 1), out(() -> Items.DYE.white(), 1)));
+        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.POLYSTYRENE_RESIN::get, "聚苯乙烯泡沫化兼容材料", out(() -> Items.SLIME_BALL, 1), out(() -> Items.WHITE_DYE, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.PET_RESIN::get, "PET 拉丝成兼容纤维", out(() -> Items.STRING, 2)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.SYNTHETIC_RUBBER::get, "合成橡胶压制为黏性材料", out(() -> Items.SLIME_BALL, 2), out(EarthOnMinecraft.CARBON_BLACK::get, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.NYLON_FIBER::get, "尼龙纤维整理成线", out(() -> Items.STRING, 3)));
@@ -444,9 +565,9 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CRYSTALLIZER, EarthOnMinecraft.HARD_WATER_SAMPLE::get, "硬水蒸发结垢", out(EarthOnMinecraft.IRRIGATION_MINERAL_DEPOSIT::get, 1), out(EarthOnMinecraft.CALCITE_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.SALINE_SOIL_SAMPLE::get, "盐碱化土壤淋洗", out(EarthOnMinecraft.BRINE_CRYSTAL::get, 1), out(EarthOnMinecraft.CLAY_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.IRRIGATION_MINERAL_DEPOSIT::get, "灌溉结垢沉积物酸解", out(EarthOnMinecraft.CALCITE_DUST::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 1), out(EarthOnMinecraft.SALT_DUST::get, 1)));
-        recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.WILDFLOWERS, "野花植物色素浸提", out(() -> Items.DYE.yellow(), 2), out(EarthOnMinecraft.CELLULOSE_FIBER::get, 1), out(EarthOnMinecraft.HUMUS_SAMPLE::get, 1)));
-        recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.PINK_PETALS, "粉色花瓣色素浸提", out(() -> Items.DYE.pink(), 2), out(EarthOnMinecraft.CELLULOSE_FIBER::get, 1)));
-        recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.CACTUS_FLOWER, "仙人掌花色素和蜡质回收", out(() -> Items.DYE.pink(), 1), out(EarthOnMinecraft.NATURAL_LATEX::get, 1)));
+        recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.WILDFLOWERS, "野花植物色素浸提", out(() -> Items.YELLOW_DYE, 2), out(EarthOnMinecraft.CELLULOSE_FIBER::get, 1), out(EarthOnMinecraft.HUMUS_SAMPLE::get, 1)));
+        recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.PINK_PETALS, "粉色花瓣色素浸提", out(() -> Items.PINK_DYE, 2), out(EarthOnMinecraft.CELLULOSE_FIBER::get, 1)));
+        recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.CACTUS_FLOWER, "仙人掌花色素和蜡质回收", out(() -> Items.PINK_DYE, 1), out(EarthOnMinecraft.NATURAL_LATEX::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.KELP, "海藻灰碱盐提取", out(EarthOnMinecraft.SODA_ASH::get, 1), out(EarthOnMinecraft.POTASH::get, 1), out(EarthOnMinecraft.CELLULOSE_FIBER::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.DRIED_KELP, "干海藻碱盐浓缩", out(EarthOnMinecraft.SODA_ASH::get, 1), out(EarthOnMinecraft.POTASH::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.HUMUS_SAMPLE::get, "腐殖质和矿物质复配", out(EarthOnMinecraft.FERTILIZER_BLEND::get, 1), out(EarthOnMinecraft.SOIL_MINERAL_MIX::get, 1)));
@@ -516,7 +637,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.WHEAT_SEEDS, "植物油皂化入口", out(EarthOnMinecraft.SOAP_BASE::get, 1), out(EarthOnMinecraft.GLYCEROL::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.SOAP_BASE::get, "皂基复配表面活性剂", out(EarthOnMinecraft.SURFACTANT::get, 1), out(EarthOnMinecraft.GLYCEROL::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.SURFACTANT::get, "洗涤剂粉体配混", out(EarthOnMinecraft.DETERGENT_POWDER::get, 2), out(EarthOnMinecraft.SODA_ASH::get, 1)));
-        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.DETERGENT_POWDER::get, "洗涤剂整理为白色兼容染料", out(() -> Items.DYE.white(), 2), out(EarthOnMinecraft.SODIUM_SULFATE::get, 1)));
+        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.DETERGENT_POWDER::get, "洗涤剂整理为白色兼容染料", out(() -> Items.WHITE_DYE, 2), out(EarthOnMinecraft.SODIUM_SULFATE::get, 1)));
 
         recipes.add(r(Kind.STEAM_CRACKER, EarthOnMinecraft.ETHYLENE::get, "乙烯裂解副产丁二烯和丙烯腈入口", out(EarthOnMinecraft.BUTADIENE::get, 1), out(EarthOnMinecraft.ACRYLONITRILE::get, 1), out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.PROPYLENE::get, "丙烯氧化制亚克力单体", out(EarthOnMinecraft.ACRYLIC_MONOMER::get, 1), out(EarthOnMinecraft.ACETONE::get, 1)));
@@ -526,7 +647,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.AMMONIA::get, "氨基路线制异氰酸酯中间物", out(EarthOnMinecraft.ISOCYANATE::get, 1), out(EarthOnMinecraft.UREA::get, 1)));
         recipes.add(r(Kind.POLYMERIZER, EarthOnMinecraft.POLYOL::get, "聚氨酯发泡", out(EarthOnMinecraft.POLYURETHANE_FOAM::get, 2), out(EarthOnMinecraft.ISOCYANATE::get, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.ABS_RESIN::get, "ABS 树脂压制为耐冲击兼容材料", out(() -> Items.SLIME_BALL, 1), out(EarthOnMinecraft.CARBON_BLACK::get, 1)));
-        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.POLYURETHANE_FOAM::get, "聚氨酯泡沫整理为轻质纤维", out(() -> Items.STRING, 2), out(() -> Blocks.WOOL.white(), 1)));
+        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.POLYURETHANE_FOAM::get, "聚氨酯泡沫整理为轻质纤维", out(() -> Items.STRING, 2), out(() -> Blocks.WHITE_WOOL, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.ACRYLIC_RESIN::get, "亚克力树脂压制为透明兼容板材", out(() -> Items.GLASS, 1), out(EarthOnMinecraft.INDUSTRIAL_SOLVENT::get, 1)));
 
         recipes.add(r(Kind.POWDER_PRESS, () -> Items.COPPER_INGOT, "铜锭拉丝", out(EarthOnMinecraft.COPPER_WIRE::get, 4)));
@@ -556,7 +677,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.PORCELAIN_BLANK::get, "瓷坯压制绝缘件", out(EarthOnMinecraft.CERAMIC_INSULATOR::get, 2)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.FIREBRICK::get, "耐火砖整理为兼容砖块", out(() -> Items.BRICK, 4)));
         recipes.add(r(Kind.INDUSTRIAL_KILN, EarthOnMinecraft.MAFIC_SILICATE_DUST::get, "镁铁质硅酸盐熔融纤维化", out(EarthOnMinecraft.MINERAL_WOOL::get, 1), out(EarthOnMinecraft.SLAG::get, 1)));
-        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.MINERAL_WOOL::get, "矿物棉整理为隔热纤维", out(() -> Items.STRING, 3), out(() -> Blocks.WOOL.white(), 1)));
+        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.MINERAL_WOOL::get, "矿物棉整理为隔热纤维", out(() -> Items.STRING, 3), out(() -> Blocks.WHITE_WOOL, 1)));
 
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.SULFURIC_ACID::get, "硫酸铵肥料中和", out(EarthOnMinecraft.AMMONIUM_SULFATE::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.PHOSPHATE_ROCK_DUST::get, "普通过磷酸钙酸解", out(EarthOnMinecraft.SINGLE_SUPERPHOSPHATE::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 1)));
@@ -602,16 +723,86 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
     }
 
     private static Recipe r(Kind kind, Supplier<? extends ItemLike> input, String note, Output... outputs) {
-        return new Recipe(kind, input, note, List.of(outputs));
+        return new Recipe(kind, List.of(new Input(input, 1)), note, List.of(outputs), false, 0, 0, "");
+    }
+
+    private static Recipe rWithCoke(Kind kind, Supplier<? extends ItemLike> input, String note, Output... outputs) {
+        return new Recipe(kind, List.of(new Input(input, 1)), note, List.of(outputs), true, 0, 0, "");
     }
 
     private static Output out(Supplier<? extends ItemLike> item, int count) {
         return new Output(item, count);
     }
 
-    public record Recipe(Kind kind, Supplier<? extends ItemLike> input, String note, List<Output> outputs) {
+    public record Input(Supplier<? extends ItemLike> item, int count) {
+        public ItemStack stack() {
+            return new ItemStack(item.get().asItem(), Math.max(1, count));
+        }
+    }
+
+    /**
+     * A machine route. {@code inputs} is ordered: the first item drives route selection, the
+     * remaining entries are consumed from the secondary input slots.
+     * {@code fluidInputs} and {@code fluidOutputs} are matched against the machine's own fluid tank
+     * in {@code mB}; a route with neither is an ordinary item-only route.
+     * {@code ticks} and {@code energyPerTick} override the machine defaults when greater than zero,
+     * because a single machine runs processes of very different durations in the spec.
+     */
+    public record Recipe(Kind kind, List<Input> inputs, String note, List<Output> outputs,
+                         boolean requiresCoke, int ticks, int energyPerTick, String sourceId,
+                         List<FluidInput> fluidInputs, List<FluidOutput> fluidOutputs) {
+        public Recipe {
+            inputs = List.copyOf(inputs);
+            outputs = List.copyOf(outputs);
+            fluidInputs = List.copyOf(fluidInputs);
+            fluidOutputs = List.copyOf(fluidOutputs);
+        }
+
+        /** Item-only route. */
+        public Recipe(Kind kind, List<Input> inputs, String note, List<Output> outputs,
+                      boolean requiresCoke, int ticks, int energyPerTick, String sourceId) {
+            this(kind, inputs, note, outputs, requiresCoke, ticks, energyPerTick, sourceId,
+                    List.of(), List.of());
+        }
+
+        public boolean usesFluid() {
+            return !fluidInputs.isEmpty() || !fluidOutputs.isEmpty();
+        }
+
+        public Supplier<? extends ItemLike> input() {
+            return inputs.isEmpty() ? null : inputs.getFirst().item();
+        }
+
         public ItemStack inputStack() {
-            return new ItemStack(input.get().asItem());
+            return inputs.isEmpty() ? ItemStack.EMPTY : inputs.getFirst().stack();
+        }
+
+        public int primaryCount() {
+            return inputs.isEmpty() ? 0 : inputs.getFirst().count();
+        }
+
+        public boolean hasItemInput() {
+            return !inputs.isEmpty();
+        }
+
+        public boolean hasSecondaryInput() {
+            return inputs.size() > 1;
+        }
+
+        public List<Input> secondaryInputs() {
+            return inputs.size() > 1 ? inputs.subList(1, inputs.size()) : List.of();
+        }
+
+        public int processTicks() {
+            return ticks > 0 ? ticks : kind.processTicks();
+        }
+
+        public int energyPerTickEffective() {
+            return energyPerTick > 0 ? energyPerTick : kind.energyPerTick();
+        }
+
+        public List<ItemStack> inputStacks() {
+            return inputs.stream().map(Input::stack).toList();
         }
 
         public List<ItemStack> outputStacks() {
@@ -625,14 +816,38 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         }
     }
 
+    /** A fluid the route consumes, expressed in millibuckets. */
+    public record FluidInput(String fluidId, int amount) {
+        /** Resolves the spec id to a registered fluid; returns the empty fluid when unknown. */
+        public net.minecraft.world.level.material.Fluid fluid() {
+            Identifier id = Identifier.tryParse(fluidId);
+            if (id == null) {
+                return net.minecraft.world.level.material.Fluids.EMPTY;
+            }
+            return BuiltInRegistries.FLUID.getValue(id);
+        }
+    }
+
+    /** A fluid the route produces, expressed in millibuckets. */
+    public record FluidOutput(String fluidId, int amount) {
+        /** Resolves the spec id to a registered fluid; returns the empty fluid when unknown. */
+        public net.minecraft.world.level.material.Fluid fluid() {
+            Identifier id = Identifier.tryParse(fluidId);
+            if (id == null) {
+                return net.minecraft.world.level.material.Fluids.EMPTY;
+            }
+            return BuiltInRegistries.FLUID.getValue(id);
+        }
+    }
+
     public enum Kind {
         CRUSHER("颚式破碎机", "把矿石和矿床方块粗碎成碎块，通常会产生尾粉或伴生矿物。", 80, 20, PowerMode.LOCAL_OR_GRID, ProcessFamily.COMMINUTION),
         BALL_MILL("球磨机", "把碎块和岩石磨成粉末，是分离矿物组分的基础步骤。", 140, 32, PowerMode.LOCAL_OR_GRID, ProcessFamily.COMMINUTION),
         SIEVE("筛分机", "按颗粒大小和密度做简化筛分，适合尾粉、金伯利岩和含金石英碎块。", 80, 16, PowerMode.LOCAL_OR_GRID, ProcessFamily.CLASSIFICATION),
-        MAGNETIC_SEPARATOR("磁选机", "利用磁性分离磁铁矿、赤铁矿和镁铁质硅酸盐里的含铁组分。", 100, 48, PowerMode.GRID_ONLY, ProcessFamily.CLASSIFICATION),
+        MAGNETIC_SEPARATOR("磁选机", "利用磁性分离磁铁矿、赤铁矿和镁铁质硅酸盐里的含铁组分。", 100, 48, PowerMode.LOCAL_OR_GRID, ProcessFamily.CLASSIFICATION),
         FLOTATION_CELL("浮选槽", "富集硫化矿和宝石矿物，让铜、金、青金石、红石等进入精矿。", 180, 56, PowerMode.GRID_ONLY, ProcessFamily.WET_PROCESS),
         ROASTER("焙烧炉", "把硫化矿、辰砂和碳酸盐做热处理，产出焙烧矿、硫粉或石灰粉。", 220, 56, PowerMode.HEAT_OR_GRID, ProcessFamily.THERMAL),
-        REDUCTION_FURNACE("还原炉", "用简化碳热还原把精矿变成兼容 MC 的锭，同时产生矿渣。", 260, 72, PowerMode.HEAT_OR_GRID, ProcessFamily.THERMAL),
+        REDUCTION_FURNACE("还原炉", "把铁精矿还原成海绵铁；其他精矿按各自路线处理并产生矿渣。", 260, 72, PowerMode.HEAT_OR_GRID, ProcessFamily.THERMAL),
         LEACHING_TANK("浸出槽", "模拟湿法冶金，从石英脉、绿柱石和红石精矿里选择性提取目标物。", 200, 40, PowerMode.GRID_ONLY, ProcessFamily.WET_PROCESS),
         ELECTROLYTIC_CELL("电解槽", "用现代电化学路线精炼铜、金、青金石和绿柱石精矿。", 280, 96, PowerMode.GRID_ONLY, ProcessFamily.ELECTROCHEMICAL),
         POWDER_PRESS("压粉机", "把粉末或精矿压回 MC 兼容物品，保留合成魔法的便利性。", 100, 48, PowerMode.GRID_ONLY, ProcessFamily.FORMING),
@@ -646,7 +861,43 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         POLYMERIZER("聚合釜", "把乙烯、丙烯和氯乙烯聚合为常见塑料树脂。", 260, 72, PowerMode.GRID_ONLY, ProcessFamily.REACTION),
         STEAM_CRACKER("蒸汽裂解炉", "把煤焦油、煤气和混合树脂裂解成芳烃、烯烃与合成气入口。", 320, 120, PowerMode.HEAT_OR_GRID, ProcessFamily.THERMAL),
         SYNTHESIS_LOOP("合成塔", "承载合成氨、甲醇、尿素和树脂前驱体这类高压循环反应。", 360, 128, PowerMode.GRID_ONLY, ProcessFamily.REACTION),
-        ABSORPTION_TOWER("吸收塔", "把酸性或含氯尾气吸收为硫酸、盐酸、纯碱等可用产品。", 240, 56, PowerMode.GRID_ONLY, ProcessFamily.COLUMN);
+        ABSORPTION_TOWER("吸收塔", "把酸性或含氯尾气吸收为硫酸、盐酸、纯碱等可用产品。", 240, 56, PowerMode.GRID_ONLY, ProcessFamily.COLUMN),
+        BLOOMERY("块炼炉", "土石竖穴炉：鼓风把氧化铁还原成海绵铁块，出炉后必须趁热锻打挤渣。", 400, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        BREAD_OVEN("面包窑", "砖拱蓄热窑：先烧透砖体再撤火，靠蓄热烘烤面团。", 300, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        GLASS_KILN("玻璃窑", "高温窑：石英砂与助熔剂熔成玻璃液，温度不足会留下未熔砂粒。", 240, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        LIME_KILN("石灰窑", "竖窑烧石灰石，得到砂浆、玻璃助熔与中和反应的起点。", 300, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        PIT_KILN("炭窑", "土堆炭窑：木材覆土后从底部点火并封堵进气，让木材炭化而不是烧尽。", 1200, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        SHAFT_FURNACE("竖炉", "高型砖砌竖炉，配热风与出铁口，炉温超过铁熔点，可连续出铁水并浇铸。", 200, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        ANVIL("锻砧台", "锻造：把锭与钢锻成工具、零件与建材，并按工艺记录品质。", 120, 0, PowerMode.MANUAL_OR_HEAT, ProcessFamily.FORMING),
+        BAR_COUNTER("吧台", "调饮：把酒、果汁与香料按配方顺序配成鸡尾酒。", 40, 0, PowerMode.MANUAL, ProcessFamily.MIXING),
+        CAMPFIRE("营火", "明火直烤：把生食烤熟，火候过头会烤焦。", 100, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        CARPENTRY_BENCH("木工台", "木工：把原木加工成板材、榫卯构件、家具与农具木件。", 100, 0, PowerMode.KINETIC, ProcessFamily.FORMING),
+        CASTING_TABLE("浇铸台", "浇铸：把熔融金属倒进铸型，冷却后得到锭与坯料。", 60, 0, PowerMode.MANUAL_OR_HEAT, ProcessFamily.FORMING),
+        COFFEE_ROASTER("烘焙机", "烘焙：把生豆烘到目标程度，浅烘与深烘风味不同。", 120, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        CONDENSER("冷凝器", "冷凝：把高温蒸汽收回成液体或固体，水封避免氧化。", 80, 12, PowerMode.HEAT_OR_GRID, ProcessFamily.COLUMN),
+        CONVERTER("吹炼炉", "吹炼：向粗铜熔体鼓风去硫，把粗铜转成精铜。", 90, 72, PowerMode.HEAT_OR_GRID, ProcessFamily.THERMAL),
+        CURING_BARN("烘房", "烘房：用温和热风长期脱水，保留风味并延长保存。", 600, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        FERMENTING_CROCK("发酵缸", "发酵：酒、醋、酱与腌菜，按游戏日计时，不需要电。", 2400, 0, PowerMode.PASSIVE, ProcessFamily.REACTION),
+        FILTER_PRESS("压滤机", "压滤：把浆料压成滤饼，滤布磨损后需要更换。", 120, 32, PowerMode.MANUAL_OR_GRID, ProcessFamily.WET_PROCESS),
+        GEM_CUTTER("宝石切割机", "切磨：按解理与硬度切出刻面，切割角度决定成品净度。", 60, 6, PowerMode.GRID_ONLY, ProcessFamily.FORMING),
+        HERB_PROCESSING_TABLE("药材处理台", "炮制：把草药洗净、切制、干燥或炒制，改变药性。", 120, 0, PowerMode.HEAT_ONLY, ProcessFamily.MIXING),
+        LOOM("织布机", "纺织：把纤维纺成线，把线织成布，手摇或水轮驱动。", 100, 0, PowerMode.KINETIC, ProcessFamily.FORMING),
+        MILL("磨坊", "磨粉：手摇、水轮或畜力驱动，把谷物与矿物磨成粉。", 60, 0, PowerMode.KINETIC, ProcessFamily.COMMINUTION),
+        NOODLE_PRESS("压面机", "压面：把面团压成面条或面皮，厚度决定口感。", 60, 0, PowerMode.MANUAL, ProcessFamily.FORMING),
+        OIL_PRESS("榨油机", "榨油：油料作物出油，饼粕做饲料。", 100, 0, PowerMode.KINETIC, ProcessFamily.FORMING),
+        RICE_HULLER("砻谷机", "脱壳：稻谷出糙米，稻壳做燃料。", 80, 0, PowerMode.KINETIC, ProcessFamily.COMMINUTION),
+        SMELTER("熔炼炉", "熔炼：上限 1750 K，只能熔化熔点低于此值的金属；铁需要更高的炉子。", 100, 80, PowerMode.HEAT_OR_GRID, ProcessFamily.THERMAL),
+        SMOKEHOUSE("熏房", "冷熏与热熏：长期保存肉类，并带来烟熏风味。", 600, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        STEAMER("蒸锅", "蒸制：需要水，水量不足会干锅。", 120, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        STEAMER_BASKET("蒸笼", "叠放蒸制：一次可蒸多层，层数决定产量。", 120, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        STILL("蒸馏器", "蒸馏：按沸点差分离酒精与芳香组分，得到烈酒与精油。", 200, 0, PowerMode.HEAT_ONLY, ProcessFamily.COLUMN),
+        STONE_MILL("石磨", "低速研磨：比磨坊细，但更慢。", 120, 0, PowerMode.KINETIC, ProcessFamily.COMMINUTION),
+        STOVE("灶台", "煎、炒、煮、蒸：火候分档，超过档位会焦。", 80, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        TABLET_PRESS("压片机", "压片：把药粉与辅料压成定量片剂，剂量更稳定。", 40, 3, PowerMode.MANUAL_OR_GRID, ProcessFamily.FORMING),
+        TANNERY("制革槽", "制革：鞣剂浸泡生皮成革，需要鞣剂与时间，不耗电。", 200, 0, PowerMode.MANUAL, ProcessFamily.WET_PROCESS),
+        TEA_KILN("茶炒锅", "杀青与提香：控制锅温炒制茶叶，温度过高会焦边。", 100, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
+        THICKENER("浓密机", "精矿浓密脱水，为压滤做准备。", 140, 40, PowerMode.GRID_ONLY, ProcessFamily.WET_PROCESS),
+        WATER_TREATMENT_UNIT("水处理单元", "水处理：软化与过滤，供锅炉与电解用水。", 160, 36, PowerMode.GRID_ONLY, ProcessFamily.WET_PROCESS);
 
         private final String displayName;
         private final String description;
@@ -732,25 +983,106 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
                 case STEAM_CRACKER -> "steam_cracker";
                 case SYNTHESIS_LOOP -> "synthesis_loop";
                 case ABSORPTION_TOWER -> "absorption_tower";
+                case ANVIL -> "anvil";
+                case BAR_COUNTER -> "bar_counter";
+                case CAMPFIRE -> "campfire";
+                case CARPENTRY_BENCH -> "carpentry_bench";
+                case CASTING_TABLE -> "casting_table";
+                case COFFEE_ROASTER -> "coffee_roaster";
+                case CONDENSER -> "condenser";
+                case CONVERTER -> "converter";
+                case CURING_BARN -> "curing_barn";
+                case FERMENTING_CROCK -> "fermenting_crock";
+                case FILTER_PRESS -> "filter_press";
+                case GEM_CUTTER -> "gem_cutter";
+                case HERB_PROCESSING_TABLE -> "herb_processing_table";
+                case LOOM -> "loom";
+                case MILL -> "mill";
+                case NOODLE_PRESS -> "noodle_press";
+                case OIL_PRESS -> "oil_press";
+                case RICE_HULLER -> "rice_huller";
+                case SMELTER -> "smelter";
+                case SMOKEHOUSE -> "smokehouse";
+                case STEAMER -> "steamer";
+                case STEAMER_BASKET -> "steamer_basket";
+                case STILL -> "still";
+                case STONE_MILL -> "stone_mill";
+                case STOVE -> "stove";
+                case TABLET_PRESS -> "tablet_press";
+                case TANNERY -> "tannery";
+                case TEA_KILN -> "tea_kiln";
+                case THICKENER -> "thickener";
+                case WATER_TREATMENT_UNIT -> "water_treatment_unit";
+                case BLOOMERY -> "bloomery_controller";
+                case BREAD_OVEN -> "bread_oven_controller";
+                case GLASS_KILN -> "glass_kiln_controller";
+                case LIME_KILN -> "lime_kiln_controller";
+                case PIT_KILN -> "pit_kiln_controller";
+                case SHAFT_FURNACE -> "shaft_furnace_controller";
             };
         }
     }
 
+    /**
+     * How a machine gets its working energy, mirroring the spec {@code power} arrays.
+     *
+     * <ul>
+     *   <li>{@code grid}: the machine can draw EOU power.</li>
+     *   <li>{@code fuel}: the fuel slot accepts burnable items.</li>
+     *   <li>{@code heat}: the process needs a burning fire when no grid power is available.</li>
+     *   <li>{@code manualFallback}: hand or kinetic drive can replace missing grid power.</li>
+     *   <li>{@code passive}: ambient process that runs with no supply at all.</li>
+     * </ul>
+     */
     public enum PowerMode {
-        LOCAL_OR_GRID(true, "screen.earth_on_minecraft.machine.power.local_or_grid"),
-        HEAT_OR_GRID(true, "screen.earth_on_minecraft.machine.power.heat_or_grid"),
-        GRID_ONLY(false, "screen.earth_on_minecraft.machine.power.grid_only");
+        LOCAL_OR_GRID(true, true, false, false, false, "screen.earth_on_minecraft.machine.power.local_or_grid"),
+        HEAT_OR_GRID(true, true, true, false, false, "screen.earth_on_minecraft.machine.power.heat_or_grid"),
+        GRID_ONLY(true, false, false, false, false, "screen.earth_on_minecraft.machine.power.grid_only"),
+        MANUAL_OR_HEAT(false, true, false, true, false, "screen.earth_on_minecraft.machine.power.manual_or_heat"),
+        MANUAL_OR_GRID(true, false, false, true, false, "screen.earth_on_minecraft.machine.power.manual_or_grid"),
+        KINETIC(false, false, false, true, false, "screen.earth_on_minecraft.machine.power.kinetic"),
+        MANUAL(false, false, false, true, false, "screen.earth_on_minecraft.machine.power.manual"),
+        HEAT_ONLY(false, true, true, false, false, "screen.earth_on_minecraft.machine.power.heat_only"),
+        PASSIVE(false, false, false, false, true, "screen.earth_on_minecraft.machine.power.passive");
 
-        private final boolean allowsLocalFuel;
+        private final boolean grid;
+        private final boolean fuel;
+        private final boolean heat;
+        private final boolean manualFallback;
+        private final boolean passive;
         private final String labelKey;
 
-        PowerMode(boolean allowsLocalFuel, String labelKey) {
-            this.allowsLocalFuel = allowsLocalFuel;
+        PowerMode(boolean grid, boolean fuel, boolean heat, boolean manualFallback, boolean passive,
+                  String labelKey) {
+            this.grid = grid;
+            this.fuel = fuel;
+            this.heat = heat;
+            this.manualFallback = manualFallback;
+            this.passive = passive;
             this.labelKey = labelKey;
         }
 
+        public boolean grid() {
+            return grid;
+        }
+
         public boolean allowsLocalFuel() {
-            return allowsLocalFuel;
+            return fuel;
+        }
+
+        /** True when the process needs a burning fire even though it may draw no electricity. */
+        public boolean requiresFuel() {
+            return heat;
+        }
+
+        /** True when hand or kinetic drive can replace missing grid power. */
+        public boolean manualFallback() {
+            return manualFallback;
+        }
+
+        /** True when the machine needs no fuel and no grid connection to make progress. */
+        public boolean passive() {
+            return passive;
         }
 
         public String labelKey() {

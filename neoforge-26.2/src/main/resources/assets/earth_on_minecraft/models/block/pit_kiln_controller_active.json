@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/pit_kiln_controller_active",
+    "front": "earth_on_minecraft:block/pit_kiln_controller_active",
+    "back": "earth_on_minecraft:block/hot_machine_side",
+    "left": "earth_on_minecraft:block/hot_machine_side",
+    "right": "earth_on_minecraft:block/hot_machine_side",
+    "top": "earth_on_minecraft:block/hot_machine_top",
+    "bottom": "earth_on_minecraft:block/hot_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "earth_ring",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        4,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            0,
+            12,
+            16,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "mound_low",
+      "from": [
+        2,
+        4,
+        2
+      ],
+      "to": [
+        14,
+        8,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8,
+            14,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            8,
+            14,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            2,
+            8,
+            14,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            8,
+            14,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "mound_cap",
+      "from": [
+        5,
+        8,
+        5
+      ],
+      "to": [
+        11,
+        12,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            4,
+            11,
+            8
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            4,
+            11,
+            8
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            4,
+            11,
+            8
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            4,
+            11,
+            8
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "vent_base",
+      "from": [
+        6,
+        2,
+        0
+      ],
+      "to": [
+        10,
+        5,
+        3
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            11,
+            10,
+            14
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            6,
+            11,
+            10,
+            14
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            13,
+            11,
+            16,
+            14
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            0,
+            11,
+            3,
+            14
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            6,
+            0,
+            10,
+            3
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            6,
+            13,
+            10,
+            16
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "vent_top",
+      "from": [
+        7,
+        11,
+        7
+      ],
+      "to": [
+        9,
+        14,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            2,
+            9,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            7,
+            2,
+            9,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            7,
+            2,
+            9,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            7,
+            2,
+            9,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "earth_cap",
+      "from": [
+        4,
+        12,
+        4
+      ],
+      "to": [
+        12,
+        13,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            3,
+            12,
+            4
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            3,
+            12,
+            4
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            3,
+            12,
+            4
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            3,
+            12,
+            4
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

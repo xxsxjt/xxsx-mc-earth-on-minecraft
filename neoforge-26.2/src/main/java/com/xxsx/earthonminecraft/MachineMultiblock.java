@@ -27,10 +27,16 @@ public final class MachineMultiblock {
             case FLOTATION_CELL, LEACHING_TANK -> Pattern.WET_VESSEL;
             case ELECTROLYTIC_CELL -> Pattern.ELECTROLYSIS_BANK;
             case CHEMICAL_REACTOR, POLYMERIZER -> Pattern.REACTION_VESSEL;
-            case ROASTER, REDUCTION_FURNACE, INDUSTRIAL_KILN -> Pattern.HEATED_LINE;
+            case ROASTER, INDUSTRIAL_KILN -> Pattern.HEATED_LINE;
             case STEAM_CRACKER -> Pattern.CRACKING_FURNACE;
             case DISTILLATION_COLUMN, ABSORPTION_TOWER -> Pattern.TALL_COLUMN;
             case SYNTHESIS_LOOP -> Pattern.PRESSURE_LOOP;
+            case BLOOMERY -> Pattern.BLOOMERY;
+            case BREAD_OVEN -> Pattern.BREAD_OVEN;
+            case GLASS_KILN -> Pattern.GLASS_KILN;
+            case LIME_KILN -> Pattern.LIME_KILN;
+            case PIT_KILN -> Pattern.PIT_KILN;
+            case SHAFT_FURNACE -> Pattern.SHAFT_FURNACE;
             default -> Pattern.NONE;
         };
     }
@@ -181,6 +187,8 @@ public final class MachineMultiblock {
             case WET_VESSEL, ELECTROLYSIS_BANK, REACTION_VESSEL -> StyledSupportPartBlock.AssemblyStyle.WET;
             case HEATED_LINE, CRACKING_FURNACE -> StyledSupportPartBlock.AssemblyStyle.HEATED;
             case TALL_COLUMN, PRESSURE_LOOP -> StyledSupportPartBlock.AssemblyStyle.TOWER;
+            case BLOOMERY, BREAD_OVEN, GLASS_KILN, LIME_KILN, PIT_KILN, SHAFT_FURNACE ->
+                    StyledSupportPartBlock.AssemblyStyle.HEATED;
         };
     }
 
@@ -307,6 +315,42 @@ public final class MachineMultiblock {
             Optional<Match> findMatch(Level level, BlockPos controller) {
                 return findBox(level, controller, 1, 3, 3, PartRole.CASING, PartRole.PIPE);
             }
+        },
+        BLOOMERY("tooltip.earth_on_minecraft.multiblock.bloomery", "screen.earth_on_minecraft.machine.structure.bloomery") {
+            @Override
+            Optional<Match> findMatch(Level level, BlockPos controller) {
+                return findLayered(level, controller, KILN_LAYERS.get(BLOOMERY));
+            }
+        },
+        BREAD_OVEN("tooltip.earth_on_minecraft.multiblock.bread_oven", "screen.earth_on_minecraft.machine.structure.bread_oven") {
+            @Override
+            Optional<Match> findMatch(Level level, BlockPos controller) {
+                return findLayered(level, controller, KILN_LAYERS.get(BREAD_OVEN));
+            }
+        },
+        GLASS_KILN("tooltip.earth_on_minecraft.multiblock.glass_kiln", "screen.earth_on_minecraft.machine.structure.glass_kiln") {
+            @Override
+            Optional<Match> findMatch(Level level, BlockPos controller) {
+                return findLayered(level, controller, KILN_LAYERS.get(GLASS_KILN));
+            }
+        },
+        LIME_KILN("tooltip.earth_on_minecraft.multiblock.lime_kiln", "screen.earth_on_minecraft.machine.structure.lime_kiln") {
+            @Override
+            Optional<Match> findMatch(Level level, BlockPos controller) {
+                return findLayered(level, controller, KILN_LAYERS.get(LIME_KILN));
+            }
+        },
+        PIT_KILN("tooltip.earth_on_minecraft.multiblock.pit_kiln", "screen.earth_on_minecraft.machine.structure.pit_kiln") {
+            @Override
+            Optional<Match> findMatch(Level level, BlockPos controller) {
+                return findLayered(level, controller, KILN_LAYERS.get(PIT_KILN));
+            }
+        },
+        SHAFT_FURNACE("tooltip.earth_on_minecraft.multiblock.shaft_furnace", "screen.earth_on_minecraft.machine.structure.shaft_furnace") {
+            @Override
+            Optional<Match> findMatch(Level level, BlockPos controller) {
+                return findLayered(level, controller, KILN_LAYERS.get(SHAFT_FURNACE));
+            }
         };
 
         private final String descriptionKey;
@@ -339,7 +383,118 @@ public final class MachineMultiblock {
             case CRACKING_FURNACE -> buildBoxRequirements(front, 1, 3, 3, PartRole.CASING, PartRole.PIPE);
             case TALL_COLUMN -> buildBoxRequirements(front, 1, 3, 4, PartRole.CASING, PartRole.PIPE);
             case PRESSURE_LOOP -> buildBoxRequirements(front, 1, 3, 3, PartRole.CASING, PartRole.PIPE);
+            case BLOOMERY, BREAD_OVEN, GLASS_KILN, LIME_KILN, PIT_KILN, SHAFT_FURNACE ->
+                    buildLayeredRequirements(front, KILN_LAYERS.get(pattern));
         };
+    }
+
+    /**
+     * The six spec kilns are described as horizontal layer patterns in {@code multiblocks.jsonl}.
+     * Each layer is a grid of characters: {@code B} shell, {@code #} interior air, {@code C}
+     * controller, {@code T} tuyere, {@code A} air inlet, {@code O} oven mouth, {@code H} chimney,
+     * and {@code .} meaning "no requirement at this height".
+     */
+    private static final Map<Pattern, List<String[]>> KILN_LAYERS = Map.of(
+            Pattern.BLOOMERY, List.of(
+                    new String[]{"BBB", "B#B", "BBB"},
+                    new String[]{"BCB", "B#B", "BTB"},
+                    new String[]{"BBB", "A#B", "BBB"},
+                    new String[]{"...", ".H.", "..."}),
+            Pattern.BREAD_OVEN, List.of(
+                    new String[]{"BBB", "BBB", "BBB"},
+                    new String[]{"BCB", "B#B", "BOB"},
+                    new String[]{"BBB", ".H.", "BBB"}),
+            Pattern.GLASS_KILN, List.of(
+                    new String[]{"BBB", "BBB", "BBB"},
+                    new String[]{"BCB", "B#B", "BTB"},
+                    new String[]{"BBB", "B#B", "BOB"},
+                    new String[]{"...", ".H.", "..."}),
+            Pattern.LIME_KILN, List.of(
+                    new String[]{"BB", "BB"},
+                    new String[]{"BC", "B#"},
+                    new String[]{"BB", "B#"},
+                    new String[]{"..", "H."}),
+            Pattern.PIT_KILN, List.of(
+                    new String[]{"BBB", "B#B", "BBB"},
+                    new String[]{"BBB", "B#B", "BBB"},
+                    new String[]{"...", ".A.", "..."}),
+            Pattern.SHAFT_FURNACE, List.of(
+                    new String[]{"BBB", "B#B", "BBB"},
+                    new String[]{"BCB", "B#B", "BTB"},
+                    new String[]{"BBB", "B#B", "BTB"},
+                    new String[]{"BBB", "A#B", "BBB"},
+                    new String[]{"...", ".H.", "..."}));
+
+    private static List<Requirement> buildLayeredRequirements(Direction front, List<String[]> layers) {
+        List<Requirement> requirements = new ArrayList<>();
+
+        // Kiln patterns mark their own controller with `C`, so unlike the industrial boxes they do
+        // not need a separate control panel next to them.
+
+        // The `C` cell marks where the controller block actually sits inside the pattern. Anchoring
+        // on the pattern centre instead shifted every requirement by the controller's own offset,
+        // so no kiln could ever match: the 2x2 lime kiln has its `C` in the right-hand column, and
+        // centring put the whole shell one block off in both directions.
+        int[] anchor = controllerCell(layers);
+        int anchorUp = anchor[0];
+        int anchorRow = anchor[1];
+        int anchorColumn = anchor[2];
+
+        for (int up = 0; up < layers.size(); up++) {
+            String[] rows = layers.get(up);
+            for (int row = 0; row < rows.length; row++) {
+                for (int column = 0; column < rows[row].length(); column++) {
+                    char symbol = rows[row].charAt(column);
+                    PartRole role = roleFor(symbol);
+                    if (role == null) {
+                        continue;
+                    }
+                    int right = column - anchorColumn;
+                    int back = row - anchorRow;
+                    int height = up - anchorUp;
+                    requirements.add(Requirement.relative(front, right, back, height, role));
+                }
+            }
+        }
+        return requirements;
+    }
+
+    /** Returns {@code {layer, row, column}} of the `C` cell, or the pattern centre when absent. */
+    private static int[] controllerCell(List<String[]> layers) {
+        for (int up = 0; up < layers.size(); up++) {
+            String[] rows = layers.get(up);
+            for (int row = 0; row < rows.length; row++) {
+                int column = rows[row].indexOf('C');
+                if (column >= 0) {
+                    return new int[]{up, row, column};
+                }
+            }
+        }
+        return new int[]{0, layers.getFirst().length / 2, layers.getFirst()[0].length() / 2};
+    }
+
+    private static PartRole roleFor(char symbol) {
+        return switch (symbol) {
+            case 'B' -> PartRole.CASING;
+            case 'T', 'A', 'H' -> PartRole.PIPE;
+            case 'O' -> PartRole.MOUTH;
+            case 'C', '#', '.' -> null;
+            default -> null;
+        };
+    }
+
+    private static Optional<Match> findLayered(Level level, BlockPos controller, List<String[]> layers) {
+        if (layers == null) {
+            return Optional.empty();
+        }
+        for (Direction front : HORIZONTALS) {
+            List<Requirement> requirements = buildLayeredRequirements(front, layers);
+            Optional<Match> match = matchFootprint(level, controller, front, requirements);
+            if (match.isPresent()) {
+                return match;
+            }
+        }
+        return Optional.empty();
     }
 
     private static Optional<Match> findBox(Level level, BlockPos controller, int halfWidth, int depth, int height,
@@ -390,18 +545,72 @@ public final class MachineMultiblock {
             case CONTROL_PANEL -> block == EarthOnMinecraft.CONTROL_PANEL.get();
             case CASING -> block == EarthOnMinecraft.INDUSTRIAL_MACHINE_CASING.get()
                     || block == EarthOnMinecraft.MACHINE_INPUT_INTERFACE.get()
-                    || block == EarthOnMinecraft.MACHINE_OUTPUT_INTERFACE.get();
-            case PIPE -> block == EarthOnMinecraft.STEEL_PROCESS_PIPE.get();
+                    || block == EarthOnMinecraft.MACHINE_OUTPUT_INTERFACE.get()
+                    || isKilnShell(block);
+            case PIPE -> block == EarthOnMinecraft.STEEL_PROCESS_PIPE.get()
+                    || isKilnPipe(block);
+            case MOUTH -> isKilnMouth(block);
         };
+    }
+
+    /**
+     * The spec kilns are built from their own masonry and fittings rather than the industrial
+     * casing set, so the shell role accepts the kiln shell blocks named in {@code multiblocks.jsonl}.
+     */
+    private static boolean isKilnShell(Block block) {
+        return block == specBlock("firebrick_block")
+                || block == specBlock("clay_brick_block")
+                || block == specBlock("packed_earth");
+    }
+
+    private static boolean isKilnPipe(Block block) {
+        return block == specBlock("tuyere")
+                || block == specBlock("air_inlet")
+                || block == specBlock("chimney");
+    }
+
+    private static boolean isKilnMouth(Block block) {
+        return block == specBlock("oven_mouth");
+    }
+
+    /** Resolves a generated spec block, or {@code null} when it is not registered. */
+    private static Block specBlock(String id) {
+        var holder = SpecBlocks.BY_ID.get(id);
+        return holder == null ? null : holder.get();
     }
 
     public record Match(Direction front, List<BlockPos> parts) {
     }
 
+    /** One block a structure needs, expressed as an offset from the controller. */
+    public record PlacedRequirement(int x, int y, int z, String role) {
+    }
+
+    /**
+     * The blocks a layered kiln needs, relative to its controller, for one facing.
+     *
+     * <p>Exposed so the guide screen and the GameTest can build or describe a kiln from the same
+     * pattern the matcher uses, instead of hand-coding coordinates that drift out of sync.</p>
+     */
+    public static List<PlacedRequirement> requirementsFor(ProcessingMachineBlock.Kind kind, Direction front) {
+        List<String[]> layers = KILN_LAYERS.get(patternFor(kind));
+        if (layers == null) {
+            return List.of();
+        }
+        // `Requirement` stores (x, z, up); `PlacedRequirement` exposes (x, y, z). Passing them
+        // positionally swapped height and depth, so every kiln requirement pointed at the wrong
+        // block.
+        return buildLayeredRequirements(front, layers).stream()
+                .map(requirement -> new PlacedRequirement(
+                        requirement.x(), requirement.up(), requirement.z(), requirement.role().name()))
+                .toList();
+    }
+
     private enum PartRole {
         CONTROL_PANEL,
         CASING,
-        PIPE
+        PIPE,
+        MOUTH
     }
 
     private record Requirement(int x, int z, int up, PartRole role) {

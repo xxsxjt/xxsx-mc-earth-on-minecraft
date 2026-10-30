@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "P P",
+    "LLL"
+  ],
+  "key": {
+    "P": "minecraft:oak_planks",
+    "L": "minecraft:oak_log"
+  },
+  "result": {
+    "id": "earth_on_minecraft:oil_press",
+    "count": 1
+  }
+}

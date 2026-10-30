@@ -1,0 +1,8 @@
+{
+  "title_key": "resident.earth_on_minecraft.role.fantasy_academy_researcher",
+  "identity_key": "resident.earth_on_minecraft.identity.arcane",
+  "vanilla_professions": ["fantasy_earth:arcane_settler"],
+  "settlement_profiles": ["earth_on_minecraft:arcane_settlement"],
+  "weight": 1,
+  "trades": []
+}

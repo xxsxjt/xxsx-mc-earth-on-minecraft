@@ -1,0 +1,691 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "campfire",
+  "model_identifier": "earth_on_minecraft:campfire",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "ash_bed",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        2,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "95a3eba8-04e0-5801-a234-ee16fc784e09",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            14,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "stone_ring_west",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        0,
+        3
+      ],
+      "to": [
+        3,
+        4,
+        13
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "6e811ddd-2f35-5300-a1ab-15e8abebf30a",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            12,
+            3,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            13,
+            12,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            3,
+            3,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            3,
+            3,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "stone_ring_east",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        13,
+        0,
+        3
+      ],
+      "to": [
+        16,
+        4,
+        13
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "a18f5808-73b3-5408-8d8a-3f812c48a383",
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            12,
+            16,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            12,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            13,
+            3,
+            16,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            13,
+            3,
+            16,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "stone_ring_north",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        0,
+        0
+      ],
+      "to": [
+        13,
+        4,
+        3
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "829b35d9-923a-59e7-b818-07d9af5540eb",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            13,
+            12,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            0,
+            12,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            0,
+            13,
+            3
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "stone_ring_south",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        0,
+        13
+      ],
+      "to": [
+        13,
+        4,
+        16
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "bcee4421-b681-5028-8abc-a37788503edd",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            12,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            13,
+            12,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            0,
+            13,
+            3
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "log_pile",
+      "box_uv": false,
+      "rescale": true,
+      "locked": false,
+      "from": [
+        4,
+        2,
+        4
+      ],
+      "to": [
+        12,
+        6,
+        12
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        4,
+        8
+      ],
+      "uuid": "0bd73d80-8272-537b-aaff-320ddd21cb98",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            10,
+            12,
+            14
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            10,
+            12,
+            14
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            10,
+            12,
+            14
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            10,
+            12,
+            14
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube",
+      "rotation": [
+        0.0,
+        45.0,
+        0.0
+      ]
+    },
+    {
+      "name": "cooking_grate",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        6,
+        3
+      ],
+      "to": [
+        13,
+        8,
+        13
+      ],
+      "autouv": 0,
+      "color": 6,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "aebc8c59-e9e5-5ca4-b715-046a06c7f830",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            8,
+            13,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            8,
+            13,
+            10
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            8,
+            13,
+            10
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            8,
+            13,
+            10
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "95a3eba8-04e0-5801-a234-ee16fc784e09",
+    "6e811ddd-2f35-5300-a1ab-15e8abebf30a",
+    "a18f5808-73b3-5408-8d8a-3f812c48a383",
+    "829b35d9-923a-59e7-b818-07d9af5540eb",
+    "bcee4421-b681-5028-8abc-a37788503edd",
+    "0bd73d80-8272-537b-aaff-320ddd21cb98",
+    "aebc8c59-e9e5-5ca4-b715-046a06c7f830"
+  ],
+  "textures": [
+    {
+      "name": "campfire.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "d4aac6e5-2f29-51c3-bc2a-6d4e9649b75b",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/campfire.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "stone-ringed open cooking fire",
+    "silhouette": "low ring of stones around a burning log pile with a grate",
+    "faces": {
+      "front": "open fire pit and grill",
+      "back": "log feed",
+      "left": "windward stone wall",
+      "right": "ember rake",
+      "top": "cooking grate",
+      "bottom": "ash bed"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/campfire",
+        "front": "earth_on_minecraft:block/campfire",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/campfire_active",
+        "front": "earth_on_minecraft:block/campfire_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/campfire",
+        "front": "earth_on_minecraft:block/campfire",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

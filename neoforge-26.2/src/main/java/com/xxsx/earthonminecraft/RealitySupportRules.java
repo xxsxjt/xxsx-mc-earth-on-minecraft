@@ -82,6 +82,8 @@ public final class RealitySupportRules {
                 || state.getBlock() instanceof BatteryBoxBlock
                 || state.getBlock() instanceof ConveyorBeltBlock
                 || state.getBlock() instanceof PowerCableBlock
+                || state.getBlock() instanceof MinerBlock
+                || state.getBlock() instanceof QuarryBlock
                 || state.getBlock() instanceof SupportPartBlock;
     }
 
@@ -92,6 +94,8 @@ public final class RealitySupportRules {
     private static boolean isPowerEndpoint(BlockState state) {
         return state.getBlock() instanceof EnergyGeneratorBlock
                 || state.getBlock() instanceof BatteryBoxBlock
-                || state.getBlock() instanceof ProcessingMachineBlock;
+                || state.getBlock() instanceof ProcessingMachineBlock
+                || state.getBlock() instanceof MinerBlock
+                || state.getBlock() instanceof QuarryBlock;
     }
 }

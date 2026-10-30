@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_table",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:blocks/large_fern"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.125
+    }
+  ],
+  "table": "earth_on_minecraft:wild_herb/large_fern"
+}

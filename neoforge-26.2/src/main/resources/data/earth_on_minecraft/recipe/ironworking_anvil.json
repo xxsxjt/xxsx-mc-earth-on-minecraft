@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    " S ",
+    "SSS"
+  ],
+  "key": {
+    "C": "minecraft:cobblestone",
+    "S": "minecraft:stone"
+  },
+  "result": {
+    "id": "earth_on_minecraft:ironworking_anvil"
+  }
+}

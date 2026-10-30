@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "P P",
+    "FFF"
+  ],
+  "key": {
+    "P": "minecraft:oak_planks",
+    "F": "minecraft:cobblestone"
+  },
+  "result": {
+    "id": "earth_on_minecraft:smokehouse",
+    "count": 1
+  }
+}

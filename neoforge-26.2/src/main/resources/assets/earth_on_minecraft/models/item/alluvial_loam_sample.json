@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:block/mud"
+    "layer0": "earth_on_minecraft:item/alluvial_loam_sample"
   }
 }

@@ -1,5 +1,6 @@
 package com.xxsx.earthonminecraft.integration.jei;
 
+import com.xxsx.earthonminecraft.EarthOnMinecraft;
 import com.xxsx.earthonminecraft.ProcessingMachineBlock;
 import com.xxsx.earthonminecraft.RouteGuide;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -7,6 +8,7 @@ import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.neoforge.NeoForgeTypes;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.category.IRecipeCategory;
@@ -15,7 +17,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class ProcessingJeiCategory implements IRecipeCategory<ProcessingMachineBlock.Recipe> {
     private final IDrawableStatic background;
@@ -25,7 +29,7 @@ public class ProcessingJeiCategory implements IRecipeCategory<ProcessingMachineB
 
     public ProcessingJeiCategory(IGuiHelper guiHelper, ProcessingMachineBlock.Kind kind,
                                  IRecipeType<ProcessingMachineBlock.Recipe> recipeType, ItemLike iconItem) {
-        this.background = guiHelper.createBlankDrawable(168, 88);
+        this.background = guiHelper.createBlankDrawable(168, 104);
         this.icon = guiHelper.createDrawableItemLike(iconItem);
         this.kind = kind;
         this.recipeType = recipeType;
@@ -58,13 +62,37 @@ public class ProcessingJeiCategory implements IRecipeCategory<ProcessingMachineB
 
     @Override
     public void setRecipe(IRecipeLayoutBuilder builder, ProcessingMachineBlock.Recipe recipe, IFocusGroup focuses) {
-        builder.addSlot(RecipeIngredientRole.INPUT, 4, 22).add(recipe.inputStack()).setStandardSlotBackground();
+        int slotIndex = 0;
+        for (ItemStack input : recipe.inputStacks()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 4 + (slotIndex % 2) * 20, 22 + (slotIndex / 2) * 20)
+                    .add(input)
+                    .setStandardSlotBackground();
+            slotIndex++;
+        }
+        // Mixed-input routes need both their item ingredients and the fluids consumed by the tank.
+        for (ProcessingMachineBlock.FluidInput fluid : recipe.fluidInputs()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 4 + (slotIndex % 2) * 20, 22 + (slotIndex / 2) * 20)
+                    .add(NeoForgeTypes.FLUID_STACK, new FluidStack(fluid.fluid(), fluid.amount()))
+                    .setStandardSlotBackground();
+            slotIndex++;
+        }
+        if (recipe.requiresCoke()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 4 + (slotIndex % 2) * 20, 22 + (slotIndex / 2) * 20)
+                    .add(new net.minecraft.world.item.ItemStack(EarthOnMinecraft.COKE.get()))
+                    .setStandardSlotBackground();
+        }
         int x = 72;
         int y = 12;
         int index = 0;
         for (var stack : recipe.outputStacks()) {
             builder.addSlot(RecipeIngredientRole.OUTPUT, x + (index % 4) * 22, y + (index / 4) * 22)
                     .add(stack)
+                    .setOutputSlotBackground();
+            index++;
+        }
+        for (ProcessingMachineBlock.FluidOutput fluid : recipe.fluidOutputs()) {
+            builder.addSlot(RecipeIngredientRole.OUTPUT, x + (index % 4) * 22, y + (index / 4) * 22)
+                    .add(NeoForgeTypes.FLUID_STACK, new FluidStack(fluid.fluid(), fluid.amount()))
                     .setOutputSlotBackground();
             index++;
         }
@@ -85,7 +113,7 @@ public class ProcessingJeiCategory implements IRecipeCategory<ProcessingMachineB
         graphics.text(font, Component.translatable("jei.earth_on_minecraft.processing.spec",
                 Math.max(1, (kind.processTicks() + 19) / 20), kind.energyPerTick()), 5, 62, 0xFFD9EEF4);
         String note = recipeNote(recipe);
-        graphics.text(font, fit(note, 158), 5, 74, 0xFFFFF2CC);
+        graphics.text(font, fit(note, 158), 5, 90, 0xFFFFF2CC);
     }
 
     private static String recipeNote(ProcessingMachineBlock.Recipe recipe) {

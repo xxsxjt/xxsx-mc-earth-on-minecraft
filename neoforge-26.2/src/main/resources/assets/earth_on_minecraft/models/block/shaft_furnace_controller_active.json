@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/shaft_furnace_controller_active",
+    "front": "earth_on_minecraft:block/shaft_furnace_controller_active",
+    "back": "earth_on_minecraft:block/hot_machine_side",
+    "left": "earth_on_minecraft:block/hot_machine_side",
+    "right": "earth_on_minecraft:block/hot_machine_side",
+    "top": "earth_on_minecraft:block/hot_machine_top",
+    "bottom": "earth_on_minecraft:block/hot_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "plinth",
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        3,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "shaft_low",
+      "from": [
+        2,
+        3,
+        2
+      ],
+      "to": [
+        14,
+        9,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            7,
+            14,
+            13
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            7,
+            14,
+            13
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            2,
+            7,
+            14,
+            13
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            7,
+            14,
+            13
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "shaft_high",
+      "from": [
+        3,
+        9,
+        3
+      ],
+      "to": [
+        13,
+        14,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            2,
+            13,
+            7
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            2,
+            13,
+            7
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            2,
+            13,
+            7
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            2,
+            13,
+            7
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "blast_main",
+      "from": [
+        0,
+        4,
+        6
+      ],
+      "to": [
+        4,
+        8,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            4,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            12,
+            8,
+            16,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            8,
+            10,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            6,
+            8,
+            10,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "tap_hole",
+      "from": [
+        5,
+        2,
+        0
+      ],
+      "to": [
+        11,
+        5,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            11,
+            11,
+            14
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            11,
+            11,
+            14
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            12,
+            11,
+            16,
+            14
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            0,
+            11,
+            4,
+            14
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            0,
+            11,
+            4
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            12,
+            11,
+            16
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "charging_bell",
+      "from": [
+        5,
+        14,
+        5
+      ],
+      "to": [
+        11,
+        16,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

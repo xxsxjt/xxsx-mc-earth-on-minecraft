@@ -1,0 +1,2912 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "routes": [
+    {
+      "id": "crop/adzuki_bean",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:adzuki_bean",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:adzuki_bean",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/amaranth",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:amaranth",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:amaranth",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/apple",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:apple",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/arrowhead",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:arrowhead",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/asparagus",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:asparagus",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:asparagus",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/avocado",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:avocado",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/bamboo_shoot",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bamboo_shoot",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/banana",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:banana",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/barley",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:barley",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:barley",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/beet",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:beet",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:beet",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/bell_pepper",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:bell_pepper",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bell_pepper",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/berry",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:berry",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:berry",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/betel_leaf",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:betel_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 300,
+      "energy": 0,
+      "note": "tree by-product: harvested from felled timber"
+    },
+    {
+      "id": "crop/betel_nut",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:betel_nut",
+          "count": 2
+        }
+      ],
+      "ticks": 300,
+      "energy": 0,
+      "note": "tree by-product: harvested from felled timber"
+    },
+    {
+      "id": "crop/bitter_melon",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:bitter_melon",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bitter_melon",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/black_bean",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:black_bean",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:black_bean",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/blackcurrant",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:blackcurrant",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/blueberry",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:blueberry",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/broad_bean",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:broad_bean",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:broad_bean",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/broccoli",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:broccoli",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:broccoli",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/buckwheat",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:buckwheat",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:buckwheat",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/cabbage",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cabbage",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cabbage",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/carrot",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:carrot",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:carrot",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/cassava",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cassava",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cassava",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/cauliflower",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cauliflower",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cauliflower",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/celery",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:celery",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:celery",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/celtuce",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:celtuce",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:celtuce",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/chickpea",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:chickpea",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chickpea",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/chili",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:chili",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chili",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/chrysanthemum_greens",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chrysanthemum_greens",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/cinnamon",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cinnamon",
+          "count": 2
+        }
+      ],
+      "ticks": 300,
+      "energy": 0,
+      "note": "tree by-product: harvested from felled timber"
+    },
+    {
+      "id": "crop/citrus",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:citrus",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/clove",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:clove",
+          "count": 2
+        }
+      ],
+      "ticks": 300,
+      "energy": 0,
+      "note": "tree by-product: harvested from felled timber"
+    },
+    {
+      "id": "crop/coca_leaf",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coca_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 300,
+      "energy": 0,
+      "note": "tree by-product: harvested from felled timber"
+    },
+    {
+      "id": "crop/coconut",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:coconut",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/cotton_raw",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cotton_raw",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cotton_raw",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/crab",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:crab",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/cucumber",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cucumber",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cucumber",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/date",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:date",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/duck_egg",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:duck_egg",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/egg",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:egg",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/eggplant",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:eggplant",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:eggplant",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/fig",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:fig",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/garlic",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:garlic",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:garlic",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/ginger",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ginger",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:ginger",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/goat_milk",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:goat_milk",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/goose_egg",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:goose_egg",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/grape",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:grape",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/hawthorn",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:hawthorn",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/honey",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:honey",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/insect_protein",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:insect_protein",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/job_tears",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:job_tears",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/kelp",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:kelp",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/kiwi",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:kiwi",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/konjac",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:konjac",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:konjac",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/leek",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:leek",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:leek",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/lemon",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lemon",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/lentil",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lentil",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lentil",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/lettuce",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lettuce",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lettuce",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/longan",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:longan",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/lotus_root",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lotus_root",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/luffa",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:luffa",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:luffa",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/lupin",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:lupin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lupin",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/lychee",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lychee",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/maize",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:maize",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:maize",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/mango",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mango",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/milk",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:milk",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/millet",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:millet",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:millet",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/mulberry",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mulberry",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/mung_bean",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:mung_bean",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mung_bean",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/mushroom",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:mushroom",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/nori",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:nori",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/nutmeg",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:nutmeg",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:nutmeg",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/oat",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:oat",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:oat",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/okra",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:okra",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:okra",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/olive",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:olive",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/onion",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:onion",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:onion",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/papaya",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:papaya",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/pea",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pea",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pea",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/peach",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:peach",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/peanut",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:peanut",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:peanut",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/pear",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pear",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/pepper",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pepper",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pepper",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/persimmon",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:persimmon",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/pineapple",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pineapple",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/pomegranate",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pomegranate",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/pomelo",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pomelo",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/potato",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:potato",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:potato",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/proso_millet",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:proso_millet",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:proso_millet",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/pumpkin",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:pumpkin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:pumpkin",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/quinoa",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:quinoa",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:quinoa",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/radish",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:radish",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:radish",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/raspberry",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raspberry",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/raw_beef",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:raw_beef",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raw_beef",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/raw_chicken",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:raw_chicken",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raw_chicken",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/raw_fish",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:raw_fish",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raw_fish",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/raw_mutton",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:raw_mutton",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raw_mutton",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/raw_pork",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:raw_pork",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raw_pork",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/raw_rabbit",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:raw_rabbit",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:raw_rabbit",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/rice",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rice",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rice",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/rice_paddy",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rice_paddy",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rice_paddy",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/rock_salt",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rock_salt",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rock_salt",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/rye",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:rye",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:rye",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/sea_buckthorn",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sea_buckthorn",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/sea_salt",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sea_salt",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sea_salt",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/shellfish",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:shellfish",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/shrimp",
+      "machine": "smokehouse",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:hay",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bran",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:shrimp",
+          "count": 2
+        }
+      ],
+      "ticks": 400,
+      "energy": 0,
+      "note": "barn produce: fed livestock yields this"
+    },
+    {
+      "id": "crop/sichuan_pepper",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sichuan_pepper",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sichuan_pepper",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/sorghum",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sorghum",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sorghum",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/soybean",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/spinach",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:spinach",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:spinach",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/strawberry",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:strawberry",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/sweet_corn",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sweet_corn",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sweet_corn",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/sweet_potato",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sweet_potato",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sweet_potato",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/taro",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:taro",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:taro",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/teff",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:teff",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:teff",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/tobacco_leaf",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tobacco_leaf",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tobacco_leaf",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/tomato",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:tomato",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tomato",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/turmeric",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:turmeric",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:turmeric",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/turnip",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:turnip",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:turnip",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/water_chestnut",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:water_chestnut",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/water_spinach",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:water_spinach",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/waxberry",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:waxberry",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/wheat",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:wheat",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:wheat",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/wild_rice",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:grass_fiber",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:wild_rice",
+          "count": 2
+        }
+      ],
+      "ticks": 200,
+      "energy": 0,
+      "note": "foraged: cleaned and bundled at the herb table"
+    },
+    {
+      "id": "crop/winter_melon",
+      "machine": "carpentry_bench",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:timber_beam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potash",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:winter_melon",
+          "count": 2
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "orchard: pruned timber yields fruit"
+    },
+    {
+      "id": "crop/wool",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:wool",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:wool",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/yam",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:yam",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:yam",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    },
+    {
+      "id": "crop/zucchini",
+      "machine": "herb_processing_table",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:zucchini",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:bone_meal",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:zucchini",
+          "count": 2
+        }
+      ],
+      "ticks": 240,
+      "energy": 0,
+      "note": "seed crop: propagate a cutting on a bone meal bed"
+    }
+  ],
+  "counts": {
+    "total": 129
+  }
+}

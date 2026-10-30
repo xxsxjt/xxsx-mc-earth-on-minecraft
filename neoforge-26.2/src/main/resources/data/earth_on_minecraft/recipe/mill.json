@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SSS",
+    "S S",
+    "PPP"
+  ],
+  "key": {
+    "S": "minecraft:stone",
+    "P": "minecraft:oak_planks"
+  },
+  "result": {
+    "id": "earth_on_minecraft:mill",
+    "count": 1
+  }
+}

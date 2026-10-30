@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/oil_press_active",
+    "front": "earth_on_minecraft:block/oil_press_active",
+    "back": "earth_on_minecraft:block/modern_machine_side",
+    "left": "earth_on_minecraft:block/modern_machine_side",
+    "right": "earth_on_minecraft:block/modern_machine_side",
+    "top": "earth_on_minecraft:block/modern_machine_top",
+    "bottom": "earth_on_minecraft:block/modern_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "cake_trough",
+      "from": [
+        1,
+        0,
+        3
+      ],
+      "to": [
+        15,
+        4,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "press_cage",
+      "from": [
+        3,
+        4,
+        4
+      ],
+      "to": [
+        13,
+        11,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            5,
+            13,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            5,
+            13,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            5,
+            12,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            5,
+            12,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "ram_screw",
+      "from": [
+        6,
+        11,
+        6
+      ],
+      "to": [
+        10,
+        16,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "seed_hopper",
+      "from": [
+        4,
+        12,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            7,
+            0,
+            12,
+            4
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            9,
+            4
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            9
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            7,
+            12,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "oil_spout",
+      "from": [
+        13,
+        5,
+        6
+      ],
+      "to": [
+        16,
+        9,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            7,
+            16,
+            11
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            7,
+            3,
+            11
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            7,
+            10,
+            11
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            6,
+            7,
+            10,
+            11
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            13,
+            6,
+            16,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            13,
+            6,
+            16,
+            10
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "wedge_block",
+      "from": [
+        4,
+        4,
+        12
+      ],
+      "to": [
+        12,
+        9,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            7,
+            12,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            7,
+            12,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            1,
+            7,
+            4,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            12,
+            7,
+            15,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            12,
+            12,
+            15
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            1,
+            12,
+            4
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

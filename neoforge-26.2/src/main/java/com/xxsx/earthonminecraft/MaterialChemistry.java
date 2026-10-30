@@ -56,6 +56,8 @@ public final class MaterialChemistry {
             entry("mafic_silicate_dust", info("olivine + pyroxene + amphibole", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
             entry("aluminosilicate_dust", info("Al2O3 + SiO2 framework", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
             entry("iron_concentrate", info("Fe3O4/Fe2O3-rich concentrate", "tooltip.earth_on_minecraft.chem.detail.concentrate")),
+            entry("sponge_iron", info("porous metallic Fe", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("wrought_iron", info("Fe 99%+", "tooltip.earth_on_minecraft.chem.detail.metal")),
             entry("copper_concentrate", info("CuFeS2-rich concentrate", "tooltip.earth_on_minecraft.chem.detail.concentrate")),
             entry("gold_concentrate", info("Au + SiO2 heavy fraction", "tooltip.earth_on_minecraft.chem.detail.concentrate")),
             entry("roasted_copper_concentrate", info("Cu2S/CuO + Fe oxides", "tooltip.earth_on_minecraft.chem.detail.roasted")),

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/block",
-  "ambientocclusion": true,
+  "ambientocclusion": false,
   "gui_light": "side",
   "textures": {
     "particle": "earth_on_minecraft:block/magnetic_separator_active",

@@ -1,67 +1,197 @@
 {
   "schema_version": 1,
-  "languages": ["zh_cn", "en_us"],
+  "languages": [
+    "zh_cn",
+    "en_us"
+  ],
   "screens": [
     {
       "id": "processing_machine",
-      "logical_size": [176, 166],
+      "logical_size": [
+        176,
+        166
+      ],
       "states": [
-        {"id": "empty", "predicate": "input slot empty", "expected": "idle indicator and actionable input guidance"},
-        {"id": "unsupported_input", "predicate": "input present and no route", "expected": "warning color and unsupported-material explanation"},
-        {"id": "missing_power", "predicate": "valid route, no grid energy and no usable local fuel", "expected": "power-source recovery guidance"},
-        {"id": "redstone_paused", "predicate": "redstone mode rejects current signal", "expected": "paused status and current redstone mode tooltip"},
-        {"id": "output_blocked", "predicate": "all route outputs cannot fit atomically", "expected": "blocked status without consuming input or power"},
-        {"id": "structure_fault", "predicate": "required multiblock is incomplete", "expected": "fault status, missing-structure guidance, and projection entry"},
-        {"id": "running", "predicate": "route, structure, output, control, and power are valid", "expected": "progress, running state, custom sound, and process-specific particle"},
-        {"id": "multi_route", "predicate": "input has more than one valid route", "expected": "visible route selector and selected output summary"}
+        {
+          "id": "empty",
+          "predicate": "input slot empty",
+          "expected": "idle indicator and actionable input guidance"
+        },
+        {
+          "id": "unsupported_input",
+          "predicate": "input present and no route",
+          "expected": "warning color and unsupported-material explanation"
+        },
+        {
+          "id": "missing_power",
+          "predicate": "valid route, no grid energy and no usable local fuel",
+          "expected": "power-source recovery guidance"
+        },
+        {
+          "id": "redstone_paused",
+          "predicate": "redstone mode rejects current signal",
+          "expected": "paused status and current redstone mode tooltip"
+        },
+        {
+          "id": "missing_additive",
+          "predicate": "selected route needs secondary inputs and additive slots are under-stocked",
+          "expected": "additive warning that names the missing slots without consuming power"
+        },
+        {
+          "id": "output_blocked",
+          "predicate": "all route outputs cannot fit atomically",
+          "expected": "blocked status without consuming input or power"
+        },
+        {
+          "id": "structure_fault",
+          "predicate": "required multiblock is incomplete",
+          "expected": "fault status, missing-structure guidance, and projection entry"
+        },
+        {
+          "id": "running",
+          "predicate": "route, structure, output, control, and power are valid",
+          "expected": "progress, running state, custom sound, and process-specific particle"
+        },
+        {
+          "id": "multi_route",
+          "predicate": "input has more than one valid route",
+          "expected": "visible route selector and selected output summary"
+        }
       ]
     },
     {
       "id": "energy_generator",
-      "logical_size": [176, 166],
+      "logical_size": [
+        176,
+        166
+      ],
       "states": [
-        {"id": "empty", "predicate": "no valid source", "expected": "source examples and zero generation"},
-        {"id": "running", "predicate": "source consumed and buffer has room", "expected": "generation rate, buffer fill, custom running feedback"},
-        {"id": "buffer_full", "predicate": "internal storage full", "expected": "full-buffer reason and cable/storage recovery"},
-        {"id": "network_blocked", "predicate": "stored energy cannot leave", "expected": "network bottleneck guidance"}
+        {
+          "id": "empty",
+          "predicate": "no valid source",
+          "expected": "source examples and zero generation"
+        },
+        {
+          "id": "running",
+          "predicate": "source consumed and buffer has room",
+          "expected": "generation rate, buffer fill, custom running feedback"
+        },
+        {
+          "id": "buffer_full",
+          "predicate": "internal storage full",
+          "expected": "full-buffer reason and cable/storage recovery"
+        },
+        {
+          "id": "network_blocked",
+          "predicate": "stored energy cannot leave",
+          "expected": "network bottleneck guidance"
+        }
       ]
     },
     {
       "id": "battery_box",
-      "logical_size": [176, 166],
+      "logical_size": [
+        176,
+        166
+      ],
       "states": [
-        {"id": "empty", "predicate": "stored energy is zero", "expected": "empty state and input direction"},
-        {"id": "charging", "predicate": "net flow is positive", "expected": "charge direction and rate"},
-        {"id": "discharging", "predicate": "net flow is negative", "expected": "discharge direction and rate"},
-        {"id": "full", "predicate": "stored energy equals capacity", "expected": "full state without clipped values"}
+        {
+          "id": "empty",
+          "predicate": "stored energy is zero",
+          "expected": "empty state and input direction"
+        },
+        {
+          "id": "charging",
+          "predicate": "net flow is positive",
+          "expected": "charge direction and rate"
+        },
+        {
+          "id": "discharging",
+          "predicate": "net flow is negative",
+          "expected": "discharge direction and rate"
+        },
+        {
+          "id": "full",
+          "predicate": "stored energy equals capacity",
+          "expected": "full state without clipped values"
+        }
       ]
     },
     {
       "id": "machine_side_config",
-      "logical_size": [200, 183],
+      "logical_size": [
+        200,
+        183
+      ],
       "states": [
-        {"id": "all_modes", "predicate": "all six relative faces visible", "expected": "input, output, both, and off are iconically distinct"},
-        {"id": "rotated_machine", "predicate": "controller faces east, south, or west", "expected": "front/back/left/right remain relative to controller"},
-        {"id": "long_localization", "predicate": "longest bundled labels", "expected": "no overlap and complete hover explanation"}
+        {
+          "id": "all_modes",
+          "predicate": "all six relative faces visible",
+          "expected": "input, output, both, and off are iconically distinct"
+        },
+        {
+          "id": "rotated_machine",
+          "predicate": "controller faces east, south, or west",
+          "expected": "front/back/left/right remain relative to controller"
+        },
+        {
+          "id": "long_localization",
+          "predicate": "longest bundled labels",
+          "expected": "no overlap and complete hover explanation"
+        }
       ]
     },
     {
       "id": "field_geology_notebook",
-      "logical_size": [200, 183],
+      "logical_size": [
+        200,
+        183
+      ],
       "states": [
-        {"id": "route_overview", "predicate": "default page", "expected": "first useful action and route categories visible"},
-        {"id": "search_results", "predicate": "search has matches", "expected": "matched text and source section visible"},
-        {"id": "search_empty", "predicate": "search has no matches", "expected": "clear recovery text"},
-        {"id": "long_page", "predicate": "longest localized entry", "expected": "scroll bounds and footer remain visible"}
+        {
+          "id": "route_overview",
+          "predicate": "default page",
+          "expected": "first useful action and route categories visible"
+        },
+        {
+          "id": "search_results",
+          "predicate": "search has matches",
+          "expected": "matched text and source section visible"
+        },
+        {
+          "id": "search_empty",
+          "predicate": "search has no matches",
+          "expected": "clear recovery text"
+        },
+        {
+          "id": "long_page",
+          "predicate": "longest localized entry",
+          "expected": "scroll bounds and footer remain visible"
+        }
       ]
     },
     {
       "id": "settlement_board",
-      "logical_size": [176, 166],
+      "logical_size": [
+        176,
+        166
+      ],
       "states": [
-        {"id": "unregistered", "predicate": "no nearby settlement", "expected": "registration/discovery guidance"},
-        {"id": "active", "predicate": "settlement snapshot available", "expected": "technology, industries, demand, supply, security, and reputation"},
-        {"id": "long_names", "predicate": "longest settlement and role localization", "expected": "no clipping or overlap"}
+        {
+          "id": "unregistered",
+          "predicate": "no nearby settlement",
+          "expected": "registration/discovery guidance"
+        },
+        {
+          "id": "active",
+          "predicate": "settlement snapshot available",
+          "expected": "technology, industries, demand, supply, security, and reputation"
+        },
+        {
+          "id": "long_names",
+          "predicate": "longest settlement and role localization",
+          "expected": "no clipping or overlap"
+        }
       ]
     }
   ]

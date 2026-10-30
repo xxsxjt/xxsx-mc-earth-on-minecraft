@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "active=false,facing=north,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller"
+    },
+    "active=false,facing=east,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller",
+      "y": 90
+    },
+    "active=false,facing=south,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller",
+      "y": 180
+    },
+    "active=false,facing=west,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller",
+      "y": 270
+    },
+    "active=false,facing=north,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault"
+    },
+    "active=false,facing=east,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault",
+      "y": 90
+    },
+    "active=false,facing=south,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault",
+      "y": 180
+    },
+    "active=false,facing=west,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault",
+      "y": 270
+    },
+    "active=true,facing=north,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_active"
+    },
+    "active=true,facing=east,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_active",
+      "y": 90
+    },
+    "active=true,facing=south,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_active",
+      "y": 180
+    },
+    "active=true,facing=west,fault=false": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_active",
+      "y": 270
+    },
+    "active=true,facing=north,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault"
+    },
+    "active=true,facing=east,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault",
+      "y": 90
+    },
+    "active=true,facing=south,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault",
+      "y": 180
+    },
+    "active=true,facing=west,fault=true": {
+      "model": "earth_on_minecraft:block/shaft_furnace_controller_fault",
+      "y": 270
+    }
+  }
+}

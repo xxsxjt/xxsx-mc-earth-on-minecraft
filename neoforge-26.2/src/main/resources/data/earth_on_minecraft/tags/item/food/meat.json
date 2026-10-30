@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "earth_on_minecraft:raw_beef",
+    "earth_on_minecraft:raw_chicken",
+    "earth_on_minecraft:raw_mutton",
+    "earth_on_minecraft:raw_pork",
+    "earth_on_minecraft:raw_rabbit"
+  ]
+}

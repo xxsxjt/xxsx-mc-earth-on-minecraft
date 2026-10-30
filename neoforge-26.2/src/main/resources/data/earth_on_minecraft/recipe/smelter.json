@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BFB",
+    "BBB"
+  ],
+  "key": {
+    "B": "minecraft:brick",
+    "F": "minecraft:blast_furnace"
+  },
+  "result": {
+    "id": "earth_on_minecraft:smelter",
+    "count": 1
+  }
+}

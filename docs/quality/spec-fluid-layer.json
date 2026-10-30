@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "fluids": 30,
+  "textures": 60,
+  "template_art": true,
+  "note": "Fluid textures are deterministic template art pending the approved art pipeline."
+}

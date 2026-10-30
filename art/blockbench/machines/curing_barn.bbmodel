@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "curing_barn",
+  "model_identifier": "earth_on_minecraft:curing_barn",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "barn_shell",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        12,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "e6ab4809-e6b7-5ceb-b6d3-bf5eb381a803",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            4,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            4,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "ridge_vent",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        12,
+        4
+      ],
+      "to": [
+        13,
+        16,
+        12
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "b162662b-f7d2-5cd6-9e0e-1024c32178e8",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            0,
+            13,
+            4
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            0,
+            13,
+            4
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "louver_west",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        3,
+        4
+      ],
+      "to": [
+        2,
+        10,
+        12
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "2b396404-4984-52b0-8918-8130e92ebe28",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            6,
+            2,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            14,
+            6,
+            16,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            4,
+            2,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            4,
+            2,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "louver_east",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        14,
+        3,
+        4
+      ],
+      "to": [
+        16,
+        10,
+        12
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "3bf0f7da-f4eb-5966-b8be-8591045da07c",
+      "faces": {
+        "north": {
+          "uv": [
+            14,
+            6,
+            16,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            6,
+            2,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            14,
+            4,
+            16,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            14,
+            4,
+            16,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "loading_door",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        0,
+        14
+      ],
+      "to": [
+        12,
+        8,
+        16
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "3a10bcbb-e1ab-5961-8946-77f34c279791",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            8,
+            12,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            8,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            8,
+            2,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            14,
+            8,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            0,
+            12,
+            2
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "hanging_rack",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        8,
+        5
+      ],
+      "to": [
+        13,
+        10,
+        11
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "1c74da52-686a-566e-90b1-c62735b817bf",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            6,
+            13,
+            8
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            6,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            6,
+            11,
+            8
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            6,
+            11,
+            8
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "e6ab4809-e6b7-5ceb-b6d3-bf5eb381a803",
+    "b162662b-f7d2-5cd6-9e0e-1024c32178e8",
+    "2b396404-4984-52b0-8918-8130e92ebe28",
+    "3bf0f7da-f4eb-5966-b8be-8591045da07c",
+    "3a10bcbb-e1ab-5961-8946-77f34c279791",
+    "1c74da52-686a-566e-90b1-c62735b817bf"
+  ],
+  "textures": [
+    {
+      "name": "curing_barn.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "e115fbb7-445b-5f1e-94a0-6adf8fe19b3d",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/curing_barn.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "ventilated tobacco curing barn",
+    "silhouette": "tall narrow shed with louvered walls and a ridge vent",
+    "faces": {
+      "front": "vent louver bank",
+      "back": "fan wall",
+      "left": "hanging rack",
+      "right": "loading door",
+      "top": "ridge vent",
+      "bottom": "dirt floor"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/curing_barn",
+        "front": "earth_on_minecraft:block/curing_barn",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/curing_barn_active",
+        "front": "earth_on_minecraft:block/curing_barn_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/curing_barn",
+        "front": "earth_on_minecraft:block/curing_barn",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

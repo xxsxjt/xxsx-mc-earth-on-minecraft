@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "earth_on_minecraft:butter",
+    "earth_on_minecraft:cheese",
+    "earth_on_minecraft:cream",
+    "earth_on_minecraft:milk",
+    "earth_on_minecraft:yogurt"
+  ]
+}

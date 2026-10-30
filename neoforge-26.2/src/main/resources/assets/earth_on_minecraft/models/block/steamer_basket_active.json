@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/steamer_basket_active",
+    "front": "earth_on_minecraft:block/steamer_basket_active",
+    "back": "earth_on_minecraft:block/hot_machine_side",
+    "left": "earth_on_minecraft:block/hot_machine_side",
+    "right": "earth_on_minecraft:block/hot_machine_side",
+    "top": "earth_on_minecraft:block/hot_machine_top",
+    "bottom": "earth_on_minecraft:block/hot_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "water_pot",
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        4,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "lower_tier",
+      "from": [
+        3,
+        4,
+        3
+      ],
+      "to": [
+        13,
+        8,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            8,
+            13,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "middle_tier",
+      "from": [
+        3,
+        8,
+        3
+      ],
+      "to": [
+        13,
+        12,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "upper_tier",
+      "from": [
+        3,
+        12,
+        3
+      ],
+      "to": [
+        13,
+        15,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            1,
+            13,
+            4
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "bamboo_lid",
+      "from": [
+        4,
+        15,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            12,
+            1
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "steam_inlet",
+      "from": [
+        0,
+        4,
+        5
+      ],
+      "to": [
+        3,
+        8,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            3,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            13,
+            8,
+            16,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            8,
+            11,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            8,
+            11,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

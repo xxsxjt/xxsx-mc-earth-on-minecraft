@@ -130,12 +130,32 @@ final class ApiServices {
         }
 
         private ProcessingRoute route(ProcessingMachineBlock.Recipe recipe) {
-            Identifier input = BuiltInRegistries.ITEM.getKey(recipe.input().get().asItem());
+            // Fluid-only routes have no item input at all, so `input()` is null. Reporting the
+            // first item input as the route key would throw; use null and let the caller fall back
+            // to the fluid list.
+            Identifier input = recipe.hasItemInput()
+                    ? BuiltInRegistries.ITEM.getKey(recipe.input().get().asItem())
+                    : null;
+            List<RouteInput> inputs = recipe.inputs().stream()
+                    .map(entry -> new RouteInput(BuiltInRegistries.ITEM.getKey(entry.item().get().asItem()), entry.count()))
+                    .toList();
             List<RouteOutput> outputs = recipe.outputs().stream()
                     .map(output -> new RouteOutput(BuiltInRegistries.ITEM.getKey(output.item().get().asItem()), output.count()))
                     .toList();
-            return new ProcessingRoute(id(recipe.kind()), input, outputs, recipe.kind().processTicks(),
-                    recipe.kind().energyPerTick(), recipe.note());
+            List<RouteFluid> fluidInputs = recipe.fluidInputs().stream()
+                    .map(entry -> new RouteFluid(fluidId(entry.fluid()), entry.amount()))
+                    .toList();
+            List<RouteFluid> fluidOutputs = recipe.fluidOutputs().stream()
+                    .map(entry -> new RouteFluid(fluidId(entry.fluid()), entry.amount()))
+                    .toList();
+            String note = recipe.requiresCoke() ? recipe.note() + " | coke charge required" : recipe.note();
+            return new ProcessingRoute(id(recipe.kind()), input, inputs, outputs, fluidInputs,
+                    fluidOutputs, recipe.processTicks(), recipe.energyPerTickEffective(), note,
+                    recipe.sourceId());
+        }
+
+        private static Identifier fluidId(net.minecraft.world.level.material.Fluid fluid) {
+            return BuiltInRegistries.FLUID.getKey(fluid);
         }
 
         private static Identifier id(ProcessingMachineBlock.Kind kind) {

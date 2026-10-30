@@ -1,0 +1,441 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/tannery_active",
+    "front": "earth_on_minecraft:block/tannery_active",
+    "back": "earth_on_minecraft:block/wet_machine_side",
+    "left": "earth_on_minecraft:block/wet_machine_side",
+    "right": "earth_on_minecraft:block/wet_machine_side",
+    "top": "earth_on_minecraft:block/wet_machine_top",
+    "bottom": "earth_on_minecraft:block/wet_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "soak_vat",
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        5,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            11,
+            15,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            11,
+            15,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            11,
+            14,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            11,
+            12,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            2,
+            15,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            4,
+            15,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "tanning_pit",
+      "from": [
+        3,
+        0,
+        12
+      ],
+      "to": [
+        13,
+        3,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            4,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            12,
+            13,
+            16,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            0,
+            13,
+            4
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "fleshing_beam",
+      "from": [
+        2,
+        5,
+        4
+      ],
+      "to": [
+        14,
+        9,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            7,
+            14,
+            11
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            7,
+            14,
+            11
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            7,
+            7,
+            12,
+            11
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            7,
+            9,
+            11
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            4,
+            14,
+            9
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            7,
+            14,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      },
+      "rotation": {
+        "axis": "z",
+        "angle": -18.0,
+        "origin": [
+          8,
+          7,
+          7
+        ],
+        "rescale": true
+      }
+    },
+    {
+      "name": "hide_rack",
+      "from": [
+        2,
+        10,
+        4
+      ],
+      "to": [
+        14,
+        15,
+        6
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            1,
+            14,
+            6
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            1,
+            14,
+            6
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            10,
+            1,
+            12,
+            6
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            1,
+            6,
+            6
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            4,
+            14,
+            6
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            10,
+            14,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "liquor_pump",
+      "from": [
+        0,
+        2,
+        4
+      ],
+      "to": [
+        4,
+        8,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            8,
+            4,
+            14
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            12,
+            8,
+            16,
+            14
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            8,
+            12,
+            14
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            8,
+            10,
+            14
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            4,
+            4,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            6,
+            4,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "drain_gutter",
+      "from": [
+        4,
+        0,
+        9
+      ],
+      "to": [
+        12,
+        2,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            14,
+            7,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            9,
+            14,
+            12,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            9,
+            12,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

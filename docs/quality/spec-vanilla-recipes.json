@@ -1,0 +1,321 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "written": [
+    "air_inlet",
+    "bloomery_controller",
+    "bread_oven_controller",
+    "chimney",
+    "clay_brick_block",
+    "firebrick_block",
+    "lime_kiln_controller",
+    "oven_mouth",
+    "tuyere"
+  ],
+  "skipped": [
+    {
+      "id": "recipe:craft/glass_kiln_controller",
+      "reason": "recipe_too_large"
+    },
+    {
+      "id": "recipe:craft/shaft_furnace_controller",
+      "reason": "recipe_too_large"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:absorption_tower",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:ball_mill",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:battery_box",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:battery_box_from_simple_battery_cell",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:black_concrete_from_asphalt",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:black_dye_from_carbon_black",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:bone_meal_from_fertilizer_blend",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:bricks_from_firebrick",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:bucket_from_aluminum_ingot",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:cauldron_from_steel_bloom",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:chalcopyrite_dust_from_chunk",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:chemical_reactor",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:cinnabar_dust_from_chunk",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:coal_from_coal_dust",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:combustion_generator",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:comparator_from_printed_circuit_board",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:control_panel",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:control_panel_from_printed_circuit_board",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:conveyor_belt",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:copper_power_cable",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:crystallizer",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:diamond_grit_from_kimberlite_chunk",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:distillation_column",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:electrolytic_cell",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:fertilizer_granulator",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:field_geology_notebook_from_dirt",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:field_geology_notebook_from_planks",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:field_geology_notebook_from_stone",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:flotation_cell",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:gas_separator",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:glass_pane_from_acrylic_resin",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:gray_concrete_powder_from_cement_powder",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:heavy_copper_power_cable",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:hopper_from_steel_bloom",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:industrial_kiln",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:industrial_machine_casing",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:industrial_machine_casing_from_steel_bloom",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:iron_bars_from_steel_bloom",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:jaw_crusher",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:leaching_tank",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:lead_from_vulcanized_rubber",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:lightning_rod_from_copper_wire",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:machine_input_interface",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:machine_output_interface",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:magnetic_separator",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:magnetite_dust_from_chunk",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:minecart_from_steel_bloom",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:mixer",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:observer_from_printed_circuit_board",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:ore_roaster",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:paper_from_cellulose_pulp",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:polymerizer",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:powder_press",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:powered_rail_from_simple_battery_cell",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:quartz_dust_from_auriferous_quartz_chunk",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:red_dye_from_iron_oxide_pigment",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:redstone_from_simple_battery_cell",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:reduction_furnace",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:repeater_from_printed_circuit_board",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:settlement_board",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:sieve",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:slime_ball_from_vulcanized_rubber",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:smooth_stone_from_cement_powder",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:steam_cracker",
+      "reason": "recipe_too_large"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:steam_turbine_generator",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:steel_process_pipe",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:steel_process_pipe_from_steel_bloom",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:sticky_piston_from_rubber_gasket",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:string_from_nylon_fiber",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:synthesis_loop",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:thin_copper_power_cable",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:torch_from_coal_dust",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:white_dye_from_titanium_dioxide",
+      "reason": "file_exists"
+    },
+    {
+      "id": "recipe:earth_on_minecraft:white_wool_from_mineral_wool",
+      "reason": "file_exists"
+    }
+  ]
+}

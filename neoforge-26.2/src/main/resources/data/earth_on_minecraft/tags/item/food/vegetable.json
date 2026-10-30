@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "earth_on_minecraft:bell_pepper",
+    "earth_on_minecraft:cabbage",
+    "earth_on_minecraft:carrot",
+    "earth_on_minecraft:onion",
+    "earth_on_minecraft:potato",
+    "earth_on_minecraft:spinach",
+    "earth_on_minecraft:tomato"
+  ]
+}

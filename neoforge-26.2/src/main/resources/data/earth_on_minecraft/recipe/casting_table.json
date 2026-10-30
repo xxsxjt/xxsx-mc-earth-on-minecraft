@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "B B",
+    "SSS"
+  ],
+  "key": {
+    "B": "minecraft:brick",
+    "S": "minecraft:smooth_stone"
+  },
+  "result": {
+    "id": "earth_on_minecraft:casting_table",
+    "count": 1
+  }
+}

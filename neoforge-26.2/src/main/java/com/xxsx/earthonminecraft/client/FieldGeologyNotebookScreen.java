@@ -264,9 +264,9 @@ public class FieldGeologyNotebookScreen extends Screen {
     @Override
     public void onClose() {
         if (this.minecraft != null) {
-            this.minecraft.gui.setScreen(null);
+            this.minecraft.setScreen(null);
         } else {
-            Minecraft.getInstance().gui.setScreen(null);
+            Minecraft.getInstance().setScreen(null);
         }
     }
 
@@ -402,25 +402,25 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "新玩家只需要记住一条线：挖矿床 -> 机器处理 -> 得到原版兼容产物。",
                 "右键机器会打开接近原版熔炉大小的界面：左侧放材料，右侧收产物；顶部会写明工艺、耗时和动力要求。"));
 
-        result.add(page("第一天", "2. 第一天路线：第一块铁怎么来？", GOLD,
+        result.add(page("第一天", "2. 第一天路线：炼出第一块铁", GOLD,
                 "0. 先合成手册：一块泥土、任意木板或任意石头都可以直接合成。",
-                "1. 做石镐和原版熔炉。Earth on Minecraft 保留原版熔炉作为新手过渡。",
+                "1. 做石镐并开采贫磁铁矿/磁铁矿。",
                 "2. 找贫磁铁矿/磁铁矿。它们是黑灰色铁矿来源，用石镐即可挖。",
-                "3. 挖到磁铁矿碎块后，不需要机器，先直接放进原版熔炉或高炉。",
-                "4. 磁铁矿碎块 -> 熔炉/高炉 -> 第一块 minecraft:iron_ingot。",
-                "5. 用石头 + 圆石 + 熔炉合成颚式破碎机；它不需要铁，也只需要石镐回收。",
-                "6. 找黄铜矿，挖出黄铜矿碎块；同样可先用原版熔炉/高炉烧出第一块铜锭。",
-                "7. 一块铁 + 一块铜 + 石头 + 熔炉合成球磨机，之后再进入粉末、分选、焙烧和还原路线。",
-                "8. 机器路线产量更高、副产物更多；熔炉捷径只是为了让前期不卡死。"));
+                "3. 磁铁矿矿床 -> 颚式破碎机 -> 碎块 -> 球磨机 -> 粉末 -> 磁选机 -> 铁精矿。",
+                "4. 铁精矿 + 焦炭装料 -> 还原炉 -> 海绵铁 + 矿渣。",
+                "5. 在石砧上手持地质锤，另一只手拿海绵铁锻成熟铁，再锻一次得到铁锭。",
+                "焦炭：用煤在熔炉中烧制；早期机器只需石料/铜料，按配方建造后可用煤作本地燃料。",
+                "6. 磁铁矿碎块和粉末不能再直烧成铁锭；球磨机、磁选机和还原炉可在首铁前制作。"));
 
         result.add(page("索引", "3. 手里有这个，该去哪？", GOLD,
                 "矿床/矿石方块：先去颚式破碎机。它负责把大块自然来源变成可继续处理的碎块。",
-                "新手注意：磁铁矿碎块和黄铜矿碎块可先直接进原版熔炉/高炉，获得第一块铁锭和铜锭。",
+                "铁路线：石镐开采磁铁矿 -> 颚式破碎机 -> 球磨机 -> 磁选机 -> 焦炭还原 -> 海绵铁 -> 石砧锻打 -> 熟铁 -> 铁锭。",
                 "稳定生产后：磁铁矿碎块 / 黄铜矿碎块 / 辰砂碎块 / 金伯利岩碎块去球磨机，磨成更容易分选的粉末。",
                 "磁铁矿粉 / 赤铁矿粉 / 镁铁质硅酸盐粉：去磁选机，目标通常是铁精矿。",
                 "黄铜矿粉 / 黄铁矿粉 / 金粉 / 青金石矿 / 红石矿：去浮选槽，目标是精矿。",
                 "铜精矿 / 黄铁矿粉 / 辰砂粉 / 方解石粉：去焙烧炉，发生热处理或煅烧。",
-                "铁精矿 / 焙烧铜精矿 / 金精矿：去还原炉，得到兼容原版的铁锭、铜锭、金锭。",
+                "铁精矿：去还原炉并加入焦炭装料，得到海绵铁和矿渣；石砧配合地质锤可继续锻成熟铁和铁锭。",
+                "焙烧铜精矿 / 金精矿：去还原炉，按各自路线得到金属产物。",
                 "盐粉：去电解槽进入氯碱工业；也可去结晶器整理盐卤路线。",
                 "煤粉 / 煤焦油 / 煤气：去气体分离器、精馏塔、蒸汽裂解炉，进入煤化工和塑料路线。",
                 "硫粉 / 氨 / 磷矿粉 / 甲醇 / 乙烯 / 氯化钾：去化学反应釜，做酸、肥料和有机化工入口。",
@@ -432,12 +432,12 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "颚式破碎机：矿石/矿床 -> 碎块 + 伴生粉/尾粉。",
                 "新手机器：颚式破碎机由石头、圆石和熔炉合成，不需要第一块铁。",
                 "球磨机：碎块/岩石 -> 粉末，是大多数流程的第二步。",
-                "第一台球磨机只需要一块铁锭和一块铜锭；先用熔炉捷径拿到它们。",
+                "开局球磨机只用石头和熔炉合成；磁选机用早期可获得的铜与磁铁矿碎块合成。",
                 "筛分机：按颗粒大小和密度分离，适合金伯利岩、含金石英和尾粉。",
                 "磁选机：处理磁铁矿粉、赤铁矿粉、镁铁质硅酸盐粉，产出铁精矿。",
                 "浮选槽：处理硫化矿和宝石矿物，产出铜精矿、青金石精矿、红石精矿等。",
                 "焙烧炉：把硫化矿/碳酸盐热处理，产出焙烧矿、硫粉、石灰粉。",
-                "还原炉：把精矿转成 MC 兼容锭，同时产出矿渣。",
+                "还原炉：用砖和熔炉制作，免多方块结构；铁精矿需焦炭装料并转成海绵铁。",
                 "浸出槽/电解槽：模拟湿法冶金和电化学精炼。",
                 "压粉机：把粉末或精矿压回 MC 物品，减少背包折磨。",
                 "化工机器：反应釜、精馏塔、混合机、结晶器、工业窑炉、气体分离器、肥料造粒机、聚合釜。",
@@ -471,16 +471,14 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "颜料和填料：炭黑、钛白粉、氧化铁颜料可转 MC 染料，接回建筑装饰。"));
 
         result.add(page("铁铜", "6. 铁和铜路线", RED,
-                "新手捷径：",
-                "磁铁矿碎块/磁铁矿粉 -> 原版熔炉或高炉 -> 铁锭。",
                 "黄铜矿碎块/黄铜矿粉 -> 原版熔炉或高炉 -> 铜锭。",
-                "这条捷径只解决第一批工具和机器；想要真实多产物，还是走下面的工业路线。",
                 "",
                 "铁：",
                 "磁铁矿矿石 Fe3O4 -> 破碎机 -> 磁铁矿碎块 + 尾粉。",
                 "磁铁矿碎块 -> 球磨机 -> 磁铁矿粉。",
                 "磁铁矿粉 -> 磁选机 -> 铁精矿 + 尾粉。",
-                "铁精矿 -> 还原炉 -> minecraft:iron_ingot + 矿渣。",
+                "铁精矿 + 焦炭装料 -> 还原炉 -> 海绵铁 + 矿渣。",
+                "海绵铁 + 地质锤 -> 石砧 -> 熟铁；熟铁再锻一次 -> 原版铁锭。",
                 "",
                 "铜：",
                 "黄铜矿矿石 CuFeS2 -> 破碎机 -> 黄铜矿碎块 + 黄铁矿粉。",
@@ -732,18 +730,18 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "",
                 "Notebook recipe: one dirt, any plank, or any stone creates the Field Geology Notebook.",
                 "Machine screens stay close to vanilla furnace size: materials on the left, products on the right, with process, cycle time, and power requirements shown at the top."));
-        result.add(page("Day 1", "2. Day one: how do I get the first iron?", GOLD,
+        result.add(page("Day 1", "2. Day one: forge the first iron ingot", GOLD,
                 "0. Craft this notebook from one dirt, any plank, or any stone.",
-                "1. Make a stone pickaxe and a vanilla furnace. The furnace is intentionally kept as the beginner bridge.",
+                "1. Make a stone pickaxe and mine poor magnetite or magnetite deposits.",
                 "2. Find poor magnetite or magnetite. These black-gray ores are your early iron source and can be mined with stone tools.",
-                "3. Smelt magnetite chunks directly in a vanilla furnace or blast furnace.",
-                "4. Magnetite chunk -> furnace/blast furnace -> first minecraft:iron_ingot.",
-                "5. Craft the Jaw Crusher from stone, cobblestone, and a furnace. It needs no iron and can be recovered with a stone pickaxe.",
-                "6. Find chalcopyrite, smelt its chunks for the first copper ingot, then craft the Ball Mill.",
-                "7. The furnace shortcut prevents early deadlocks; machines remain the better route for yield and byproducts."));
+                "3. Magnetite deposit -> Jaw Crusher -> chunks -> Ball Mill -> magnetite dust -> Magnetic Separator -> iron concentrate.",
+                "4. Iron concentrate + coke charge -> Reduction Furnace -> sponge iron + slag.",
+                "5. Hold a geology hammer in one hand and sponge iron in the other; right-click the stone anvil to forge wrought iron, then forge it once more into an iron ingot.",
+                "Coke is made by smelting coal. The Ball Mill, Magnetic Separator, and Reduction Furnace can all be crafted before the first iron ingot.",
+                "6. Magnetite chunks and dust no longer smelt directly into iron."));
         result.add(page("Routes", "3. If you have this, where does it go?", GOLD,
                 "Ore and deposit blocks usually start in the Jaw Crusher.",
-                "Beginner shortcut: magnetite and chalcopyrite chunks can be smelted first for your first iron and copper.",
+                "Iron: stone-pick mine magnetite -> crush -> mill -> magnetic separation -> coke reduction -> sponge iron -> stone-anvil forging -> wrought iron -> iron ingot.",
                 "After that, chunks and rocks usually go to the Ball Mill.",
                 "Magnetite, hematite, and mafic silicate powders go to the Magnetic Separator.",
                 "Sulfide ores and gem ores usually go to the Flotation Cell.",
@@ -751,7 +749,9 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "If unsure, hover the item or check JEI. Earth on Minecraft adds route hints to items."));
         result.add(page("Machines", "4. Machine and multiblock basics", BLUE,
                 "The Jaw Crusher is the first machine: stone + cobblestone + furnace, no iron required.",
-                "The Ball Mill is the second machine: one iron, one copper, stone, and a furnace.",
+                "The Ball Mill is stone-and-furnace crafted; the Magnetic Separator uses copper and magnetite chunks and can run on coal.",
+                "The Reduction Furnace uses bricks and a furnace, and has no multiblock requirement on the first-iron route.",
+                "Stone anvil + geology hammer: sponge iron -> wrought iron -> iron ingot.",
                 "Large equipment uses clear boxy footprints: the Control Panel is the front-bottom center and the controller sits directly behind it.",
                 "Missing parts appear as pass-through, unbreakable translucent projections.",
                 "Pressure skid 3x2x2; wet vessel 3x2x2; electrolysis bank 3x3x2.",
@@ -781,16 +781,15 @@ public class FieldGeologyNotebookScreen extends Screen {
                 "Fertilizer becomes bone meal; pulp/fibers/mineral wool become paper, string, and wool.",
                 "Carbon black, titanium dioxide, and iron oxide pigments become MC dyes."));
         result.add(page("Iron", "6. Iron and copper", RED,
-                "Beginner shortcut:",
-                "Magnetite chunk/dust -> furnace or blast furnace -> iron ingot.",
                 "Chalcopyrite chunk/dust -> furnace or blast furnace -> copper ingot.",
-                "Use this for the first tools and machines; use the industrial route for better yield.",
                 "",
                 "Iron route:",
                 "Magnetite ore Fe3O4 -> crusher -> magnetite chunks + tailings.",
                 "Magnetite chunks -> ball mill -> magnetite dust.",
                 "Magnetite dust -> magnetic separator -> iron concentrate + tailings.",
-                "Iron concentrate -> reduction furnace -> minecraft:iron_ingot + slag.",
+                "Iron concentrate + coke charge -> reduction furnace -> sponge iron + slag.",
+                "Sponge iron + geology hammer -> stone anvil -> wrought iron; forge once more -> minecraft:iron_ingot.",
+                "The first Ball Mill uses stone, the Magnetic Separator uses copper and magnetite chunks, and the Reduction Furnace uses bricks; none require a prior iron ingot.",
                 "",
                 "Copper route:",
                 "Chalcopyrite CuFeS2 -> crusher/ball mill/flotation -> copper concentrate.",

@@ -29,6 +29,24 @@ def box(name: str, start: tuple[float, float, float], end: tuple[float, float, f
 
 B = box
 SHAPES: dict[str, list[dict[str, object]]] = {
+    "bloomery_controller": [
+        B("plinth", [1, 0, 1], [15, 2, 15]), B("shaft_low", [3, 2, 3], [13, 8, 13]), B("shaft_high", [4, 8, 4], [12, 13, 12]), B("tuyere", [0, 4, 6], [4, 7, 10]), B("tap_arch", [5, 2, 0], [11, 5, 4]), B("flue", [5, 13, 5], [11, 15, 11]),
+    ],
+    "bread_oven_controller": [
+        B("plinth", [1, 0, 1], [15, 3, 15]), B("hearth", [2, 3, 2], [14, 5, 14]), B("dome_low", [3, 5, 3], [13, 10, 13]), B("dome_cap", [5, 10, 5], [11, 13, 11]), B("mouth_arch", [5, 3, 0], [11, 8, 4]), B("peel", [0, 4, 12], [4, 5, 15]),
+    ],
+    "glass_kiln_controller": [
+        B("base", [1, 0, 1], [15, 4, 15]), B("barrel", [2, 4, 2], [14, 11, 14]), B("crown", [3, 11, 3], [13, 14, 13]), B("gather_port", [12, 4, 6], [15, 9, 10]), B("charging_chute", [6, 11, 0], [10, 14, 4]), B("firebox", [0, 1, 6], [3, 4, 10]),
+    ],
+    "lime_kiln_controller": [
+        B("plinth", [2, 0, 2], [14, 3, 14]), B("shaft", [3, 3, 3], [13, 12, 13]), B("stack_cap", [4, 12, 4], [12, 14, 12]), B("draw_arch", [5, 1, 0], [11, 4, 3]), B("charging_opening", [6, 7, 12], [10, 11, 15]), B("ash_drawer", [5, 0, 3], [11, 2, 6]),
+    ],
+    "pit_kiln_controller": [
+        B("earth_ring", [0, 0, 0], [16, 4, 16]), B("mound_low", [2, 4, 2], [14, 8, 14]), B("mound_cap", [5, 8, 5], [11, 12, 11]), B("vent_base", [6, 2, 0], [10, 5, 3]), B("vent_top", [7, 11, 7], [9, 14, 9]), B("earth_cap", [4, 12, 4], [12, 13, 12]),
+    ],
+    "shaft_furnace_controller": [
+        B("plinth", [1, 0, 1], [15, 3, 15]), B("shaft_low", [2, 3, 2], [14, 9, 14]), B("shaft_high", [3, 9, 3], [13, 14, 13]), B("blast_main", [0, 4, 6], [4, 8, 10]), B("tap_hole", [5, 2, 0], [11, 5, 4]), B("charging_bell", [5, 14, 5], [11, 16, 11]),
+    ],
     "jaw_crusher": [
         B("foundation", (1, 0, 1), (15, 2, 15)), B("jaw_chamber", (3, 2, 3), (13, 12, 14)),
         B("left_cheek", (1, 3, 2), (4, 13, 15)), B("right_cheek", (12, 3, 2), (15, 13, 15)),
@@ -147,6 +165,159 @@ SHAPES: dict[str, list[dict[str, object]]] = {
         B("turbine_high", (3, 7, 2), (10, 14, 14)), B("generator", (9, 5, 4), (15, 13, 12)),
         B("shaft_guard", (7, 6, 6), (11, 11, 10)), B("steam_chest", (1, 11, 5), (6, 16, 11)),
     ],
+    "anvil": [
+        B("stump", (4, 0, 4), (12, 4, 12)), B("anvil_base", (5, 4, 5), (11, 6, 11)),
+        B("anvil_waist", (6, 6, 6), (10, 9, 10)), B("anvil_body", (4, 9, 4), (12, 12, 12)),
+        B("anvil_horn", (12, 10, 6), (16, 12, 10)), B("hammer_rack", (1, 2, 5), (4, 9, 11)),
+    ],
+    "bar_counter": [
+        B("counter_body", (1, 0, 4), (15, 8, 14)), B("counter_top", (0, 8, 3), (16, 10, 15)),
+        B("back_bar", (1, 0, 0), (15, 14, 4)), B("bottle_rail", (2, 10, 3), (14, 13, 6)),
+        B("ice_well", (3, 8, 9), (7, 10, 13)), B("foot_rail", (2, 0, 14), (14, 2, 16)),
+    ],
+    "campfire": [
+        B("ash_bed", (2, 0, 2), (14, 2, 14)), B("stone_ring_west", (0, 0, 3), (3, 4, 13)),
+        B("stone_ring_east", (13, 0, 3), (16, 4, 13)), B("stone_ring_north", (3, 0, 0), (13, 4, 3)),
+        B("stone_ring_south", (3, 0, 13), (13, 4, 16)),
+        B("log_pile", (4, 2, 4), (12, 6, 12), ("y", 45.0, (8, 4, 8))),
+        B("cooking_grate", (3, 6, 3), (13, 8, 13)),
+    ],
+    "carpentry_bench": [
+        B("left_trestle", (1, 0, 3), (4, 9, 13)), B("right_trestle", (12, 0, 3), (15, 9, 13)),
+        B("worktop", (0, 9, 2), (16, 12, 14)), B("tail_vise", (11, 8, 14), (15, 12, 16)),
+        B("tool_board", (2, 12, 1), (14, 16, 3)), B("dog_holes", (4, 12, 6), (10, 13, 11)),
+    ],
+    "casting_table": [
+        B("table_bed", (1, 0, 2), (15, 4, 14)), B("mold_rack_left", (1, 4, 3), (4, 8, 13)),
+        B("mold_rack_right", (12, 4, 3), (15, 8, 13)), B("launder", (5, 4, 0), (11, 7, 4)),
+        B("cooling_fins", (4, 4, 4), (12, 6, 12)), B("quench_trough", (2, 0, 14), (14, 4, 16)),
+    ],
+    "coffee_roaster": [
+        B("burner_base", (1, 0, 3), (15, 5, 13)), B("roast_drum", (3, 4, 4), (13, 12, 12)),
+        B("drum_sight_glass", (6, 6, 2), (10, 10, 5)), B("bean_hopper", (4, 12, 4), (12, 16, 10)),
+        B("exhaust_hood", (5, 12, 10), (11, 15, 14)), B("cooling_tray", (1, 0, 13), (9, 3, 16)),
+    ],
+    "condenser": [
+        B("seal_sump", (2, 0, 3), (14, 4, 13)), B("shell", (4, 4, 4), (12, 14, 12)),
+        B("vapor_dome", (5, 14, 5), (11, 16, 11)), B("coolant_feed", (0, 6, 5), (4, 10, 11)),
+        B("coolant_return", (12, 6, 5), (16, 10, 11)), B("condensate_outlet", (5, 0, 0), (11, 3, 4)),
+    ],
+    "converter": [
+        B("trunnion_base", (1, 0, 2), (15, 4, 14)), B("barrel", (2, 4, 3), (14, 12, 13)),
+        B("offgas_hood", (4, 12, 4), (12, 16, 12)), B("tuyere_line", (2, 6, 0), (14, 9, 4)),
+        B("tap_hole", (6, 2, 13), (10, 6, 16)), B("slag_notch", (12, 7, 6), (16, 10, 12)),
+    ],
+    "curing_barn": [
+        B("barn_shell", (1, 0, 2), (15, 12, 14)), B("ridge_vent", (3, 12, 4), (13, 16, 12)),
+        B("louver_west", (0, 3, 4), (2, 10, 12)), B("louver_east", (14, 3, 4), (16, 10, 12)),
+        B("loading_door", (4, 0, 14), (12, 8, 16)), B("hanging_rack", (3, 8, 5), (13, 10, 11)),
+    ],
+    "fermenting_crock": [
+        B("stone_plinth", (2, 0, 2), (14, 3, 14)), B("crock_belly", (3, 3, 3), (13, 11, 13)),
+        B("crock_lid", (4, 11, 4), (12, 14, 12)), B("airlock", (7, 14, 7), (9, 16, 9)),
+        B("sample_tap", (12, 5, 6), (16, 8, 10)), B("brine_gutter", (3, 3, 0), (13, 6, 3)),
+    ],
+    "filter_press": [
+        B("press_frame", (1, 0, 2), (15, 4, 14)), B("left_plate_bank", (2, 4, 3), (6, 14, 13)),
+        B("right_plate_bank", (8, 4, 3), (12, 14, 13)), B("hydraulic_ram", (6, 5, 5), (8, 13, 11)),
+        B("feed_manifold", (12, 6, 4), (16, 12, 12)), B("drip_tray", (2, 0, 13), (14, 3, 16)),
+    ],
+    "gem_cutter": [
+        B("lap_table", (2, 0, 2), (14, 5, 14)), B("dop_mast", (5, 5, 4), (8, 15, 7)),
+        B("dop_arm", (5, 11, 6), (13, 14, 9)), B("index_gear", (10, 5, 9), (14, 10, 13)),
+        B("coolant_can", (0, 8, 3), (4, 13, 8)), B("swarf_tray", (2, 0, 14), (14, 2, 16)),
+    ],
+    "herb_processing_table": [
+        B("bench_body", (1, 0, 2), (15, 9, 14)), B("drying_rack", (2, 11, 3), (14, 13, 13)),
+        B("rack_posts", (2, 9, 3), (4, 14, 5)), B("cutting_board", (3, 9, 5), (9, 11, 11)),
+        B("wash_basin", (10, 9, 5), (14, 12, 11)), B("scrap_bin", (1, 0, 14), (6, 6, 16)),
+    ],
+    "loom": [
+        B("loom_frame", (1, 0, 2), (15, 3, 14)), B("warp_beam", (1, 3, 3), (4, 13, 13)),
+        B("cloth_beam", (12, 3, 3), (15, 13, 13)), B("heddle_frame", (5, 5, 4), (11, 12, 12)),
+        B("shuttle_race", (4, 12, 5), (12, 14, 11)), B("warp_tension_bar", (3, 8, 2), (13, 10, 4)),
+    ],
+    "mill": [
+        B("meal_bin", (2, 0, 2), (14, 5, 14)), B("stone_housing", (3, 5, 3), (13, 11, 13)),
+        B("runner_stone", (4, 11, 4), (12, 14, 12)), B("grain_hopper", (5, 14, 5), (11, 16, 11)),
+        B("flour_spout", (11, 4, 6), (16, 8, 10)), B("sack_hoist", (0, 7, 5), (4, 14, 11)),
+    ],
+    "noodle_press": [
+        B("press_frame", (1, 0, 3), (15, 4, 13)), B("left_roller", (2, 4, 4), (6, 9, 12)),
+        B("right_roller", (10, 4, 4), (14, 9, 12)), B("dough_hopper", (6, 9, 5), (10, 15, 11)),
+        B("cutter_comb", (5, 3, 3), (11, 6, 13)), B("noodle_tray", (2, 0, 13), (14, 3, 16)),
+    ],
+    "oil_press": [
+        B("cake_trough", (1, 0, 3), (15, 4, 13)), B("press_cage", (3, 4, 4), (13, 11, 12)),
+        B("ram_screw", (6, 11, 6), (10, 16, 10)), B("seed_hopper", (4, 12, 4), (12, 16, 9)),
+        B("oil_spout", (13, 5, 6), (16, 9, 10)), B("wedge_block", (4, 4, 12), (12, 9, 15)),
+    ],
+    "rice_huller": [
+        B("huller_base", (1, 0, 2), (15, 5, 14)), B("left_roller", (3, 5, 4), (7, 11, 12)),
+        B("right_roller", (9, 5, 4), (13, 11, 12)), B("paddy_hopper", (4, 11, 5), (12, 16, 11)),
+        B("screen_shoe", (3, 2, 12), (13, 5, 16)), B("husk_chute", (0, 6, 5), (4, 10, 11)),
+    ],
+    "smelter": [
+        B("hearth_base", (2, 0, 2), (14, 4, 14)), B("shaft_body", (3, 4, 3), (13, 12, 13)),
+        B("charging_mouth", (5, 12, 5), (11, 16, 11)), B("tap_hole", (6, 2, 13), (10, 6, 16)),
+        B("slag_notch", (13, 6, 5), (16, 10, 11)), B("metal_launder", (3, 0, 13), (13, 3, 16)),
+    ],
+    "smokehouse": [
+        B("smoke_chamber", (2, 3, 3), (14, 14, 13)), B("gabled_roof", (1, 14, 2), (15, 16, 14)),
+        B("firebox", (3, 0, 4), (13, 4, 12)), B("meat_rail", (3, 9, 5), (13, 11, 11)),
+        B("draft_vent", (13, 5, 6), (16, 9, 10)), B("ash_pit", (4, 0, 12), (12, 2, 15)),
+    ],
+    "steamer": [
+        B("boiler_base", (2, 0, 2), (14, 6, 14)), B("steam_pot", (3, 6, 3), (13, 12, 13)),
+        B("domed_lid", (4, 12, 4), (12, 15, 12)), B("basket_ring", (4, 15, 4), (12, 16, 12)),
+        B("fire_door", (5, 0, 13), (11, 4, 16)), B("water_feed", (13, 6, 5), (16, 10, 11)),
+    ],
+    "steamer_basket": [
+        B("water_pot", (3, 0, 3), (13, 4, 13)), B("lower_tier", (3, 4, 3), (13, 8, 13)),
+        B("middle_tier", (3, 8, 3), (13, 12, 13)), B("upper_tier", (3, 12, 3), (13, 15, 13)),
+        B("bamboo_lid", (4, 15, 4), (12, 16, 12)), B("steam_inlet", (0, 4, 5), (3, 8, 11)),
+    ],
+    "still": [
+        B("furnace_base", (2, 0, 2), (14, 5, 14)), B("copper_pot", (3, 5, 3), (13, 12, 13)),
+        B("swan_neck", (6, 12, 6), (10, 16, 10)), B("worm_condenser", (12, 3, 4), (16, 11, 12)),
+        B("spirit_receiver", (4, 0, 13), (10, 4, 16)), B("wash_inlet", (0, 6, 5), (3, 10, 11)),
+    ],
+    "stone_mill": [
+        B("stone_base", (1, 0, 1), (15, 4, 15)), B("lower_stone", (3, 4, 3), (13, 9, 13)),
+        B("runner_stone", (4, 9, 4), (12, 13, 12)), B("grain_eye", (6, 13, 6), (10, 15, 10)),
+        B("side_handle", (12, 9, 6), (16, 12, 10)), B("meal_spout", (5, 1, 0), (11, 5, 4)),
+    ],
+    "stove": [
+        B("firebox", (2, 0, 2), (14, 8, 14)), B("iron_plate", (1, 8, 1), (15, 11, 15)),
+        B("burner_ring", (5, 11, 5), (11, 12, 11)), B("fuel_door", (5, 1, 13), (11, 6, 16)),
+        B("oven_door", (13, 2, 5), (16, 7, 11)), B("ash_drawer", (3, 0, 13), (13, 3, 16)),
+    ],
+    "tablet_press": [
+        B("press_base", (2, 0, 3), (14, 4, 13)), B("die_block", (5, 4, 5), (11, 8, 11)),
+        B("upper_punch", (6, 8, 6), (10, 14, 10)), B("hopper", (4, 12, 3), (9, 16, 9)),
+        B("tablet_chute", (11, 4, 5), (16, 8, 11)), B("dust_tray", (3, 0, 13), (13, 2, 16)),
+    ],
+    "tannery": [
+        B("soak_vat", (1, 0, 2), (15, 5, 12)), B("tanning_pit", (3, 0, 12), (13, 3, 16)),
+        B("fleshing_beam", (2, 5, 4), (14, 9, 9), ("z", -18.0, (8, 7, 7))),
+        B("hide_rack", (2, 10, 4), (14, 15, 6)), B("liquor_pump", (0, 2, 4), (4, 8, 10)),
+        B("drain_gutter", (4, 0, 9), (12, 2, 12)),
+    ],
+    "tea_kiln": [
+        B("brick_base", (2, 0, 2), (14, 8, 14)), B("wok", (3, 8, 3), (13, 12, 13)),
+        B("wok_rim", (2, 11, 2), (14, 13, 14)), B("stirrer", (7, 12, 7), (9, 16, 9)),
+        B("fire_door", (5, 0, 13), (11, 5, 16)), B("cooling_tray", (12, 5, 4), (16, 8, 12)),
+    ],
+    "thickener": [
+        B("cone_bottom", (3, 0, 3), (13, 4, 13)), B("thickener_tank", (1, 4, 1), (15, 11, 15)),
+        B("rake_drive", (5, 11, 5), (11, 16, 11)), B("overflow_launder", (14, 5, 3), (16, 9, 13)),
+        B("feed_well", (2, 8, 2), (7, 12, 7)), B("flocculant_dosing", (0, 9, 5), (3, 13, 11)),
+    ],
+    "water_treatment_unit": [
+        B("skid_frame", (1, 0, 1), (15, 3, 15)), B("pressure_vessel", (3, 3, 4), (10, 15, 12)),
+        B("gauge_panel", (10, 6, 3), (13, 13, 12)), B("raw_water_inlet", (0, 5, 5), (3, 9, 11)),
+        B("treated_outlet", (12, 3, 4), (16, 7, 12)), B("backwash_drain", (4, 0, 13), (12, 3, 16)),
+    ],
 }
 
 
@@ -211,7 +382,7 @@ def runtime_model(machine_id: str, textures: dict[str, str], state: str) -> dict
         elements.append(runtime_element(machine_id, alarm, fault=True))
     return {
         "parent": "minecraft:block/block",
-        "ambientocclusion": True,
+        "ambientocclusion": False,
         "gui_light": "side",
         "textures": textures,
         "elements": elements,

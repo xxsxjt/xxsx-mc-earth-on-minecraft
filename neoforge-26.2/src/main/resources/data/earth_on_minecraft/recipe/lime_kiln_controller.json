@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "B B",
+    "BBB"
+  ],
+  "key": {
+    "B": "minecraft:brick"
+  },
+  "result": {
+    "id": "earth_on_minecraft:lime_kiln_controller",
+    "count": 1
+  }
+}

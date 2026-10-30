@@ -1,0 +1,22 @@
+{
+  "display_name_key": "settlement.earth_on_minecraft.profile.cultivation_settlement",
+  "scale_key": "settlement.earth_on_minecraft.scale.village",
+  "technology_key": "settlement.earth_on_minecraft.technology.cultivation",
+  "name_keys": [
+    "settlement.earth_on_minecraft.name.cloudstep",
+    "settlement.earth_on_minecraft.name.springvale"
+  ],
+  "industry_keys": [
+    "settlement.earth_on_minecraft.industry.cultivation",
+    "settlement.earth_on_minecraft.industry.herbalism"
+  ],
+  "demand_keys": [
+    "settlement.earth_on_minecraft.material.spirit_grass",
+    "settlement.earth_on_minecraft.material.spirit_springs"
+  ],
+  "supply_keys": [
+    "settlement.earth_on_minecraft.material.talisman_paper",
+    "settlement.earth_on_minecraft.material.spirit_stones"
+  ],
+  "weight": 1
+}

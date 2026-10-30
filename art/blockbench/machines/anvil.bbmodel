@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "anvil",
+  "model_identifier": "earth_on_minecraft:anvil",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "stump",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        0,
+        4
+      ],
+      "to": [
+        12,
+        4,
+        12
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "cd36709e-996a-590b-88ba-952251aefdd9",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            12,
+            12,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            12,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            12,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            12,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "anvil_base",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        4,
+        5
+      ],
+      "to": [
+        11,
+        6,
+        11
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "01296bdc-6259-5e36-9982-aa209c3fd9db",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            10,
+            11,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            10,
+            11,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            10,
+            11,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            10,
+            11,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "anvil_waist",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        6,
+        6,
+        6
+      ],
+      "to": [
+        10,
+        9,
+        10
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "6f864ee7-265d-5aed-be42-558287f80477",
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            7,
+            10,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6,
+            7,
+            10,
+            10
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            7,
+            10,
+            10
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            7,
+            10,
+            10
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "anvil_body",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        9,
+        4
+      ],
+      "to": [
+        12,
+        12,
+        12
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "e8657784-d0be-576b-8eff-69fa6cec68c5",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "anvil_horn",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        12,
+        10,
+        6
+      ],
+      "to": [
+        16,
+        12,
+        10
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "aba84031-ee3f-5b16-9401-f0a7d4003260",
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            4,
+            16,
+            6
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            4,
+            4,
+            6
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            4,
+            10,
+            6
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            4,
+            10,
+            6
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "hammer_rack",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        2,
+        5
+      ],
+      "to": [
+        4,
+        9,
+        11
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "42fbdd14-a264-5a04-a50c-afff25970eb9",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            7,
+            4,
+            14
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12,
+            7,
+            15,
+            14
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            7,
+            11,
+            14
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            7,
+            11,
+            14
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            5,
+            4,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            5,
+            4,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "cd36709e-996a-590b-88ba-952251aefdd9",
+    "01296bdc-6259-5e36-9982-aa209c3fd9db",
+    "6f864ee7-265d-5aed-be42-558287f80477",
+    "e8657784-d0be-576b-8eff-69fa6cec68c5",
+    "aba84031-ee3f-5b16-9401-f0a7d4003260",
+    "42fbdd14-a264-5a04-a50c-afff25970eb9"
+  ],
+  "textures": [
+    {
+      "name": "anvil.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "f4eb3409-8441-5b17-b7ce-d20022245e77",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/anvil.png"
+    },
+    {
+      "name": "modern_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "8d04c733-d81f-5311-8eb9-cb7a80647df6",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/modern_machine_side.png"
+    },
+    {
+      "name": "modern_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "f2ac9f4c-70fc-5c99-930e-b27a5b9981ba",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/modern_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "single-horn blacksmith anvil on a stump",
+    "silhouette": "waisted steel block on a tapered stump with a horn on one end",
+    "faces": {
+      "front": "anvil face and horn",
+      "back": "hardie and pritchel holes",
+      "left": "hammer rack",
+      "right": "quench tank",
+      "top": "anvil waist",
+      "bottom": "stump base"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/anvil",
+        "front": "earth_on_minecraft:block/anvil",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/anvil_active",
+        "front": "earth_on_minecraft:block/anvil_active",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/anvil",
+        "front": "earth_on_minecraft:block/anvil",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

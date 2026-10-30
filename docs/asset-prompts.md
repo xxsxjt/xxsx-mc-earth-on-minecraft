@@ -283,6 +283,9 @@ original 16x16 pixel art block texture front face of a packed absorption tower, 
 ```
 
 ## 生成工具优先级
+> **已废弃（历史记录）**：本节描述的 `image-2` / `gpt-image-2` CLI 与旧用户目录路径已不再适用。
+> 当前管线见文末「生成管线」一节：`tools/generate_gemini_art.py` 优先用 Gemini，限流时回退到 `AIGCPro-image/gpt-image-2.5-sunburst` 与 `-flare`。
+
 
 正式方块贴图、机器正面、电力设备、多方块成型态、矿床代表块优先使用 `image-2` / `gpt-image-2`。这些资产决定玩家第一印象和玩法可读性，不能再默认走低成本批量路线。
 
@@ -294,10 +297,10 @@ Agnes 只作为低成本草稿、风格探索、非关键补量或临时对照�
 
 ```powershell
 # 子进程内读取配置和密钥，不打印 key
-$cfg = Get-Content 'C:\Users\du_ji\.codex\config.toml' -Raw
+$cfg = Get-Content '<旧用户目录>\.codex\config.toml' -Raw
 $base = [regex]::Match($cfg, 'base_url\s*=\s*"([^"]+)"').Groups[1].Value
 $env:OPENAI_BASE_URL = $base
-$secret = Import-Clixml -LiteralPath 'C:\Users\du_ji\.agents\secrets\image2-openai-key.clixml'
+$secret = Import-Clixml -LiteralPath '<旧用户目录>\.agents\secrets\image2-openai-key.clixml'
 $bstr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secret)
 try {
   $env:OPENAI_API_KEY = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($bstr)
@@ -305,7 +308,7 @@ try {
   [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($bstr)
 }
 
-python 'C:\Users\du_ji\.codex\skills\.system\imagegen\scripts\image_gen.py' generate `
+python '<旧用户目录>\.codex\skills\.system\imagegen\scripts\image_gen.py' generate `
   --model gpt-image-2 `
   --quality low `
   --size 1024x1024 `
@@ -314,7 +317,7 @@ python 'C:\Users\du_ji\.codex\skills\.system\imagegen\scripts\image_gen.py' gene
   --force
 ```
 
-规则：`C:\Users\du_ji\.agents\secrets\image2-openai-key.clixml` 是主 `image-2` 凭据，`C:\Users\du_ji\.agents\secrets\image2-backup-key.clixml` 是备用凭据；两者都是仅当前 Windows 用户可解密的 DPAPI 文件。备用兼容端点为 `https://api.xxssxx.top/v1`。`tools/start-image2-batch.ps1` 默认使用 `ProviderMode=auto`，主接口失败后自动切换备用接口；已知主接口故障时可显式使用 `ProviderMode=backup`，避免每张图重复等待主接口失败。`C:\_dx\files\ls.txt` 只属于 Agnes 临时迁移路径，不能用于 `gpt-image-*`。任何情况下都不要打印、提交或复制密钥内容。
+规则：`<旧用户目录>\.agents\secrets\image2-openai-key.clixml` 是主 `image-2` 凭据，`<旧用户目录>\.agents\secrets\image2-backup-key.clixml` 是备用凭据；两者都是仅当前 Windows 用户可解密的 DPAPI 文件。备用兼容端点为 `https://api.xxssxx.top/v1`。`tools/start-image2-batch.ps1` 默认使用 `ProviderMode=auto`，主接口失败后自动切换备用接口；已知主接口故障时可显式使用 `ProviderMode=backup`，避免每张图重复等待主接口失败。`C:\_dx\files\ls.txt` 只属于 Agnes 临时迁移路径，不能用于 `gpt-image-*`。任何情况下都不要打印、提交或复制密钥内容。
 
 规则：
 
@@ -340,7 +343,7 @@ Agnes 辅助批量脚本：
 python tools\generate_agnes_item_textures.py
 ```
 
-脚本会从 `C:\Users\du_ji\WorkBuddy\agnes\providers.json` 读取 Agnes 配置，调用 `agnes-image-2.1-flash`，把原始生成图保存到 `tmp/imagegen/agnes-modern-chemistry/`，再裁切缩放为 `assets/earth_on_minecraft/textures/item/*.png`。不要把 API Key 写进仓库或日志。高可见资产不要因为脚本能批量生成就直接视为最终美术。
+脚本会从 `<旧用户目录>\WorkBuddy\agnes\providers.json` 读取 Agnes 配置，调用 `agnes-image-2.1-flash`，把原始生成图保存到 `tmp/imagegen/agnes-modern-chemistry/`，再裁切缩放为 `assets/earth_on_minecraft/textures/item/*.png`。不要把 API Key 写进仓库或日志。高可见资产不要因为脚本能批量生成就直接视为最终美术。
 
 通用 Agnes / image-2 提示词结构：
 
@@ -524,3 +527,50 @@ original 16x16 pixel art item icon, handheld mineral analyzer device, small scre
 - 机器贴图要先生成正面，再用同风格扩展侧面、顶部、底部；形成多方块结构后应有连续机壳、管线、控制面板的成型态贴图。
 - 侧面/顶面不要所有机器共用一套通用灰板。至少按工艺分组：通用机械、热工设备、湿法/反应设备、塔器/气体设备、电力设备、线缆/管廊。
 - 不要让 AI 生成文字、化学式或 UI 边框，化学式应由语言文件和 tooltip 显示。
+
+## 生成管线
+
+贴图由 `tools/generate_gemini_art.py` 通过本地 relay（`http://127.0.0.1:10100/v1`）生成。
+relay 只通过 chat completions 暴露图像模型，没有 `/v1/images/generations`。
+
+### 模型优先级
+
+按顺序尝试，前一个配额耗尽时自动切到下一个：
+
+| 顺序 | 模型 | 返回格式 | 后处理 |
+|---|---|---|---|
+| 1 | `google-antigravity/gemini-3.1-flash-image` | markdown 链接到 relay artifact（JPEG） | 品红抠图 |
+| 2 | `AIGCPro-image/gpt-image-2.5-sunburst` | 内联 `data:image/png;base64` | 有 alpha 则跳过，否则抠图 |
+| 3 | `AIGCPro-image/gpt-image-2.5-flare` | 同上 | 同上 |
+
+Gemini 是首选，因为同一批图风格最一致。它的 429 响应体里带恢复倒计时
+（`Your quota will reset after 4h25m28s`），脚本会解析该字段：剩余时间超过 3 分钟就直接
+切换供应商，不会空转重试烧配额。三个供应商全部耗尽时脚本以退出码 3 结束并打印剩余时间。
+
+### 运行方式
+
+```powershell
+# 只补仍是模板尺寸的图标
+python tools/generate_gemini_art.py --kind item --template-only --pause 3
+
+# 指定若干条目
+python tools/generate_gemini_art.py --kind item --only wine,beer --pause 2
+
+# 预览提示词，不请求模型
+python tools/generate_gemini_art.py --kind item --dry-run
+```
+
+### 产物
+
+- 运行时贴图：`neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/item/<id>.png`（128×128）
+- 覆盖率清单：`docs/quality/gemini-art-manifest.json`（每生成一张即写盘，中断不丢记录）
+- 对比图：`python tools/make_gemini_only_sheet.py` → `output/quality/gemini-art-only.png`
+
+### 受保护条目
+
+`sponge_iron`、`wrought_iron` 是已批准的手绘 pilot 图，脚本永不覆盖。
+
+### 注意
+
+`ITEM_SUBJECTS` 目前只覆盖 82 个物品，其余物品仍使用 `tools/generate_spec_items.py`
+产出的程序化模板图。要扩展覆盖率需要先补写提示词条目。

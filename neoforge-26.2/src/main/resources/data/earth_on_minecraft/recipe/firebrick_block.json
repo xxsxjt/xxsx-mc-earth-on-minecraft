@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAA",
+    "AB "
+  ],
+  "key": {
+    "A": "earth_on_minecraft:firebrick",
+    "B": "minecraft:clay_ball"
+  },
+  "result": {
+    "id": "earth_on_minecraft:firebrick_block"
+  }
+}

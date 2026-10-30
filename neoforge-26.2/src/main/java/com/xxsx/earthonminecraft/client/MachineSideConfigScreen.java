@@ -87,7 +87,7 @@ final class MachineSideConfigScreen extends Screen {
 
     @Override
     public void onClose() {
-        Minecraft.getInstance().gui.popScreenLayer();
+        Minecraft.getInstance().setScreen(null);
     }
 
     @Override

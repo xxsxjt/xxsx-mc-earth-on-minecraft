@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BFB",
+    "SSS"
+  ],
+  "key": {
+    "B": "minecraft:brick",
+    "F": "minecraft:blast_furnace",
+    "S": "minecraft:smooth_stone"
+  },
+  "result": {
+    "id": "earth_on_minecraft:glass_kiln_controller",
+    "count": 1
+  }
+}

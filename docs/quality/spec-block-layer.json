@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "generated_blocks": 33,
+  "generated_textures": 0,
+  "worldgen_features": 6,
+  "skipped": [
+    {
+      "id": "anthracite_coal_seam",
+      "reason": "already_registered"
+    },
+    {
+      "id": "auriferous_quartz_vein",
+      "reason": "already_registered"
+    },
+    {
+      "id": "battery_box",
+      "reason": "already_registered"
+    },
+    {
+      "id": "bauxite_laterite_deposit",
+      "reason": "already_registered"
+    },
+    {
+      "id": "bituminous_coal_seam",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cassiterite_placer_deposit",
+      "reason": "already_registered"
+    },
+    {
+      "id": "chalcopyrite_ore",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cinnabar_vein",
+      "reason": "already_registered"
+    },
+    {
+      "id": "combustion_generator",
+      "reason": "already_registered"
+    },
+    {
+      "id": "control_panel",
+      "reason": "already_registered"
+    },
+    {
+      "id": "conveyor_belt",
+      "reason": "already_registered"
+    },
+    {
+      "id": "copper_power_cable",
+      "reason": "already_registered"
+    },
+    {
+      "id": "diamondiferous_kimberlite",
+      "reason": "already_registered"
+    },
+    {
+      "id": "emerald_beryl_vein",
+      "reason": "already_registered"
+    },
+    {
+      "id": "evaporite_salt_bed",
+      "reason": "already_registered"
+    },
+    {
+      "id": "heavy_copper_power_cable",
+      "reason": "already_registered"
+    },
+    {
+      "id": "industrial_machine_casing",
+      "reason": "already_registered"
+    },
+    {
+      "id": "kimberlite",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lapis_lazuli_ore",
+      "reason": "already_registered"
+    },
+    {
+      "id": "machine_input_interface",
+      "reason": "already_registered"
+    },
+    {
+      "id": "machine_output_interface",
+      "reason": "already_registered"
+    },
+    {
+      "id": "magnetite_ore",
+      "reason": "already_registered"
+    },
+    {
+      "id": "phosphorite_bed",
+      "reason": "already_registered"
+    },
+    {
+      "id": "poor_magnetite_ore",
+      "reason": "already_registered"
+    },
+    {
+      "id": "rare_earth_carbonatite",
+      "reason": "already_registered"
+    },
+    {
+      "id": "redstone_mineral_ore",
+      "reason": "already_registered"
+    },
+    {
+      "id": "rich_magnetite_ore",
+      "reason": "already_registered"
+    },
+    {
+      "id": "settlement_board",
+      "reason": "already_registered"
+    },
+    {
+      "id": "steam_turbine_generator",
+      "reason": "already_registered"
+    },
+    {
+      "id": "steel_process_pipe",
+      "reason": "already_registered"
+    },
+    {
+      "id": "structure_projection",
+      "reason": "already_registered"
+    },
+    {
+      "id": "thin_copper_power_cable",
+      "reason": "already_registered"
+    }
+  ],
+  "template_art": true,
+  "note": "Block textures are deterministic template art pending the approved art pipeline."
+}

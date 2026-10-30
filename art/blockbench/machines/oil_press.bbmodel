@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "oil_press",
+  "model_identifier": "earth_on_minecraft:oil_press",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "cake_trough",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        3
+      ],
+      "to": [
+        15,
+        4,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "404b47ac-2e98-59f1-89d7-169d7cda157f",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            3,
+            15,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "press_cage",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        4,
+        4
+      ],
+      "to": [
+        13,
+        11,
+        12
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "72dcfbda-06cd-5d11-8a2c-ab93b6db01c4",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            5,
+            13,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            5,
+            13,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            5,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            5,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "ram_screw",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        6,
+        11,
+        6
+      ],
+      "to": [
+        10,
+        16,
+        10
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "2a5a224c-b039-53e4-8e71-c7824d90eb44",
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            0,
+            10,
+            5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            6,
+            6,
+            10,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "seed_hopper",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        12,
+        4
+      ],
+      "to": [
+        12,
+        16,
+        9
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "a604c106-cff5-58cf-9a80-963e7d8a24c5",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            7,
+            0,
+            12,
+            4
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            9,
+            4
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            9
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            7,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "oil_spout",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        13,
+        5,
+        6
+      ],
+      "to": [
+        16,
+        9,
+        10
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "543c088e-874f-5d82-9478-a9e77c3f9a09",
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            7,
+            16,
+            11
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            7,
+            3,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            7,
+            10,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            7,
+            10,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            13,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            13,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "wedge_block",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        4,
+        12
+      ],
+      "to": [
+        12,
+        9,
+        15
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "e99d07cf-3f72-5519-8890-825ad19fa758",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            7,
+            12,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            7,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            1,
+            7,
+            4,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            12,
+            7,
+            15,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            12,
+            12,
+            15
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            1,
+            12,
+            4
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "404b47ac-2e98-59f1-89d7-169d7cda157f",
+    "72dcfbda-06cd-5d11-8a2c-ab93b6db01c4",
+    "2a5a224c-b039-53e4-8e71-c7824d90eb44",
+    "a604c106-cff5-58cf-9a80-963e7d8a24c5",
+    "543c088e-874f-5d82-9478-a9e77c3f9a09",
+    "e99d07cf-3f72-5519-8890-825ad19fa758"
+  ],
+  "textures": [
+    {
+      "name": "oil_press.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "87f1a1c4-1181-5760-8448-2374ca19f545",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/oil_press.png"
+    },
+    {
+      "name": "modern_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "8d04c733-d81f-5311-8eb9-cb7a80647df6",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/modern_machine_side.png"
+    },
+    {
+      "name": "modern_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "f2ac9f4c-70fc-5c99-930e-b27a5b9981ba",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/modern_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "wedge press oil mill with cage",
+    "silhouette": "stout cage of wooden slats under a screw and wedge",
+    "faces": {
+      "front": "press cage and wedge",
+      "back": "ram screw",
+      "left": "oilseed hopper",
+      "right": "oil spout",
+      "top": "pressing plate",
+      "bottom": "cake trough"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/oil_press",
+        "front": "earth_on_minecraft:block/oil_press",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/oil_press_active",
+        "front": "earth_on_minecraft:block/oil_press_active",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/oil_press",
+        "front": "earth_on_minecraft:block/oil_press",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

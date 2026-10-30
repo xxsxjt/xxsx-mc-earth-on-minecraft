@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "III",
+    "ICI",
+    "III"
+  ],
+  "key": {
+    "I": "minecraft:iron_ingot",
+    "C": "minecraft:cauldron"
+  },
+  "result": {
+    "id": "earth_on_minecraft:filter_press",
+    "count": 1
+  }
+}

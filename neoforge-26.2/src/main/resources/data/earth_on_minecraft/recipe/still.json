@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CCC",
+    "C C",
+    "BBB"
+  ],
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "B": "minecraft:brick"
+  },
+  "result": {
+    "id": "earth_on_minecraft:still",
+    "count": 1
+  }
+}

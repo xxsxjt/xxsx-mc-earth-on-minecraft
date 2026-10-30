@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/thickener_active",
+    "front": "earth_on_minecraft:block/thickener_active",
+    "back": "earth_on_minecraft:block/wet_machine_side",
+    "left": "earth_on_minecraft:block/wet_machine_side",
+    "right": "earth_on_minecraft:block/wet_machine_side",
+    "top": "earth_on_minecraft:block/wet_machine_top",
+    "bottom": "earth_on_minecraft:block/wet_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "cone_bottom",
+      "from": [
+        3,
+        0,
+        3
+      ],
+      "to": [
+        13,
+        4,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "thickener_tank",
+      "from": [
+        1,
+        4,
+        1
+      ],
+      "to": [
+        15,
+        11,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            5,
+            15,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            5,
+            15,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            1,
+            5,
+            15,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            1,
+            5,
+            15,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "rake_drive",
+      "from": [
+        5,
+        11,
+        5
+      ],
+      "to": [
+        11,
+        16,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            0,
+            11,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            0,
+            11,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            11,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            11,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "overflow_launder",
+      "from": [
+        14,
+        5,
+        3
+      ],
+      "to": [
+        16,
+        9,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            14,
+            7,
+            16,
+            11
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            7,
+            2,
+            11
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            7,
+            13,
+            11
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            7,
+            13,
+            11
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            14,
+            3,
+            16,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            14,
+            3,
+            16,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "feed_well",
+      "from": [
+        2,
+        8,
+        2
+      ],
+      "to": [
+        7,
+        12,
+        7
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            4,
+            7,
+            8
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            9,
+            4,
+            14,
+            8
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            9,
+            4,
+            14,
+            8
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            4,
+            7,
+            8
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            7,
+            7
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            9,
+            7,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "flocculant_dosing",
+      "from": [
+        0,
+        9,
+        5
+      ],
+      "to": [
+        3,
+        13,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            3,
+            3,
+            7
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            13,
+            3,
+            16,
+            7
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            3,
+            11,
+            7
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            3,
+            11,
+            7
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

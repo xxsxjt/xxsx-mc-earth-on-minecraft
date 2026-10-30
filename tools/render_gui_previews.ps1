@@ -375,12 +375,25 @@ function New-ContainerCanvas([string]$fileName) {
     $sourcePath = Join-Path $textureRoot "gui\container\$fileName"
     $source = [System.Drawing.Bitmap]::FromFile($sourcePath)
     try {
-        $bitmap = [System.Drawing.Bitmap]::new(176, 166, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
+        $width = 176
+        $height = 0
+        for ($y = $source.Height - 1; $y -ge 0 -and $height -eq 0; $y--) {
+            for ($x = 0; $x -lt $width; $x++) {
+                if ($source.GetPixel($x, $y).A -gt 0) {
+                    $height = $y + 1
+                    break
+                }
+            }
+        }
+        if ($height -eq 0) {
+            $height = 166
+        }
+        $bitmap = [System.Drawing.Bitmap]::new($width, $height, [System.Drawing.Imaging.PixelFormat]::Format32bppArgb)
         $graphics = [System.Drawing.Graphics]::FromImage($bitmap)
         try {
             $graphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::NearestNeighbor
-            $graphics.DrawImage($source, [System.Drawing.Rectangle]::new(0, 0, 176, 166),
-                [System.Drawing.Rectangle]::new(0, 0, 176, 166), [System.Drawing.GraphicsUnit]::Pixel)
+            $graphics.DrawImage($source, [System.Drawing.Rectangle]::new(0, 0, $width, $height),
+                [System.Drawing.Rectangle]::new(0, 0, $width, $height), [System.Drawing.GraphicsUnit]::Pixel)
         } finally {
             $graphics.Dispose()
         }
@@ -515,7 +528,7 @@ function Render-Processing([string]$lang, [bool]$multiblock, [string]$name,
         Draw-Item $bitmap $(if ($multiblock) { 'block\steam_cracker.png' } else { 'block\crystallizer.png' }) 8 22
         Draw-McText $bitmap (Fit-McText $family 31) 7 41 $accent
         Draw-McText $bitmap (Fit-McText $title 140) 8 6 (C '#404040')
-        Draw-McText $bitmap $inventory 8 73 (C '#404040')
+        Draw-McText $bitmap $inventory 8 94 (C '#404040')
 
         $hasInput = $statusKey -ne 'screen.earth_on_minecraft.machine.empty_input_short'
         $hasRecipe = $hasInput -and $statusKey -ne 'screen.earth_on_minecraft.machine.unsupported_input_short'
@@ -526,6 +539,15 @@ function Render-Processing([string]$lang, [bool]$multiblock, [string]$name,
             Draw-Item $bitmap 'item\neutral_salt.png' 102 20
             Draw-Item $bitmap 'item\tailings_dust.png' 120 20
             Draw-Item $bitmap 'item\gypsum_dust.png' 138 20
+        }
+        if ($statusKey -eq 'screen.earth_on_minecraft.machine.missing_secondary_short') {
+            Draw-Item $bitmap 'item\salt_dust.png' 8 76
+            Draw-Item $bitmap 'item\distilled_water.png' 26 76
+        } elseif ($hasRecipe) {
+            Draw-Item $bitmap 'item\distilled_water.png' 8 76
+        }
+        if ($statusKey -eq 'screen.earth_on_minecraft.machine.missing_reductant_short' -and -not $multiblock) {
+            Draw-Item $bitmap 'item\distilled_water.png' 26 76
         }
         if ($statusKey -eq 'screen.earth_on_minecraft.machine.running') {
             Draw-Progress $graphics 64 38 15
@@ -880,6 +902,7 @@ $processingStates = @(
     @{ Id = 'unsupported-input'; Key = 'screen.earth_on_minecraft.machine.unsupported_input_short'; Multiblock = $false },
     @{ Id = 'missing-power'; Key = 'screen.earth_on_minecraft.machine.missing_power_short'; Multiblock = $false },
     @{ Id = 'redstone-paused'; Key = 'screen.earth_on_minecraft.machine.redstone_paused_short'; Multiblock = $true },
+    @{ Id = 'missing-additive'; Key = 'screen.earth_on_minecraft.machine.missing_secondary_short'; Multiblock = $false },
     @{ Id = 'output-blocked'; Key = 'screen.earth_on_minecraft.machine.outputs_full_short'; Multiblock = $false },
     @{ Id = 'structure-fault'; Key = 'screen.earth_on_minecraft.machine.structure_missing_short'; Multiblock = $true },
     @{ Id = 'running'; Key = 'screen.earth_on_minecraft.machine.running'; Multiblock = $false },

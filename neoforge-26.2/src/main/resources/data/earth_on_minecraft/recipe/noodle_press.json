@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "P P",
+    "S S"
+  ],
+  "key": {
+    "P": "minecraft:oak_planks",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "earth_on_minecraft:noodle_press",
+    "count": 1
+  }
+}

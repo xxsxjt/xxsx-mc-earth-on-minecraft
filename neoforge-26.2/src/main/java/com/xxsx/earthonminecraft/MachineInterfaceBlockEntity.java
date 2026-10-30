@@ -15,10 +15,7 @@ import java.util.Optional;
 
 public class MachineInterfaceBlockEntity extends BlockEntity implements WorldlyContainer {
     private static final int EXPORT_INTERVAL_TICKS = 10;
-    private static final int[] INPUT_SLOTS = {
-            ProcessingMachineBlockEntity.SLOT_INPUT,
-            ProcessingMachineBlockEntity.SLOT_FUEL
-    };
+    private static final int[] INPUT_SLOTS = createInputSlots();
     private static final int[] OUTPUT_SLOTS = createOutputSlots();
 
     private final MachineInterfaceBlock.InterfaceType interfaceType;
@@ -209,6 +206,18 @@ public class MachineInterfaceBlockEntity extends BlockEntity implements WorldlyC
         return false;
     }
 
+    private static int[] createInputSlots() {
+        int[] slots = new int[3 + ProcessingMachineBlockEntity.SECONDARY_INPUT_SLOTS];
+        int index = 0;
+        slots[index++] = ProcessingMachineBlockEntity.SLOT_INPUT;
+        slots[index++] = ProcessingMachineBlockEntity.SLOT_FUEL;
+        for (int i = 0; i < ProcessingMachineBlockEntity.SECONDARY_INPUT_SLOTS; i++) {
+            slots[index++] = ProcessingMachineBlockEntity.SLOT_SECONDARY_START + i;
+        }
+        slots[index] = ProcessingMachineBlockEntity.SLOT_REAGENT;
+        return slots;
+    }
+
     private static int[] createOutputSlots() {
         int[] slots = new int[ProcessingMachineBlockEntity.OUTPUT_SLOT_COUNT];
         for (int i = 0; i < slots.length; i++) {
@@ -218,7 +227,10 @@ public class MachineInterfaceBlockEntity extends BlockEntity implements WorldlyC
     }
 
     private static boolean isInputSlot(int slot) {
-        return slot == ProcessingMachineBlockEntity.SLOT_INPUT || slot == ProcessingMachineBlockEntity.SLOT_FUEL;
+        return slot == ProcessingMachineBlockEntity.SLOT_INPUT
+                || slot == ProcessingMachineBlockEntity.SLOT_FUEL
+                || slot == ProcessingMachineBlockEntity.SLOT_REAGENT
+                || ProcessingMachineBlockEntity.isSecondaryInputSlot(slot);
     }
 
     private static boolean isOutputSlot(int slot) {

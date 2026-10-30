@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "facing=north,active=false": {
+      "model": "earth_on_minecraft:block/bore_head"
+    },
+    "facing=north,active=true": {
+      "model": "earth_on_minecraft:block/bore_head_active"
+    },
+    "facing=east,active=false": {
+      "model": "earth_on_minecraft:block/bore_head"
+    },
+    "facing=east,active=true": {
+      "model": "earth_on_minecraft:block/bore_head_active"
+    },
+    "facing=south,active=false": {
+      "model": "earth_on_minecraft:block/bore_head"
+    },
+    "facing=south,active=true": {
+      "model": "earth_on_minecraft:block/bore_head_active"
+    },
+    "facing=west,active=false": {
+      "model": "earth_on_minecraft:block/bore_head"
+    },
+    "facing=west,active=true": {
+      "model": "earth_on_minecraft:block/bore_head_active"
+    }
+  }
+}

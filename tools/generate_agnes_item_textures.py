@@ -35,6 +35,8 @@ ITEMS = {
     "magnetite_dust": ("磁铁矿粉 Fe3O4", "Magnetite Dust Fe3O4", "a dark black magnetic iron oxide powder pile with subtle metallic grains"),
     "chalcopyrite_dust": ("黄铜矿粉 CuFeS2", "Chalcopyrite Dust CuFeS2", "a brass yellow copper sulfide powder pile with dark mineral speckles"),
     "iron_concentrate": ("铁精矿", "Iron Concentrate", "a dense dark iron concentrate pellet pile with metallic black-red highlights"),
+    "sponge_iron": ("海绵铁", "Sponge Iron", "a porous dark gray mass of metallic iron nodules with visible sponge-like cavities"),
+    "wrought_iron": ("熟铁", "Wrought Iron", "a compact hand-forged low-carbon iron billet with subtle hammer facets and warm gray metallic highlights"),
     "copper_concentrate": ("铜精矿", "Copper Concentrate", "a golden brown copper concentrate powder pile with sulfide sparkle"),
     "crude_oil_sample": ("原油样品", "Crude Oil Sample", "a small dark crude oil vial with black-brown liquid"),
     "natural_gas_cell": ("天然气单元 CH4 等", "Natural Gas Cell CH4 Mix", "a pale blue compressed gas cell with a metal cap"),
@@ -199,6 +201,8 @@ NON_CHEMICAL_PRODUCT_ITEMS = {
     "magnetite_dust",
     "chalcopyrite_dust",
     "iron_concentrate",
+    "sponge_iron",
+    "wrought_iron",
     "copper_concentrate",
 }
 

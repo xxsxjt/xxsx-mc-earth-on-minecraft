@@ -59,7 +59,7 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
         addSlot(new Slot(container, ProcessingMachineBlockEntity.SLOT_INPUT, 38, 35) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return ProcessingMachineBlock.findRecipe(ProcessingMachineMenu.this.kind, stack).isPresent();
+                return ProcessingMachineBlock.acceptsInput(ProcessingMachineMenu.this.kind, stack);
             }
         });
         addSlot(new Slot(container, ProcessingMachineBlockEntity.SLOT_FUEL, 38, 57) {
@@ -69,7 +69,16 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
                         && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0;
             }
         });
-
+        int[][] secondarySlots = {{8, 76}, {26, 76}, {44, 76}, {62, 76}};
+        for (int i = 0; i < secondarySlots.length; i++) {
+            int slot = ProcessingMachineBlockEntity.SLOT_SECONDARY_START + i;
+            addSlot(new Slot(container, slot, secondarySlots[i][0], secondarySlots[i][1]) {
+                @Override
+                public boolean mayPlace(ItemStack stack) {
+                    return ProcessingMachineMenu.this.acceptsSecondaryInput(stack);
+                }
+            });
+        }
         int[][] outputSlots = {
                 {102, 20}, {120, 20}, {138, 20}, {156, 20},
                 {111, 42}, {129, 42}, {147, 42}
@@ -78,9 +87,30 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
             int slot = ProcessingMachineBlockEntity.SLOT_OUTPUT_START + i;
             addSlot(new OutputSlot(container, slot, outputSlots[i][0], outputSlots[i][1]));
         }
+        addSlot(new Slot(container, ProcessingMachineBlockEntity.SLOT_REAGENT, 80, 76) {
+            @Override
+            public boolean mayPlace(ItemStack stack) {
+                return ProcessingMachineMenu.this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
+                        && stack.getItem() == EarthOnMinecraft.COKE.get();
+            }
+        });
 
-        addStandardInventorySlots(inventory, 8, 84);
+        addStandardInventorySlots(inventory, 8, 104);
         addDataSlots(data);
+    }
+
+    private boolean acceptsSecondaryInput(ItemStack stack) {
+        if (container instanceof ProcessingMachineBlockEntity machine) {
+            return machine.acceptsSecondaryInput(stack);
+        }
+        for (ProcessingMachineBlock.Recipe recipe : ProcessingMachineBlock.recipesFor(this.kind)) {
+            for (ProcessingMachineBlock.Input input : recipe.secondaryInputs()) {
+                if (!stack.isEmpty() && stack.getItem() == input.item().get().asItem()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
@@ -117,8 +147,20 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
             if (!moveItemStackTo(stack, PLAYER_INV_START, HOTBAR_END, true)) {
                 return ItemStack.EMPTY;
             }
-        } else if (ProcessingMachineBlock.findRecipe(this.kind, stack).isPresent()) {
+        } else if (this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
+                && stack.getItem() == EarthOnMinecraft.COKE.get()
+                && selectedRecipe().map(ProcessingMachineBlock.Recipe::requiresCoke).orElse(false)) {
+            if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_REAGENT,
+                    ProcessingMachineBlockEntity.SLOT_REAGENT + 1, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (ProcessingMachineBlock.acceptsInput(this.kind, stack)) {
             if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_INPUT, ProcessingMachineBlockEntity.SLOT_INPUT + 1, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else if (acceptsSecondaryInput(stack)) {
+            if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_SECONDARY_START,
+                    ProcessingMachineBlockEntity.SLOT_SECONDARY_START + ProcessingMachineBlockEntity.SECONDARY_INPUT_SLOTS, false)) {
                 return ItemStack.EMPTY;
             }
         } else if (this.kind.acceptsLocalFuel() && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0) {
@@ -213,12 +255,70 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
         return selectedRecipe().map(recipe -> !canFitOutputs(recipe.outputStacks())).orElse(false);
     }
 
+    /** Fluid required by the selected route, in mB. */
+    public int requiredFluidAmount() {
+        return selectedRecipe()
+                .map(recipe -> recipe.fluidInputs().stream()
+                        .mapToInt(ProcessingMachineBlock.FluidInput::amount).sum())
+                .orElse(0);
+    }
+
+    public int tankAmount() {
+        return data.get(ProcessingMachineBlockEntity.DATA_TANK_AMOUNT);
+    }
+
+    public int tankCapacity() {
+        return Math.max(1, data.get(ProcessingMachineBlockEntity.DATA_TANK_CAPACITY));
+    }
+
+    /** True when the selected route needs more fluid than the tank currently holds. */
+    public boolean fluidInputsMissing() {
+        return selectedRecipe().map(recipe -> {
+            int available = tankAmount();
+            for (ProcessingMachineBlock.FluidInput fluid : recipe.fluidInputs()) {
+                if (!tankHolds(fluid)) {
+                    return true;
+                }
+                available -= fluid.amount();
+            }
+            return available < 0;
+        }).orElse(false);
+    }
+
+    /**
+     * The menu does not know the tank's fluid id, so it compares required amounts only; the
+     * block entity performs the exact id check before starting a route.
+     */
+    private boolean tankHolds(ProcessingMachineBlock.FluidInput fluid) {
+        return tankAmount() >= fluid.amount();
+    }
+
+    public boolean usesFluid() {
+        return selectedRecipe().map(ProcessingMachineBlock.Recipe::usesFluid).orElse(false);
+    }
+
     public int energyPerTick() {
-        return kind.energyPerTick();
+        return selectedRecipe()
+                .map(ProcessingMachineBlock.Recipe::energyPerTickEffective)
+                .orElse(kind.energyPerTick());
     }
 
     public boolean acceptsLocalFuel() {
         return kind.acceptsLocalFuel();
+    }
+
+    /**
+     * True when the selected route cannot run without grid power or a burning fire. Passive and
+     * manual/kinetic routes report false so the screen does not warn about missing power.
+     */
+    public boolean needsExternalPower() {
+        if (kind.powerMode().passive()) {
+            return false;
+        }
+        if (energyPerTick() > 0) {
+            return true;
+        }
+        return kind.powerMode().requiresFuel();
     }
 
     public ProcessingMachineBlock.PowerMode powerMode() {
@@ -231,6 +331,23 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
 
     public ProcessingMachineBlockEntity.SideMode sideMode(Direction side) {
         return ProcessingMachineBlockEntity.SideMode.byId(data.get(8 + side.ordinal()));
+    }
+
+    public int requiredSecondaryCount() {
+        return data.get(ProcessingMachineBlockEntity.DATA_REQUIRED_SECONDARY);
+    }
+
+    public int availableSecondaryCount() {
+        return data.get(ProcessingMachineBlockEntity.DATA_AVAILABLE_SECONDARY);
+    }
+
+    public boolean secondaryInputsMissing() {
+        int required = requiredSecondaryCount();
+        return required > 0 && availableSecondaryCount() < required;
+    }
+
+    public boolean hasSecondaryInputs() {
+        return requiredSecondaryCount() > 0;
     }
 
     private boolean canFitOutputs(List<ItemStack> outputs) {

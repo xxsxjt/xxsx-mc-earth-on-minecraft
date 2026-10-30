@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minecraft:block/podzol_top"
+    "layer0": "earth_on_minecraft:item/humus_sample"
   }
 }

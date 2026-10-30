@@ -1,8 +1,8 @@
-# Earth on Minecraft / 我的地球
+# The Earth / 地球
 
 > **开发中测试版 / In-development beta**
 >
-> 当前 jar 只面向 `Minecraft 26.2` + `NeoForge 26.2.0.7-beta` 测试。内容、世界生成、配方、机器数值和 API 都还在快速变化；请先在新世界或测试存档中使用，不要把它当作稳定版长期存档依赖。
+> 当前 jar 只面向 `Minecraft 26.1.2` + `NeoForge 26.1.2.124` 测试。内容、世界生成、配方、机器数值和 API 都还在快速变化；请先在新世界或测试存档中使用，不要把它当作稳定版长期存档依赖。
 
 设计纲领：
 
@@ -27,10 +27,14 @@
 - [第二轮工业扩展计划](docs/round-2-industrial-expansion-plan.md)
 - [本体与附属边界](docs/core-and-addons-boundary.md)
 - [四模块生态联动契约 v1](docs/ecosystem-integration-contract-v1.md)
+- [魔幻地球本体联动指示](docs/fantasy-earth-addon-guide.md)
+- [玄幻地球本体联动指示](docs/xuanhuan-earth-addon-guide.md)
 - [玩家入门流程](docs/player-guide.md)
 - [贴图 AI 提示词](docs/asset-prompts.md)
 - [扩展路线图：核能、电网、自动化和科幻附属边界](docs/earth-on-minecraft-expanded-roadmap.md)
 - [科幻附属路线图](docs/scifi-addon-roadmap.md)
+- [0.1.16 Test Beta release notes](docs/release-notes-0.1.16-beta.md)
+- [0.1.15 Test Beta release notes](docs/release-notes-0.1.15-beta.md)
 - [0.1.14 Test Beta release notes](docs/release-notes-0.1.14-beta.md)
 - [0.1.14 CurseForge submission record](docs/quality/curseforge-0.1.14-beta.md)
 - [0.1.10 Beta 发布说明](docs/release-notes-0.1.10-beta.md)
@@ -52,22 +56,23 @@
 
 ```powershell
 cd neoforge-26.2
-.\gradlew.bat build
+.\gradlew.bat compileJava verifyStaticQuality jar --console=plain
 cd ..
-python tools\validate_resources.py
 pwsh -NoProfile -File tools\render_gui_previews.ps1
 python tools\render_connected_ore_previews.py
 ```
+
+构建需要 JDK 25；通过本机 `JAVA_HOME` 指向安装目录，或在 Gradle 命令中传入 `-Porg.gradle.java.installations.paths=<JDK目录>`。JEI 编译 API 由 Maven 获取。上述静态验证不会启动 Minecraft；`build` / `check` 还会运行 GameTest，需单独执行。
 
 连接矿床资源由 `tools/generate_connected_ore_assets.py` 统一生成；固定形状矩阵和全部矿床 2x2 联系表输出到 `output/connected-ore-previews/`，用于贴图重做后的视觉回归检查。
 
 ## 当前模块
 
 - GitHub: https://github.com/xxsxjt/xxsx-mc-earth-on-minecraft
-- `neoforge-26.2/` — NeoForge `26.2.0.7-beta` / Minecraft `26.2`，Java 25。
-- 构建产物：`neoforge-26.2/build/libs/earth-on-minecraft-neoforge-26.2-0.1.14.jar`
-- 测试部署：`D:\_dx\_Games\MC\xxxxxx\.minecraft\versions\26.2-NeoForge_26.2.0.7-beta\mods`
-- 发布状态：`0.1.14` 是开发中测试版，重点验证 23 个独立 Blockbench 几何模型、空闲/运行/故障状态、自定义设备反馈、GameTest、联动 API v1 和旧世界迁移。
+- `neoforge-26.2/` — 目录名沿用旧版，当前目标为 NeoForge `26.1.2.124` / Minecraft `26.1.2`，Java 25。
+- 构建产物：`neoforge-26.2/build/libs/earth-on-minecraft-neoforge-26.1.2-0.1.16.jar`
+- 测试部署目标：`E:\_dx\_Games\MC\xxxxxx\.minecraft\versions\26.1.2-NeoForge_26.1.2.124\mods`
+- 发布状态：`0.1.16` 是开发中测试版，包含首铁迁移、有限矿床、工业钻头、采石场、多方块机器、流体处理和扩展路线；本轮仅进行静态验证与构建，游戏内行为尚未验证。
 
 第一版已实现：
 
@@ -100,7 +105,7 @@ python tools\render_connected_ore_previews.py
 - 0.1.13 建立资产清单、双语界面状态矩阵、GameTest/截图测试场和运行检查表；拆分地质连接纹理、物品轮廓和 Blockbench 模型管线；为 21 台处理机及 2 类发电设备建立真实原型、六面职责、三态反馈、自定义声音粒子，并发布版本化地质、材料、处理、能源、物流和聚落查询 API v1。
 - 0.1.14 为 21 台处理机和 2 类发电设备生成可编辑 `.bbmodel` 源及独立非立方几何；模型按真实原型拆分机架、滚筒、塔体、罐体、立柱、管口和传动部件，使用坐标对齐 UV 保留现有六面纹理；多方块结构失效会同步 `fault` 方块状态和故障模型，并新增 OGG 响度、削波、静音、重复资源与波形接触表门禁。
 - 保留原版物品生态：矿物处理最终输出 `minecraft:iron_ingot`、`minecraft:copper_ingot`、`minecraft:gold_ingot`、`minecraft:diamond` 等。
-- 使用 26.2 新版 `assets/<modid>/items/*.json` 物品模型定义。
+- 使用 `assets/<modid>/items/*.json` 物品模型定义。
 - 已用 Agnes 生成并接入机器、新材料和精矿贴图；同时覆盖部分原版岩石视觉以强化真实岩石体系。新增贴图可用 `tools/generate_agnes_item_textures.py` 续跑。
 
 ## License

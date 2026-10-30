@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "AAB"
+  ],
+  "key": {
+    "A": "earth_on_minecraft:clay_brick",
+    "B": "minecraft:iron_ingot"
+  },
+  "result": {
+    "id": "earth_on_minecraft:tuyere"
+  }
+}

@@ -17,6 +17,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 RES = ROOT / "neoforge-26.2" / "src" / "main" / "resources"
 ASSETS = RES / "assets" / "earth_on_minecraft"
 JAVA_ENTRYPOINT = ROOT / "neoforge-26.2" / "src" / "main" / "java" / "com" / "xxsx" / "earthonminecraft" / "EarthOnMinecraft.java"
+JAVA_SPEC_ITEMS = ROOT / "neoforge-26.2" / "src" / "main" / "java" / "com" / "xxsx" / "earthonminecraft" / "SpecItems.java"
 BUILD_GRADLE = ROOT / "neoforge-26.2" / "build.gradle"
 JAVA_ROOT = ROOT / "neoforge-26.2" / "src" / "main" / "java" / "com" / "xxsx" / "earthonminecraft"
 MACHINE_PROFILES = RES / "data" / "earth_on_minecraft" / "earth" / "quality" / "machine_profiles.json"
@@ -324,10 +325,28 @@ def registry_ids() -> tuple[list[str], list[str], list[str]]:
         match.group(1)
         for match in re.finditer(r'DeferredBlock<[^>]+>\s+\w+\s*=\s*\w+\("([a-z0-9_]+)"', java)
     ]
+    block_ids.extend(
+        match.group(1)
+        for match in re.finditer(r'DeferredBlock<[^>]+>\s+\w+\s*=\s*BLOCKS\.registerBlock\(\s*"([a-z0-9_]+)"', java)
+        if match.group(1) not in block_ids
+    )
+    spec_blocks_path = JAVA_ROOT / "SpecBlocks.java"
+    if spec_blocks_path.exists():
+        spec_blocks = spec_blocks_path.read_text(encoding="utf-8")
+        block_ids.extend(
+            match.group(1)
+            for match in re.finditer(r'new BlockEntry\("([a-z0-9_]+)"', spec_blocks)
+        )
     direct_item_ids = [
         match.group(1)
         for match in re.finditer(r'DeferredItem<[^>]+>\s+\w+\s*=\s*\w+\("([a-z0-9_]+)"', java)
     ]
+    if JAVA_SPEC_ITEMS.exists():
+        spec_items = JAVA_SPEC_ITEMS.read_text(encoding="utf-8")
+        direct_item_ids.extend(
+            match.group(1)
+            for match in re.finditer(r'new Entry\("([a-z0-9_]+)"', spec_items)
+        )
     # Projection blocks are internal ghost helpers and intentionally have no inventory item.
     block_item_ids = [block_id for block_id in block_ids if block_id != "structure_projection"]
     stack_item_ids = sorted(set(direct_item_ids + block_item_ids))
@@ -359,6 +378,63 @@ def validate_registry_resource_coverage() -> tuple[int, int, int, set[str]]:
     return len(block_ids), len(direct_item_ids), len(stack_item_ids), set(block_ids) | set(stack_item_ids)
 
 
+def validate_first_iron_bootstrap() -> int:
+    recipe_root = RES / "data" / "earth_on_minecraft" / "recipe"
+
+    def recipe(name: str) -> dict:
+        path = recipe_root / f"{name}.json"
+        if not path.exists():
+            fail(f"missing first-iron bootstrap recipe {path.relative_to(ROOT)}")
+        return json.loads(path.read_text(encoding="utf-8-sig"))
+
+    ball_mill = recipe("ball_mill")
+    ball_mill_inputs = set(walk_values(ball_mill.get("key", {})))
+    if "minecraft:stone" not in ball_mill_inputs or "minecraft:furnace" not in ball_mill_inputs:
+        fail("first Ball Mill recipe must use stone and a furnace")
+    if "minecraft:iron_ingot" in ball_mill_inputs:
+        fail("first Ball Mill recipe must not require an iron ingot")
+
+    separator = recipe("magnetic_separator")
+    separator_inputs = set(walk_values(separator.get("key", {})))
+    if not {"minecraft:copper_ingot", "earth_on_minecraft:magnetite_chunk"}.issubset(separator_inputs):
+        fail("first Magnetic Separator recipe must use copper and a magnetite chunk")
+    if "minecraft:iron_ingot" in separator_inputs:
+        fail("first Magnetic Separator recipe must not require an iron ingot")
+
+    reduction_furnace = recipe("reduction_furnace")
+    reduction_inputs = set(walk_values(reduction_furnace.get("key", {})))
+    if not {"minecraft:brick", "minecraft:furnace"}.issubset(reduction_inputs):
+        fail("first Reduction Furnace recipe must use bricks and a furnace")
+    if "minecraft:iron_ingot" in reduction_inputs or "minecraft:blast_furnace" in reduction_inputs:
+        fail("first Reduction Furnace recipe must not require iron or a blast furnace")
+
+    anvil = recipe("ironworking_anvil")
+    anvil_inputs = set(walk_values(anvil.get("key", {})))
+    if not {"minecraft:stone", "minecraft:cobblestone"}.issubset(anvil_inputs):
+        fail("stone ironworking anvil must be craftable from early stone materials")
+
+    hammer = recipe("geology_hammer")
+    hammer_inputs = set(walk_values(hammer.get("key", {})))
+    if not {"minecraft:cobblestone", "minecraft:stick"}.issubset(hammer_inputs):
+        fail("geology hammer must be craftable from cobblestone and sticks")
+
+    coke = recipe("coke_from_coal")
+    if coke.get("type") != "minecraft:smelting" or coke.get("ingredient") != "minecraft:coal":
+        fail("coke must be obtainable by smelting coal")
+    if coke.get("result", {}).get("id") != "earth_on_minecraft:coke":
+        fail("coal smelting must produce coke for the first-iron reduction route")
+
+    retired = (
+        "iron_ingot_from_smelting_magnetite_chunk.json",
+        "iron_ingot_from_smelting_magnetite_dust.json",
+        "iron_ingot_from_blasting_magnetite_chunk.json",
+        "iron_ingot_from_blasting_magnetite_dust.json",
+    )
+    if any((recipe_root / name).exists() for name in retired):
+        fail("magnetite chunk/dust direct iron-ingot recipes must remain retired")
+    return 7
+
+
 def validate_player_facing_text() -> int:
     roots = [
         ASSETS / "lang",
@@ -383,7 +459,7 @@ def validate_release_note_sha() -> int:
     if version_match is None:
         fail(f"cannot determine project version from {BUILD_GRADLE.relative_to(ROOT)}")
     version = version_match.group(1)
-    current_jar = ROOT / "neoforge-26.2" / "build" / "libs" / f"earth-on-minecraft-neoforge-26.2-{version}.jar"
+    current_jar = ROOT / "neoforge-26.2" / "build" / "libs" / f"earth-on-minecraft-neoforge-26.1.2-{version}.jar"
     current_release_notes = ROOT / "docs" / f"release-notes-{version}-beta.md"
     if not current_release_notes.exists():
         return 0
@@ -826,6 +902,7 @@ def main() -> None:
     vanilla_ore_suppression_count = validate_vanilla_ore_suppression()
     machine_profile_count, device_profile_count, ui_state_count, feedback_count, api_count = validate_quality_foundation()
     player_text_count = validate_player_facing_text()
+    iron_bootstrap_count = validate_first_iron_bootstrap()
     release_note_count = validate_release_note_sha()
     print(
         f"OK json={json_count} png={png_count} modIcons={mod_icon_count} connectedOres={connected_ore_count} models={model_count} refs={ref_count} "
@@ -836,7 +913,7 @@ def main() -> None:
         f"vanillaOreSuppression={vanilla_ore_suppression_count} machineProfiles={machine_profile_count} "
         f"deviceProfiles={device_profile_count} "
         f"uiStates={ui_state_count} feedback={feedback_count} apiV1={api_count} playerText={player_text_count} "
-        f"releaseNotes={release_note_count}"
+        f"ironBootstrap={iron_bootstrap_count} releaseNotes={release_note_count}"
     )
 
 

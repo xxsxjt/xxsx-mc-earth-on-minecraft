@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "condenser",
+  "model_identifier": "earth_on_minecraft:condenser",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "seal_sump",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        0,
+        3
+      ],
+      "to": [
+        14,
+        4,
+        13
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "88153d5b-81dc-5e9e-9ef3-cc2a44774424",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            12,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            12,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "shell",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        4,
+        4
+      ],
+      "to": [
+        12,
+        14,
+        12
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "2f19175c-904b-545d-acc6-7b4a41c16441",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            2,
+            12,
+            12
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            2,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            2,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            2,
+            12,
+            12
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "vapor_dome",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        14,
+        5
+      ],
+      "to": [
+        11,
+        16,
+        11
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "5ab01ea4-b34d-5f18-8b6f-83af2f8419ec",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            0,
+            11,
+            2
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "coolant_feed",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        6,
+        5
+      ],
+      "to": [
+        4,
+        10,
+        11
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "373af35f-90a6-5c95-afdc-ac7ca674c452",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            6,
+            11,
+            10
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            6,
+            11,
+            10
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            4,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            4,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "coolant_return",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        12,
+        6,
+        5
+      ],
+      "to": [
+        16,
+        10,
+        11
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "76b5ccaf-68f5-5a51-acef-504b31637f88",
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            6,
+            4,
+            10
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            6,
+            11,
+            10
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            6,
+            11,
+            10
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            12,
+            5,
+            16,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12,
+            5,
+            16,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "condensate_outlet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        0,
+        0
+      ],
+      "to": [
+        11,
+        3,
+        4
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "fb8ed45e-1d56-5b7a-9ad8-96e61443ef8f",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            13,
+            11,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            13,
+            11,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            12,
+            13,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            0,
+            13,
+            4,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            0,
+            11,
+            4
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            12,
+            11,
+            16
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "88153d5b-81dc-5e9e-9ef3-cc2a44774424",
+    "2f19175c-904b-545d-acc6-7b4a41c16441",
+    "5ab01ea4-b34d-5f18-8b6f-83af2f8419ec",
+    "373af35f-90a6-5c95-afdc-ac7ca674c452",
+    "76b5ccaf-68f5-5a51-acef-504b31637f88",
+    "fb8ed45e-1d56-5b7a-9ad8-96e61443ef8f"
+  ],
+  "textures": [
+    {
+      "name": "condenser.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "5dab2feb-8c67-5025-b941-d9d6064077a2",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/condenser.png"
+    },
+    {
+      "name": "tower_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "0b8abbc7-e480-5512-adeb-f4321929a754",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/tower_machine_side.png"
+    },
+    {
+      "name": "tower_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "605f0daf-183e-5d9b-9401-d5b958e2689e",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/tower_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "water-jacketed shell-and-tube condenser",
+    "silhouette": "vertical shell with tube bundle and two coolant stubs",
+    "faces": {
+      "front": "vapor inlet and sight glass",
+      "back": "coolant return",
+      "left": "coolant feed",
+      "right": "condensate outlet",
+      "top": "vapor dome",
+      "bottom": "water seal sump"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/condenser",
+        "front": "earth_on_minecraft:block/condenser",
+        "back": "earth_on_minecraft:block/tower_machine_side",
+        "left": "earth_on_minecraft:block/tower_machine_side",
+        "right": "earth_on_minecraft:block/tower_machine_side",
+        "top": "earth_on_minecraft:block/tower_machine_top",
+        "bottom": "earth_on_minecraft:block/tower_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/condenser_active",
+        "front": "earth_on_minecraft:block/condenser_active",
+        "back": "earth_on_minecraft:block/tower_machine_side",
+        "left": "earth_on_minecraft:block/tower_machine_side",
+        "right": "earth_on_minecraft:block/tower_machine_side",
+        "top": "earth_on_minecraft:block/tower_machine_top",
+        "bottom": "earth_on_minecraft:block/tower_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/condenser",
+        "front": "earth_on_minecraft:block/condenser",
+        "back": "earth_on_minecraft:block/tower_machine_side",
+        "left": "earth_on_minecraft:block/tower_machine_side",
+        "right": "earth_on_minecraft:block/tower_machine_side",
+        "top": "earth_on_minecraft:block/tower_machine_top",
+        "bottom": "earth_on_minecraft:block/tower_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

@@ -43,10 +43,24 @@ An authorized old-world smoke test uses `tools/run_world_migration_smoke.ps1` wi
 ## Canonical Inputs
 
 - Machine physical and presentation contracts: `data/earth_on_minecraft/earth/quality/machine_profiles.json`
+- Authored route chains (outside the spec): `data/earth_on_minecraft/earth/quality/{drink,medicine,herb,crop}_routes.json`
 - UI states: `docs/quality/ui-state-matrix.json`
 - New feature closure contract: `docs/quality/vertical-slice-template.json`
 - Runtime evidence: `docs/quality/runtime-checklist.md`
 - Generated inventories and contact sheets: `output/quality/`
+
+## Acquisition audit
+
+The spec names several whole families with a pseudo-source and no producer (`family:drink`,
+`family:medicine`, `gather:wild_herb`, `agriculture:crop`). `tools/_dead_content.py` prints every
+registered item that has no producer at all, grouped by family, and is the metric to watch:
+
+```powershell
+python tools\_dead_content.py
+```
+
+Route generators that name an item or machine that does not exist are caught by
+`tools/_validate_generated_routes.py`, which exits non-zero and lists the offenders.
 
 ## Asset Pipelines
 

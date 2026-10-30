@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "top": "earth_on_minecraft:block/quarry",
+    "bottom": "earth_on_minecraft:block/quarry",
+    "side": "earth_on_minecraft:block/quarry"
+  }
+}

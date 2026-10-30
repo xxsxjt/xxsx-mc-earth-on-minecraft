@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/curing_barn_active",
+    "front": "earth_on_minecraft:block/curing_barn_active",
+    "back": "earth_on_minecraft:block/hot_machine_side",
+    "left": "earth_on_minecraft:block/hot_machine_side",
+    "right": "earth_on_minecraft:block/hot_machine_side",
+    "top": "earth_on_minecraft:block/hot_machine_top",
+    "bottom": "earth_on_minecraft:block/hot_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "barn_shell",
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        12,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            4,
+            15,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            4,
+            15,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            4,
+            14,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "ridge_vent",
+      "from": [
+        3,
+        12,
+        4
+      ],
+      "to": [
+        13,
+        16,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            0,
+            13,
+            4
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            0,
+            13,
+            4
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            0,
+            12,
+            4
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            13,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "louver_west",
+      "from": [
+        0,
+        3,
+        4
+      ],
+      "to": [
+        2,
+        10,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            6,
+            2,
+            13
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            14,
+            6,
+            16,
+            13
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            4,
+            2,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            4,
+            2,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "louver_east",
+      "from": [
+        14,
+        3,
+        4
+      ],
+      "to": [
+        16,
+        10,
+        12
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            14,
+            6,
+            16,
+            13
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            6,
+            2,
+            13
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            4,
+            6,
+            12,
+            13
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            14,
+            4,
+            16,
+            12
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            14,
+            4,
+            16,
+            12
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "loading_door",
+      "from": [
+        4,
+        0,
+        14
+      ],
+      "to": [
+        12,
+        8,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            8,
+            12,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            4,
+            8,
+            12,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            0,
+            8,
+            2,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            14,
+            8,
+            16,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            4,
+            14,
+            12,
+            16
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            4,
+            0,
+            12,
+            2
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "hanging_rack",
+      "from": [
+        3,
+        8,
+        5
+      ],
+      "to": [
+        13,
+        10,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            6,
+            13,
+            8
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            6,
+            13,
+            8
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            6,
+            11,
+            8
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            6,
+            11,
+            8
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            5,
+            13,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

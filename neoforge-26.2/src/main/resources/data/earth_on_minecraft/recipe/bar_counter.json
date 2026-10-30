@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "SSS",
+    "S S"
+  ],
+  "key": {
+    "P": "minecraft:stripped_oak_log",
+    "S": "minecraft:oak_planks"
+  },
+  "result": {
+    "id": "earth_on_minecraft:bar_counter",
+    "count": 1
+  }
+}

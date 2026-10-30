@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "III",
+    " I ",
+    "SSS"
+  ],
+  "key": {
+    "I": "minecraft:iron_block",
+    "S": "minecraft:stone"
+  },
+  "result": {
+    "id": "earth_on_minecraft:anvil",
+    "count": 1
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "earth_on_minecraft:block/depleted_andesite_volcanic_belt"
+  }
+}

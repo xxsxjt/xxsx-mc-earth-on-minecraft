@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "SCS",
+    "LLL"
+  ],
+  "key": {
+    "S": "minecraft:cobblestone",
+    "C": "minecraft:charcoal",
+    "L": "minecraft:oak_log"
+  },
+  "result": {
+    "id": "earth_on_minecraft:campfire",
+    "count": 1
+  }
+}

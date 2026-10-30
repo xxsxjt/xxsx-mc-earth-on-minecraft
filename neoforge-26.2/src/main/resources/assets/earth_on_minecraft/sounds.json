@@ -188,6 +188,330 @@
       }
     ]
   },
+  "machine.anvil.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/anvil/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.bar_counter.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/bar_counter/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.campfire.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/campfire/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.carpentry_bench.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/carpentry_bench/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.casting_table.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/casting_table/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.coffee_roaster.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/coffee_roaster/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.condenser.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/condenser/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.converter.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/converter/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.curing_barn.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/curing_barn/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.fermenting_crock.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/fermenting_crock/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.filter_press.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/filter_press/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.gem_cutter.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/gem_cutter/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.herb_processing_table.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/herb_processing_table/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.loom.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/loom/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.mill.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/mill/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.noodle_press.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/noodle_press/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.oil_press.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/oil_press/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.rice_huller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/rice_huller/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.smelter.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/smelter/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.smokehouse.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/smokehouse/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.steamer.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/steamer/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.steamer_basket.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/steamer_basket/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.still.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/still/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.stone_mill.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/stone_mill/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.stove.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/stove/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.tablet_press.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/tablet_press/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.tannery.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/tannery/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.tea_kiln.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/tea_kiln/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.thickener.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/thickener/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.water_treatment_unit.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/water_treatment_unit/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.bloomery_controller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/bloomery_controller/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.bread_oven_controller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/bread_oven_controller/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.glass_kiln_controller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/glass_kiln_controller/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.lime_kiln_controller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/lime_kiln_controller/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.pit_kiln_controller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/pit_kiln_controller/run",
+        "volume": 0.72
+      }
+    ]
+  },
+  "machine.shaft_furnace_controller.run": {
+    "subtitle": "subtitles.earth_on_minecraft.machine.running",
+    "sounds": [
+      {
+        "name": "earth_on_minecraft:machine/shaft_furnace_controller/run",
+        "volume": 0.72
+      }
+    ]
+  },
   "device.combustion_generator.run": {
     "subtitle": "subtitles.earth_on_minecraft.machine.running",
     "sounds": [

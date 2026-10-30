@@ -37,6 +37,10 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
     private static final int STATUS_Y = 62;
     private static final int STATUS_W = 69;
     private static final int STATUS_H = 11;
+    private static final int TANK_X = 58;
+    private static final int TANK_Y = 18;
+    private static final int TANK_W = 8;
+    private static final int TANK_H = 16;
 
     private Button redstoneButton;
     private Button routeButton;
@@ -47,7 +51,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         this.titleLabelX = 8;
         this.titleLabelY = 6;
         this.inventoryLabelX = 8;
-        this.inventoryLabelY = 73;
+        this.inventoryLabelY = 94;
     }
 
     @Override
@@ -59,7 +63,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
 
         if (!isMultiblockMachine()) {
             sideConfigButton = addRenderableWidget(Button.builder(Component.empty(), b ->
-                            Minecraft.getInstance().gui.pushScreenLayer(new MachineSideConfigScreen(menu)))
+                            Minecraft.getInstance().setScreen(new MachineSideConfigScreen(menu)))
                     .bounds(leftPos + SIDE_X, topPos + CONTROLS_Y, ICON_BUTTON_SIZE, ICON_BUTTON_SIZE)
                     .tooltip(Tooltip.create(Component.translatable("screen.earth_on_minecraft.side.config.open.tooltip")))
                     .build());
@@ -93,6 +97,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
                 0.0F, 0.0F, imageWidth, imageHeight, 256, 256);
         drawMachineIdentity(g);
         drawGridOnlyPowerSlot(g);
+        drawTank(g);
         drawFuel(g);
         drawProgress(g);
     }
@@ -136,8 +141,25 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         drawPowerGlyph(g, x + 3, y + 2, menu.processFamily().accentColor());
     }
 
-    private void drawFuel(GuiGraphicsExtractor g) {
-        if (!menu.acceptsLocalFuel() || menu.burnTimeTotal() <= 0) {
+    /**
+     * Draws a vertical gauge next to the input slot. It is only shown for routes that consume or
+     * produce a fluid so item-only machines keep their original layout.
+     */
+    private void drawTank(GuiGraphicsExtractor g) {
+        if (!menu.usesFluid() && menu.tankAmount() <= 0) {
+            return;
+        }
+        int x = leftPos + TANK_X;
+        int y = topPos + TANK_Y;
+        EarthGuiSupport.drawInset(g, x, y, TANK_W, TANK_H);
+        int capacity = menu.tankCapacity();
+        int filled = Math.min(TANK_H, TANK_H * menu.tankAmount() / capacity);
+        if (filled > 0) {
+            g.fill(x + 1, y + TANK_H - filled, x + TANK_W - 1, y + TANK_H - 1, 0xFF3E7CC4);
+        }
+    }
+
+    private void drawFuel(GuiGraphicsExtractor g) {        if (!menu.acceptsLocalFuel() || menu.burnTimeTotal() <= 0) {
             return;
         }
         int lit = Math.min(14, 14 * menu.burnTime() / menu.burnTimeTotal());
@@ -190,13 +212,22 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             if (redstonePaused()) {
                 return localized("screen.earth_on_minecraft.machine.redstone_paused_short");
             }
+            if (recipe.requiresCoke() && !hasCokeCharge()) {
+                return localized("screen.earth_on_minecraft.machine.missing_reductant_short");
+            }
+            if (menu.secondaryInputsMissing()) {
+                return localized("screen.earth_on_minecraft.machine.missing_secondary_short");
+            }
+            if (menu.fluidInputsMissing()) {
+                return localized("screen.earth_on_minecraft.machine.missing_fluid_short");
+            }
             if (menu.outputsBlocked()) {
                 return localized("screen.earth_on_minecraft.machine.outputs_full_short");
             }
             if (menu.active()) {
                 return localized("screen.earth_on_minecraft.machine.running");
             }
-            if (!menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
+            if (menu.needsExternalPower() && !menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
                 return localized(menu.acceptsLocalFuel()
                         ? "screen.earth_on_minecraft.machine.missing_power_short"
                         : "screen.earth_on_minecraft.machine.missing_grid_power_short");
@@ -219,10 +250,19 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             if (redstonePaused()) {
                 return localized("screen.earth_on_minecraft.machine.redstone_paused");
             }
+            if (recipe.requiresCoke() && !hasCokeCharge()) {
+                return localized("screen.earth_on_minecraft.machine.missing_reductant");
+            }
+            if (menu.secondaryInputsMissing()) {
+                return localized("screen.earth_on_minecraft.machine.missing_secondary");
+            }
+            if (menu.fluidInputsMissing()) {
+                return localized("screen.earth_on_minecraft.machine.missing_fluid");
+            }
             if (menu.outputsBlocked()) {
                 return localized("screen.earth_on_minecraft.machine.outputs_full");
             }
-            if (!menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
+            if (menu.needsExternalPower() && !menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
                 return localized(menu.acceptsLocalFuel()
                         ? "screen.earth_on_minecraft.machine.missing_power"
                         : "screen.earth_on_minecraft.machine.missing_grid_power");
@@ -236,16 +276,19 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             return EarthGuiSupport.WARNING;
         }
         ItemStack input = menu.getSlot(ProcessingMachineBlockEntity.SLOT_INPUT).getItem();
-        if (!input.isEmpty() && ProcessingMachineBlock.findRecipe(menu.kind(), input).isEmpty()) {
+        if (!input.isEmpty() && !ProcessingMachineBlock.acceptsInput(menu.kind(), input)) {
             return EarthGuiSupport.WARNING;
         }
-        if (!input.isEmpty() && (redstonePaused() || menu.outputsBlocked())) {
+        if (!input.isEmpty() && (redstonePaused() || menu.outputsBlocked() || menu.secondaryInputsMissing()
+                || menu.fluidInputsMissing()
+                || menu.selectedRecipe().map(recipe -> recipe.requiresCoke() && !hasCokeCharge()).orElse(false))) {
             return EarthGuiSupport.WARNING;
         }
         if (menu.active()) {
             return 0xFF207030;
         }
-        if (!input.isEmpty() && !menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
+        if (!input.isEmpty() && menu.needsExternalPower() && !menu.gridPowered()
+                && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
             return EarthGuiSupport.WARNING;
         }
         return EarthGuiSupport.MUTED;
@@ -266,6 +309,18 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         }
         if (isHovering(38, 57, 18, 18, mouseX, mouseY)) {
             g.setComponentTooltipForNextFrame(font, powerTooltip(), mouseX, mouseY);
+        }
+        if (isHovering(TANK_X, TANK_Y, TANK_W, TANK_H, mouseX, mouseY)) {
+            g.setComponentTooltipForNextFrame(font, List.of(
+                    Component.translatable("screen.earth_on_minecraft.machine.tank",
+                            menu.tankAmount(), menu.tankCapacity()),
+                    Component.translatable("screen.earth_on_minecraft.machine.tank.tooltip")
+            ), mouseX, mouseY);
+        }
+        if (isHovering(80, 76, 18, 18, mouseX, mouseY)
+                && menu.kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE) {
+            g.setComponentTooltipForNextFrame(font,
+                    List.of(Component.translatable("screen.earth_on_minecraft.machine.reductant.tooltip")), mouseX, mouseY);
         }
         if (isHovering(STATUS_X, STATUS_Y, STATUS_W, STATUS_H, mouseX, mouseY)
                 || isHovering(64, 38, 24, 16, mouseX, mouseY)) {
@@ -351,6 +406,11 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         return ProcessingMachineBlockEntity.getFuelTicks(fuel) > 0;
     }
 
+    private boolean hasCokeCharge() {
+        ItemStack reagent = menu.getSlot(ProcessingMachineBlockEntity.SLOT_REAGENT).getItem();
+        return !reagent.isEmpty() && reagent.getItem() == com.xxsx.earthonminecraft.EarthOnMinecraft.COKE.get();
+    }
+
     private boolean redstonePaused() {
         var level = Minecraft.getInstance().level;
         return level != null && !menu.redstoneMode().allows(level.hasNeighborSignal(menu.pos()));
@@ -361,7 +421,9 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         tooltip.add(Component.translatable(menu.powerMode().labelKey()));
         tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.spec",
                 secondsPerOperation(), menu.energyPerTick()));
-        if (menu.acceptsLocalFuel()) {
+        if (menu.powerMode().passive()) {
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.passive.tooltip"));
+        } else if (menu.acceptsLocalFuel()) {
             tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.fuel.tooltip"));
             tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.fuel.examples"));
         } else {

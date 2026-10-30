@@ -2,13 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "IRI",
-    "RMR",
-    "III"
+    "CCC",
+    "CMC",
+    "CCC"
   ],
   "key": {
-    "I": "minecraft:iron_ingot",
-    "R": "minecraft:redstone",
+    "C": "minecraft:copper_ingot",
     "M": "earth_on_minecraft:magnetite_chunk"
   },
   "result": {

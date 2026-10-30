@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "water_treatment_unit",
+  "model_identifier": "earth_on_minecraft:water_treatment_unit",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "skid_frame",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        3,
+        15
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "104e12b5-9bbe-54c2-9194-3f68ac60becd",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            1,
+            13,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "pressure_vessel",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        3,
+        4
+      ],
+      "to": [
+        10,
+        15,
+        12
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "5ae79504-b1a7-592d-bf40-af9978b5a762",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            1,
+            10,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            6,
+            1,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            1,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            1,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            4,
+            10,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            4,
+            10,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "gauge_panel",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        10,
+        6,
+        3
+      ],
+      "to": [
+        13,
+        13,
+        12
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "83fc18f7-b300-5bc1-9bfb-9bc8490ca1ea",
+      "faces": {
+        "north": {
+          "uv": [
+            10,
+            3,
+            13,
+            10
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            3,
+            6,
+            10
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            3,
+            13,
+            10
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            3,
+            12,
+            10
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            10,
+            3,
+            13,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            10,
+            4,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "raw_water_inlet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        0,
+        5,
+        5
+      ],
+      "to": [
+        3,
+        9,
+        11
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "dbf779b6-db56-598d-a76e-ac6d82748d4a",
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            7,
+            3,
+            11
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            13,
+            7,
+            16,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            7,
+            11,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            7,
+            11,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            0,
+            5,
+            3,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "treated_outlet",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        12,
+        3,
+        4
+      ],
+      "to": [
+        16,
+        7,
+        12
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "4c3d67c3-a9e3-595d-8d29-5b3c4373c23b",
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            9,
+            16,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            9,
+            4,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            9,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            9,
+            12,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            12,
+            4,
+            16,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12,
+            4,
+            16,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "backwash_drain",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        0,
+        13
+      ],
+      "to": [
+        12,
+        3,
+        16
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "ae480806-f991-5bc7-b0cf-8354aa65b2d4",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            13,
+            12,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            13,
+            12,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            13,
+            13,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            13,
+            12,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            0,
+            12,
+            3
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "104e12b5-9bbe-54c2-9194-3f68ac60becd",
+    "5ae79504-b1a7-592d-bf40-af9978b5a762",
+    "83fc18f7-b300-5bc1-9bfb-9bc8490ca1ea",
+    "dbf779b6-db56-598d-a76e-ac6d82748d4a",
+    "4c3d67c3-a9e3-595d-8d29-5b3c4373c23b",
+    "ae480806-f991-5bc7-b0cf-8354aa65b2d4"
+  ],
+  "textures": [
+    {
+      "name": "water_treatment_unit.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "09f93d9f-7a80-5cc2-bc0f-19c609ab0f4f",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/water_treatment_unit.png"
+    },
+    {
+      "name": "wet_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "31a85def-7245-5aaf-baff-46b21859fe59",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/wet_machine_side.png"
+    },
+    {
+      "name": "wet_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "86ed510c-65cf-56b6-a264-51bde1430d2c",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/wet_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "pressurized media filter skid",
+    "silhouette": "upright pressure vessel with a gauge panel and pipe manifold",
+    "faces": {
+      "front": "filter bank and gauge panel",
+      "back": "backwash drain",
+      "left": "raw water inlet",
+      "right": "treated water outlet",
+      "top": "pressure vessel top",
+      "bottom": "brine sump"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/water_treatment_unit",
+        "front": "earth_on_minecraft:block/water_treatment_unit",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/water_treatment_unit_active",
+        "front": "earth_on_minecraft:block/water_treatment_unit_active",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/water_treatment_unit",
+        "front": "earth_on_minecraft:block/water_treatment_unit",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

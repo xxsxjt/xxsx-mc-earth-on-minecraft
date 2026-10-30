@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:blasting",
-  "group": "iron_ingot",
-  "ingredient": "earth_on_minecraft:magnetite_dust",
-  "result": {
-    "id": "minecraft:iron_ingot"
-  },
-  "experience": 0.7
-}

@@ -1,0 +1,431 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/glass_kiln_controller",
+    "front": "earth_on_minecraft:block/glass_kiln_controller",
+    "back": "earth_on_minecraft:block/hot_machine_side",
+    "left": "earth_on_minecraft:block/hot_machine_side",
+    "right": "earth_on_minecraft:block/hot_machine_side",
+    "top": "earth_on_minecraft:block/hot_machine_top",
+    "bottom": "earth_on_minecraft:block/hot_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        4,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            1,
+            12,
+            15,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "barrel",
+      "from": [
+        2,
+        4,
+        2
+      ],
+      "to": [
+        14,
+        11,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            5,
+            14,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            5,
+            14,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            2,
+            5,
+            14,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            5,
+            14,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "crown",
+      "from": [
+        3,
+        11,
+        3
+      ],
+      "to": [
+        13,
+        14,
+        13
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            2,
+            13,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            2,
+            13,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            3,
+            2,
+            13,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            3,
+            2,
+            13,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "gather_port",
+      "from": [
+        12,
+        4,
+        6
+      ],
+      "to": [
+        15,
+        9,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            7,
+            15,
+            12
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            7,
+            4,
+            12
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            7,
+            10,
+            12
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            6,
+            7,
+            10,
+            12
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            12,
+            6,
+            15,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            12,
+            6,
+            15,
+            10
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "charging_chute",
+      "from": [
+        6,
+        11,
+        0
+      ],
+      "to": [
+        10,
+        14,
+        4
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6,
+            2,
+            10,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            6,
+            2,
+            10,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            12,
+            2,
+            16,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            0,
+            2,
+            4,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            6,
+            0,
+            10,
+            4
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            6,
+            12,
+            10,
+            16
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "firebox",
+      "from": [
+        0,
+        1,
+        6
+      ],
+      "to": [
+        3,
+        4,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            12,
+            3,
+            15
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            13,
+            12,
+            16,
+            15
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            6,
+            12,
+            10,
+            15
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            6,
+            12,
+            10,
+            15
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            0,
+            6,
+            3,
+            10
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            0,
+            6,
+            3,
+            10
+          ],
+          "texture": "#bottom"
+        }
+      }
+    }
+  ]
+}

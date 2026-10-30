@@ -2,6 +2,8 @@ package com.xxsx.earthonminecraft;
 
 import com.mojang.logging.LogUtils;
 import com.xxsx.earthonminecraft.client.EarthOnMinecraftClient;
+import com.xxsx.earthonminecraft.component.EarthDataComponents;
+import com.xxsx.earthonminecraft.component.QualityComponents;
 import com.xxsx.earthonminecraft.living.ResidentProfileManager;
 import com.xxsx.earthonminecraft.living.SettlementDataManager;
 import net.minecraft.core.registries.Registries;
@@ -16,6 +18,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
@@ -24,10 +27,14 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 
@@ -44,6 +51,8 @@ public class EarthOnMinecraft {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, MODID);
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
+    public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, MODID);
+    public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, MODID);
 
     private static final List<ItemLike> TAB_ITEMS = new ArrayList<>();
     private static final List<DeferredBlock<ProcessingMachineBlock>> MACHINE_BLOCKS = new ArrayList<>();
@@ -89,6 +98,56 @@ public class EarthOnMinecraft {
     public static final DeferredBlock<ProcessingMachineBlock> STEAM_CRACKER = machineBlock("steam_cracker", ProcessingMachineBlock.Kind.STEAM_CRACKER);
     public static final DeferredBlock<ProcessingMachineBlock> SYNTHESIS_LOOP = machineBlock("synthesis_loop", ProcessingMachineBlock.Kind.SYNTHESIS_LOOP);
     public static final DeferredBlock<ProcessingMachineBlock> ABSORPTION_TOWER = machineBlock("absorption_tower", ProcessingMachineBlock.Kind.ABSORPTION_TOWER);
+    public static final DeferredBlock<ProcessingMachineBlock> ANVIL = machineBlock("anvil", ProcessingMachineBlock.Kind.ANVIL);
+    public static final DeferredBlock<ProcessingMachineBlock> BLOOMERY =
+            machineBlock("bloomery_controller", ProcessingMachineBlock.Kind.BLOOMERY);
+    public static final DeferredBlock<ProcessingMachineBlock> BREAD_OVEN =
+            machineBlock("bread_oven_controller", ProcessingMachineBlock.Kind.BREAD_OVEN);
+    public static final DeferredBlock<ProcessingMachineBlock> GLASS_KILN =
+            machineBlock("glass_kiln_controller", ProcessingMachineBlock.Kind.GLASS_KILN);
+    public static final DeferredBlock<ProcessingMachineBlock> LIME_KILN =
+            machineBlock("lime_kiln_controller", ProcessingMachineBlock.Kind.LIME_KILN);
+    public static final DeferredBlock<ProcessingMachineBlock> PIT_KILN =
+            machineBlock("pit_kiln_controller", ProcessingMachineBlock.Kind.PIT_KILN);
+    public static final DeferredBlock<ProcessingMachineBlock> SHAFT_FURNACE =
+            machineBlock("shaft_furnace_controller", ProcessingMachineBlock.Kind.SHAFT_FURNACE);
+
+    public static final DeferredBlock<ProcessingMachineBlock> BAR_COUNTER = machineBlock("bar_counter", ProcessingMachineBlock.Kind.BAR_COUNTER);
+    public static final DeferredBlock<ProcessingMachineBlock> CAMPFIRE = machineBlock("campfire", ProcessingMachineBlock.Kind.CAMPFIRE);
+    public static final DeferredBlock<ProcessingMachineBlock> CARPENTRY_BENCH = machineBlock("carpentry_bench", ProcessingMachineBlock.Kind.CARPENTRY_BENCH);
+    public static final DeferredBlock<ProcessingMachineBlock> CASTING_TABLE = machineBlock("casting_table", ProcessingMachineBlock.Kind.CASTING_TABLE);
+    public static final DeferredBlock<ProcessingMachineBlock> COFFEE_ROASTER = machineBlock("coffee_roaster", ProcessingMachineBlock.Kind.COFFEE_ROASTER);
+    public static final DeferredBlock<ProcessingMachineBlock> CONDENSER = machineBlock("condenser", ProcessingMachineBlock.Kind.CONDENSER);
+    public static final DeferredBlock<ProcessingMachineBlock> CONVERTER = machineBlock("converter", ProcessingMachineBlock.Kind.CONVERTER);
+    public static final DeferredBlock<ProcessingMachineBlock> CURING_BARN = machineBlock("curing_barn", ProcessingMachineBlock.Kind.CURING_BARN);
+    public static final DeferredBlock<ProcessingMachineBlock> FERMENTING_CROCK = machineBlock("fermenting_crock", ProcessingMachineBlock.Kind.FERMENTING_CROCK);
+    public static final DeferredBlock<ProcessingMachineBlock> FILTER_PRESS = machineBlock("filter_press", ProcessingMachineBlock.Kind.FILTER_PRESS);
+    public static final DeferredBlock<ProcessingMachineBlock> GEM_CUTTER = machineBlock("gem_cutter", ProcessingMachineBlock.Kind.GEM_CUTTER);
+    public static final DeferredBlock<ProcessingMachineBlock> HERB_PROCESSING_TABLE = machineBlock("herb_processing_table", ProcessingMachineBlock.Kind.HERB_PROCESSING_TABLE);
+    public static final DeferredBlock<ProcessingMachineBlock> LOOM = machineBlock("loom", ProcessingMachineBlock.Kind.LOOM);
+    public static final DeferredBlock<ProcessingMachineBlock> MILL = machineBlock("mill", ProcessingMachineBlock.Kind.MILL);
+    public static final DeferredBlock<ProcessingMachineBlock> NOODLE_PRESS = machineBlock("noodle_press", ProcessingMachineBlock.Kind.NOODLE_PRESS);
+    public static final DeferredBlock<ProcessingMachineBlock> OIL_PRESS = machineBlock("oil_press", ProcessingMachineBlock.Kind.OIL_PRESS);
+    public static final DeferredBlock<ProcessingMachineBlock> RICE_HULLER = machineBlock("rice_huller", ProcessingMachineBlock.Kind.RICE_HULLER);
+    public static final DeferredBlock<ProcessingMachineBlock> SMELTER = machineBlock("smelter", ProcessingMachineBlock.Kind.SMELTER);
+    public static final DeferredBlock<ProcessingMachineBlock> SMOKEHOUSE = machineBlock("smokehouse", ProcessingMachineBlock.Kind.SMOKEHOUSE);
+    public static final DeferredBlock<ProcessingMachineBlock> STEAMER = machineBlock("steamer", ProcessingMachineBlock.Kind.STEAMER);
+    public static final DeferredBlock<ProcessingMachineBlock> STEAMER_BASKET = machineBlock("steamer_basket", ProcessingMachineBlock.Kind.STEAMER_BASKET);
+    public static final DeferredBlock<ProcessingMachineBlock> STILL = machineBlock("still", ProcessingMachineBlock.Kind.STILL);
+    public static final DeferredBlock<ProcessingMachineBlock> STONE_MILL = machineBlock("stone_mill", ProcessingMachineBlock.Kind.STONE_MILL);
+    public static final DeferredBlock<ProcessingMachineBlock> STOVE = machineBlock("stove", ProcessingMachineBlock.Kind.STOVE);
+    public static final DeferredBlock<ProcessingMachineBlock> TABLET_PRESS = machineBlock("tablet_press", ProcessingMachineBlock.Kind.TABLET_PRESS);
+    public static final DeferredBlock<ProcessingMachineBlock> TANNERY = machineBlock("tannery", ProcessingMachineBlock.Kind.TANNERY);
+    public static final DeferredBlock<ProcessingMachineBlock> TEA_KILN = machineBlock("tea_kiln", ProcessingMachineBlock.Kind.TEA_KILN);
+    public static final DeferredBlock<ProcessingMachineBlock> THICKENER = machineBlock("thickener", ProcessingMachineBlock.Kind.THICKENER);
+    public static final DeferredBlock<ProcessingMachineBlock> WATER_TREATMENT_UNIT = machineBlock("water_treatment_unit", ProcessingMachineBlock.Kind.WATER_TREATMENT_UNIT);
+    public static final DeferredBlock<IronworkingAnvilBlock> IRONWORKING_ANVIL = BLOCKS.registerBlock(
+            "ironworking_anvil", IronworkingAnvilBlock::new,
+            () -> BlockBehaviour.Properties.of()
+                    .mapColor(MapColor.STONE)
+                    .strength(3.0F, 6.0F)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE));
 
     public static final DeferredBlock<StyledSupportPartBlock> INDUSTRIAL_MACHINE_CASING = supportBlock("industrial_machine_casing", MapColor.METAL, 4.5F, "tooltip.earth_on_minecraft.support.casing");
     public static final DeferredBlock<StyledSupportPartBlock> STEEL_PROCESS_PIPE = supportBlock("steel_process_pipe", MapColor.METAL, 3.0F, "tooltip.earth_on_minecraft.support.pipe");
@@ -105,12 +164,32 @@ public class EarthOnMinecraft {
     public static final DeferredBlock<ConveyorBeltBlock> CONVEYOR_BELT = conveyorBeltBlock("conveyor_belt");
     public static final DeferredBlock<SettlementBoardBlock> SETTLEMENT_BOARD = settlementBoardBlock("settlement_board");
 
+    /** Industrial bore head: works nearby lodes for the player. */
+    public static final DeferredBlock<MinerBlock> MINER = minerBlock("bore_head");
+
+    /** Quarry: bulk rock extraction for sites with no ore body. */
+    public static final DeferredBlock<QuarryBlock> QUARRY = quarryBlock("quarry");
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ProcessingMachineBlockEntity>> PROCESSING_MACHINE_BLOCK_ENTITY =
             BLOCK_ENTITY_TYPES.register("processing_machine", () -> new BlockEntityType<>(
                     ProcessingMachineBlockEntity::new,
                     MACHINE_BLOCKS.stream().map(DeferredBlock::get).toArray(Block[]::new)));
     public static final DeferredHolder<MenuType<?>, MenuType<ProcessingMachineMenu>> PROCESSING_MACHINE_MENU =
             MENUS.register("processing_machine", () -> IMenuTypeExtension.create(ProcessingMachineMenu::new));
+
+    /** Bore head: works lodes without a player. One entity type, one block. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MinerBlockEntity>> MINER_BLOCK_ENTITY =
+            BLOCK_ENTITY_TYPES.register("bore_head", () -> new BlockEntityType<>(
+                    MinerBlockEntity::new, MINER.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuarryBlockEntity>> QUARRY_BLOCK_ENTITY =
+            BLOCK_ENTITY_TYPES.register("quarry", () -> new BlockEntityType<>(
+                    QuarryBlockEntity::new, QUARRY.get()));
+
+    /** Every lode and depleted block carries a finite reserve. */
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DepositBlockEntity>> DEPOSIT_BLOCK_ENTITY =
+            BLOCK_ENTITY_TYPES.register("deposit", () -> new BlockEntityType<>(
+                    DepositBlockEntity::new, depositBlocks().toArray(Block[]::new)));
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnergyGeneratorBlockEntity>> ENERGY_GENERATOR_BLOCK_ENTITY =
             BLOCK_ENTITY_TYPES.register("combustion_generator", () -> new BlockEntityType<>(
                     EnergyGeneratorBlockEntity::new,
@@ -164,6 +243,11 @@ public class EarthOnMinecraft {
     public static final DeferredItem<Item> MAFIC_SILICATE_DUST = item("mafic_silicate_dust");
     public static final DeferredItem<Item> ALUMINOSILICATE_DUST = item("aluminosilicate_dust");
     public static final DeferredItem<Item> IRON_CONCENTRATE = item("iron_concentrate");
+    public static final DeferredItem<Item> SPONGE_IRON = item("sponge_iron");
+    public static final DeferredItem<Item> WROUGHT_IRON = item("wrought_iron");
+    public static final DeferredItem<GeologyHammerItem> GEOLOGY_HAMMER = item("geology_hammer", GeologyHammerItem::new);
+    public static final DeferredItem<?> IRONWORKING_ANVIL_ITEM = itemForBlock(
+            "ironworking_anvil", IRONWORKING_ANVIL, "tooltip.earth_on_minecraft.ironworking_anvil");
     public static final DeferredItem<Item> COPPER_CONCENTRATE = item("copper_concentrate");
     public static final DeferredItem<Item> GOLD_CONCENTRATE = item("gold_concentrate");
     public static final DeferredItem<Item> ROASTED_COPPER_CONCENTRATE = item("roasted_copper_concentrate");
@@ -383,12 +467,22 @@ public class EarthOnMinecraft {
     public static final DeferredItem<FieldGeologyNotebookItem> FIELD_GEOLOGY_NOTEBOOK = notebookItem("field_geology_notebook");
 
     public EarthOnMinecraft(IEventBus modBus) {
+        EarthDataComponents.COMPONENTS.register(modBus);
+        SpecItems.register();
+        SpecBlocks.register();
+        SpecDepletedBlocks.register();
+        SpecFluids.register(FLUID_TYPES, FLUIDS);
         addLegacyAliases();
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         BLOCK_ENTITY_TYPES.register(modBus);
         MENUS.register(modBus);
+        FLUID_TYPES.register(modBus);
+        FLUIDS.register(modBus);
         MachineFeedback.register(modBus);
+        modBus.addListener(this::registerCapabilities);
+        modBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) ->
+                event.enqueueWork(DepositSpec::bind));
         EarthGameTests.register(modBus);
         modBus.addListener(this::registerCreativeTab);
         NeoForge.EVENT_BUS.addListener(EarthOnMinecraftTooltips::addVanillaTooltips);
@@ -403,6 +497,16 @@ public class EarthOnMinecraft {
             EarthOnMinecraftClient.register(modBus);
         }
         LOGGER.info("[Earth on Minecraft] NeoForge 26.2 module loaded");
+    }
+
+    /**
+     * Exposes each processing machine's fluid tank on every side so pipes and buckets can fill or
+     * drain it. Machines without a fluid route still carry an empty tank; that costs nothing and
+     * keeps the capability uniform.
+     */
+    private void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK, PROCESSING_MACHINE_BLOCK_ENTITY.get(),
+                (machine, side) -> machine.tank());
     }
 
     private static void addLegacyAliases() {
@@ -420,11 +524,12 @@ public class EarthOnMinecraft {
     }
 
     private static DeferredBlock<Block> oreBlock(String id, MapColor color, float strength) {
-        DeferredBlock<Block> block = BLOCKS.registerSimpleBlock(id, () -> BlockBehaviour.Properties.of()
-                .mapColor(color)
-                .strength(strength, strength * 2.0F)
-                .requiresCorrectToolForDrops()
-                .sound(SoundType.STONE));
+        DeferredBlock<Block> block = BLOCKS.registerBlock(id, DepositBlock::new,
+                () -> BlockBehaviour.Properties.of()
+                        .mapColor(color)
+                        .strength(strength, strength * 2.0F)
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.STONE));
         CONNECTED_ORE_BLOCKS.add(block);
         DeferredItem<?> item = ITEMS.registerItem(id,
                 props -> new GuidedBlockItem(block.get(), props, "tooltip.earth_on_minecraft.natural_source"),
@@ -439,6 +544,10 @@ public class EarthOnMinecraft {
 
     public static List<DeferredBlock<ProcessingMachineBlock>> processingMachineBlocks() {
         return List.copyOf(MACHINE_BLOCKS);
+    }
+
+    public static void addTabItem(ItemLike item) {
+        TAB_ITEMS.add(item);
     }
 
     private static DeferredBlock<StyledSupportPartBlock> supportBlock(String id, MapColor color, float strength, String hintKey) {
@@ -491,6 +600,7 @@ public class EarthOnMinecraft {
                 () -> BlockBehaviour.Properties.of()
                         .mapColor(MapColor.METAL)
                         .strength(4.0F, 8.0F)
+                        .noOcclusion()
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.METAL));
         DeferredItem<?> item = ITEMS.registerItem(id,
@@ -505,6 +615,7 @@ public class EarthOnMinecraft {
                 () -> BlockBehaviour.Properties.of()
                         .mapColor(MapColor.METAL)
                         .strength(4.0F, 8.0F)
+                        .noOcclusion()
                         .requiresCorrectToolForDrops()
                         .sound(SoundType.METAL));
         DeferredItem<?> item = ITEMS.registerItem(id,
@@ -513,6 +624,12 @@ public class EarthOnMinecraft {
         TAB_ITEMS.add(item);
         MACHINE_BLOCKS.add(block);
         return block;
+    }
+
+    private static DeferredItem<GeologyHammerItem> item(String id, java.util.function.Function<Item.Properties, GeologyHammerItem> factory) {
+        DeferredItem<GeologyHammerItem> item = ITEMS.registerItem(id, factory, props -> props);
+        TAB_ITEMS.add(item);
+        return item;
     }
 
     private static DeferredBlock<EnergyGeneratorBlock> energyGeneratorBlock(String id) {
@@ -561,6 +678,54 @@ public class EarthOnMinecraft {
         return block;
     }
 
+    private static DeferredBlock<QuarryBlock> quarryBlock(String id) {
+        DeferredBlock<QuarryBlock> block = BLOCKS.registerBlock(id, QuarryBlock::new,
+                () -> BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.STONE)
+                        .strength(4.0F, 8.0F)
+                        .noOcclusion()
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.METAL));
+        DeferredItem<?> item = ITEMS.registerItem(id,
+                props -> new GuidedBlockItem(block.get(), props, "tooltip.earth_on_minecraft.automation.quarry"),
+                props -> props);
+        TAB_ITEMS.add(item);
+        return block;
+    }
+
+    private static DeferredBlock<MinerBlock> minerBlock(String id) {
+        DeferredBlock<MinerBlock> block = BLOCKS.registerBlock(id, MinerBlock::new,
+                () -> BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.METAL)
+                        .strength(4.0F, 8.0F)
+                        .noOcclusion()
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.METAL));
+        DeferredItem<?> item = ITEMS.registerItem(id,
+                props -> new GuidedBlockItem(block.get(), props, "tooltip.earth_on_minecraft.automation.bore_head"),
+                props -> props);
+        TAB_ITEMS.add(item);
+        return block;
+    }
+
+    /**
+     * Every block that carries a {@link DepositBlockEntity}: the 24 generated lode blocks plus the
+     * 37 depleted forms. Both need the entity so a reserve survives being worked down to nothing.
+     */
+    public static java.util.List<Block> depositBlocks() {
+        java.util.List<Block> blocks = new java.util.ArrayList<>();
+        for (DeferredBlock<Block> holder : CONNECTED_ORE_BLOCKS) {
+            blocks.add(holder.get());
+        }
+        for (DeferredBlock<Block> holder : SpecBlocks.oreBlocks()) {
+            blocks.add(holder.get());
+        }
+        for (DeferredBlock<Block> holder : SpecDepletedBlocks.BY_ID.values()) {
+            blocks.add(holder.get());
+        }
+        return blocks;
+    }
+
     private static DeferredBlock<ConveyorBeltBlock> conveyorBeltBlock(String id) {
         DeferredBlock<ConveyorBeltBlock> block = BLOCKS.registerBlock(id, ConveyorBeltBlock::new,
                 () -> BlockBehaviour.Properties.of()
@@ -591,7 +756,16 @@ public class EarthOnMinecraft {
     }
 
     private static DeferredItem<Item> item(String id) {
-        DeferredItem<Item> item = ITEMS.registerItem(id, GuidedMaterialItem::new, props -> props);
+        DeferredItem<Item> item = ITEMS.registerItem(id, GuidedMaterialItem::new,
+                props -> QualityComponents.applyDefaults(id, props));
+        TAB_ITEMS.add(item);
+        return item;
+    }
+
+    private static DeferredItem<?> itemForBlock(String id, DeferredBlock<? extends Block> block, String hintKey) {
+        DeferredItem<?> item = ITEMS.registerItem(id,
+                props -> new GuidedBlockItem(block.get(), props, hintKey),
+                props -> props);
         TAB_ITEMS.add(item);
         return item;
     }

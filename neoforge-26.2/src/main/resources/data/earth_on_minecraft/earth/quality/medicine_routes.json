@@ -1,0 +1,1608 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "routes": [
+    {
+      "id": "forceps",
+      "machine": "anvil",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:steel",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:forceps",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "scalpel",
+      "machine": "anvil",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:steel",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:scalpel",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "syringe",
+      "machine": "anvil",
+      "inputs": [
+        {
+          "item": "minecraft:glass_bottle",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:steel",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:syringe",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "acetic_anhydride",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:acetone",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 16,
+      "note": "ketene route from acetone"
+    },
+    {
+      "id": "acetylsalicylic_acid",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:salicylic_acid",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:acetylsalicylic_acid",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 18,
+      "note": "acetylate salicylic acid"
+    },
+    {
+      "id": "anticoagulant",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:salicylic_acid",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:anticoagulant",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 22,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "anticonvulsant",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:benzene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:urea",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:anticonvulsant",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 22,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "antidepressant",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:toluene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antidepressant",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 22,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "antidiabetic",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sulfanilamide",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:urea",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antidiabetic",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "energy": 24,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "antifungal_agent",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:chlorine_gas_cell",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antifungal_agent",
+          "count": 1
+        }
+      ],
+      "ticks": 140,
+      "energy": 18,
+      "note": "wound care"
+    },
+    {
+      "id": "antihistamine",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antihistamine",
+          "count": 1
+        }
+      ],
+      "ticks": 140,
+      "energy": 18,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "antihypertensive",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:nitric_acid",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antihypertensive",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "energy": 24,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "antipsychotic",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:chlorine_gas_cell",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antipsychotic",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "energy": 24,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "antiviral_agent",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:benzene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antiviral_agent",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 24,
+      "note": "wound care"
+    },
+    {
+      "id": "bronchodilator",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bronchodilator",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 22,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "chemotherapy_agent",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:nitrotoluene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:benzene",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chemotherapy_agent",
+          "count": 1
+        }
+      ],
+      "ticks": 260,
+      "energy": 30,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "chloramphenicol",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:benzene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:nitric_acid",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chloramphenicol",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 24,
+      "note": "wound care"
+    },
+    {
+      "id": "chloroform",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:acetone",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:chlorine_gas_cell",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:chloroform",
+          "count": 1
+        }
+      ],
+      "ticks": 140,
+      "energy": 18,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "codeine",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:morphine",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:methanol",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:codeine",
+          "count": 1
+        }
+      ],
+      "ticks": 160,
+      "energy": 20,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "corticosteroid",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glycerol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:corticosteroid",
+          "count": 1
+        }
+      ],
+      "ticks": 220,
+      "energy": 26,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "fentanyl",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:aniline",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:fentanyl",
+          "count": 1
+        }
+      ],
+      "ticks": 260,
+      "energy": 30,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "ibuprofen",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:benzene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:ibuprofen",
+          "count": 1
+        }
+      ],
+      "ticks": 160,
+      "energy": 22,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "lidocaine",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:toluene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:lidocaine",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "energy": 24,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "melatonin",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:toluene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:melatonin",
+          "count": 1
+        }
+      ],
+      "ticks": 160,
+      "energy": 20,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "morphine",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:corydalis",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:lime",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:morphine",
+          "count": 1
+        }
+      ],
+      "ticks": 240,
+      "energy": 26,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "muscle_relaxant",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glycerol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:ammonia",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:muscle_relaxant",
+          "count": 1
+        }
+      ],
+      "ticks": 160,
+      "energy": 20,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "naloxone",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:morphine",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:naloxone",
+          "count": 1
+        }
+      ],
+      "ticks": 220,
+      "energy": 26,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "paracetamol",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:p_aminophenol",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:paracetamol",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 16,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "phenol",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:benzene",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:sulfuric_acid",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:phenol",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 20,
+      "note": "cumene-style oxidation of benzene to phenol"
+    },
+    {
+      "id": "potassium_iodide",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:iodine",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potassium_chloride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:potassium_iodide",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 14,
+      "note": "halide exchange over iodine"
+    },
+    {
+      "id": "sulfanilamide",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:aniline",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:acetic_anhydride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sulfanilamide",
+          "count": 1
+        }
+      ],
+      "ticks": 160,
+      "energy": 20,
+      "note": "wound care"
+    },
+    {
+      "id": "thyroxine",
+      "machine": "chemical_reactor",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:iodine",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:insect_protein",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:thyroxine",
+          "count": 1
+        }
+      ],
+      "ticks": 200,
+      "energy": 24,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "diethyl_ether",
+      "machine": "distillation_column",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ethanol",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:sulfuric_acid",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:diethyl_ether",
+          "count": 1
+        }
+      ],
+      "ticks": 140,
+      "energy": 18,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "toluene",
+      "machine": "distillation_column",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:coal_tar",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:toluene",
+          "count": 1
+        }
+      ],
+      "ticks": 140,
+      "energy": 24,
+      "note": "fractionate toluene out of coal tar"
+    },
+    {
+      "id": "glucose",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "minecraft:starch",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 1
+        }
+      ],
+      "ticks": 300,
+      "energy": 0,
+      "note": "enzymatic hydrolysis of starch"
+    },
+    {
+      "id": "immunosuppressant",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:immunosuppressant",
+          "count": 1
+        }
+      ],
+      "ticks": 700,
+      "energy": 0,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "penicillin",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:yeast",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:penicillin",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "statin",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:oat",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:statin",
+          "count": 1
+        }
+      ],
+      "ticks": 700,
+      "energy": 0,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "streptomycin",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 3
+        },
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:streptomycin",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "tetracycline",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bone_broth",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tetracycline",
+          "count": 1
+        }
+      ],
+      "ticks": 600,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "vancomycin",
+      "machine": "fermenting_crock",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 3
+        },
+        {
+          "item": "earth_on_minecraft:soybean",
+          "count": 3
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:vancomycin",
+          "count": 1
+        }
+      ],
+      "ticks": 800,
+      "energy": 0,
+      "note": "wound care"
+    },
+    {
+      "id": "sucrose",
+      "machine": "filter_press",
+      "inputs": [
+        {
+          "item": "minecraft:sugar",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:sucrose",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "refine and press cane sugar"
+    },
+    {
+      "id": "nitrous_oxide",
+      "machine": "industrial_kiln",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ammonium_nitrate",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:nitrous_oxide",
+          "count": 1
+        }
+      ],
+      "ticks": 160,
+      "energy": 20,
+      "note": "anaesthesia and analgesia"
+    },
+    {
+      "id": "iodine",
+      "machine": "leaching_tank",
+      "inputs": [
+        {
+          "item": "minecraft:kelp",
+          "count": 4
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:iodine",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 12,
+      "note": "leach iodine from kelp"
+    },
+    {
+      "id": "bandage",
+      "machine": "loom",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cotton_cloth",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:antiseptic_ethanol",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:bandage",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 4,
+      "note": "wound care"
+    },
+    {
+      "id": "suture_thread",
+      "machine": "loom",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:silk_thread",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:antiseptic_ethanol",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:suture_thread",
+          "count": 1
+        }
+      ],
+      "ticks": 100,
+      "energy": 4,
+      "note": "wound care"
+    },
+    {
+      "id": "tourniquet",
+      "machine": "loom",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:cotton_cloth",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:rope",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tourniquet",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 4,
+      "note": "wound care"
+    },
+    {
+      "id": "antibiotic_ointment",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:penicillin",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:wax",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antibiotic_ointment",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 8,
+      "note": "wound care"
+    },
+    {
+      "id": "antiseptic_ethanol",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:ethanol",
+          "count": 3
+        },
+        {
+          "item": "earth_on_minecraft:distilled_water",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antiseptic_ethanol",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "wound care"
+    },
+    {
+      "id": "antivenom",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:saline_solution",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bone_broth",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antivenom",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 10,
+      "note": "wound care"
+    },
+    {
+      "id": "burn_ointment",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:sulfanilamide",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:wax",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:burn_ointment",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 8,
+      "note": "wound care"
+    },
+    {
+      "id": "cough_syrup",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "minecraft:honey",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:citric_acid",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:glycerol",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:cough_syrup",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "glucose_injection",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:distilled_water",
+          "count": 4
+        },
+        {
+          "item": "earth_on_minecraft:glucose",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:glucose_injection",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "hydrogen_peroxide_solution",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:distilled_water",
+          "count": 3
+        },
+        {
+          "item": "earth_on_minecraft:hydrogen_peroxide",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:hydrogen_peroxide_solution",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "insulin",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:bone_broth",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:saline_solution",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:insulin",
+          "count": 1
+        }
+      ],
+      "ticks": 180,
+      "energy": 16,
+      "note": "chronic condition management"
+    },
+    {
+      "id": "laxative",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:magnesium_hydroxide",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:sucrose",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:laxative",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "oral_rehydration_salts",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "minecraft:salt",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:sucrose",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:potassium_chloride",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:oral_rehydration_salts",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "povidone_iodine",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:iodine",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:soap_base",
+          "count": 2
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:povidone_iodine",
+          "count": 1
+        }
+      ],
+      "ticks": 80,
+      "energy": 8,
+      "note": "wound care"
+    },
+    {
+      "id": "saline_solution",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:distilled_water",
+          "count": 4
+        },
+        {
+          "item": "minecraft:salt",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:saline_solution",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 6,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "tetanus_antitoxin",
+      "machine": "mixer",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:saline_solution",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:bone_broth",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:tetanus_antitoxin",
+          "count": 1
+        }
+      ],
+      "ticks": 120,
+      "energy": 10,
+      "note": "wound care"
+    },
+    {
+      "id": "styptic_powder",
+      "machine": "powder_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:alum",
+          "count": 2
+        },
+        {
+          "item": "earth_on_minecraft:calcium_sulfate",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:styptic_powder",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "wound care"
+    },
+    {
+      "id": "antacid_tablet",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:calcium_phosphate",
+          "count": 2
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:antacid_tablet",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "aspirin",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:acetylsalicylic_acid",
+          "count": 2
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:aspirin",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "caffeine_tablet",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:caffeine",
+          "count": 1
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:caffeine_tablet",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "calcium_tablet",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:calcium_phosphate",
+          "count": 2
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:calcium_tablet",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "iron_supplement",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:calcium_phosphate",
+          "count": 1
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:iron_supplement",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "motion_sickness_pill",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:antihistamine",
+          "count": 1
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:motion_sickness_pill",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "paracetamol_tablet",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:paracetamol",
+          "count": 2
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:paracetamol_tablet",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "throat_lozenge",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "minecraft:honey",
+          "count": 1
+        },
+        {
+          "item": "earth_on_minecraft:citric_acid",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:throat_lozenge",
+          "count": 1
+        }
+      ],
+      "ticks": 50,
+      "energy": 6,
+      "note": "therapeutic formulation"
+    },
+    {
+      "id": "vitamin_tablet",
+      "machine": "tablet_press",
+      "inputs": [
+        {
+          "item": "earth_on_minecraft:citric_acid",
+          "count": 1
+        },
+        {
+          "item": "minecraft:starch",
+          "count": 1
+        }
+      ],
+      "outputs": [
+        {
+          "item": "earth_on_minecraft:vitamin_tablet",
+          "count": 1
+        }
+      ],
+      "ticks": 60,
+      "energy": 8,
+      "note": "therapeutic formulation"
+    }
+  ],
+  "counts": {
+    "total": 70,
+    "machines": [
+      "anvil",
+      "chemical_reactor",
+      "distillation_column",
+      "fermenting_crock",
+      "filter_press",
+      "industrial_kiln",
+      "leaching_tank",
+      "loom",
+      "mixer",
+      "powder_press",
+      "tablet_press"
+    ]
+  }
+}

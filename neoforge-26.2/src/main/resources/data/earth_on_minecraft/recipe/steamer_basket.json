@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "B B",
+    "BBB",
+    "B B"
+  ],
+  "key": {
+    "B": "minecraft:bamboo"
+  },
+  "result": {
+    "id": "earth_on_minecraft:steamer_basket",
+    "count": 1
+  }
+}

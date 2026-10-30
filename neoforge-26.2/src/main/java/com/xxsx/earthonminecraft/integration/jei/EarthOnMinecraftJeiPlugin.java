@@ -39,6 +39,7 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
             registration.addRecipeCategories(new ProcessingJeiCategory(guiHelper, kind, recipeTypeFor(kind), machineFor(kind)));
         }
+        registration.addRecipeCategories(new IronworkingJeiCategory(guiHelper));
     }
 
     @Override
@@ -46,6 +47,7 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
             registration.addRecipes(recipeTypeFor(kind), ProcessingMachineBlock.recipesFor(kind));
         }
+        registerIronworkingRecipes(registration);
         registerHandbookInfo(registration);
         registerLivingWorldInfo(registration);
         registerMachineInfo(registration);
@@ -58,6 +60,7 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
             registration.addCraftingStation(recipeTypeFor(kind), machineFor(kind));
         }
+        registration.addCraftingStation(IronworkingJeiCategory.RECIPE_TYPE, EarthOnMinecraft.IRONWORKING_ANVIL.get());
     }
 
     public static IRecipeType<ProcessingMachineBlock.Recipe> recipeTypeFor(ProcessingMachineBlock.Kind kind) {
@@ -96,6 +99,42 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
             case STEAM_CRACKER -> EarthOnMinecraft.STEAM_CRACKER.get();
             case SYNTHESIS_LOOP -> EarthOnMinecraft.SYNTHESIS_LOOP.get();
             case ABSORPTION_TOWER -> EarthOnMinecraft.ABSORPTION_TOWER.get();
+            case ANVIL -> EarthOnMinecraft.ANVIL.get();
+            case BAR_COUNTER -> EarthOnMinecraft.BAR_COUNTER.get();
+            case CAMPFIRE -> EarthOnMinecraft.CAMPFIRE.get();
+            case CARPENTRY_BENCH -> EarthOnMinecraft.CARPENTRY_BENCH.get();
+            case CASTING_TABLE -> EarthOnMinecraft.CASTING_TABLE.get();
+            case COFFEE_ROASTER -> EarthOnMinecraft.COFFEE_ROASTER.get();
+            case CONDENSER -> EarthOnMinecraft.CONDENSER.get();
+            case CONVERTER -> EarthOnMinecraft.CONVERTER.get();
+            case CURING_BARN -> EarthOnMinecraft.CURING_BARN.get();
+            case FERMENTING_CROCK -> EarthOnMinecraft.FERMENTING_CROCK.get();
+            case FILTER_PRESS -> EarthOnMinecraft.FILTER_PRESS.get();
+            case GEM_CUTTER -> EarthOnMinecraft.GEM_CUTTER.get();
+            case HERB_PROCESSING_TABLE -> EarthOnMinecraft.HERB_PROCESSING_TABLE.get();
+            case LOOM -> EarthOnMinecraft.LOOM.get();
+            case MILL -> EarthOnMinecraft.MILL.get();
+            case NOODLE_PRESS -> EarthOnMinecraft.NOODLE_PRESS.get();
+            case OIL_PRESS -> EarthOnMinecraft.OIL_PRESS.get();
+            case RICE_HULLER -> EarthOnMinecraft.RICE_HULLER.get();
+            case SMELTER -> EarthOnMinecraft.SMELTER.get();
+            case SMOKEHOUSE -> EarthOnMinecraft.SMOKEHOUSE.get();
+            case STEAMER -> EarthOnMinecraft.STEAMER.get();
+            case STEAMER_BASKET -> EarthOnMinecraft.STEAMER_BASKET.get();
+            case STILL -> EarthOnMinecraft.STILL.get();
+            case STONE_MILL -> EarthOnMinecraft.STONE_MILL.get();
+            case STOVE -> EarthOnMinecraft.STOVE.get();
+            case TABLET_PRESS -> EarthOnMinecraft.TABLET_PRESS.get();
+            case TANNERY -> EarthOnMinecraft.TANNERY.get();
+            case TEA_KILN -> EarthOnMinecraft.TEA_KILN.get();
+            case THICKENER -> EarthOnMinecraft.THICKENER.get();
+            case WATER_TREATMENT_UNIT -> EarthOnMinecraft.WATER_TREATMENT_UNIT.get();
+            case BLOOMERY -> EarthOnMinecraft.BLOOMERY.get();
+            case BREAD_OVEN -> EarthOnMinecraft.BREAD_OVEN.get();
+            case GLASS_KILN -> EarthOnMinecraft.GLASS_KILN.get();
+            case LIME_KILN -> EarthOnMinecraft.LIME_KILN.get();
+            case PIT_KILN -> EarthOnMinecraft.PIT_KILN.get();
+            case SHAFT_FURNACE -> EarthOnMinecraft.SHAFT_FURNACE.get();
         };
     }
 
@@ -116,7 +155,32 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
                 lineKey("jei.earth_on_minecraft.settlement_board.1", JEI_BODY),
                 lineKey("jei.earth_on_minecraft.settlement_board.2", ChatFormatting.AQUA),
                 lineKey("jei.earth_on_minecraft.settlement_board.3", ChatFormatting.GREEN),
-                lineKey("jei.earth_on_minecraft.settlement_board.4", JEI_HINT));
+                lineKey("jei.earth_on_minecraft.settlement_board.4", JEI_HINT),
+                lineKey("jei.earth_on_minecraft.settlement_board.5", JEI_BODY));
+    }
+
+    private static void registerIronworkingRecipes(IRecipeRegistration registration) {
+        registration.addRecipes(IronworkingJeiCategory.RECIPE_TYPE, java.util.List.of(
+                new IronworkingJeiCategory.IronworkingRecipe(
+                        new ItemStack(EarthOnMinecraft.SPONGE_IRON.get()),
+                        new ItemStack(EarthOnMinecraft.WROUGHT_IRON.get())),
+                new IronworkingJeiCategory.IronworkingRecipe(
+                        new ItemStack(EarthOnMinecraft.WROUGHT_IRON.get()),
+                        new ItemStack(net.minecraft.world.item.Items.IRON_INGOT))));
+        registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.GEOLOGY_HAMMER.get()),
+                lineKey("jei.earth_on_minecraft.ironworking.hammer.0", ChatFormatting.GOLD),
+                lineKey("jei.earth_on_minecraft.ironworking.hammer.1", JEI_BODY),
+                lineKey("jei.earth_on_minecraft.ironworking.hammer.2", JEI_HINT));
+        registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.IRONWORKING_ANVIL.get()),
+                lineKey("jei.earth_on_minecraft.ironworking.anvil.0", ChatFormatting.GOLD),
+                lineKey("jei.earth_on_minecraft.ironworking.anvil.1", JEI_BODY),
+                lineKey("jei.earth_on_minecraft.ironworking.anvil.2", JEI_HINT));
+        registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.SPONGE_IRON.get()),
+                lineKey("jei.earth_on_minecraft.ironworking.sponge.0", ChatFormatting.GOLD),
+                lineKey("jei.earth_on_minecraft.ironworking.sponge.1", JEI_BODY));
+        registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.WROUGHT_IRON.get()),
+                lineKey("jei.earth_on_minecraft.ironworking.wrought.0", ChatFormatting.GOLD),
+                lineKey("jei.earth_on_minecraft.ironworking.wrought.1", JEI_BODY));
     }
 
     private static void registerMachineInfo(IRecipeRegistration registration) {
@@ -141,6 +205,36 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
         registerMachine(registration, EarthOnMinecraft.STEAM_CRACKER.get(), ProcessingMachineBlock.Kind.STEAM_CRACKER);
         registerMachine(registration, EarthOnMinecraft.SYNTHESIS_LOOP.get(), ProcessingMachineBlock.Kind.SYNTHESIS_LOOP);
         registerMachine(registration, EarthOnMinecraft.ABSORPTION_TOWER.get(), ProcessingMachineBlock.Kind.ABSORPTION_TOWER);
+        registerMachine(registration, EarthOnMinecraft.ANVIL.get(), ProcessingMachineBlock.Kind.ANVIL);
+        registerMachine(registration, EarthOnMinecraft.BAR_COUNTER.get(), ProcessingMachineBlock.Kind.BAR_COUNTER);
+        registerMachine(registration, EarthOnMinecraft.CAMPFIRE.get(), ProcessingMachineBlock.Kind.CAMPFIRE);
+        registerMachine(registration, EarthOnMinecraft.CARPENTRY_BENCH.get(), ProcessingMachineBlock.Kind.CARPENTRY_BENCH);
+        registerMachine(registration, EarthOnMinecraft.CASTING_TABLE.get(), ProcessingMachineBlock.Kind.CASTING_TABLE);
+        registerMachine(registration, EarthOnMinecraft.COFFEE_ROASTER.get(), ProcessingMachineBlock.Kind.COFFEE_ROASTER);
+        registerMachine(registration, EarthOnMinecraft.CONDENSER.get(), ProcessingMachineBlock.Kind.CONDENSER);
+        registerMachine(registration, EarthOnMinecraft.CONVERTER.get(), ProcessingMachineBlock.Kind.CONVERTER);
+        registerMachine(registration, EarthOnMinecraft.CURING_BARN.get(), ProcessingMachineBlock.Kind.CURING_BARN);
+        registerMachine(registration, EarthOnMinecraft.FERMENTING_CROCK.get(), ProcessingMachineBlock.Kind.FERMENTING_CROCK);
+        registerMachine(registration, EarthOnMinecraft.FILTER_PRESS.get(), ProcessingMachineBlock.Kind.FILTER_PRESS);
+        registerMachine(registration, EarthOnMinecraft.GEM_CUTTER.get(), ProcessingMachineBlock.Kind.GEM_CUTTER);
+        registerMachine(registration, EarthOnMinecraft.HERB_PROCESSING_TABLE.get(), ProcessingMachineBlock.Kind.HERB_PROCESSING_TABLE);
+        registerMachine(registration, EarthOnMinecraft.LOOM.get(), ProcessingMachineBlock.Kind.LOOM);
+        registerMachine(registration, EarthOnMinecraft.MILL.get(), ProcessingMachineBlock.Kind.MILL);
+        registerMachine(registration, EarthOnMinecraft.NOODLE_PRESS.get(), ProcessingMachineBlock.Kind.NOODLE_PRESS);
+        registerMachine(registration, EarthOnMinecraft.OIL_PRESS.get(), ProcessingMachineBlock.Kind.OIL_PRESS);
+        registerMachine(registration, EarthOnMinecraft.RICE_HULLER.get(), ProcessingMachineBlock.Kind.RICE_HULLER);
+        registerMachine(registration, EarthOnMinecraft.SMELTER.get(), ProcessingMachineBlock.Kind.SMELTER);
+        registerMachine(registration, EarthOnMinecraft.SMOKEHOUSE.get(), ProcessingMachineBlock.Kind.SMOKEHOUSE);
+        registerMachine(registration, EarthOnMinecraft.STEAMER.get(), ProcessingMachineBlock.Kind.STEAMER);
+        registerMachine(registration, EarthOnMinecraft.STEAMER_BASKET.get(), ProcessingMachineBlock.Kind.STEAMER_BASKET);
+        registerMachine(registration, EarthOnMinecraft.STILL.get(), ProcessingMachineBlock.Kind.STILL);
+        registerMachine(registration, EarthOnMinecraft.STONE_MILL.get(), ProcessingMachineBlock.Kind.STONE_MILL);
+        registerMachine(registration, EarthOnMinecraft.STOVE.get(), ProcessingMachineBlock.Kind.STOVE);
+        registerMachine(registration, EarthOnMinecraft.TABLET_PRESS.get(), ProcessingMachineBlock.Kind.TABLET_PRESS);
+        registerMachine(registration, EarthOnMinecraft.TANNERY.get(), ProcessingMachineBlock.Kind.TANNERY);
+        registerMachine(registration, EarthOnMinecraft.TEA_KILN.get(), ProcessingMachineBlock.Kind.TEA_KILN);
+        registerMachine(registration, EarthOnMinecraft.THICKENER.get(), ProcessingMachineBlock.Kind.THICKENER);
+        registerMachine(registration, EarthOnMinecraft.WATER_TREATMENT_UNIT.get(), ProcessingMachineBlock.Kind.WATER_TREATMENT_UNIT);
     }
 
     private static void registerMachine(IRecipeRegistration registration, ItemLike item, ProcessingMachineBlock.Kind kind) {

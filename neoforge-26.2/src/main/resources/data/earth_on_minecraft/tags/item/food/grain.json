@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "earth_on_minecraft:barley",
+    "earth_on_minecraft:maize",
+    "earth_on_minecraft:oat",
+    "earth_on_minecraft:rice",
+    "earth_on_minecraft:rye",
+    "earth_on_minecraft:sorghum",
+    "earth_on_minecraft:wheat"
+  ]
+}

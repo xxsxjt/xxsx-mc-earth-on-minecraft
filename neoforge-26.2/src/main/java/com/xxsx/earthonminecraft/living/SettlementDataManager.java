@@ -11,6 +11,7 @@ import net.minecraft.util.profiling.ProfilerFiller;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 
 import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.ToIntFunction;
@@ -33,7 +34,7 @@ public final class SettlementDataManager {
             ), 1)
     );
 
-    private static final Map<Identifier, ResidentRole> FALLBACK_ROLES = Map.of(
+    private static final Map<Identifier, ResidentRole> BASE_ROLES = Map.of(
             EarthOnMinecraft.id("miner"), new ResidentRole(
                     "resident.earth_on_minecraft.role.miner", "resident.earth_on_minecraft.identity.worker",
                     List.of("minecraft:mason"), List.of("earth_on_minecraft:resource_village"), 3,
@@ -79,8 +80,43 @@ public final class SettlementDataManager {
                             trade(3, "minecraft:emerald", 4, "minecraft:chest", 4, 8, 20))),
             EarthOnMinecraft.id("resident"), new ResidentRole(
                     "resident.earth_on_minecraft.role.resident", "resident.earth_on_minecraft.identity.resident",
-                    List.of("minecraft:none", "minecraft:nitwit"), List.of(), 4, List.of())
+                    List.of("minecraft:none", "minecraft:nitwit"), List.of(), 4, List.of()),
+            EarthOnMinecraft.id("arcane_resident"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.arcane_resident", "resident.earth_on_minecraft.identity.arcane",
+                    List.of("fantasy_earth:arcane_settler"), List.of("earth_on_minecraft:arcane_settlement"), 1, List.of()),
+            EarthOnMinecraft.id("cultivation_resident"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.cultivation_resident", "resident.earth_on_minecraft.identity.cultivator",
+                    List.of("xuanhuan_earth:cultivation_settler"), List.of("earth_on_minecraft:cultivation_settlement"), 1, List.of())
     );
+
+    private static final Map<Identifier, ResidentRole> FALLBACK_ADDON_ROLES = Map.of(
+            EarthOnMinecraft.id("fantasy_hedge_witch"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.fantasy_hedge_witch", "resident.earth_on_minecraft.identity.arcane",
+                    List.of("fantasy_earth:arcane_settler"), List.of("earth_on_minecraft:arcane_settlement"), 1, List.of()),
+            EarthOnMinecraft.id("fantasy_goblin_appraiser"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.fantasy_goblin_appraiser", "resident.earth_on_minecraft.identity.arcane",
+                    List.of("fantasy_earth:arcane_settler"), List.of("earth_on_minecraft:arcane_settlement"), 1, List.of()),
+            EarthOnMinecraft.id("fantasy_academy_researcher"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.fantasy_academy_researcher", "resident.earth_on_minecraft.identity.arcane",
+                    List.of("fantasy_earth:arcane_settler"), List.of("earth_on_minecraft:arcane_settlement"), 1, List.of()),
+            EarthOnMinecraft.id("xuanhuan_wandering_merchant"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.xuanhuan_wandering_merchant", "resident.earth_on_minecraft.identity.cultivator",
+                    List.of("xuanhuan_earth:cultivation_settler"), List.of("earth_on_minecraft:cultivation_settlement"), 1, List.of()),
+            EarthOnMinecraft.id("xuanhuan_spirit_spring_keeper"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.xuanhuan_spirit_spring_keeper", "resident.earth_on_minecraft.identity.cultivator",
+                    List.of("xuanhuan_earth:cultivation_settler"), List.of("earth_on_minecraft:cultivation_settlement"), 1, List.of()),
+            EarthOnMinecraft.id("xuanhuan_sect_steward"), new ResidentRole(
+                    "resident.earth_on_minecraft.role.xuanhuan_sect_steward", "resident.earth_on_minecraft.identity.cultivator",
+                    List.of("xuanhuan_earth:cultivation_settler"), List.of("earth_on_minecraft:cultivation_settlement"), 1, List.of())
+    );
+
+    private static final Map<Identifier, ResidentRole> FALLBACK_ROLES = fallbackRoles();
+
+    private static Map<Identifier, ResidentRole> fallbackRoles() {
+        Map<Identifier, ResidentRole> values = new LinkedHashMap<>(BASE_ROLES);
+        values.putAll(FALLBACK_ADDON_ROLES);
+        return Map.copyOf(values);
+    }
 
     private static final Map<Identifier, SettlementProfile> FALLBACK_PROFILES = Map.of(
             EarthOnMinecraft.id("agricultural_village"), new SettlementProfile(
@@ -106,7 +142,23 @@ public final class SettlementDataManager {
                     List.of("settlement.earth_on_minecraft.name.pine_ridge_works", "settlement.earth_on_minecraft.name.ironbridge"),
                     List.of("settlement.earth_on_minecraft.industry.manufacturing", "settlement.earth_on_minecraft.industry.logistics"),
                     List.of("settlement.earth_on_minecraft.material.coal", "settlement.earth_on_minecraft.material.lubricant"),
-                    List.of("settlement.earth_on_minecraft.material.machine_parts", "settlement.earth_on_minecraft.material.cable"), 2)
+                    List.of("settlement.earth_on_minecraft.material.machine_parts", "settlement.earth_on_minecraft.material.cable"), 2),
+            EarthOnMinecraft.id("arcane_settlement"), new SettlementProfile(
+                    "settlement.earth_on_minecraft.profile.arcane_settlement",
+                    "settlement.earth_on_minecraft.scale.village",
+                    "settlement.earth_on_minecraft.technology.arcane",
+                    List.of("settlement.earth_on_minecraft.name.witchlight", "settlement.earth_on_minecraft.name.runehollow"),
+                    List.of("settlement.earth_on_minecraft.industry.arcane_research", "settlement.earth_on_minecraft.industry.alchemy"),
+                    List.of("settlement.earth_on_minecraft.material.arcane_focus", "settlement.earth_on_minecraft.material.crystal"),
+                    List.of("settlement.earth_on_minecraft.material.runes", "settlement.earth_on_minecraft.material.potions"), 1),
+            EarthOnMinecraft.id("cultivation_settlement"), new SettlementProfile(
+                    "settlement.earth_on_minecraft.profile.cultivation_settlement",
+                    "settlement.earth_on_minecraft.scale.village",
+                    "settlement.earth_on_minecraft.technology.cultivation",
+                    List.of("settlement.earth_on_minecraft.name.cloudstep", "settlement.earth_on_minecraft.name.springvale"),
+                    List.of("settlement.earth_on_minecraft.industry.cultivation", "settlement.earth_on_minecraft.industry.herbalism"),
+                    List.of("settlement.earth_on_minecraft.material.spirit_grass", "settlement.earth_on_minecraft.material.spirit_springs"),
+                    List.of("settlement.earth_on_minecraft.material.talisman_paper", "settlement.earth_on_minecraft.material.spirit_stones"), 1)
     );
 
     private static volatile Map<Identifier, NamePool> namePools = FALLBACK_NAME_POOLS;
@@ -158,6 +210,12 @@ public final class SettlementDataManager {
         return new ProfileSelection(selected.getKey(), selected.getValue());
     }
 
+    public static String chooseSettlementNameKey(Identifier profileId, long seed) {
+        SettlementProfile profile = profile(profileId);
+        int index = Math.floorMod((int) mix(seed), profile.nameKeys().size());
+        return profile.nameKeys().get(index);
+    }
+
     public static ResidentRole role(Identifier id) {
         return roles.getOrDefault(id, FALLBACK_ROLES.get(EarthOnMinecraft.id("resident")));
     }
@@ -172,6 +230,10 @@ public final class SettlementDataManager {
                 .flatMap(entry -> entry.getValue().trades().stream()
                         .map(trade -> new RoleTradeSelection(entry.getKey(), trade)))
                 .toList();
+    }
+
+    public static List<TradeDefinition> tradesForRole(Identifier roleId) {
+        return role(roleId).trades();
     }
 
     private static TradeDefinition trade(int level, String inputId, int inputCount, String outputId,
@@ -197,7 +259,7 @@ public final class SettlementDataManager {
         return values.getFirst();
     }
 
-    static long mix(long value) {
+    public static long mix(long value) {
         value ^= value >>> 33;
         value *= 0xFF51AFD7ED558CCDL;
         value ^= value >>> 33;

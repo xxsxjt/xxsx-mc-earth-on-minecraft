@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "stove",
+  "model_identifier": "earth_on_minecraft:stove",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "firebox",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        8,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "e96ad55e-d364-5c42-bc7c-d011e38e3f04",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "iron_plate",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        8,
+        1
+      ],
+      "to": [
+        15,
+        11,
+        15
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "db6f8437-bf24-57b9-a069-54b6f8a3c593",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "burner_ring",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        11,
+        5
+      ],
+      "to": [
+        11,
+        12,
+        11
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "a8008b6f-a496-5b1b-bedc-4296703a4ec7",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "fuel_door",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        1,
+        13
+      ],
+      "to": [
+        11,
+        6,
+        16
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "5ee589ae-f8c3-5c71-afcc-2f21f10a928a",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            10,
+            11,
+            15
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            10,
+            11,
+            15
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            10,
+            3,
+            15
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            13,
+            10,
+            16,
+            15
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            13,
+            11,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            0,
+            11,
+            3
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "oven_door",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        13,
+        2,
+        5
+      ],
+      "to": [
+        16,
+        7,
+        11
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "4bca174a-39cb-51f7-8fd1-14a494b93257",
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            9,
+            16,
+            14
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            9,
+            3,
+            14
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            9,
+            11,
+            14
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            9,
+            11,
+            14
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            13,
+            5,
+            16,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            13,
+            5,
+            16,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "ash_drawer",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        0,
+        13
+      ],
+      "to": [
+        13,
+        3,
+        16
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "9ccd9308-1d04-55f6-9a4a-54bcff93189c",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            13,
+            13,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            0,
+            13,
+            3
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "e96ad55e-d364-5c42-bc7c-d011e38e3f04",
+    "db6f8437-bf24-57b9-a069-54b6f8a3c593",
+    "a8008b6f-a496-5b1b-bedc-4296703a4ec7",
+    "5ee589ae-f8c3-5c71-afcc-2f21f10a928a",
+    "4bca174a-39cb-51f7-8fd1-14a494b93257",
+    "9ccd9308-1d04-55f6-9a4a-54bcff93189c"
+  ],
+  "textures": [
+    {
+      "name": "stove.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "706c2096-e540-58f1-85a4-628512945dcd",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/stove.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "cast-iron range with wok ring",
+    "silhouette": "flat iron plate with burner rings over a firebox and ash drawer",
+    "faces": {
+      "front": "burner ring and wok seat",
+      "back": "fuel door",
+      "left": "firebox draft",
+      "right": "oven door",
+      "top": "cast iron plate",
+      "bottom": "ash drawer"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/stove",
+        "front": "earth_on_minecraft:block/stove",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/stove_active",
+        "front": "earth_on_minecraft:block/stove_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/stove",
+        "front": "earth_on_minecraft:block/stove",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

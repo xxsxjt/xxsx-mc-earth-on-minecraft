@@ -1,0 +1,500 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": false,
+  "gui_light": "side",
+  "textures": {
+    "particle": "earth_on_minecraft:block/stove",
+    "front": "earth_on_minecraft:block/stove",
+    "back": "earth_on_minecraft:block/hot_machine_side",
+    "left": "earth_on_minecraft:block/hot_machine_side",
+    "right": "earth_on_minecraft:block/hot_machine_side",
+    "top": "earth_on_minecraft:block/hot_machine_top",
+    "bottom": "earth_on_minecraft:block/hot_machine_top",
+    "fault": "minecraft:block/redstone_lamp_on"
+  },
+  "elements": [
+    {
+      "name": "firebox",
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        8,
+        14
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "iron_plate",
+      "from": [
+        1,
+        8,
+        1
+      ],
+      "to": [
+        15,
+        11,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            1,
+            5,
+            15,
+            8
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            1,
+            1,
+            15,
+            15
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "burner_ring",
+      "from": [
+        5,
+        11,
+        5
+      ],
+      "to": [
+        11,
+        12,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            4,
+            11,
+            5
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            5,
+            11,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "fuel_door",
+      "from": [
+        5,
+        1,
+        13
+      ],
+      "to": [
+        11,
+        6,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            10,
+            11,
+            15
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            5,
+            10,
+            11,
+            15
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            0,
+            10,
+            3,
+            15
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            13,
+            10,
+            16,
+            15
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            5,
+            13,
+            11,
+            16
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            5,
+            0,
+            11,
+            3
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "oven_door",
+      "from": [
+        13,
+        2,
+        5
+      ],
+      "to": [
+        16,
+        7,
+        11
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            13,
+            9,
+            16,
+            14
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            0,
+            9,
+            3,
+            14
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            5,
+            9,
+            11,
+            14
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            5,
+            9,
+            11,
+            14
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            13,
+            5,
+            16,
+            11
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            13,
+            5,
+            16,
+            11
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "ash_drawer",
+      "from": [
+        3,
+        0,
+        13
+      ],
+      "to": [
+        13,
+        3,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": "#front"
+        },
+        "south": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": "#back"
+        },
+        "west": {
+          "uv": [
+            0,
+            13,
+            3,
+            16
+          ],
+          "texture": "#left"
+        },
+        "east": {
+          "uv": [
+            13,
+            13,
+            16,
+            16
+          ],
+          "texture": "#right"
+        },
+        "up": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": "#top"
+        },
+        "down": {
+          "uv": [
+            3,
+            0,
+            13,
+            3
+          ],
+          "texture": "#bottom"
+        }
+      }
+    },
+    {
+      "name": "fault_beacon",
+      "from": [
+        6.5,
+        5,
+        0
+      ],
+      "to": [
+        9.5,
+        8,
+        1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            6.5,
+            8,
+            9.5,
+            11
+          ],
+          "texture": "#fault"
+        },
+        "south": {
+          "uv": [
+            6.5,
+            8,
+            9.5,
+            11
+          ],
+          "texture": "#fault"
+        },
+        "west": {
+          "uv": [
+            15,
+            8,
+            16,
+            11
+          ],
+          "texture": "#fault"
+        },
+        "east": {
+          "uv": [
+            0,
+            8,
+            1,
+            11
+          ],
+          "texture": "#fault"
+        },
+        "up": {
+          "uv": [
+            6.5,
+            0,
+            9.5,
+            1
+          ],
+          "texture": "#fault"
+        },
+        "down": {
+          "uv": [
+            6.5,
+            15,
+            9.5,
+            16
+          ],
+          "texture": "#fault"
+        }
+      }
+    }
+  ]
+}

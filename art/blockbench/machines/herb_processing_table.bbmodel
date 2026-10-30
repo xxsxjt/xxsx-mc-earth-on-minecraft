@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "herb_processing_table",
+  "model_identifier": "earth_on_minecraft:herb_processing_table",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "bench_body",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        2
+      ],
+      "to": [
+        15,
+        9,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "cd2dd779-8152-59c3-8089-0268a49e85eb",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            7,
+            15,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            1,
+            7,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            7,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            7,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            2,
+            15,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "drying_rack",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        11,
+        3
+      ],
+      "to": [
+        14,
+        13,
+        13
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "accd25c9-5afc-5e79-a71d-82163c62eaeb",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            3,
+            14,
+            5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            3,
+            14,
+            5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            3,
+            13,
+            5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            3,
+            13,
+            5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            3,
+            14,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "rack_posts",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        9,
+        3
+      ],
+      "to": [
+        4,
+        14,
+        5
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "f174679a-54d8-5c98-8b66-217d6fd30ab2",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            2,
+            4,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            12,
+            2,
+            14,
+            7
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            11,
+            2,
+            13,
+            7
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            2,
+            5,
+            7
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            11,
+            4,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "cutting_board",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        9,
+        5
+      ],
+      "to": [
+        9,
+        11,
+        11
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "0afc52ae-91f7-58cf-ba43-3a3703378716",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            5,
+            9,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7,
+            5,
+            13,
+            7
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            5,
+            11,
+            7
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            5,
+            11,
+            7
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            5,
+            9,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            5,
+            9,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "wash_basin",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        10,
+        9,
+        5
+      ],
+      "to": [
+        14,
+        12,
+        11
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "f03e5cdd-8128-5902-a039-cd8b78a8481b",
+      "faces": {
+        "north": {
+          "uv": [
+            10,
+            4,
+            14,
+            7
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            4,
+            6,
+            7
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            5,
+            4,
+            11,
+            7
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            5,
+            4,
+            11,
+            7
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            10,
+            5,
+            14,
+            11
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            10,
+            5,
+            14,
+            11
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "scrap_bin",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        1,
+        0,
+        14
+      ],
+      "to": [
+        6,
+        6,
+        16
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "2100f8fc-8551-51d6-aa82-398044dfc3a5",
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            10,
+            6,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            10,
+            10,
+            15,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            10,
+            2,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            14,
+            10,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            1,
+            14,
+            6,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            1,
+            0,
+            6,
+            2
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "cd2dd779-8152-59c3-8089-0268a49e85eb",
+    "accd25c9-5afc-5e79-a71d-82163c62eaeb",
+    "f174679a-54d8-5c98-8b66-217d6fd30ab2",
+    "0afc52ae-91f7-58cf-ba43-3a3703378716",
+    "f03e5cdd-8128-5902-a039-cd8b78a8481b",
+    "2100f8fc-8551-51d6-aa82-398044dfc3a5"
+  ],
+  "textures": [
+    {
+      "name": "herb_processing_table.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "9d699dec-749d-5d7a-8500-6984f70e1a97",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/herb_processing_table.png"
+    },
+    {
+      "name": "modern_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "8d04c733-d81f-5311-8eb9-cb7a80647df6",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/modern_machine_side.png"
+    },
+    {
+      "name": "modern_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "f2ac9f4c-70fc-5c99-930e-b27a5b9981ba",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/modern_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "herbal preparation bench with drying rack",
+    "silhouette": "waist-high bench with a rack above and drawers below",
+    "faces": {
+      "front": "cutting board and sieve",
+      "back": "drying rack",
+      "left": "wash basin",
+      "right": "mortar and pestle",
+      "top": "drying surface",
+      "bottom": "scrap bin"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/herb_processing_table",
+        "front": "earth_on_minecraft:block/herb_processing_table",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/herb_processing_table_active",
+        "front": "earth_on_minecraft:block/herb_processing_table_active",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/herb_processing_table",
+        "front": "earth_on_minecraft:block/herb_processing_table",
+        "back": "earth_on_minecraft:block/modern_machine_side",
+        "left": "earth_on_minecraft:block/modern_machine_side",
+        "right": "earth_on_minecraft:block/modern_machine_side",
+        "top": "earth_on_minecraft:block/modern_machine_top",
+        "bottom": "earth_on_minecraft:block/modern_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

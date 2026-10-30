@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "tea_kiln",
+  "model_identifier": "earth_on_minecraft:tea_kiln",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "brick_base",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        8,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "d88f37f9-3b17-53d2-b5e1-2287bb2ec876",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            8,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "wok",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        8,
+        3
+      ],
+      "to": [
+        13,
+        12,
+        13
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "26c94893-6a7d-5f4b-83cc-acd202747fd0",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            4,
+            13,
+            8
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "wok_rim",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        11,
+        2
+      ],
+      "to": [
+        14,
+        13,
+        14
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "c41fe783-2d8a-5a4b-8d38-ef5ae428f5f3",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            3,
+            14,
+            5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            3,
+            14,
+            5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            3,
+            14,
+            5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            3,
+            14,
+            5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "stirrer",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        7,
+        12,
+        7
+      ],
+      "to": [
+        9,
+        16,
+        9
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "9e84dbb8-0df1-5d58-9958-902c4bd670e5",
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            7,
+            0,
+            9,
+            4
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "fire_door",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        5,
+        0,
+        13
+      ],
+      "to": [
+        11,
+        5,
+        16
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "156a2720-0e5d-5dfa-9659-751e482590fd",
+      "faces": {
+        "north": {
+          "uv": [
+            5,
+            11,
+            11,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            5,
+            11,
+            11,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            0,
+            11,
+            3,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            13,
+            11,
+            16,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            5,
+            13,
+            11,
+            16
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            5,
+            0,
+            11,
+            3
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "cooling_tray",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        12,
+        5,
+        4
+      ],
+      "to": [
+        16,
+        8,
+        12
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "cd39848e-a04c-5c6d-bdb1-173692c0c8e5",
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            8,
+            16,
+            11
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            8,
+            4,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            8,
+            12,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            8,
+            12,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            12,
+            4,
+            16,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12,
+            4,
+            16,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "d88f37f9-3b17-53d2-b5e1-2287bb2ec876",
+    "26c94893-6a7d-5f4b-83cc-acd202747fd0",
+    "c41fe783-2d8a-5a4b-8d38-ef5ae428f5f3",
+    "9e84dbb8-0df1-5d58-9958-902c4bd670e5",
+    "156a2720-0e5d-5dfa-9659-751e482590fd",
+    "cd39848e-a04c-5c6d-bdb1-173692c0c8e5"
+  ],
+  "textures": [
+    {
+      "name": "tea_kiln.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "91e78d56-5997-5ab2-b3c5-7e1db646ea68",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/tea_kiln.png"
+    },
+    {
+      "name": "hot_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "520d693f-920f-5c67-8750-f9d05b45a0f5",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_side.png"
+    },
+    {
+      "name": "hot_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "cc33103f-2816-54fa-835c-9fe787590f8a",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/hot_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "tea firing wok over a brick firebox",
+    "silhouette": "round wok set into a brick base with a fire door",
+    "faces": {
+      "front": "wok and stirrer",
+      "back": "fire door",
+      "left": "leaf hopper",
+      "right": "cooling tray",
+      "top": "wok rim",
+      "bottom": "brick base"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/tea_kiln",
+        "front": "earth_on_minecraft:block/tea_kiln",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/tea_kiln_active",
+        "front": "earth_on_minecraft:block/tea_kiln_active",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/tea_kiln",
+        "front": "earth_on_minecraft:block/tea_kiln",
+        "back": "earth_on_minecraft:block/hot_machine_side",
+        "left": "earth_on_minecraft:block/hot_machine_side",
+        "right": "earth_on_minecraft:block/hot_machine_side",
+        "top": "earth_on_minecraft:block/hot_machine_top",
+        "bottom": "earth_on_minecraft:block/hot_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

@@ -1,0 +1,954 @@
+{
+  "schema_version": 1,
+  "source": "D:\\Codex\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
+  "generated_items": 1068,
+  "generated_textures": 0,
+  "skipped": [
+    {
+      "id": "abs_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "acetic_acid",
+      "reason": "already_registered"
+    },
+    {
+      "id": "acetone",
+      "reason": "already_registered"
+    },
+    {
+      "id": "acrylic_monomer",
+      "reason": "already_registered"
+    },
+    {
+      "id": "acrylic_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "acrylonitrile",
+      "reason": "already_registered"
+    },
+    {
+      "id": "activated_carbon",
+      "reason": "already_registered"
+    },
+    {
+      "id": "activated_carbon_filter",
+      "reason": "already_registered"
+    },
+    {
+      "id": "alluvial_loam_sample",
+      "reason": "already_registered"
+    },
+    {
+      "id": "alumina",
+      "reason": "already_registered"
+    },
+    {
+      "id": "aluminosilicate_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "aluminum_alloy_billet",
+      "reason": "already_registered"
+    },
+    {
+      "id": "aluminum_hydroxide",
+      "reason": "already_registered"
+    },
+    {
+      "id": "aluminum_ingot",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ammonia",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ammonium_nitrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ammonium_sulfate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "antibiotic",
+      "reason": "superseded"
+    },
+    {
+      "id": "asphalt",
+      "reason": "already_registered"
+    },
+    {
+      "id": "auriferous_quartz_chunk",
+      "reason": "already_registered"
+    },
+    {
+      "id": "bastnasite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "battery_carbon",
+      "reason": "already_registered"
+    },
+    {
+      "id": "bauxite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "benzene",
+      "reason": "already_registered"
+    },
+    {
+      "id": "beryl_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "bleached_pulp",
+      "reason": "already_registered"
+    },
+    {
+      "id": "bleaching_powder",
+      "reason": "already_registered"
+    },
+    {
+      "id": "borate_mineral_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "boron_carbide_pellet",
+      "reason": "already_registered"
+    },
+    {
+      "id": "brine_crystal",
+      "reason": "already_registered"
+    },
+    {
+      "id": "butadiene",
+      "reason": "already_registered"
+    },
+    {
+      "id": "calcite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "calcium_chloride",
+      "reason": "already_registered"
+    },
+    {
+      "id": "caprolactam",
+      "reason": "already_registered"
+    },
+    {
+      "id": "carbon_black",
+      "reason": "already_registered"
+    },
+    {
+      "id": "carbon_dioxide_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "carbon_monoxide_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cassiterite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cellulose_fiber",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cellulose_pulp",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cement_clinker",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cement_powder",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cement_raw_meal",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ceramic_body",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ceramic_insulator",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ceramic_substrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "chalcopyrite_chunk",
+      "reason": "already_registered"
+    },
+    {
+      "id": "chalcopyrite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "chlorine_gas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "chlorosilane",
+      "reason": "already_registered"
+    },
+    {
+      "id": "chromite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cinnabar_chunk",
+      "reason": "already_registered"
+    },
+    {
+      "id": "cinnabar_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "clay_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "coal_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "coal_gas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "coal_tar",
+      "reason": "already_registered"
+    },
+    {
+      "id": "coke",
+      "reason": "already_registered"
+    },
+    {
+      "id": "control_rod_assembly",
+      "reason": "already_registered"
+    },
+    {
+      "id": "conveyor_drive",
+      "reason": "already_registered"
+    },
+    {
+      "id": "copper_busbar",
+      "reason": "already_registered"
+    },
+    {
+      "id": "copper_clad_laminate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "copper_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "copper_wire",
+      "reason": "already_registered"
+    },
+    {
+      "id": "crude_oil_sample",
+      "reason": "already_registered"
+    },
+    {
+      "id": "depleted_uranium",
+      "reason": "already_registered"
+    },
+    {
+      "id": "detergent_powder",
+      "reason": "already_registered"
+    },
+    {
+      "id": "diamond_grit",
+      "reason": "already_registered"
+    },
+    {
+      "id": "diesel_fraction",
+      "reason": "already_registered"
+    },
+    {
+      "id": "dopant_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "dry_storage_cask",
+      "reason": "already_registered"
+    },
+    {
+      "id": "electrode_sheet",
+      "reason": "already_registered"
+    },
+    {
+      "id": "electrolyte",
+      "reason": "already_registered"
+    },
+    {
+      "id": "epoxy_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ethanol",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ethylene",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ethylene_glycol",
+      "reason": "already_registered"
+    },
+    {
+      "id": "feldspar_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ferrochrome",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ferromanganese",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ferrosilicon",
+      "reason": "already_registered"
+    },
+    {
+      "id": "fertilizer_blend",
+      "reason": "already_registered"
+    },
+    {
+      "id": "fiberglass_cloth",
+      "reason": "already_registered"
+    },
+    {
+      "id": "field_geology_notebook",
+      "reason": "already_registered"
+    },
+    {
+      "id": "firebrick",
+      "reason": "already_registered"
+    },
+    {
+      "id": "formaldehyde",
+      "reason": "already_registered"
+    },
+    {
+      "id": "galena_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "generator_stator",
+      "reason": "already_registered"
+    },
+    {
+      "id": "geology_hammer",
+      "reason": "already_registered"
+    },
+    {
+      "id": "glass_batch",
+      "reason": "already_registered"
+    },
+    {
+      "id": "glycerol",
+      "reason": "already_registered"
+    },
+    {
+      "id": "gold_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "gold_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "graphite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "gypsum_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "hard_water_sample",
+      "reason": "already_registered"
+    },
+    {
+      "id": "hematite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "high_purity_silicon",
+      "reason": "already_registered"
+    },
+    {
+      "id": "humus_sample",
+      "reason": "already_registered"
+    },
+    {
+      "id": "hydrochloric_acid",
+      "reason": "already_registered"
+    },
+    {
+      "id": "hydrogen_gas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "hydrogen_peroxide",
+      "reason": "already_registered"
+    },
+    {
+      "id": "industrial_solvent",
+      "reason": "already_registered"
+    },
+    {
+      "id": "iron_catalyst",
+      "reason": "already_registered"
+    },
+    {
+      "id": "iron_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "iron_oxide_pigment",
+      "reason": "already_registered"
+    },
+    {
+      "id": "irrigation_mineral_deposit",
+      "reason": "already_registered"
+    },
+    {
+      "id": "isocyanate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "kaolin_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "kerosene_fraction",
+      "reason": "already_registered"
+    },
+    {
+      "id": "kimberlite_chunk",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lapis_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lead_ingot",
+      "reason": "already_registered"
+    },
+    {
+      "id": "led_phosphor",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lime_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lime_treatment_residue",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lithium_salt",
+      "reason": "already_registered"
+    },
+    {
+      "id": "low_enriched_uranium",
+      "reason": "already_registered"
+    },
+    {
+      "id": "lubricating_oil",
+      "reason": "already_registered"
+    },
+    {
+      "id": "mafic_silicate_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "magnesium_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "magnetite_chunk",
+      "reason": "already_registered"
+    },
+    {
+      "id": "magnetite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "manganese_oxide_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "mercury_droplet",
+      "reason": "already_registered"
+    },
+    {
+      "id": "metallurgical_silicon",
+      "reason": "already_registered"
+    },
+    {
+      "id": "methanol",
+      "reason": "already_registered"
+    },
+    {
+      "id": "mica_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "mineral_wool",
+      "reason": "already_registered"
+    },
+    {
+      "id": "mixed_rare_earth_oxide",
+      "reason": "already_registered"
+    },
+    {
+      "id": "monazite_sand",
+      "reason": "already_registered"
+    },
+    {
+      "id": "naphtha",
+      "reason": "already_registered"
+    },
+    {
+      "id": "natural_gas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "natural_latex",
+      "reason": "already_registered"
+    },
+    {
+      "id": "ndfeb_magnet",
+      "reason": "already_registered"
+    },
+    {
+      "id": "neodymium_salt",
+      "reason": "already_registered"
+    },
+    {
+      "id": "neutral_salt",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nickel_catalyst",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nickel_precursor",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nitric_acid",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nitrogen_gas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nuclear_fuel_assembly",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nuclear_fuel_pellet",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nuclear_fuel_rod",
+      "reason": "already_registered"
+    },
+    {
+      "id": "nylon_fiber",
+      "reason": "already_registered"
+    },
+    {
+      "id": "oxygen_gas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "painkiller",
+      "reason": "superseded"
+    },
+    {
+      "id": "paint_base",
+      "reason": "already_registered"
+    },
+    {
+      "id": "pet_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "petroleum_coke",
+      "reason": "already_registered"
+    },
+    {
+      "id": "phenol",
+      "reason": "already_registered"
+    },
+    {
+      "id": "phenolic_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "phosphate_rock_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "phosphoric_acid",
+      "reason": "already_registered"
+    },
+    {
+      "id": "photoresist_precursor",
+      "reason": "already_registered"
+    },
+    {
+      "id": "platinum_group_catalyst",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polyethylene_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polymer_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polyol",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polypropylene_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polysilicon",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polystyrene_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "polyurethane_foam",
+      "reason": "already_registered"
+    },
+    {
+      "id": "porcelain_blank",
+      "reason": "already_registered"
+    },
+    {
+      "id": "potash",
+      "reason": "already_registered"
+    },
+    {
+      "id": "potassium_chloride",
+      "reason": "already_registered"
+    },
+    {
+      "id": "potassium_nitrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "printed_circuit_board",
+      "reason": "already_registered"
+    },
+    {
+      "id": "propylene",
+      "reason": "already_registered"
+    },
+    {
+      "id": "pvc_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "pyrite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "quality_inspection_module",
+      "reason": "already_registered"
+    },
+    {
+      "id": "quartz_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "rare_earth_tailings",
+      "reason": "already_registered"
+    },
+    {
+      "id": "raw_rubber",
+      "reason": "already_registered"
+    },
+    {
+      "id": "redstone_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "refractory_clay",
+      "reason": "already_registered"
+    },
+    {
+      "id": "roasted_copper_concentrate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "rubber_compound",
+      "reason": "already_registered"
+    },
+    {
+      "id": "rubber_gasket",
+      "reason": "already_registered"
+    },
+    {
+      "id": "saline_soil_sample",
+      "reason": "already_registered"
+    },
+    {
+      "id": "salt_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sandy_loam_sample",
+      "reason": "already_registered"
+    },
+    {
+      "id": "servo_motor",
+      "reason": "already_registered"
+    },
+    {
+      "id": "silica_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "silicon_wafer",
+      "reason": "already_registered"
+    },
+    {
+      "id": "simple_battery_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "single_superphosphate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "slag",
+      "reason": "already_registered"
+    },
+    {
+      "id": "slaked_lime",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sludge_cake",
+      "reason": "already_registered"
+    },
+    {
+      "id": "soap_base",
+      "reason": "already_registered"
+    },
+    {
+      "id": "soda_ash",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sodium_bicarbonate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sodium_hydroxide",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sodium_hypochlorite",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sodium_sulfate",
+      "reason": "already_registered"
+    },
+    {
+      "id": "softened_water",
+      "reason": "already_registered"
+    },
+    {
+      "id": "soil_mineral_mix",
+      "reason": "already_registered"
+    },
+    {
+      "id": "solder_alloy",
+      "reason": "already_registered"
+    },
+    {
+      "id": "solder_flux",
+      "reason": "already_registered"
+    },
+    {
+      "id": "spent_fuel_assembly",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sphalerite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sponge_iron",
+      "reason": "already_registered"
+    },
+    {
+      "id": "stabilized_tailings",
+      "reason": "already_registered"
+    },
+    {
+      "id": "stainless_steel_bloom",
+      "reason": "already_registered"
+    },
+    {
+      "id": "steam_turbine_assembly",
+      "reason": "already_registered"
+    },
+    {
+      "id": "steel_bloom",
+      "reason": "already_registered"
+    },
+    {
+      "id": "styrene",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sulfur_dioxide_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sulfur_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "sulfuric_acid",
+      "reason": "already_registered"
+    },
+    {
+      "id": "surfactant",
+      "reason": "already_registered"
+    },
+    {
+      "id": "syngas_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "synthetic_rubber",
+      "reason": "already_registered"
+    },
+    {
+      "id": "tailings_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "terephthalic_acid",
+      "reason": "already_registered"
+    },
+    {
+      "id": "tin_ingot",
+      "reason": "already_registered"
+    },
+    {
+      "id": "titanium_dioxide",
+      "reason": "already_registered"
+    },
+    {
+      "id": "titanium_slag",
+      "reason": "already_registered"
+    },
+    {
+      "id": "titanium_sponge",
+      "reason": "already_registered"
+    },
+    {
+      "id": "titanium_tetrachloride",
+      "reason": "already_registered"
+    },
+    {
+      "id": "uraninite_dust",
+      "reason": "already_registered"
+    },
+    {
+      "id": "uranium_dioxide_powder",
+      "reason": "already_registered"
+    },
+    {
+      "id": "uranium_hexafluoride_cell",
+      "reason": "already_registered"
+    },
+    {
+      "id": "urea",
+      "reason": "already_registered"
+    },
+    {
+      "id": "urea_formaldehyde_resin",
+      "reason": "already_registered"
+    },
+    {
+      "id": "vanadium_catalyst",
+      "reason": "already_registered"
+    },
+    {
+      "id": "vinyl_chloride",
+      "reason": "already_registered"
+    },
+    {
+      "id": "vulcanized_rubber",
+      "reason": "already_registered"
+    },
+    {
+      "id": "wood_chips",
+      "reason": "already_registered"
+    },
+    {
+      "id": "wrought_iron",
+      "reason": "already_registered"
+    },
+    {
+      "id": "yellowcake",
+      "reason": "already_registered"
+    },
+    {
+      "id": "zinc_ingot",
+      "reason": "already_registered"
+    },
+    {
+      "id": "zinc_oxide",
+      "reason": "already_registered"
+    },
+    {
+      "id": "zirconium_alloy_tube",
+      "reason": "already_registered"
+    }
+  ],
+  "template_art": true,
+  "note": "Item textures are deterministic template art pending the approved art pipeline."
+}

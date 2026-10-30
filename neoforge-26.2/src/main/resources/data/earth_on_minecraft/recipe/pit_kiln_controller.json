@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "DDD",
+    "D D",
+    "DDD"
+  ],
+  "key": {
+    "D": "minecraft:dirt"
+  },
+  "result": {
+    "id": "earth_on_minecraft:pit_kiln_controller",
+    "count": 1
+  }
+}

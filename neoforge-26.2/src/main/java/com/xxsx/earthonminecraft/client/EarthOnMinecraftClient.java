@@ -16,6 +16,7 @@ public final class EarthOnMinecraftClient {
         modBus.addListener(MachineFeedbackClient::registerParticleProviders);
         modBus.addListener(ConnectedOreModels::registerStandaloneModels);
         modBus.addListener(ConnectedOreModels::replaceBakedModels);
+        modBus.addListener(SpecFluidModels::register);
     }
 
     private static void registerScreens(RegisterMenuScreensEvent event) {
@@ -30,6 +31,6 @@ public final class EarthOnMinecraftClient {
     }
 
     public static void openNotebook() {
-        Minecraft.getInstance().gui.setScreen(new FieldGeologyNotebookScreen());
+        Minecraft.getInstance().setScreen(new FieldGeologyNotebookScreen());
     }
 }

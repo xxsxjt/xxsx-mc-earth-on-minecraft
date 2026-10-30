@@ -1,0 +1,604 @@
+{
+  "meta": {
+    "format_version": "5.0",
+    "model_format": "java_block",
+    "box_uv": false
+  },
+  "name": "fermenting_crock",
+  "model_identifier": "earth_on_minecraft:fermenting_crock",
+  "visible_box": [
+    1,
+    1,
+    0
+  ],
+  "variable_placeholders": "",
+  "resolution": {
+    "width": 128,
+    "height": 128
+  },
+  "elements": [
+    {
+      "name": "stone_plinth",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        3,
+        14
+      ],
+      "autouv": 0,
+      "color": 0,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "2458f731-1630-56d2-b0e2-da800d5ea367",
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            13,
+            14,
+            16
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            2,
+            13,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            2,
+            13,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            2,
+            13,
+            14,
+            16
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            2,
+            2,
+            14,
+            14
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "crock_belly",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        3,
+        3
+      ],
+      "to": [
+        13,
+        11,
+        13
+      ],
+      "autouv": 0,
+      "color": 1,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "f3338a49-1d57-58a3-b3b8-147373f40096",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            5,
+            13,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            5,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            3,
+            5,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            3,
+            5,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            3,
+            13,
+            13
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "crock_lid",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        4,
+        11,
+        4
+      ],
+      "to": [
+        12,
+        14,
+        12
+      ],
+      "autouv": 0,
+      "color": 2,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "36961c51-5965-50e9-b0b1-dac32dbfef38",
+      "faces": {
+        "north": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            4,
+            2,
+            12,
+            5
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            4,
+            4,
+            12,
+            12
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "airlock",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        7,
+        14,
+        7
+      ],
+      "to": [
+        9,
+        16,
+        9
+      ],
+      "autouv": 0,
+      "color": 3,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "8e251613-09ee-5f1f-9af6-23517605f2c1",
+      "faces": {
+        "north": {
+          "uv": [
+            7,
+            0,
+            9,
+            2
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            7,
+            0,
+            9,
+            2
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            7,
+            0,
+            9,
+            2
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            7,
+            0,
+            9,
+            2
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            7,
+            7,
+            9,
+            9
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "sample_tap",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        12,
+        5,
+        6
+      ],
+      "to": [
+        16,
+        8,
+        10
+      ],
+      "autouv": 0,
+      "color": 4,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "b2e9f8a4-1228-5e4c-8952-233fbff91419",
+      "faces": {
+        "north": {
+          "uv": [
+            12,
+            8,
+            16,
+            11
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            0,
+            8,
+            4,
+            11
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            6,
+            8,
+            10,
+            11
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            6,
+            8,
+            10,
+            11
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            12,
+            6,
+            16,
+            10
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "brine_gutter",
+      "box_uv": false,
+      "rescale": false,
+      "locked": false,
+      "from": [
+        3,
+        3,
+        0
+      ],
+      "to": [
+        13,
+        6,
+        3
+      ],
+      "autouv": 0,
+      "color": 5,
+      "origin": [
+        8,
+        8,
+        8
+      ],
+      "uuid": "87dfb40a-2146-56b3-a814-0afcc5bc99d4",
+      "faces": {
+        "north": {
+          "uv": [
+            3,
+            10,
+            13,
+            13
+          ],
+          "texture": 0
+        },
+        "south": {
+          "uv": [
+            3,
+            10,
+            13,
+            13
+          ],
+          "texture": 1
+        },
+        "west": {
+          "uv": [
+            13,
+            10,
+            16,
+            13
+          ],
+          "texture": 1
+        },
+        "east": {
+          "uv": [
+            0,
+            10,
+            3,
+            13
+          ],
+          "texture": 1
+        },
+        "up": {
+          "uv": [
+            3,
+            0,
+            13,
+            3
+          ],
+          "texture": 2
+        },
+        "down": {
+          "uv": [
+            3,
+            13,
+            13,
+            16
+          ],
+          "texture": 2
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "outliner": [
+    "2458f731-1630-56d2-b0e2-da800d5ea367",
+    "f3338a49-1d57-58a3-b3b8-147373f40096",
+    "36961c51-5965-50e9-b0b1-dac32dbfef38",
+    "8e251613-09ee-5f1f-9af6-23517605f2c1",
+    "b2e9f8a4-1228-5e4c-8952-233fbff91419",
+    "87dfb40a-2146-56b3-a814-0afcc5bc99d4"
+  ],
+  "textures": [
+    {
+      "name": "fermenting_crock.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "0",
+      "particle": true,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "23c08797-c8f5-5a6f-8104-bbdde74753ed",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/fermenting_crock.png"
+    },
+    {
+      "name": "wet_machine_side.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "1",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "31a85def-7245-5aaf-baff-46b21859fe59",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/wet_machine_side.png"
+    },
+    {
+      "name": "wet_machine_top.png",
+      "folder": "",
+      "namespace": "earth_on_minecraft",
+      "id": "2",
+      "particle": false,
+      "render_mode": "default",
+      "render_sides": "auto",
+      "frame_time": 1,
+      "frame_order_type": "loop",
+      "frame_order": "",
+      "uuid": "86ed510c-65cf-56b6-a264-51bde1430d2c",
+      "relative_path": "../../../neoforge-26.2/src/main/resources/assets/earth_on_minecraft/textures/block/wet_machine_top.png"
+    }
+  ],
+  "earth_on_minecraft": {
+    "schema_version": 1,
+    "prototype": "stoneware fermentation crock with airlock",
+    "silhouette": "round-bellied glazed crock with a clamped lid and airlock",
+    "faces": {
+      "front": "sealed lid and airlock",
+      "back": "sample tap",
+      "left": "brine gutter",
+      "right": "drain valve",
+      "top": "crock mouth",
+      "bottom": "stone plinth"
+    },
+    "states": {
+      "idle": {
+        "particle": "earth_on_minecraft:block/fermenting_crock",
+        "front": "earth_on_minecraft:block/fermenting_crock",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "running": {
+        "particle": "earth_on_minecraft:block/fermenting_crock_active",
+        "front": "earth_on_minecraft:block/fermenting_crock_active",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      },
+      "fault": {
+        "particle": "earth_on_minecraft:block/fermenting_crock",
+        "front": "earth_on_minecraft:block/fermenting_crock",
+        "back": "earth_on_minecraft:block/wet_machine_side",
+        "left": "earth_on_minecraft:block/wet_machine_side",
+        "right": "earth_on_minecraft:block/wet_machine_side",
+        "top": "earth_on_minecraft:block/wet_machine_top",
+        "bottom": "earth_on_minecraft:block/wet_machine_top",
+        "fault": "minecraft:block/redstone_lamp_on"
+      }
+    }
+  }
+}

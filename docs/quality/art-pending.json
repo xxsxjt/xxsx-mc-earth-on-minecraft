@@ -1,0 +1,10 @@
+{
+  "schema_version": 2,
+  "template_threshold_bytes": 1200,
+  "curated_items": 1129,
+  "curated_blocks": 131,
+  "item_pending": [],
+  "block_pending": [],
+  "item_missing_texture": [],
+  "block_missing_texture": []
+}
