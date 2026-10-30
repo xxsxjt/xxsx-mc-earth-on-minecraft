@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:muscovite",
+  "kind": "mineral",
+  "formula": "KAl2(AlSi3O10)(OH)2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 398.31,
+  "constituents": [{ "species": "KAl2(AlSi3O10)(OH)2", "fraction": 1.0 }],
+  "source": ["metamorphic", "pegmatitic", "hydrothermal"],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.muscovite",
+  "notes": "Dioctahedral mica end member; natural sheets carry Na, Fe and Mg substitution."
+}
+
+\n

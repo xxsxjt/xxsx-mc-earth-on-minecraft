@@ -11,5 +11,16 @@ public interface MaterialPropertyApi {
         public boolean isMixture() {
             return simplificationKey.endsWith(".mixture") || formula.contains("+") || formula.contains("/");
         }
+
+        public String compositionBasis() {
+            if (isMixture()) {
+                return "mixture";
+            }
+            return "ideal_formula";
+        }
+
+        public String energyPolicy() {
+            return "chemical";
+        }
     }
 }

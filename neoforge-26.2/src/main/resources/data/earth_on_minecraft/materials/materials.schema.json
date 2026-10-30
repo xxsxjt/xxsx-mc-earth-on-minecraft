@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "earth_on_minecraft:materials.schema.json",
+  "title": "Earth on Minecraft material catalog record",
+  "type": "object",
+  "required": ["schema_version", "id", "kind", "formula", "composition_basis", "phase", "constituents", "simplification", "certainty"],
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 1 },
+    "id": { "type": "string", "pattern": "^earth_on_minecraft:[a-z0-9_/]+$" },
+    "kind": { "enum": ["element", "compound", "mineral", "rock", "deposit", "mixture", "alloy", "polymer", "manufactured", "soil", "gas"] },
+    "formula": { "type": "string", "minLength": 1 },
+    "composition_basis": { "enum": ["ideal_formula", "end_member_range", "mass_fraction", "game_simplified", "mixed"] },
+    "phase": { "enum": ["solid", "liquid", "gas", "solution", "plasma", "mixed"] },
+    "molar_mass_g_mol": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "constituents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["species"],
+        "properties": {
+          "species": { "type": "string", "minLength": 1 },
+          "fraction": { "type": "number", "minimum": 0, "maximum": 1 },
+          "fraction_min": { "type": "number", "minimum": 0, "maximum": 1 },
+          "fraction_max": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "source": { "type": "array", "items": { "type": "string" } },
+    "simplification": { "enum": ["none", "game_batch", "mixture", "composite", "concentrate"] },
+    "certainty": { "enum": ["well_established", "range_estimate", "game_simplified", "unknown"] },
+    "display_key": { "type": "string" },
+    "notes": { "type": "string" }
+  },
+  "additionalProperties": false
+}

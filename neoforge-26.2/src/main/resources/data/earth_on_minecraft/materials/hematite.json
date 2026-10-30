@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:hematite",
+  "kind": "mineral",
+  "formula": "Fe2O3",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 159.69,
+  "constituents": [{ "species": "Fe2O3", "fraction": 1.0 }],
+  "source": ["sedimentary", "metamorphic", "hydrothermal"],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.hematite"
+}
+
+\n

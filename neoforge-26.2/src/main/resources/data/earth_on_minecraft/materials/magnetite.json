@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:magnetite",
+  "kind": "mineral",
+  "formula": "Fe3O4",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 231.53,
+  "constituents": [{ "species": "Fe3O4", "fraction": 1.0 }],
+  "source": ["magmatic", "hydrothermal", "metamorphic"],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.magnetite",
+  "notes": "Ideal formula for the mineral; natural ore batches carry silicate gangue and hematite."
+}
