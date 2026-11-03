@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:sponge_iron",
+  "kind": "alloy",
+  "formula": "Fe + Slag + C + S + P",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.86
+    },
+    {
+      "species": "Slag",
+      "fraction": 0.115
+    },
+    {
+      "species": "C",
+      "fraction": 0.018
+    },
+    {
+      "species": "S",
+      "fraction": 0.004
+    },
+    {
+      "species": "P",
+      "fraction": 0.003
+    }
+  ],
+  "source": [
+    "direct_reduction",
+    "bloomery"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.sponge_iron",
+  "notes": "Porous direct-reduced iron bloom with entrapped silicate slag and heterogeneous carbon/sulfur/phosphorus."
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:coal_dust",
+  "kind": "mixture",
+  "formula": "C + CH2 + SiO2 + S + P",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "C",
+      "fraction": 0.72
+    },
+    {
+      "species": "CH2",
+      "fraction": 0.16
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.095
+    },
+    {
+      "species": "S",
+      "fraction": 0.02
+    },
+    {
+      "species": "P",
+      "fraction": 0.005
+    }
+  ],
+  "source": [
+    "grinding"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.coal_dust",
+  "notes": "Pulverized raw coal carrying volatile organics and elevated sulfur/phosphorus impurities."
+}

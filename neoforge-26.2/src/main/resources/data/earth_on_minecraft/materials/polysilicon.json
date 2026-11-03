@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:polysilicon",
+  "kind": "element",
+  "formula": "Si",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 28.085,
+  "constituents": [
+    {
+      "species": "Si",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "chemical_vapor_deposition"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.polysilicon",
+  "notes": "Electronic-grade polycrystalline silicon rod chunk for Czochralski crystal pulling."
+}

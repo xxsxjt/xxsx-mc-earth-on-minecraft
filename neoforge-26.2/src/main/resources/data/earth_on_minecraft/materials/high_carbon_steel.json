@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:high_carbon_steel",
+  "kind": "alloy",
+  "formula": "Fe + C + Mn + Si + S + P",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.978
+    },
+    {
+      "species": "C",
+      "fraction": 0.014
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.005
+    },
+    {
+      "species": "Si",
+      "fraction": 0.002
+    },
+    {
+      "species": "S",
+      "fraction": 0.0005
+    },
+    {
+      "species": "P",
+      "fraction": 0.0005
+    }
+  ],
+  "source": [
+    "steelmaking",
+    "forging"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.high_carbon_steel",
+  "notes": "High-carbon blade and tool steel (1.4 wt% C) with strict sulfur and phosphorus limits."
+}

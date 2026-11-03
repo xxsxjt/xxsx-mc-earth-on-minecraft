@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:steel_bloom",
+  "kind": "alloy",
+  "formula": "Fe + Slag + C + Mn + S + P",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.962
+    },
+    {
+      "species": "Slag",
+      "fraction": 0.022
+    },
+    {
+      "species": "C",
+      "fraction": 0.011
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.003
+    },
+    {
+      "species": "S",
+      "fraction": 0.001
+    },
+    {
+      "species": "P",
+      "fraction": 0.001
+    }
+  ],
+  "source": [
+    "carburization",
+    "steelmaking"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.steel_bloom",
+  "notes": "Carburized semi-fused steel bloom requiring anvil forging to expel residual slag and homogenize carbon."
+}

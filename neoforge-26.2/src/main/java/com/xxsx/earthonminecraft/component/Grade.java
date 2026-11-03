@@ -50,4 +50,36 @@ public enum Grade implements StringRepresentable {
         }
         return COMMON;
     }
+
+    public static Grade fromPurity(double purity) {
+        if (purity >= 0.999) {
+            return HEIRLOOM;
+        }
+        if (purity >= 0.990) {
+            return MASTERWORK;
+        }
+        if (purity >= 0.940) {
+            return FINE;
+        }
+        if (purity >= 0.700) {
+            return COMMON;
+        }
+        return CRUDE;
+    }
+
+    public Grade min(Grade other) {
+        return this.tier <= other.tier ? this : other;
+    }
+
+    public Grade max(Grade other) {
+        return this.tier >= other.tier ? this : other;
+    }
+
+    public Grade stepUp() {
+        return fromTier(Math.min(HEIRLOOM.tier, this.tier + 1));
+    }
+
+    public Grade stepDown() {
+        return fromTier(Math.max(CRUDE.tier, this.tier - 1));
+    }
 }

@@ -11,6 +11,9 @@ import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 
 import java.io.Reader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -29,17 +32,52 @@ import java.util.Optional;
 public final class MaterialCatalog implements ResourceManagerReloadListener {
     private static final FileToIdConverter LISTER = FileToIdConverter.json("materials");
     private static volatile Map<Identifier, MaterialRecord> records = Map.of();
+    private static final Map<Identifier, MaterialRecord> FALLBACK_CACHE = new java.util.concurrent.ConcurrentHashMap<>();
 
     public static void register(AddServerReloadListenersEvent event) {
         event.addListener(EarthOnMinecraft.id("materials"), new MaterialCatalog());
     }
 
     public static Optional<MaterialRecord> find(Identifier id) {
-        return Optional.ofNullable(records.get(id));
+        MaterialRecord loaded = records.get(id);
+        if (loaded != null) {
+            return Optional.of(loaded);
+        }
+        Identifier lookupId = "minecraft".equals(id.getNamespace())
+                ? EarthOnMinecraft.id(id.getPath())
+                : id;
+        loaded = records.get(lookupId);
+        if (loaded != null) {
+            return Optional.of(loaded);
+        }
+        return loadFromClasspath(lookupId);
     }
 
     public static Map<Identifier, MaterialRecord> records() {
         return records;
+    }
+
+    private static Optional<MaterialRecord> loadFromClasspath(Identifier id) {
+        if (!EarthOnMinecraft.MODID.equals(id.getNamespace())) {
+            return Optional.empty();
+        }
+        MaterialRecord cached = FALLBACK_CACHE.get(id);
+        if (cached != null) {
+            return Optional.of(cached);
+        }
+        String resourcePath = "/data/" + id.getNamespace() + "/materials/" + id.getPath() + ".json";
+        try (InputStream stream = MaterialCatalog.class.getResourceAsStream(resourcePath)) {
+            if (stream == null) {
+                return Optional.empty();
+            }
+            try (Reader reader = new InputStreamReader(stream, StandardCharsets.UTF_8)) {
+                MaterialRecord parsed = parse(JsonParser.parseReader(reader).getAsJsonObject());
+                FALLBACK_CACHE.put(id, parsed);
+                return Optional.of(parsed);
+            }
+        } catch (Exception ignored) {
+            return Optional.empty();
+        }
     }
 
     @Override

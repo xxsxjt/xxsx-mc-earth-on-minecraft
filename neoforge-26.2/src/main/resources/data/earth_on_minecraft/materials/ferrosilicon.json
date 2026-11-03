@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:ferrosilicon",
+  "kind": "alloy",
+  "formula": "Si + Fe + C + Al",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Si",
+      "fraction": 0.75
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.23
+    },
+    {
+      "species": "Al",
+      "fraction": 0.015
+    },
+    {
+      "species": "C",
+      "fraction": 0.005
+    }
+  ],
+  "source": [
+    "carbothermic_reduction"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.ferrosilicon",
+  "notes": "FeSi75 master alloy deoxidizer and inoculant for steelmaking and cast iron."
+}

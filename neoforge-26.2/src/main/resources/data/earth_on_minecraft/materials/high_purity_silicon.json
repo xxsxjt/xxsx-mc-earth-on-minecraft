@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:high_purity_silicon",
+  "kind": "element",
+  "formula": "Si",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 28.085,
+  "constituents": [
+    {
+      "species": "Si",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "siemens_process"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.high_purity_silicon",
+  "notes": "Solar/electronic high-purity silicon (6N-9N) purified via chlorosilane distillation."
+}

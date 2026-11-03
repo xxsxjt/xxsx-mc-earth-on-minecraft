@@ -3,12 +3,20 @@ package com.xxsx.earthonminecraft;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.xxsx.earthonminecraft.api.v1.EarthOnMinecraftApi;
+import com.xxsx.earthonminecraft.component.EarthDataComponents;
+import com.xxsx.earthonminecraft.component.Grade;
+import com.xxsx.earthonminecraft.component.MaterialBatch;
+import com.xxsx.earthonminecraft.component.MetalBatch;
+import com.xxsx.earthonminecraft.component.QualityComponents;
+import com.xxsx.earthonminecraft.component.ToolQualityComponent;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.gametest.framework.GameTestInstance;
@@ -43,6 +51,7 @@ final class EarthGameTests {
     private static final Identifier FLUID_LAYER = EarthOnMinecraft.id("fluid_layer");
     private static final Identifier MULTIBLOCK_ASSEMBLY = EarthOnMinecraft.id("multiblock_assembly");
     private static final Identifier DEPOSIT_RESERVE = EarthOnMinecraft.id("deposit_reserve");
+    private static final Identifier ASSAY_METALLURGY_FORGING = EarthOnMinecraft.id("assay_metallurgy_forging");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
     private static final Map<Identifier, Consumer<GameTestHelper>> TESTS = Map.ofEntries(
@@ -59,7 +68,8 @@ final class EarthGameTests {
             Map.entry(MACHINE_POWER_MODES, EarthGameTests::machinePowerModes),
             Map.entry(FLUID_LAYER, EarthGameTests::fluidLayer),
             Map.entry(MULTIBLOCK_ASSEMBLY, EarthGameTests::multiblockAssembly),
-            Map.entry(DEPOSIT_RESERVE, EarthGameTests::depositReserve));
+            Map.entry(DEPOSIT_RESERVE, EarthGameTests::depositReserve),
+            Map.entry(ASSAY_METALLURGY_FORGING, EarthGameTests::assayMetallurgyForging));
 
     static {
         TEST_INSTANCE_TYPES.register("direct", () -> DirectGameTestInstance.CODEC);
@@ -92,6 +102,7 @@ final class EarthGameTests {
         event.registerTest(FLUID_LAYER, test(FLUID_LAYER, environment, 40, true, 8));
         event.registerTest(MULTIBLOCK_ASSEMBLY, test(MULTIBLOCK_ASSEMBLY, environment, 100, true, 8));
         event.registerTest(DEPOSIT_RESERVE, test(DEPOSIT_RESERVE, environment, 100, true, 8));
+        event.registerTest(ASSAY_METALLURGY_FORGING, test(ASSAY_METALLURGY_FORGING, environment, 60, true, 8));
     }
 
     private static GameTestInstance test(Identifier testId, Holder<TestEnvironmentDefinition<?>> environment,
@@ -761,6 +772,120 @@ final class EarthGameTests {
         helper.setBlock(new BlockPos(23, 1, 3), EarthOnMinecraft.BATTERY_BOX.get());
         helper.setBlock(new BlockPos(23, 1, 5), EarthOnMinecraft.COPPER_POWER_CABLE.get());
         helper.setBlock(new BlockPos(23, 1, 7), EarthOnMinecraft.CONVEYOR_BELT.get());
+        helper.succeed();
+    }
+
+    private static void assayMetallurgyForging(GameTestHelper helper) {
+        // 1. Expanded MaterialCatalog coverage for ores, concentrates, metals & chemicals
+        helper.assertTrue(MaterialCatalog.find(EarthOnMinecraft.id("magnetite_ore")).isPresent(),
+                "magnetite_ore must be in MaterialCatalog");
+        helper.assertTrue(MaterialCatalog.find(EarthOnMinecraft.id("iron_concentrate")).isPresent(),
+                "iron_concentrate must be in MaterialCatalog");
+        helper.assertTrue(MaterialCatalog.find(EarthOnMinecraft.id("sponge_iron")).isPresent(),
+                "sponge_iron must be in MaterialCatalog");
+        helper.assertTrue(MaterialCatalog.find(EarthOnMinecraft.id("high_purity_silicon")).isPresent(),
+                "high_purity_silicon must be in MaterialCatalog");
+        helper.assertTrue(MaterialCatalog.find(EarthOnMinecraft.id("methanol")).isPresent(),
+                "methanol must be in MaterialCatalog");
+
+        // 2. Sponge Iron -> Wrought Iron slag expulsion & C < 0.02% decarburization
+        ItemStack sponge = new ItemStack(EarthOnMinecraft.SPONGE_IRON.get());
+        MetalBatch spongeMetal = sponge.get(EarthDataComponents.METAL_BATCH.get());
+        helper.assertTrue(spongeMetal != null, "sponge iron must carry default MetalBatch");
+        helper.assertTrue(spongeMetal.slagContent() >= 0.10,
+                "sponge iron must start with high slag (>=10%), got " + spongeMetal.slagContent());
+        helper.assertValueEqual(spongeMetal.ironCarbonClass(), "sponge_iron", "sponge iron metallurgical class");
+
+        ItemStack masterHammer = new ItemStack(EarthOnMinecraft.GEOLOGY_HAMMER.get());
+        masterHammer.set(EarthDataComponents.TOOL_QUALITY.get(),
+                new ToolQualityComponent(1, Grade.MASTERWORK, "test_smith", 0.9));
+        ItemStack wrought = IronworkingAnvilBlock.forgeResult(sponge, masterHammer, 1280)
+                .orElseThrow(() -> helper.assertionException("sponge iron forging failed"));
+        MetalBatch wroughtMetal = wrought.get(EarthDataComponents.METAL_BATCH.get());
+        MaterialBatch wroughtBatch = wrought.get(EarthDataComponents.MATERIAL_BATCH.get());
+        helper.assertTrue(wroughtMetal != null && wroughtBatch != null,
+                "forged wrought iron must carry updated MetalBatch and MaterialBatch");
+        helper.assertTrue(wroughtMetal.slagContent() < 0.01,
+                "anvil forging must expel slag below 1%, got " + wroughtMetal.slagContent());
+        helper.assertTrue(wroughtMetal.carbonContent() < 0.0002,
+                "wrought iron must have C < 0.02% (0.0002), got " + wroughtMetal.carbonContent());
+        helper.assertTrue(wroughtMetal.fractionOf("Fe") > 0.99,
+                "forged wrought iron must exceed 99% Fe purity, got " + wroughtMetal.fractionOf("Fe"));
+        helper.assertValueEqual(wroughtMetal.ironCarbonClass(), "wrought_iron",
+                "forged wrought iron must classify as wrought_iron");
+        helper.assertTrue(wroughtBatch.grade().tier() >= Grade.FINE.tier(),
+                "hot-forged wrought iron with master hammer must upgrade to >= FINE, got " + wroughtBatch.grade());
+
+        // 3. Iron-Carbon windows & S/P impurity cap
+        MetalBatch cleanSteel = MetallurgyAssay.createIronCarbonBatch(0.010, 0.0002, 0.0002, 0.0008);
+        helper.assertValueEqual(cleanSteel.ironCarbonClass(), "steel", "1.0% C batch must classify as steel");
+        helper.assertTrue(cleanSteel.maxGradeCap().tier() >= Grade.MASTERWORK.tier(),
+                "low S/P clean steel must allow MASTERWORK/HEIRLOOM grade");
+
+        MetalBatch highSulfurSteel = MetallurgyAssay.createIronCarbonBatch(0.010, 0.0040, 0.0025, 0.0050);
+        helper.assertValueEqual(highSulfurSteel.ironCarbonClass(), "steel", "high-S steel still in steel C window");
+        helper.assertValueEqual(highSulfurSteel.maxGradeCap(), Grade.CRUDE,
+                "high S+P (>0.5%) must cap metallurgical grade at CRUDE");
+
+        MetalBatch pigIronBatch = MetallurgyAssay.createIronCarbonBatch(0.038, 0.0010, 0.0015, 0.0020);
+        helper.assertValueEqual(pigIronBatch.ironCarbonClass(), "pig_iron", "3.8% C (>2.1%) must classify as pig_iron");
+
+        // 4. Steel Bloom -> Steel -> Folding -> Tool Quality propagation
+        ItemStack bloom = new ItemStack(EarthOnMinecraft.STEEL_BLOOM.get());
+        bloom.set(EarthDataComponents.METAL_BATCH.get(),
+                MetallurgyAssay.createIronCarbonBatch(0.011, 0.0002, 0.0002, 0.0040));
+        bloom.set(EarthDataComponents.MATERIAL_BATCH.get(),
+                MaterialBatch.defaultFor("steel_bloom").withPurityAndGrade(0.975, Grade.FINE).withTemperatureK(1300));
+        ItemStack forgedSteel = IronworkingAnvilBlock.forgeResult(bloom, masterHammer, 1300)
+                .orElseThrow(() -> helper.assertionException("steel bloom forging failed"));
+        ItemStack foldedSteel = IronworkingAnvilBlock.forgeResult(forgedSteel, masterHammer, 1320)
+                .orElseThrow(() -> helper.assertionException("steel folding failed"));
+        MaterialBatch foldedBatch = foldedSteel.get(EarthDataComponents.MATERIAL_BATCH.get());
+        helper.assertTrue(foldedBatch.grade().tier() >= Grade.MASTERWORK.tier(),
+                "folded clean steel at 1320 K must reach MASTERWORK or HEIRLOOM, got " + foldedBatch.grade());
+
+        var pickaxeRoute = ProcessingMachineBlock.recipesFor(ProcessingMachineBlock.Kind.ANVIL).stream()
+                .filter(r -> r.outputs().stream().anyMatch(o ->
+                        BuiltInRegistries.ITEM.getKey(o.item().get().asItem()).getPath().equals("steel_pickaxe")))
+                .findFirst()
+                .orElseThrow(() -> helper.assertionException("missing anvil steel_pickaxe route"));
+        List<ItemStack> forgedTools = MetallurgyAssay.evaluateMachineOutputs(
+                ProcessingMachineBlock.Kind.ANVIL, pickaxeRoute, foldedSteel, List.of(), ItemStack.EMPTY, 1300);
+        ToolQualityComponent toolQuality = forgedTools.getFirst().get(EarthDataComponents.TOOL_QUALITY.get());
+        helper.assertTrue(toolQuality != null && toolQuality.grade().tier() >= Grade.MASTERWORK.tier(),
+                "forging steel_pickaxe from masterwork/heirloom steel at 1300 K must yield >= MASTERWORK tool_quality");
+
+        // 5. Tooltip formatting check (wt%, grade, purity)
+        List<Component> tooltipLines = new ArrayList<>();
+        QualityComponents.appendTooltip(foldedSteel, tooltipLines::add);
+        String joinedTooltip = tooltipLines.stream().map(Component::getString).reduce("", (a, b) -> a + "\n" + b);
+        helper.assertTrue(joinedTooltip.contains("Fe ") && joinedTooltip.contains("%"),
+                "tooltip must display element mass fraction percentages: " + joinedTooltip);
+
+        // 6. Cross-addon API (Xuanhuan / Magic / Sci-Fi)
+        var cleanReport = EarthOnMinecraftApi.materials().inspectStack(foldedSteel);
+        ItemStack dirtySponge = new ItemStack(EarthOnMinecraft.SPONGE_IRON.get());
+        var dirtyReport = EarthOnMinecraftApi.materials().inspectStack(dirtySponge);
+        helper.assertTrue(cleanReport.xuanhuanArtifactEmbryoFactor() > dirtyReport.xuanhuanArtifactEmbryoFactor() * 2.0,
+                "folded clean steel must have a much higher Xuanhuan flying-sword embryo factor than dirty sponge iron");
+        helper.assertTrue(dirtyReport.impurityPenalty() > cleanReport.impurityPenalty(),
+                "dirty sponge iron must report higher impurity penalty than refined steel");
+
+        var cathodeReport = EarthOnMinecraftApi.materials()
+                .inspectMaterial(EarthOnMinecraft.id("cathode_copper"))
+                .orElseThrow(() -> helper.assertionException("missing cathode_copper assay report"));
+        helper.assertTrue(cathodeReport.magicArcaneConductivityFactor() > cleanReport.magicArcaneConductivityFactor(),
+                "4N cathode copper must exceed ferrous steel in Magic arcane conductivity");
+
+        var waferReport = EarthOnMinecraftApi.materials()
+                .inspectMaterial(EarthOnMinecraft.id("silicon_wafer"))
+                .orElseThrow(() -> helper.assertionException("missing silicon_wafer assay report"));
+        var mgSiReport = EarthOnMinecraftApi.materials()
+                .inspectMaterial(EarthOnMinecraft.id("metallurgical_silicon"))
+                .orElseThrow(() -> helper.assertionException("missing metallurgical_silicon assay report"));
+        helper.assertTrue(waferReport.scifiHighPurityFactor() > mgSiReport.scifiHighPurityFactor(),
+                "9N silicon wafer must exceed metallurgical silicon in Sci-Fi high-purity factor");
+
         helper.succeed();
     }
 

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:phenol",
+  "kind": "compound",
+  "formula": "C6H6O",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 94.11,
+  "constituents": [
+    {
+      "species": "C6H6O",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "coal_tar",
+    "cumene_process"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.phenol",
+  "notes": "Carbolic acid aromatic monomer for phenolic and epoxy resins."
+}

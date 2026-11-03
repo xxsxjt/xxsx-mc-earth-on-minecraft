@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:coke",
+  "kind": "mixture",
+  "formula": "C + SiO2 + Al2O3 + S + P",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "C",
+      "fraction": 0.89
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.065
+    },
+    {
+      "species": "Al2O3",
+      "fraction": 0.035
+    },
+    {
+      "species": "S",
+      "fraction": 0.008
+    },
+    {
+      "species": "P",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "coking"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.coke",
+  "notes": "Metallurgical coke carbon reductant and high-temperature fuel with mineral ash."
+}

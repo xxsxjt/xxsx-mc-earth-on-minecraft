@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:diamondiferous_kimberlite",
+  "kind": "deposit",
+  "formula": "(Mg,Fe)2SiO4 + Mg3Si2O5(OH)4 + CaCO3 + Fe3O4 + C",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "(Mg,Fe)2SiO4",
+      "fraction": 0.45
+    },
+    {
+      "species": "Mg3Si2O5(OH)4",
+      "fraction": 0.27
+    },
+    {
+      "species": "CaCO3",
+      "fraction": 0.14
+    },
+    {
+      "species": "Fe3O4",
+      "fraction": 0.08
+    },
+    {
+      "species": "C",
+      "fraction": 0.06
+    }
+  ],
+  "source": [
+    "magmatic",
+    "mantle_pipe"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.diamondiferous_kimberlite",
+  "notes": "Diamond-bearing kimberlite pipe horizon enriched in mantle xenocrysts and crystalline carbon."
+}

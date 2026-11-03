@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:slaked_lime",
+  "kind": "compound",
+  "formula": "Ca(OH)2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 74.09,
+  "constituents": [
+    {
+      "species": "Ca(OH)2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "hydration"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.slaked_lime",
+  "notes": "Hydrated calcium hydroxide base for mortar, water softening and flue-gas scrubbing."
+}

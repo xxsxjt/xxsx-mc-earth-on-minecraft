@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:urea",
+  "kind": "compound",
+  "formula": "CH4N2O",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 60.06,
+  "constituents": [
+    {
+      "species": "CH4N2O",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "bosch_meiser"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.urea",
+  "notes": "High-nitrogen carbamide fertilizer and resin precursor."
+}

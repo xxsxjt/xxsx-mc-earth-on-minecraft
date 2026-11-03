@@ -2,25 +2,33 @@
   "schema_version": 1,
   "id": "earth_on_minecraft:wrought_iron",
   "kind": "alloy",
-  "formula": "Fe + SiO2 + C + Mn",
+  "formula": "Fe + Slag + Mn + C + S + P",
   "composition_basis": "mass_fraction",
   "phase": "solid",
   "constituents": [
     {
       "species": "Fe",
-      "fraction": 0.992
+      "fraction": 0.9955
     },
     {
-      "species": "SiO2",
-      "fraction": 0.005
-    },
-    {
-      "species": "C",
-      "fraction": 0.002
+      "species": "Slag",
+      "fraction": 0.003
     },
     {
       "species": "Mn",
       "fraction": 0.001
+    },
+    {
+      "species": "C",
+      "fraction": 0.00015
+    },
+    {
+      "species": "P",
+      "fraction": 0.0002
+    },
+    {
+      "species": "S",
+      "fraction": 0.00015
     }
   ],
   "source": [
@@ -29,5 +37,5 @@
   "simplification": "game_batch",
   "certainty": "well_established",
   "display_key": "material.earth_on_minecraft.wrought_iron",
-  "notes": "Low-carbon forged iron containing fibrous silicate slag inclusions."
+  "notes": "Low-carbon forged wrought iron (C < 0.02 wt%) containing trace fibrous silicate slag inclusions."
 }

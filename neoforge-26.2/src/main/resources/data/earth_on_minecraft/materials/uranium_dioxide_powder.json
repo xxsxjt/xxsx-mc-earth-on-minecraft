@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:uranium_dioxide_powder",
+  "kind": "compound",
+  "formula": "UO2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 270.03,
+  "constituents": [
+    {
+      "species": "UO2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "hydrogen_reduction"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.uranium_dioxide_powder",
+  "notes": "Ceramic-grade uranium(IV) dioxide powder for nuclear fuel pellets and hydrofluorination."
+}

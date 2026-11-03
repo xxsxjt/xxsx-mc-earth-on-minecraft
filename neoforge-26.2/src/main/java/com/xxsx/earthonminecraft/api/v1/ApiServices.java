@@ -5,8 +5,16 @@ import com.xxsx.earthonminecraft.MachineMultiblock;
 import com.xxsx.earthonminecraft.MaterialChemistry;
 import com.xxsx.earthonminecraft.MaterialCatalog;
 import com.xxsx.earthonminecraft.ProcessingMachineBlock;
+import com.xxsx.earthonminecraft.component.EarthDataComponents;
+import com.xxsx.earthonminecraft.component.Grade;
+import com.xxsx.earthonminecraft.component.MaterialBatch;
+import com.xxsx.earthonminecraft.component.MetalBatch;
+import com.xxsx.earthonminecraft.component.QualityComponents;
+import com.xxsx.earthonminecraft.component.ToolQualityComponent;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +28,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 final class ApiServices {
-    static final MaterialPropertyApi MATERIALS = ApiServices::material;
+    static final MaterialPropertyApi MATERIALS = new MaterialService();
     static final GeologyQueryApi GEOLOGY = new GeologyService();
     static final MachineProcessingApi PROCESSING = new ProcessingService();
     static final EnergyApi ENERGY = ApiServices::energyPort;
@@ -30,24 +38,126 @@ final class ApiServices {
     private ApiServices() {
     }
 
-    private static Optional<MaterialPropertyApi.MaterialProperties> material(Identifier id) {
-        Optional<MaterialPropertyApi.MaterialProperties> known = MaterialChemistry.describe(id)
-                .map(info -> new MaterialPropertyApi.MaterialProperties(
-                        id, info.formula(), info.categoryKey(), info.formKey(), info.sourceKey(),
-                        info.processKey(), info.useKey(), info.simplificationKey()));
-        if (known.isPresent()) {
-            return known;
+    private static final class MaterialService implements MaterialPropertyApi {
+        @Override
+        public Optional<MaterialProperties> find(Identifier id) {
+            Optional<MaterialProperties> known = MaterialChemistry.describe(id)
+                    .map(info -> new MaterialProperties(
+                            id, info.formula(), info.categoryKey(), info.formKey(), info.sourceKey(),
+                            info.processKey(), info.useKey(), info.simplificationKey()));
+            if (known.isPresent()) {
+                return known;
+            }
+            return MaterialCatalog.find(id)
+                    .map(record -> new MaterialProperties(
+                            id, record.formula(), "tooltip.earth_on_minecraft.chem.detail.mineral",
+                            "tooltip.earth_on_minecraft.chem.form.natural_block",
+                            "tooltip.earth_on_minecraft.chem.source.mineral",
+                            "tooltip.earth_on_minecraft.chem.process.mineral",
+                            "tooltip.earth_on_minecraft.chem.use.general",
+                            record.isMixture()
+                                    ? "tooltip.earth_on_minecraft.chem.simplify.mixture"
+                                    : "tooltip.earth_on_minecraft.chem.simplify.stackable"));
         }
-        return MaterialCatalog.find(id)
-                .map(record -> new MaterialPropertyApi.MaterialProperties(
-                        id, record.formula(), "tooltip.earth_on_minecraft.chem.detail.mineral",
-                        "tooltip.earth_on_minecraft.chem.form.natural_block",
-                        "tooltip.earth_on_minecraft.chem.source.mineral",
-                        "tooltip.earth_on_minecraft.chem.process.mineral",
-                        "tooltip.earth_on_minecraft.chem.use.general",
-                        record.isMixture()
-                                ? "tooltip.earth_on_minecraft.chem.simplify.mixture"
-                                : "tooltip.earth_on_minecraft.chem.simplify.stackable"));
+
+        @Override
+        public Optional<AssayReport> inspectMaterial(Identifier id) {
+            Optional<MaterialCatalog.MaterialRecord> recordOpt = MaterialCatalog.find(id);
+            if (recordOpt.isEmpty()) {
+                return Optional.empty();
+            }
+            MaterialCatalog.MaterialRecord record = recordOpt.get();
+            MaterialBatch batch = MaterialBatch.defaultFor(id.getPath());
+            Map<String, Double> comp = new LinkedHashMap<>();
+            for (MaterialCatalog.Constituent c : record.constituents()) {
+                comp.put(c.species(), c.fraction());
+            }
+            MetalBatch metal = QualityComponents.defaultMetalBatchForItem(id.getPath());
+            boolean isAlloy = "alloy".equals(record.kind());
+            return Optional.of(buildReport(
+                    id, batch.grade(), batch.purity(), Map.copyOf(comp),
+                    isAlloy ? metal.ironCarbonClass() : "non_ferrous",
+                    isAlloy ? metal.workability() : 1.0,
+                    batch.temperatureK(), batch.moisture()));
+        }
+
+        @Override
+        public AssayReport inspectStack(ItemStack stack) {
+            if (stack == null || stack.isEmpty()) {
+                return AssayReport.EMPTY;
+            }
+            Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            MaterialBatch batch = QualityComponents.resolveMaterialBatch(stack)
+                    .orElseGet(() -> MaterialBatch.defaultFor(id.getPath()));
+            MetalBatch metal = QualityComponents.resolveMetalBatch(stack).orElse(null);
+            ToolQualityComponent tool = stack.get(EarthDataComponents.TOOL_QUALITY.get());
+
+            Grade grade = tool != null ? tool.grade() : batch.grade();
+            Map<String, Double> comp = new LinkedHashMap<>();
+            if (metal != null && !metal.composition().isEmpty()) {
+                comp.putAll(metal.composition());
+            } else {
+                MaterialCatalog.find(id).ifPresent(record -> {
+                    for (MaterialCatalog.Constituent c : record.constituents()) {
+                        comp.put(c.species(), c.fraction());
+                    }
+                });
+            }
+            String icClass = metal != null ? metal.ironCarbonClass() : "non_ferrous";
+            double workability = metal != null ? metal.workability() : 1.0;
+            return buildReport(id, grade, batch.purity(), Map.copyOf(comp), icClass,
+                    workability, batch.temperatureK(), batch.moisture());
+        }
+
+        private static AssayReport buildReport(
+                Identifier id, Grade grade, double purity, Map<String, Double> comp,
+                String icClass, double workability, int tempK, double moisture) {
+            double s = comp.getOrDefault("S", 0.0) + comp.getOrDefault("FeS2", 0.0) * 0.53;
+            double p = comp.getOrDefault("P", 0.0);
+            double slag = comp.getOrDefault("Slag", 0.0);
+            boolean silicateIsPrimary = comp.getOrDefault("SiO2", 0.0) >= 0.50 || id.getPath().contains("quartz") || id.getPath().contains("spirit_stone");
+            double gangueSi = silicateIsPrimary ? 0.0 : comp.getOrDefault("SiO2", 0.0) * 0.5;
+
+            double penalty = Math.min(0.95, s * 35.0 + p * 30.0 + slag * 3.2 + gangueSi + moisture * 1.5);
+            double gradeBonus = 1.0 + grade.tier() * 0.15;
+
+            // 1. Xuanhuan flying-sword / artifact embryo factor
+            double xuanhuanBase;
+            if ("steel".equals(icClass)) {
+                xuanhuanBase = 1.15;
+            } else if ("wrought_iron".equals(icClass)) {
+                xuanhuanBase = 0.95;
+            } else if ("pig_iron".equals(icClass) || "sponge_iron".equals(icClass)) {
+                xuanhuanBase = 0.45;
+            } else if (comp.containsKey("Cu") || comp.containsKey("Au") || comp.containsKey("Ti") || id.getPath().contains("spirit_stone")) {
+                xuanhuanBase = 1.05;
+            } else {
+                xuanhuanBase = 0.75;
+            }
+            double xuanhuanFactor = round4(Math.max(0.05, purity * xuanhuanBase * gradeBonus * (1.0 - penalty)));
+
+            // 2. Magic arcane conductor factor (rewards Cu, Ag, Au, rare earths & high purity; penalizes Fe/Slag/S scattering)
+            double cuAuAg = comp.getOrDefault("Cu", 0.0) + comp.getOrDefault("Au", 0.0) * 1.25
+                    + comp.getOrDefault("Ag", 0.0) * 1.35 + comp.getOrDefault("CeCO3F", 0.0) * 0.9;
+            double feScatter = comp.getOrDefault("Fe", 0.0) > 0.5 ? 0.55 : 1.0 - comp.getOrDefault("Fe", 0.0) * 0.8;
+            double magicBase = cuAuAg > 0.2 ? (0.85 + cuAuAg * 0.45) : (0.65 * feScatter);
+            double magicFactor = round4(Math.max(0.05, purity * magicBase * (1.0 + grade.tier() * 0.12) * (1.0 - penalty)));
+
+            // 3. Sci-Fi semiconductor & special alloy factor (rewards 6N/9N Si, Ti, Al, Invar, Stainless & ultra-low impurities)
+            double siTi = comp.getOrDefault("Si", 0.0) + comp.getOrDefault("Ti", 0.0)
+                    + comp.getOrDefault("Al", 0.0) * 0.9 + comp.getOrDefault("Cr", 0.0) * 0.8 + comp.getOrDefault("Ni", 0.0) * 0.8;
+            double nineNBonus = purity >= 0.99999 ? 1.45 : (purity >= 0.995 ? 1.20 : 0.90);
+            double scifiBase = siTi > 0.15 ? 1.10 : 0.85;
+            double scifiFactor = round4(Math.max(0.05, purity * scifiBase * nineNBonus * (1.0 + grade.tier() * 0.12) * (1.0 - penalty)));
+
+            return new AssayReport(
+                    id, grade, round4(purity), comp, icClass, round4(workability),
+                    tempK, round4(penalty), xuanhuanFactor, magicFactor, scifiFactor);
+        }
+
+        private static double round4(double v) {
+            return Math.round(v * 10_000.0) / 10_000.0;
+        }
     }
 
     private static Optional<EnergyApi.EnergyPort> energyPort(Level level, BlockPos pos, Direction side) {

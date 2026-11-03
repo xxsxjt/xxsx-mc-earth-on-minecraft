@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:acetic_acid",
+  "kind": "compound",
+  "formula": "C2H4O2",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 60.05,
+  "constituents": [
+    {
+      "species": "C2H4O2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "carbonylation",
+    "oxidation"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.acetic_acid",
+  "notes": "Glacial ethanoic acid organic reagent and acetylating feedstock."
+}

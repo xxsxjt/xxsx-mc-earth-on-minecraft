@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:uraninite_ore",
+  "kind": "deposit",
+  "formula": "UO2 + SiO2 + Fe2O3 + PbS",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "UO2",
+      "fraction": 0.45
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.35
+    },
+    {
+      "species": "Fe2O3",
+      "fraction": 0.14
+    },
+    {
+      "species": "PbS",
+      "fraction": 0.06
+    }
+  ],
+  "source": [
+    "hydrothermal",
+    "unconformity"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.uraninite_ore",
+  "notes": "Pitchblende/uraninite ore vein with hematitic alteration and radiogenic galena."
+}

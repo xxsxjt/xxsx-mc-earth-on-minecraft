@@ -489,6 +489,14 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         changed = true;
 
         if (machine.progress >= recipe.processTicks()) {
+            ItemStack primarySnapshot = input.copy();
+            List<ItemStack> secondarySnapshots = new java.util.ArrayList<>(SECONDARY_INPUT_SLOTS);
+            for (int i = 0; i < SECONDARY_INPUT_SLOTS; i++) {
+                secondarySnapshots.add(machine.items.get(SLOT_SECONDARY_START + i).copy());
+            }
+            ItemStack reagentSnapshot = reagent.copy();
+            List<ItemStack> evaluatedOutputs = MetallurgyAssay.evaluateMachineOutputs(
+                    kind, recipe, primarySnapshot, secondarySnapshots, reagentSnapshot, machine.temperatureK);
             if (recipe.requiresCoke()) {
                 reagent.shrink(1);
                 if (reagent.isEmpty()) {
@@ -503,7 +511,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             if (input.isEmpty()) {
                 machine.items.set(SLOT_INPUT, ItemStack.EMPTY);
             }
-            machine.insertOutputs(recipe.outputStacks());
+            machine.insertOutputs(evaluatedOutputs);
             machine.produceFluidOutputs(recipe);
             machine.progress = 0;
             MachineFeedback.playComplete(level, pos, kind);

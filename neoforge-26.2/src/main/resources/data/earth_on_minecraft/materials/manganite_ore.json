@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:manganite_ore",
+  "kind": "deposit",
+  "formula": "MnOOH + MnO2 + Fe2O3 + SiO2",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "MnOOH",
+      "fraction": 0.56
+    },
+    {
+      "species": "MnO2",
+      "fraction": 0.24
+    },
+    {
+      "species": "Fe2O3",
+      "fraction": 0.1
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.1
+    }
+  ],
+  "source": [
+    "sedimentary",
+    "hydrothermal"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.manganite_ore",
+  "notes": "Manganite/pyrolusite manganese oxide ore bed for ferromanganese smelting."
+}

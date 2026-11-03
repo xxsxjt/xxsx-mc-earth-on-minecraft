@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:cathode_copper",
+  "kind": "alloy",
+  "formula": "Cu + Ag + O",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Cu",
+      "fraction": 0.9995
+    },
+    {
+      "species": "Ag",
+      "fraction": 0.0003
+    },
+    {
+      "species": "O",
+      "fraction": 0.0002
+    }
+  ],
+  "source": [
+    "electrorefining"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.cathode_copper",
+  "notes": "4N-grade electrolytic cathode copper (99.95% Cu) for electrical and arcane conductors."
+}

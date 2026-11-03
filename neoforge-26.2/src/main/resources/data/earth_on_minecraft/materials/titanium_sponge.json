@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:titanium_sponge",
+  "kind": "alloy",
+  "formula": "Ti + Mg + Cl + Fe + O",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Ti",
+      "fraction": 0.99
+    },
+    {
+      "species": "Mg",
+      "fraction": 0.004
+    },
+    {
+      "species": "Cl",
+      "fraction": 0.003
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.002
+    },
+    {
+      "species": "O",
+      "fraction": 0.001
+    }
+  ],
+  "source": [
+    "kroll_process"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.titanium_sponge",
+  "notes": "Porous Kroll-process titanium sponge reduced from TiCl4 with magnesium."
+}

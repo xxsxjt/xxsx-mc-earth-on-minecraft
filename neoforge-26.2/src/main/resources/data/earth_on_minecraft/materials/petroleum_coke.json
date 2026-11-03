@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:petroleum_coke",
+  "kind": "mixture",
+  "formula": "C + S + SiO2",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "C",
+      "fraction": 0.965
+    },
+    {
+      "species": "S",
+      "fraction": 0.025
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.01
+    }
+  ],
+  "source": [
+    "delayed_coking"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.petroleum_coke",
+  "notes": "High-carbon low-ash petroleum coke for carbon anodes and graphite synthesis."
+}

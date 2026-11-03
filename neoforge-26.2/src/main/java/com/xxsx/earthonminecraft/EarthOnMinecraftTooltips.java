@@ -1,5 +1,6 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthonminecraft.component.QualityComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -33,10 +34,13 @@ final class EarthOnMinecraftTooltips {
         }
         boolean hasChemistry = MaterialChemistry.hasDetails(stack);
         boolean hasRoute = !RouteGuide.routeFor(stack.getItem()).isEmpty();
-        if (!hasChemistry && !hasRoute) {
+        boolean hasAssay = QualityComponents.resolveMaterialBatch(stack).isPresent()
+                || QualityComponents.resolveMetalBatch(stack).isPresent();
+        if (!hasChemistry && !hasRoute && !hasAssay) {
             return;
         }
         event.getToolTip().add(Component.translatable("tooltip.earth_on_minecraft.vanilla.header").withStyle(ChatFormatting.GOLD));
+        QualityComponents.appendTooltip(stack, event.getToolTip()::add);
         MaterialChemistry.addDetails(stack, event.getToolTip()::add, event.getFlags());
         RouteGuide.addRouteTips(stack, event.getToolTip()::add);
     }

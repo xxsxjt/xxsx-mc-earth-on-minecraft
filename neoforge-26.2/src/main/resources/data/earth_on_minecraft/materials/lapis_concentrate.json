@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:lapis_concentrate",
+  "kind": "mixture",
+  "formula": "Na6Ca2Al6Si6O24S2 + CaCO3 + SiO2",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Na6Ca2Al6Si6O24S2",
+      "fraction": 0.86
+    },
+    {
+      "species": "CaCO3",
+      "fraction": 0.09
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.05
+    }
+  ],
+  "source": [
+    "flotation"
+  ],
+  "simplification": "concentrate",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.lapis_concentrate",
+  "notes": "Upgraded lazurite pigment and crystal concentrate."
+}

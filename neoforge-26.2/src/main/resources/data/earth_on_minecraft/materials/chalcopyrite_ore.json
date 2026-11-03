@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:chalcopyrite_ore",
+  "kind": "deposit",
+  "formula": "CuFeS2 + FeS2 + SiO2 + CaCO3",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "CuFeS2",
+      "fraction": 0.55
+    },
+    {
+      "species": "FeS2",
+      "fraction": 0.2
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.18
+    },
+    {
+      "species": "CaCO3",
+      "fraction": 0.07
+    }
+  ],
+  "source": [
+    "hydrothermal",
+    "porphyry"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.chalcopyrite_ore",
+  "notes": "Sulfide copper ore intergrown with pyrite and quartz gangue."
+}

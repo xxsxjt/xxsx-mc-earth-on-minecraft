@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:beryl_concentrate",
+  "kind": "mixture",
+  "formula": "Be3Al2Si6O18 + SiO2 + Cr2O3",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Be3Al2Si6O18",
+      "fraction": 0.88
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.1
+    },
+    {
+      "species": "Cr2O3",
+      "fraction": 0.02
+    }
+  ],
+  "source": [
+    "leaching",
+    "beneficiation"
+  ],
+  "simplification": "concentrate",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.beryl_concentrate",
+  "notes": "Purified chromium-bearing beryl concentrate."
+}

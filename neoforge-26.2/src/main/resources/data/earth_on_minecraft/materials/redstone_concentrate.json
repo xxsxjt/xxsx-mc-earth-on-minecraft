@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:redstone_concentrate",
+  "kind": "mixture",
+  "formula": "Fe2O3 + HgS + MnO2 + SiO2",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe2O3",
+      "fraction": 0.48
+    },
+    {
+      "species": "HgS",
+      "fraction": 0.3
+    },
+    {
+      "species": "MnO2",
+      "fraction": 0.18
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.04
+    }
+  ],
+  "source": [
+    "flotation"
+  ],
+  "simplification": "concentrate",
+  "certainty": "game_simplified",
+  "display_key": "material.earth_on_minecraft.redstone_concentrate",
+  "notes": "Deslimed redstone mineral concentrate with low silica gangue."
+}

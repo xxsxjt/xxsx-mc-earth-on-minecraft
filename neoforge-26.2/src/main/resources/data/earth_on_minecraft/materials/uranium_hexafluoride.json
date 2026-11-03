@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:uranium_hexafluoride",
+  "kind": "compound",
+  "formula": "UF6",
+  "composition_basis": "ideal_formula",
+  "phase": "gas",
+  "molar_mass_g_mol": 352.02,
+  "constituents": [
+    {
+      "species": "UF6",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "fluorination"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.uranium_hexafluoride",
+  "notes": "Volatile uranium(VI) fluoride gas for centrifuge isotope separation."
+}

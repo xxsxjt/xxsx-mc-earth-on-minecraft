@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:emerald_beryl_vein",
+  "kind": "deposit",
+  "formula": "Be3Al2Si6O18 + SiO2 + KAl2(AlSi3O10)(OH)2 + Cr2O3",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Be3Al2Si6O18",
+      "fraction": 0.52
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.3
+    },
+    {
+      "species": "KAl2(AlSi3O10)(OH)2",
+      "fraction": 0.16
+    },
+    {
+      "species": "Cr2O3",
+      "fraction": 0.02
+    }
+  ],
+  "source": [
+    "pegmatitic",
+    "hydrothermal"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.emerald_beryl_vein",
+  "notes": "Pegmatitic and hydrothermal beryl vein doped with trace chromium."
+}

@@ -2,7 +2,7 @@ package com.xxsx.earthonminecraft.api.v1;
 
 public final class EarthOnMinecraftApi {
     public static final int MAJOR_VERSION = 1;
-    public static final int MINOR_VERSION = 0;
+    public static final int MINOR_VERSION = 1;
 
     private EarthOnMinecraftApi() {
     }

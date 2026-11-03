@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:titanium_alloy",
+  "kind": "alloy",
+  "formula": "Ti + Al + V + Fe",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Ti",
+      "fraction": 0.898
+    },
+    {
+      "species": "Al",
+      "fraction": 0.06
+    },
+    {
+      "species": "V",
+      "fraction": 0.04
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.titanium_alloy",
+  "notes": "Ti-6Al-4V aerospace and sci-fi structural alpha-beta titanium alloy."
+}

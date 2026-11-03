@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:blister_copper",
+  "kind": "alloy",
+  "formula": "Cu + S + Fe + O + Ag",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Cu",
+      "fraction": 0.982
+    },
+    {
+      "species": "S",
+      "fraction": 0.007
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.005
+    },
+    {
+      "species": "O",
+      "fraction": 0.004
+    },
+    {
+      "species": "Ag",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "converting",
+    "smelting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.blister_copper",
+  "notes": "Converter blister copper (~98.2% Cu) blistered by escaping SO2 gas."
+}

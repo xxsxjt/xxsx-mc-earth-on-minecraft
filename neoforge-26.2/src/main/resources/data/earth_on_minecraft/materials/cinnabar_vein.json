@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:cinnabar_vein",
+  "kind": "deposit",
+  "formula": "HgS + SiO2 + FeS2 + CaCO3",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "HgS",
+      "fraction": 0.68
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.18
+    },
+    {
+      "species": "FeS2",
+      "fraction": 0.08
+    },
+    {
+      "species": "CaCO3",
+      "fraction": 0.06
+    }
+  ],
+  "source": [
+    "epithermal",
+    "vein"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.cinnabar_vein",
+  "notes": "Epithermal mercury sulfide vein hosted in silicified carbonate wallrock."
+}

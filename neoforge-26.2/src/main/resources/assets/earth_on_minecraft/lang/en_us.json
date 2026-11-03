@@ -2510,5 +2510,14 @@
   "screen.earth_on_minecraft.machine.drive.state.thermal_active": "Thermal Active",
   "screen.earth_on_minecraft.machine.drive.state.grid_active": "EOU Grid",
   "screen.earth_on_minecraft.machine.drive.state.local_fuel_active": "Fuel Drive",
-  "screen.earth_on_minecraft.machine.drive.state.no_power": "No Power"
+  "screen.earth_on_minecraft.machine.drive.state.no_power": "No Power",
+  "tooltip.earth_on_minecraft.assay.purity": "Purity: %s (%s)",
+  "tooltip.earth_on_minecraft.assay.composition": "Assay (wt%%): %s",
+  "tooltip.earth_on_minecraft.assay.metallurgy": "Metallurgy: %s | Workability %s | Cap %s",
+  "tooltip.earth_on_minecraft.assay.class.sponge_iron": "Sponge Iron (Porous Bloom, Slag >= 3%%)",
+  "tooltip.earth_on_minecraft.assay.class.wrought_iron": "Wrought Iron (C < 0.02%%)",
+  "tooltip.earth_on_minecraft.assay.class.low_carbon_iron": "Low-Carbon Mild Iron (C 0.02%%-0.20%%)",
+  "tooltip.earth_on_minecraft.assay.class.steel": "Carbon Steel (C 0.20%%-2.10%%)",
+  "tooltip.earth_on_minecraft.assay.class.pig_iron": "Pig / Cast Iron (C > 2.10%%)",
+  "tooltip.earth_on_minecraft.assay.class.non_ferrous": "Non-Ferrous Metal / Alloy"
 }

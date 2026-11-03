@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:copper_concentrate",
+  "kind": "mixture",
+  "formula": "CuFeS2 + FeS2 + SiO2",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "CuFeS2",
+      "fraction": 0.82
+    },
+    {
+      "species": "FeS2",
+      "fraction": 0.12
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.06
+    }
+  ],
+  "source": [
+    "flotation"
+  ],
+  "simplification": "concentrate",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.copper_concentrate",
+  "notes": "Froth-floated chalcopyrite concentrate (~28 wt% Cu) for roasting and smelting."
+}

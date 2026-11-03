@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:ethylene",
+  "kind": "compound",
+  "formula": "C2H4",
+  "composition_basis": "ideal_formula",
+  "phase": "gas",
+  "molar_mass_g_mol": 28.05,
+  "constituents": [
+    {
+      "species": "C2H4",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "steam_cracking"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.ethylene",
+  "notes": "Primary olefin monomer for polyethylene and ethylene oxide."
+}

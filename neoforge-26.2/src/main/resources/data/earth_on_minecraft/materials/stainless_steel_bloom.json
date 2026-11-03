@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:stainless_steel_bloom",
+  "kind": "alloy",
+  "formula": "Fe + Cr + Ni + Slag + C",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.705
+    },
+    {
+      "species": "Cr",
+      "fraction": 0.18
+    },
+    {
+      "species": "Ni",
+      "fraction": 0.08
+    },
+    {
+      "species": "Slag",
+      "fraction": 0.032
+    },
+    {
+      "species": "C",
+      "fraction": 0.003
+    }
+  ],
+  "source": [
+    "alloy_steelmaking"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.stainless_steel_bloom",
+  "notes": "Unconsolidated Fe-Cr-Ni stainless steel billet prior to hot rolling and forging."
+}

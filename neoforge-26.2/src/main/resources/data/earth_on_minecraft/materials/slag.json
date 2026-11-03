@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:slag",
+  "kind": "mixture",
+  "formula": "CaO + SiO2 + Al2O3 + FeO",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "CaO",
+      "fraction": 0.4
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.36
+    },
+    {
+      "species": "Al2O3",
+      "fraction": 0.14
+    },
+    {
+      "species": "FeO",
+      "fraction": 0.1
+    }
+  ],
+  "source": [
+    "smelting"
+  ],
+  "simplification": "mixture",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.slag",
+  "notes": "Vitreous calcium-aluminosilicate metallurgical slag byproduct."
+}

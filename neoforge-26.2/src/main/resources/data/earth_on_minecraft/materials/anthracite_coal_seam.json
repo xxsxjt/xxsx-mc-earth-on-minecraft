@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:anthracite_coal_seam",
+  "kind": "deposit",
+  "formula": "C + CH2 + SiO2 + FeS2",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "C",
+      "fraction": 0.9
+    },
+    {
+      "species": "CH2",
+      "fraction": 0.04
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.05
+    },
+    {
+      "species": "FeS2",
+      "fraction": 0.01
+    }
+  ],
+  "source": [
+    "metamorphic",
+    "coal_seam"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.anthracite_coal_seam",
+  "notes": "High-rank low-volatile anthracite coal seam with high fixed carbon."
+}

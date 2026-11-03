@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:titanium_tetrachloride",
+  "kind": "compound",
+  "formula": "TiCl4",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 189.68,
+  "constituents": [
+    {
+      "species": "TiCl4",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "chlorination"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.titanium_tetrachloride",
+  "notes": "Distilled titanium tetrachloride feedstock for Kroll magnesium reduction."
+}

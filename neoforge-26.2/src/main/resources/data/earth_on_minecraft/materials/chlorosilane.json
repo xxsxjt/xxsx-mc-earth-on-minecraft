@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:chlorosilane",
+  "kind": "compound",
+  "formula": "SiHCl3",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 135.45,
+  "constituents": [
+    {
+      "species": "SiHCl3",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "hydrochlorination"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.chlorosilane",
+  "notes": "Volatile trichlorosilane liquid intermediate for fractional distillation to 9N silicon."
+}

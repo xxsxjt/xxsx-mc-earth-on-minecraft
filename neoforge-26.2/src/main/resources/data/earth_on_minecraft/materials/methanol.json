@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:methanol",
+  "kind": "compound",
+  "formula": "CH4O",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 32.04,
+  "constituents": [
+    {
+      "species": "CH4O",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "syngas_synthesis"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.methanol",
+  "notes": "Industrial methyl alcohol solvent and C1 chemical feedstock."
+}

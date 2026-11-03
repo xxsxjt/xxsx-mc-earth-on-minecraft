@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:silicon_wafer",
+  "kind": "manufactured",
+  "formula": "Si",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 28.085,
+  "constituents": [
+    {
+      "species": "Si",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "czochralski_growth"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.silicon_wafer",
+  "notes": "Monocrystalline 9N semiconductor silicon wafer substrate."
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:yellowcake",
+  "kind": "mixture",
+  "formula": "U3O8 + UO3 + Na2U2O7",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "U3O8",
+      "fraction": 0.82
+    },
+    {
+      "species": "UO3",
+      "fraction": 0.12
+    },
+    {
+      "species": "Na2U2O7",
+      "fraction": 0.06
+    }
+  ],
+  "source": [
+    "leaching",
+    "precipitation"
+  ],
+  "simplification": "concentrate",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.yellowcake",
+  "notes": "Milled uranium oxide concentrate powder (~80% U3O8 equivalent)."
+}

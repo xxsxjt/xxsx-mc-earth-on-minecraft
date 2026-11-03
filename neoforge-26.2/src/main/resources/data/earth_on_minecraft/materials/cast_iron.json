@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:cast_iron",
+  "kind": "alloy",
+  "formula": "Fe + C + Si + Mn + P + S",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.938
+    },
+    {
+      "species": "C",
+      "fraction": 0.036
+    },
+    {
+      "species": "Si",
+      "fraction": 0.018
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.005
+    },
+    {
+      "species": "P",
+      "fraction": 0.002
+    },
+    {
+      "species": "S",
+      "fraction": 0.001
+    }
+  ],
+  "source": [
+    "shaft_furnace",
+    "casting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.cast_iron",
+  "notes": "High-carbon (C > 2.1%) cast iron alloy with silicon promoting graphite flake formation."
+}

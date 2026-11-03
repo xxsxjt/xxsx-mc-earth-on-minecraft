@@ -1,5 +1,6 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthonminecraft.component.QualityComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
@@ -26,6 +27,7 @@ public class GuidedBlockItem extends BlockItem {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display, Consumer<Component> lines, TooltipFlag flag) {
         lines.accept(Component.translatable(hintKey).withStyle(ChatFormatting.GOLD));
+        QualityComponents.appendTooltip(stack, lines);
         EarthOnMinecraftTooltips.addMaterialDetails(stack, lines, flag);
         EarthOnMinecraftTooltips.addRouteTips(stack, lines);
     }

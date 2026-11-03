@@ -6,6 +6,7 @@ import com.xxsx.earthonminecraft.component.Grade;
 import com.xxsx.earthonminecraft.component.HerbComponent;
 import com.xxsx.earthonminecraft.component.MaterialBatch;
 import com.xxsx.earthonminecraft.component.MetalBatch;
+import com.xxsx.earthonminecraft.component.QualityComponents;
 import com.xxsx.earthonminecraft.component.ToolQualityComponent;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
@@ -1134,7 +1135,15 @@ public final class SpecItems {
                     MaterialBatch.defaultFor(entry.id()));
             case "earth_on_minecraft:metal_batch" -> props.component(EarthDataComponents.METAL_BATCH.get(),
                     MetalBatch.defaultFor(entry.componentValue()));
-            default -> props;
+            default -> {
+                if (entry.nutrition() > 0 || entry.drink()) {
+                    yield props;
+                }
+                if (MaterialCatalog.find(EarthOnMinecraft.id(entry.id())).isPresent()) {
+                    yield QualityComponents.applyDefaults(entry.id(), props);
+                }
+                yield props;
+            }
         };
     }
 

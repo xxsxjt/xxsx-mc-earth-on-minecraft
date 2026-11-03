@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:metallurgical_silicon",
+  "kind": "alloy",
+  "formula": "Si + Fe + Al + Ca",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Si",
+      "fraction": 0.985
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.008
+    },
+    {
+      "species": "Al",
+      "fraction": 0.005
+    },
+    {
+      "species": "Ca",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "carbothermic_reduction"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.metallurgical_silicon",
+  "notes": "98.5% metallurgical-grade silicon (MG-Si) from submerged-arc quartz reduction."
+}

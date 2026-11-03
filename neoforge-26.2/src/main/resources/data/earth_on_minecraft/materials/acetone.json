@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:acetone",
+  "kind": "compound",
+  "formula": "C3H6O",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 58.08,
+  "constituents": [
+    {
+      "species": "C3H6O",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "cumene_process"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.acetone",
+  "notes": "Polar aprotic ketone solvent and methacrylate precursor."
+}

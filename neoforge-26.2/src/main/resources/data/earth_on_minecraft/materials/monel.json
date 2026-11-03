@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:monel",
+  "kind": "alloy",
+  "formula": "Ni + Cu + Fe + Mn",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Ni",
+      "fraction": 0.66
+    },
+    {
+      "species": "Cu",
+      "fraction": 0.315
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.015
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.01
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.monel",
+  "notes": "Monel 400 nickel-copper corrosion-resistant chemical engineering alloy."
+}

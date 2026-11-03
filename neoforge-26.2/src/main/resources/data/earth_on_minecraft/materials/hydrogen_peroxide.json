@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:hydrogen_peroxide",
+  "kind": "compound",
+  "formula": "H2O2",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 34.01,
+  "constituents": [
+    {
+      "species": "H2O2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "anthraquinone_process"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.hydrogen_peroxide",
+  "notes": "Clean liquid oxidizer and bleaching agent."
+}

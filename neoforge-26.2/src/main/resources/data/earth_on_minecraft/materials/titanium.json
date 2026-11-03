@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:titanium",
+  "kind": "alloy",
+  "formula": "Ti + Fe + O",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Ti",
+      "fraction": 0.995
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.003
+    },
+    {
+      "species": "O",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "vacuum_arc_remelting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.titanium",
+  "notes": "Commercially pure Grade-2 vacuum-remelted titanium metal."
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:ammonium_nitrate",
+  "kind": "compound",
+  "formula": "H4N2O3",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 80.04,
+  "constituents": [
+    {
+      "species": "H4N2O3",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "neutralization"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.ammonium_nitrate",
+  "notes": "Concentrated nitrogen fertilizer and industrial oxidizer salt."
+}

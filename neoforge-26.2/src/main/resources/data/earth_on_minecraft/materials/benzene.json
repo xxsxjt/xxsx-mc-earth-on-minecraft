@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:benzene",
+  "kind": "compound",
+  "formula": "C6H6",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 78.11,
+  "constituents": [
+    {
+      "species": "C6H6",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "coal_tar_distillation",
+    "reforming"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.benzene",
+  "notes": "Aromatic hydrocarbon ring precursor for styrene, phenol and aniline."
+}

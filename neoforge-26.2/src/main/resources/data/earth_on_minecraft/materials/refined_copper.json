@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:refined_copper",
+  "kind": "alloy",
+  "formula": "Cu + O + Ag",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Cu",
+      "fraction": 0.998
+    },
+    {
+      "species": "O",
+      "fraction": 0.001
+    },
+    {
+      "species": "Ag",
+      "fraction": 0.001
+    }
+  ],
+  "source": [
+    "converting",
+    "refining"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.refined_copper",
+  "notes": "High-conductivity refined copper stock for alloying and wire drawing."
+}

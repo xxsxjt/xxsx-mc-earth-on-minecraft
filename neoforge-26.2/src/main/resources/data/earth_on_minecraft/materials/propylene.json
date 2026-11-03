@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:propylene",
+  "kind": "compound",
+  "formula": "C3H6",
+  "composition_basis": "ideal_formula",
+  "phase": "gas",
+  "molar_mass_g_mol": 42.08,
+  "constituents": [
+    {
+      "species": "C3H6",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "steam_cracking"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.propylene",
+  "notes": "Light olefin monomer for polypropylene and acrylonitrile."
+}
