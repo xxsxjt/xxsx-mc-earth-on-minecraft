@@ -90,7 +90,14 @@ public class ControlPanelBlock extends SupportPartBlock {
         return MachineMultiblock.findControllerForPart(level, pos)
                 .map(controller -> ProcessingMachineBlock.openMachineAt(level, controller, player))
                 .orElseGet(() -> {
-                    player.sendOverlayMessage(Component.translatable("message.earth_on_minecraft.control_panel.not_connected"));
+                    MachineMultiblock.findCandidateController(level, pos).ifPresentOrElse(controller -> {
+                        if (level.getBlockEntity(controller) instanceof ProcessingMachineBlockEntity machine) {
+                            MachineMultiblock.refreshProjection(level, controller, machine.kind());
+                            player.sendOverlayMessage(MachineMultiblock.formatDiagnosticMessage(level, controller, machine.kind()));
+                        } else {
+                            player.sendOverlayMessage(Component.translatable("message.earth_on_minecraft.control_panel.not_connected"));
+                        }
+                    }, () -> player.sendOverlayMessage(Component.translatable("message.earth_on_minecraft.control_panel.not_connected")));
                     return InteractionResult.SUCCESS_SERVER;
                 });
     }

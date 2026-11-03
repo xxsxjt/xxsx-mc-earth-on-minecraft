@@ -33,12 +33,25 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     public static final int SECONDARY_INPUT_SLOTS = 4;
     public static final int SLOT_REAGENT = SLOT_SECONDARY_START + SECONDARY_INPUT_SLOTS;
     public static final int SLOT_COUNT = SLOT_REAGENT + 1;
-    public static final int DATA_COUNT = 21;
     public static final int DATA_REQUIRED_SECONDARY = 16;
     public static final int DATA_AVAILABLE_SECONDARY = 17;
     public static final int DATA_TANK_AMOUNT = 18;
     public static final int DATA_TANK_CAPACITY = 19;
     public static final int DATA_TANK_FLUID = 20;
+    public static final int DATA_TEMPERATURE_K = 21;
+    public static final int DATA_TARGET_TEMPERATURE_K = 22;
+    public static final int DATA_MAX_TEMPERATURE_K = 23;
+    public static final int DATA_ENERGY_STORED = 24;
+    public static final int DATA_ENERGY_CAPACITY = 25;
+    public static final int DATA_DRIVE_STATE = 26;
+    public static final int DATA_MANUAL_TICKS = 27;
+    public static final int DATA_FAULT_DX = 28;
+    public static final int DATA_FAULT_DY = 29;
+    public static final int DATA_FAULT_DZ = 30;
+    public static final int DATA_FAULT_ROLE = 31;
+    public static final int DATA_FAULT_META = 32;
+    public static final int DATA_COUNT = 33;
+    public static final int AMBIENT_TEMP_K = 293;
     /** Fluid tank size in mB. One bucket is 1000 mB and a spec ingot cast is 144 mB. */
     public static final int TANK_CAPACITY = 8000;
     private static final int LAYOUT_VERSION = 2;
@@ -73,6 +86,18 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 case DATA_TANK_AMOUNT -> tankAmount;
                 case DATA_TANK_CAPACITY -> TANK_CAPACITY;
                 case DATA_TANK_FLUID -> tank.fluid() == null ? -1 : BuiltInRegistries.FLUID.getId(tank.fluid());
+                case DATA_TEMPERATURE_K -> temperatureK;
+                case DATA_TARGET_TEMPERATURE_K -> targetTemperatureK();
+                case DATA_MAX_TEMPERATURE_K -> currentHeatCeilingK();
+                case DATA_ENERGY_STORED -> energyStored;
+                case DATA_ENERGY_CAPACITY -> energyCapacity();
+                case DATA_DRIVE_STATE -> driveState.id;
+                case DATA_MANUAL_TICKS -> manualWorkTicks;
+                case DATA_FAULT_DX -> faultDx;
+                case DATA_FAULT_DY -> faultDy;
+                case DATA_FAULT_DZ -> faultDz;
+                case DATA_FAULT_ROLE -> faultRoleId;
+                case DATA_FAULT_META -> packFaultMeta(faultWrongBlock, faultMatchedParts, faultTotalParts);
                 default -> 0;
             };
         }
@@ -88,6 +113,19 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 case 7 -> gridPowered = value != 0;
                 case 8, 9, 10, 11, 12, 13 -> sideModes[index - 8] = SideMode.byId(value);
                 case 14 -> selectedRouteIndex = Math.max(0, value);
+                case DATA_TEMPERATURE_K -> temperatureK = Math.max(AMBIENT_TEMP_K, value);
+                case DATA_ENERGY_STORED -> energyStored = Math.max(0, value);
+                case DATA_DRIVE_STATE -> driveState = DriveState.byId(value);
+                case DATA_MANUAL_TICKS -> manualWorkTicks = Math.max(0, value);
+                case DATA_FAULT_DX -> faultDx = value;
+                case DATA_FAULT_DY -> faultDy = value;
+                case DATA_FAULT_DZ -> faultDz = value;
+                case DATA_FAULT_ROLE -> faultRoleId = Math.max(0, value);
+                case DATA_FAULT_META -> {
+                    faultWrongBlock = (value & 1) != 0;
+                    faultMatchedParts = (value >> 1) & 0x3F;
+                    faultTotalParts = (value >> 7) & 0x3F;
+                }
                 default -> {
                 }
             }
@@ -121,6 +159,18 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     private int tankAmount;
     /** Fluid id currently held in the tank; empty when the tank is dry. */
     private String tankFluid = "";
+    private int temperatureK = AMBIENT_TEMP_K;
+    private int fuelMaxTempK = AMBIENT_TEMP_K;
+    private int energyStored;
+    private int manualWorkTicks;
+    private DriveState driveState = DriveState.IDLE;
+    private int faultDx;
+    private int faultDy;
+    private int faultDz;
+    private int faultRoleId;
+    private boolean faultWrongBlock;
+    private int faultMatchedParts;
+    private int faultTotalParts;
 
     public ProcessingMachineBlockEntity(BlockPos pos, BlockState state) {
         super(EarthOnMinecraft.PROCESSING_MACHINE_BLOCK_ENTITY.get(), pos, state);
@@ -146,6 +196,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 machine.panelStateSynced = false;
             }
             MachineMultiblock.refreshProjection(level, pos, machine.kind());
+            machine.syncStructureDiagnostics(level, pos, completeStructure);
             if (machine.structureValid != completeStructure) {
                 if (!completeStructure) {
                     MachineFeedback.playFault(level, pos);
@@ -156,6 +207,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             machine.structureCheckCooldown = 20;
         }
         if (!machine.structureValid) {
+            machine.driveState = DriveState.IDLE;
+            if (machine.coolStep()) {
+                changed = true;
+            }
             if (machine.progress != 0) {
                 machine.progress = 0;
                 changed = true;
@@ -164,7 +219,15 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             return;
         }
 
+        if (machine.rechargeElectricBuffer(level, pos)) {
+            changed = true;
+        }
+
         if (!machine.redstoneMode.allows(level.hasNeighborSignal(pos))) {
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
             machine.finishTick(level, pos, state, changed);
             return;
         }
@@ -184,6 +247,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 ? Optional.empty()
                 : Optional.of(routes.get(machine.selectedRouteIndex));
         if (match.isEmpty()) {
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
             if (machine.progress != 0) {
                 machine.progress = 0;
                 changed = true;
@@ -203,11 +270,19 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 changed = true;
             }
             machine.activeRecipe = recipe;
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
             machine.finishTick(level, pos, state, changed);
             return;
         }
         if (!machine.canFitOutputs(recipe.outputStacks())) {
             machine.activeRecipe = recipe;
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
             machine.finishTick(level, pos, state, changed);
             return;
         }
@@ -217,11 +292,19 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 changed = true;
             }
             machine.activeRecipe = recipe;
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
             machine.finishTick(level, pos, state, changed);
             return;
         }
         if (!machine.canStoreFluidOutputs(recipe)) {
             machine.activeRecipe = recipe;
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
             machine.finishTick(level, pos, state, changed);
             return;
         }
@@ -229,46 +312,165 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         ProcessingMachineBlock.Kind kind = machine.kind();
         ProcessingMachineBlock.PowerMode powerMode = kind.powerMode();
         int energyCost = recipe.energyPerTickEffective();
+        int requiredTempK = recipe.requiredTemperatureK();
         boolean supplied = false;
-        if (powerMode.passive()) {
-            // Ambient process: fermentation and curing run without fuel or grid.
-            supplied = true;
-        } else if (energyCost > 0 && powerMode.grid() && EnergyNetwork.consume(level, pos, energyCost)) {
-            machine.gridPowered = true;
-            supplied = true;
-        }
-        if (!supplied && powerMode.manualFallback()) {
-            // Hand, crank, water wheel or animal drive. Checked before the fuel fallback so a manual
-            // station never burns fuel it does not need.
-            supplied = true;
-        }
-        if (!supplied && energyCost > 0 && powerMode.allowsLocalFuel()) {
-            // Local fuel is the fallback for a grid-capable machine that has no grid connection.
-            if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
-                changed = true;
-            }
-            if (machine.burnTime > 0) {
-                machine.burnTime--;
+        switch (powerMode) {
+            case PASSIVE -> {
                 supplied = true;
+                machine.driveState = DriveState.PASSIVE;
+                if (machine.coolStep()) {
+                    changed = true;
+                }
             }
-        }
-        if (!supplied && powerMode.requiresFuel()) {
-            // Heat process: keep the fire going even when the route draws no electricity.
-            if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
-                changed = true;
+            case MANUAL -> {
+                if (machine.coolStep()) {
+                    changed = true;
+                }
+                if (machine.manualWorkTicks > 0) {
+                    machine.manualWorkTicks--;
+                    supplied = true;
+                    machine.driveState = DriveState.MANUAL_ACTIVE;
+                    changed = true;
+                } else {
+                    machine.driveState = DriveState.MANUAL_WAIT;
+                }
             }
-            if (machine.burnTime > 0) {
-                machine.burnTime--;
-                supplied = true;
+            case KINETIC -> {
+                if (machine.coolStep()) {
+                    changed = true;
+                }
+                if (machine.hasKineticDrive(level, pos)) {
+                    supplied = true;
+                    machine.driveState = DriveState.KINETIC_ACTIVE;
+                } else if (machine.manualWorkTicks > 0) {
+                    machine.manualWorkTicks--;
+                    supplied = true;
+                    machine.driveState = DriveState.MANUAL_ACTIVE;
+                    changed = true;
+                } else {
+                    machine.driveState = DriveState.KINETIC_WAIT;
+                }
             }
-        }
-        if (!supplied && energyCost <= 0 && !powerMode.requiresFuel()) {
-            // A route that declares no electric draw and needs no fire runs without a supply.
-            supplied = true;
+            case MANUAL_OR_GRID -> {
+                if (machine.coolStep()) {
+                    changed = true;
+                }
+                if (machine.consumeElectric(level, pos, Math.max(1, energyCost))) {
+                    machine.gridPowered = true;
+                    supplied = true;
+                    machine.driveState = DriveState.GRID_ACTIVE;
+                    changed = true;
+                } else if (machine.manualWorkTicks > 0) {
+                    machine.manualWorkTicks--;
+                    supplied = true;
+                    machine.driveState = DriveState.MANUAL_ACTIVE;
+                    changed = true;
+                } else {
+                    machine.driveState = DriveState.MANUAL_WAIT;
+                }
+            }
+            case MANUAL_OR_HEAT -> {
+                if (machine.manualWorkTicks > 0) {
+                    machine.manualWorkTicks--;
+                    supplied = true;
+                    machine.driveState = DriveState.MANUAL_ACTIVE;
+                    machine.coolStep();
+                    changed = true;
+                } else {
+                    if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
+                        changed = true;
+                    }
+                    if (machine.burnTime > 0) {
+                        machine.burnTime--;
+                        int ceiling = Math.min(kind.maxTemperatureK(), Math.max(AMBIENT_TEMP_K, machine.fuelMaxTempK));
+                        machine.heatStep(ceiling);
+                        supplied = true;
+                        machine.driveState = DriveState.THERMAL_ACTIVE;
+                        changed = true;
+                    } else {
+                        if (machine.coolStep()) {
+                            changed = true;
+                        }
+                        machine.driveState = DriveState.MANUAL_WAIT;
+                    }
+                }
+            }
+            case GRID_ONLY -> {
+                if (machine.coolStep()) {
+                    changed = true;
+                }
+                if (machine.consumeElectric(level, pos, Math.max(1, energyCost))) {
+                    machine.gridPowered = true;
+                    supplied = true;
+                    machine.driveState = DriveState.GRID_ACTIVE;
+                    changed = true;
+                } else {
+                    machine.driveState = DriveState.NO_POWER;
+                }
+            }
+            case LOCAL_OR_GRID -> {
+                if (machine.coolStep()) {
+                    changed = true;
+                }
+                if (machine.consumeElectric(level, pos, Math.max(1, energyCost))) {
+                    machine.gridPowered = true;
+                    supplied = true;
+                    machine.driveState = DriveState.GRID_ACTIVE;
+                    changed = true;
+                } else {
+                    if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
+                        changed = true;
+                    }
+                    if (machine.burnTime > 0) {
+                        machine.burnTime--;
+                        supplied = true;
+                        machine.driveState = DriveState.LOCAL_FUEL_ACTIVE;
+                        changed = true;
+                    } else {
+                        machine.driveState = DriveState.NO_POWER;
+                    }
+                }
+            }
+            case HEAT_OR_GRID, HEAT_ONLY -> {
+                boolean heated = false;
+                int ceilingK = AMBIENT_TEMP_K;
+                if (powerMode.grid() && machine.consumeElectric(level, pos, Math.max(1, energyCost))) {
+                    machine.gridPowered = true;
+                    heated = true;
+                    ceilingK = kind.maxTemperatureK();
+                    changed = true;
+                } else if (powerMode.allowsLocalFuel()) {
+                    if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
+                        changed = true;
+                    }
+                    if (machine.burnTime > 0) {
+                        machine.burnTime--;
+                        heated = true;
+                        ceilingK = Math.min(kind.maxTemperatureK(), Math.max(AMBIENT_TEMP_K, machine.fuelMaxTempK));
+                        changed = true;
+                    }
+                }
+                if (heated) {
+                    if (machine.heatStep(ceilingK)) {
+                        changed = true;
+                    }
+                } else if (machine.coolStep()) {
+                    changed = true;
+                }
+                if (machine.temperatureK >= requiredTempK && (heated || machine.temperatureK > AMBIENT_TEMP_K)) {
+                    supplied = true;
+                    machine.driveState = machine.gridPowered ? DriveState.GRID_ACTIVE : DriveState.THERMAL_ACTIVE;
+                } else if (heated) {
+                    supplied = false;
+                    machine.driveState = ceilingK < requiredTempK ? DriveState.FUEL_TEMP_LOW : DriveState.HEATING;
+                } else {
+                    supplied = false;
+                    machine.driveState = DriveState.NO_POWER;
+                }
+            }
         }
         if (!supplied) {
-            if (machine.burnTime != 0 || machine.burnTimeTotal != 0) {
-                machine.burnTime = 0;
+            if (machine.burnTime <= 0 && machine.burnTimeTotal != 0) {
                 machine.burnTimeTotal = 0;
                 changed = true;
             }
@@ -690,6 +892,85 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         return activeRecipe != null ? activeRecipe.energyPerTickEffective() : kind().energyPerTick();
     }
 
+    public int temperatureK() {
+        return temperatureK;
+    }
+
+    public int targetTemperatureK() {
+        ProcessingMachineBlock.Recipe r = activeRecipe != null ? activeRecipe : selectedRecipe();
+        return r != null ? r.requiredTemperatureK() : kind().requiredTemperatureK();
+    }
+
+    public int currentHeatCeilingK() {
+        if (gridPowered && kind().powerMode().grid()) {
+            return Math.max(AMBIENT_TEMP_K, kind().maxTemperatureK());
+        }
+        if (burnTime > 0 && fuelMaxTempK > AMBIENT_TEMP_K) {
+            return Math.min(kind().maxTemperatureK(), fuelMaxTempK);
+        }
+        ItemStack fuel = items.get(SLOT_FUEL);
+        int fuelCap = getFuelMaxTemperatureK(fuel);
+        if (fuelCap > 0) {
+            return Math.min(kind().maxTemperatureK(), fuelCap);
+        }
+        return Math.max(AMBIENT_TEMP_K, kind().maxTemperatureK());
+    }
+
+    public int energyStored() {
+        return energyStored;
+    }
+
+    public int energyCapacity() {
+        return kind().energyBufferCapacity();
+    }
+
+    public DriveState driveState() {
+        return driveState;
+    }
+
+    public int manualWorkTicks() {
+        return manualWorkTicks;
+    }
+
+    public void triggerManualWork(int ticks) {
+        if (!kind().powerMode().manualFallback()) {
+            return;
+        }
+        this.manualWorkTicks = Math.min(160, Math.max(0, this.manualWorkTicks) + Math.max(1, ticks));
+        setChanged();
+    }
+
+    public boolean hasKineticDrive(Level level, BlockPos pos) {
+        if (isKineticDriveItem(items.get(SLOT_FUEL))) {
+            return true;
+        }
+        for (Direction dir : Direction.values()) {
+            BlockPos neighbor = pos.relative(dir);
+            if (level.getFluidState(neighbor).is(net.minecraft.tags.FluidTags.WATER)) {
+                return true;
+            }
+            BlockState neighborState = level.getBlockState(neighbor);
+            if (neighborState.getBlock() == EarthOnMinecraft.CONVEYOR_BELT.get()) {
+                return true;
+            }
+        }
+        return pos.getY() >= 80 && level.canSeeSky(pos.above());
+    }
+
+    public static boolean isKineticDriveItem(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return false;
+        }
+        var key = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        if (key == null || !EarthOnMinecraft.MODID.equals(key.getNamespace())) {
+            return false;
+        }
+        return switch (key.getPath()) {
+            case "waterwheel", "water_power", "wind", "wheel", "servo_motor", "conveyor_drive" -> true;
+            default -> false;
+        };
+    }
+
     public void cycleRedstoneMode() {
         this.redstoneMode = this.redstoneMode.next();
         setChanged();
@@ -742,7 +1023,13 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             return kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
                     && stack.getItem() == EarthOnMinecraft.COKE.get();
         }
-        return slot == SLOT_FUEL && kind().acceptsLocalFuel() && getFuelTicks(stack) > 0;
+        if (slot == SLOT_FUEL) {
+            if (kind().acceptsLocalFuel() && getFuelTicks(stack) > 0) {
+                return true;
+            }
+            return kind().powerMode() == ProcessingMachineBlock.PowerMode.KINETIC && isKineticDriveItem(stack);
+        }
+        return false;
     }
 
     /**
@@ -750,7 +1037,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
      * input. Coke stays reserved for the dedicated reagent slot so the two never compete.
      */
     public boolean acceptsSecondaryInput(ItemStack stack) {
-        if (stack.isEmpty()) {
+        if (stack.isEmpty() || stack.getItem() == EarthOnMinecraft.COKE.get()) {
             return false;
         }
         for (ProcessingMachineBlock.Recipe recipe : ProcessingMachineBlock.recipesFor(kind())) {
@@ -826,6 +1113,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         this.progress = input.getIntOr("Progress", 0);
         this.burnTime = input.getIntOr("BurnTime", 0);
         this.burnTimeTotal = input.getIntOr("BurnTimeTotal", burnTime);
+        this.temperatureK = Math.max(AMBIENT_TEMP_K, input.getIntOr("TemperatureK", AMBIENT_TEMP_K));
+        this.fuelMaxTempK = Math.max(AMBIENT_TEMP_K, input.getIntOr("FuelMaxTempK", AMBIENT_TEMP_K));
+        this.energyStored = Math.max(0, input.getIntOr("EnergyStored", 0));
+        this.manualWorkTicks = Math.max(0, input.getIntOr("ManualWorkTicks", 0));
         this.redstoneMode = RedstoneMode.byId(input.getIntOr("RedstoneMode", 0));
         this.selectedRouteIndex = Math.max(0, input.getIntOr("SelectedRouteIndex", 0));
         for (int i = 0; i < sideModes.length; i++) {
@@ -845,6 +1136,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         output.putInt("Progress", this.progress);
         output.putInt("BurnTime", this.burnTime);
         output.putInt("BurnTimeTotal", this.burnTimeTotal);
+        output.putInt("TemperatureK", this.temperatureK);
+        output.putInt("FuelMaxTempK", this.fuelMaxTempK);
+        output.putInt("EnergyStored", this.energyStored);
+        output.putInt("ManualWorkTicks", this.manualWorkTicks);
         output.putInt("RedstoneMode", this.redstoneMode.id);
         output.putInt("SelectedRouteIndex", this.selectedRouteIndex);
         for (int i = 0; i < sideModes.length; i++) {
@@ -912,6 +1207,32 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         return 0;
     }
 
+    public static int getFuelMaxTemperatureK(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return 0;
+        }
+        Item item = stack.getItem();
+        if (item == EarthOnMinecraft.WOOD_CHIPS.get().asItem() || item == Items.DRIED_KELP_BLOCK) {
+            return 900;
+        }
+        if (item == EarthOnMinecraft.COAL_DUST.get().asItem()) {
+            return 1400;
+        }
+        if (item == Items.COAL || item == Items.CHARCOAL || item == Items.COAL_BLOCK) {
+            return 1550;
+        }
+        if (item == EarthOnMinecraft.COAL_GAS_CELL.get().asItem() || item == EarthOnMinecraft.NATURAL_GAS_CELL.get().asItem()) {
+            return 1750;
+        }
+        if (item == EarthOnMinecraft.COKE.get().asItem()
+                || item == EarthOnMinecraft.PETROLEUM_COKE.get().asItem()
+                || item == Items.BLAZE_ROD
+                || item == Items.LAVA_BUCKET) {
+            return 2100;
+        }
+        return 0;
+    }
+
     private boolean tryConsumeFuel() {
         if (!kind().acceptsLocalFuel()) {
             return false;
@@ -921,6 +1242,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         if (ticks <= 0) {
             return false;
         }
+        int maxTemp = Math.max(AMBIENT_TEMP_K, getFuelMaxTemperatureK(fuel));
         Item item = fuel.getItem();
         fuel.shrink(1);
         if (fuel.isEmpty()) {
@@ -928,7 +1250,101 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         }
         this.burnTime = ticks;
         this.burnTimeTotal = ticks;
+        this.fuelMaxTempK = maxTemp;
         return true;
+    }
+
+    private boolean rechargeElectricBuffer(Level level, BlockPos pos) {
+        int cap = energyCapacity();
+        if (cap <= 0 || energyStored >= cap) {
+            return false;
+        }
+        int pull = Math.min(cap - energyStored, Math.max(64, kind().energyPerTick() * 4));
+        int received = EnergyNetwork.extractUpTo(level, pos, pull);
+        if (received > 0) {
+            energyStored += received;
+            return true;
+        }
+        return false;
+    }
+
+    private boolean consumeElectric(Level level, BlockPos pos, int amount) {
+        if (amount <= 0) {
+            return true;
+        }
+        if (energyStored < amount) {
+            int pulled = EnergyNetwork.extractUpTo(level, pos, Math.max(amount - energyStored, Math.min(energyCapacity() - energyStored, amount * 2)));
+            energyStored += pulled;
+        }
+        if (energyStored >= amount) {
+            energyStored -= amount;
+            return true;
+        }
+        return EnergyNetwork.consume(level, pos, amount);
+    }
+
+    private boolean heatStep(int ceilingK) {
+        int target = Math.max(AMBIENT_TEMP_K, ceilingK);
+        if (temperatureK < target) {
+            temperatureK = Math.min(target, temperatureK + 20);
+            return true;
+        }
+        if (temperatureK > target) {
+            temperatureK = Math.max(target, temperatureK - 4);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean coolStep() {
+        if (temperatureK > AMBIENT_TEMP_K) {
+            temperatureK = Math.max(AMBIENT_TEMP_K, temperatureK - 4);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean tickIdleHeat() {
+        if (burnTime > 0) {
+            burnTime--;
+            if (burnTime <= 0) {
+                burnTimeTotal = 0;
+            }
+            heatStep(Math.min(kind().maxTemperatureK(), Math.max(AMBIENT_TEMP_K, fuelMaxTempK)));
+            return true;
+        }
+        return coolStep();
+    }
+
+    private void syncStructureDiagnostics(Level level, BlockPos pos, boolean complete) {
+        if (complete || MachineMultiblock.patternFor(kind()) == MachineMultiblock.Pattern.NONE) {
+            this.faultDx = 0;
+            this.faultDy = 0;
+            this.faultDz = 0;
+            this.faultRoleId = 0;
+            this.faultWrongBlock = false;
+            this.faultMatchedParts = 0;
+            this.faultTotalParts = 0;
+            return;
+        }
+        MachineMultiblock.diagnose(level, pos, kind()).ifPresentOrElse(diag -> {
+            this.faultDx = diag.dx();
+            this.faultDy = diag.dy();
+            this.faultDz = diag.dz();
+            this.faultRoleId = diag.expectedRole().id();
+            this.faultWrongBlock = diag.wrongBlock();
+            this.faultMatchedParts = Math.min(63, diag.matchedParts());
+            this.faultTotalParts = Math.min(63, diag.totalParts());
+        }, () -> {
+            this.faultRoleId = 0;
+            this.faultWrongBlock = false;
+        });
+    }
+
+    private static int packFaultMeta(boolean wrongBlock, int matched, int total) {
+        return (wrongBlock ? 1 : 0)
+                | ((Math.min(63, Math.max(0, matched)) & 0x3F) << 1)
+                | ((Math.min(63, Math.max(0, total)) & 0x3F) << 7);
     }
 
     private boolean canFitOutputs(List<ItemStack> outputs) {
@@ -1181,6 +1597,46 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
 
         public String descriptionKey() {
             return descriptionKey;
+        }
+    }
+
+    public enum DriveState {
+        IDLE(0, "screen.earth_on_minecraft.machine.drive.state.idle"),
+        PASSIVE(1, "screen.earth_on_minecraft.machine.drive.state.passive"),
+        MANUAL_WAIT(2, "screen.earth_on_minecraft.machine.drive.state.manual_wait"),
+        MANUAL_ACTIVE(3, "screen.earth_on_minecraft.machine.drive.state.manual_active"),
+        KINETIC_WAIT(4, "screen.earth_on_minecraft.machine.drive.state.kinetic_wait"),
+        KINETIC_ACTIVE(5, "screen.earth_on_minecraft.machine.drive.state.kinetic_active"),
+        HEATING(6, "screen.earth_on_minecraft.machine.drive.state.heating"),
+        FUEL_TEMP_LOW(7, "screen.earth_on_minecraft.machine.drive.state.fuel_temp_low"),
+        THERMAL_ACTIVE(8, "screen.earth_on_minecraft.machine.drive.state.thermal_active"),
+        GRID_ACTIVE(9, "screen.earth_on_minecraft.machine.drive.state.grid_active"),
+        LOCAL_FUEL_ACTIVE(10, "screen.earth_on_minecraft.machine.drive.state.local_fuel_active"),
+        NO_POWER(11, "screen.earth_on_minecraft.machine.drive.state.no_power");
+
+        private final int id;
+        private final String labelKey;
+
+        DriveState(int id, String labelKey) {
+            this.id = id;
+            this.labelKey = labelKey;
+        }
+
+        public int id() {
+            return id;
+        }
+
+        public String labelKey() {
+            return labelKey;
+        }
+
+        public static DriveState byId(int id) {
+            for (DriveState state : values()) {
+                if (state.id == id) {
+                    return state;
+                }
+            }
+            return IDLE;
         }
     }
 }

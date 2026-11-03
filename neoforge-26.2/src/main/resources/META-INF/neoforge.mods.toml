@@ -5,12 +5,21 @@ license="AGPL-3.0-only"
 [[mods]]
 modId="earth_on_minecraft"
 version="0.1.16"
-displayName="The Earth / 地球"
+displayName="The Earth / 地球 — Earth Series Core"
 description='''
-In-development beta for Minecraft 26.1.2 + NeoForge 26.1.2.124.
-The Earth keeps Minecraft's item ecosystem while replacing natural ore sources,
-rock composition, processing chains, electricity, ore deposits and addon-facing material tags with a more realistic geology and industry model.
-Expect recipes, worldgen, machine values and APIs to change during testing.
+【地球现实法则 × 硬核全产业链 × Earth Series 核心底座】
+Earth Reality Rules × Hardcore Full-Chain Industry × Earth Series Core Foundation (Minecraft 26.1.2 / NeoForge 26.1.2.124)
+
+• 真实地质与原版矿石禁用 (Authentic Geology & Zero Vanilla Ores):
+  彻底禁用主世界原版自然矿石与矿脉噪声，代之以 37 类按地层/围岩分布的有限真实矿床（磁铁矿 Fe3O4、黄铜矿 CuFeS2、方解石 CaCO3、铝土矿、独居石、油气盐卤等）及岩石矿物学组成。
+• 化学计量与成分纯度冶金 (Stoichiometric Processing & Purity Metallurgy):
+  告别原版“一烧即锭”——历经破碎、球磨、筛分、磁选/浮选、焙烧、还原、浸出、电解、精馏与蒸汽裂解；从块铁炉海绵铁、锻铁、生铁到现代氧气转炉钢与高纯硅/钛/稀土，严格遵循多输入配比、熔剂造渣与副产物闭环。
+• 四阶段动力演进与开尔文热工学 (4-Stage Power & Kelvin Thermodynamics):
+  无假自动化——人力（MANUAL）需玩家实操步进；机械动力（KINETIC）检验水轮/风车/传动输入；热力（THERMAL）实装真实炉温（K）升温/散热曲线与燃料最高温上限判定（木柴 900K → 煤炭 1550K → 煤气 1750K → 焦炭/石油焦 2100K，未达配方要求温度绝不推进）；电力（ELECTRIC）接入 EOU 电网、电容缓冲与工业自动化。
+• 3D 层级工业多方块与坐标级诊断 (3D Layered Multiblocks & Coordinate Diagnostics):
+  6 座传统砌筑窑炉与 8 类现代化工/冶金多方块均采用严格朝向对齐的 3D 层级蓝图，内置结构全息投影与精确到世界/相对坐标的缺件/错件报错反馈，配合工业级实时功率、电量、炉温（K）与多方块状态 GUI。
+• Earth Series 跨题材核心底座 (Unified Foundation for Addons):
+  在输出原版兼容成品的同时，通过版本化地质/材料/能源 API 与统一标签契约，为《Earth Human》《Earth Online: Magic（魔幻）》《地球 Online：玄幻》及未来科幻星际扩展提供统一的现实物质与物理法则底座。
 '''
 authors="xxsx"
 logoFile="earth_on_minecraft.png"

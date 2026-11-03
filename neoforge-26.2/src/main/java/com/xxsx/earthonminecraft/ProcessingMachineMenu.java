@@ -22,6 +22,7 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
     public static final int BUTTON_REDSTONE_REQUIRE_SIGNAL = 1;
     public static final int BUTTON_REDSTONE_REQUIRE_NO_SIGNAL = 2;
     public static final int BUTTON_ROUTE_NEXT = 10;
+    public static final int BUTTON_MANUAL_STEP = 11;
     public static final int BUTTON_SIDE_BASE = 20;
     private static final int PLAYER_INV_START = ProcessingMachineBlockEntity.SLOT_COUNT;
     private static final int PLAYER_INV_END = PLAYER_INV_START + 27;
@@ -71,8 +72,12 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
         addSlot(new Slot(container, ProcessingMachineBlockEntity.SLOT_FUEL, 38, 57) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return ProcessingMachineMenu.this.kind.acceptsLocalFuel()
-                        && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0;
+                if (ProcessingMachineMenu.this.kind.acceptsLocalFuel()
+                        && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0) {
+                    return true;
+                }
+                return ProcessingMachineMenu.this.kind.powerMode() == ProcessingMachineBlock.PowerMode.KINETIC
+                        && ProcessingMachineBlockEntity.isKineticDriveItem(stack);
             }
         });
         int[][] secondarySlots = {{8, 76}, {26, 76}, {44, 76}, {62, 76}};
@@ -129,6 +134,10 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
             machine.cycleSelectedRoute();
             return true;
         }
+        if (container instanceof ProcessingMachineBlockEntity machine && id == BUTTON_MANUAL_STEP) {
+            machine.triggerManualWork(40);
+            return true;
+        }
         if (container instanceof ProcessingMachineBlockEntity machine
                 && id >= BUTTON_SIDE_BASE
                 && id < BUTTON_SIDE_BASE + Direction.values().length) {
@@ -164,7 +173,9 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
                 movedToMachine = moveItemStackTo(stack, 0, 1, false);
             } else if (acceptsSecondaryInput(stack)) {
                 movedToMachine = moveItemStackTo(stack, MENU_SECONDARY_START, MENU_SECONDARY_END, false);
-            } else if (this.kind.acceptsLocalFuel() && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0) {
+            } else if ((this.kind.acceptsLocalFuel() && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0)
+                    || (this.kind.powerMode() == ProcessingMachineBlock.PowerMode.KINETIC
+                    && ProcessingMachineBlockEntity.isKineticDriveItem(stack))) {
                 movedToMachine = moveItemStackTo(stack, 1, 2, false);
             }
             if (movedToMachine) {
@@ -371,6 +382,70 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
 
     public boolean hasSecondaryInputs() {
         return requiredSecondaryCount() > 0;
+    }
+
+    public int temperatureK() {
+        int temp = data.get(ProcessingMachineBlockEntity.DATA_TEMPERATURE_K);
+        return temp <= 0 ? ProcessingMachineBlockEntity.AMBIENT_TEMP_K : temp;
+    }
+
+    public int targetTemperatureK() {
+        int target = data.get(ProcessingMachineBlockEntity.DATA_TARGET_TEMPERATURE_K);
+        if (target > 0) {
+            return target;
+        }
+        return selectedRecipe().map(ProcessingMachineBlock.Recipe::requiredTemperatureK)
+                .orElse(kind.requiredTemperatureK());
+    }
+
+    public int maxTemperatureK() {
+        int max = data.get(ProcessingMachineBlockEntity.DATA_MAX_TEMPERATURE_K);
+        return max > 0 ? max : kind.maxTemperatureK();
+    }
+
+    public int energyStored() {
+        return Math.max(0, data.get(ProcessingMachineBlockEntity.DATA_ENERGY_STORED));
+    }
+
+    public int energyCapacity() {
+        int cap = data.get(ProcessingMachineBlockEntity.DATA_ENERGY_CAPACITY);
+        return cap > 0 ? cap : kind.energyBufferCapacity();
+    }
+
+    public ProcessingMachineBlockEntity.DriveState driveState() {
+        return ProcessingMachineBlockEntity.DriveState.byId(data.get(ProcessingMachineBlockEntity.DATA_DRIVE_STATE));
+    }
+
+    public int manualWorkTicks() {
+        return Math.max(0, data.get(ProcessingMachineBlockEntity.DATA_MANUAL_TICKS));
+    }
+
+    public int faultDx() {
+        return data.get(ProcessingMachineBlockEntity.DATA_FAULT_DX);
+    }
+
+    public int faultDy() {
+        return data.get(ProcessingMachineBlockEntity.DATA_FAULT_DY);
+    }
+
+    public int faultDz() {
+        return data.get(ProcessingMachineBlockEntity.DATA_FAULT_DZ);
+    }
+
+    public java.util.Optional<MachineMultiblock.PartRole> faultExpectedRole() {
+        return MachineMultiblock.PartRole.byId(data.get(ProcessingMachineBlockEntity.DATA_FAULT_ROLE));
+    }
+
+    public boolean faultWrongBlock() {
+        return (data.get(ProcessingMachineBlockEntity.DATA_FAULT_META) & 1) != 0;
+    }
+
+    public int faultMatchedParts() {
+        return (data.get(ProcessingMachineBlockEntity.DATA_FAULT_META) >> 1) & 0x3F;
+    }
+
+    public int faultTotalParts() {
+        return (data.get(ProcessingMachineBlockEntity.DATA_FAULT_META) >> 7) & 0x3F;
     }
 
     private boolean canFitOutputs(List<ItemStack> outputs) {

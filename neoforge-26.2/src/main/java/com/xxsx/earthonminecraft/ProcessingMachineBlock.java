@@ -75,6 +75,13 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (player.isShiftKeyDown() && this.kind.powerMode().manualFallback()
+                && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
+            if (!level.isClientSide()) {
+                machine.triggerManualWork(40);
+            }
+            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+        }
         return openMachine(level, pos, player);
     }
 
@@ -84,6 +91,13 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
             if (machine.tryInteractWithFluidItem(player, hand, stack)) {
                 return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
             }
+        }
+        if (player.isShiftKeyDown() && this.kind.powerMode().manualFallback()
+                && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
+            if (!level.isClientSide()) {
+                machine.triggerManualWork(40);
+            }
+            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
         }
         return openMachine(level, pos, player);
     }
@@ -829,6 +843,22 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
             return energyPerTick > 0 ? energyPerTick : kind.energyPerTick();
         }
 
+        public int requiredTemperatureK() {
+            if (kind == Kind.SMELTER || kind == Kind.SHAFT_FURNACE) {
+                for (FluidOutput fluid : fluidOutputs) {
+                    String id = fluid.fluidId();
+                    if (id.endsWith("molten_tin")) return 510;
+                    if (id.endsWith("molten_lead")) return 610;
+                    if (id.endsWith("molten_zinc")) return 700;
+                    if (id.endsWith("molten_aluminum")) return 940;
+                    if (id.endsWith("molten_bronze") || id.endsWith("molten_brass")) return 1250;
+                    if (id.endsWith("molten_silver") || id.endsWith("molten_gold") || id.endsWith("molten_copper")) return 1360;
+                    if (id.endsWith("molten_iron") || id.endsWith("molten_steel") || id.endsWith("molten_pig_iron")) return 1820;
+                }
+            }
+            return kind.requiredTemperatureK();
+        }
+
         public List<ItemStack> inputStacks() {
             return inputs.stream().map(Input::stack).toList();
         }
@@ -982,6 +1012,57 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
 
         public boolean acceptsLocalFuel() {
             return powerMode.allowsLocalFuel();
+        }
+
+        public int requiredTemperatureK() {
+            return switch (this) {
+                case CURING_BARN -> 340;
+                case SMOKEHOUSE -> 350;
+                case HERB_PROCESSING_TABLE -> 360;
+                case STILL -> 365;
+                case STEAMER, STEAMER_BASKET -> 373;
+                case DISTILLATION_COLUMN, STOVE -> 450;
+                case COFFEE_ROASTER -> 480;
+                case TEA_KILN, BREAD_OVEN -> 500;
+                case CAMPFIRE -> 600;
+                case PIT_KILN -> 750;
+                case ROASTER -> 1050;
+                case STEAM_CRACKER -> 1100;
+                case LIME_KILN -> 1200;
+                case REDUCTION_FURNACE -> 1350;
+                case SMELTER -> 1400;
+                case BLOOMERY -> 1450;
+                case GLASS_KILN -> 1500;
+                case CONVERTER -> 1550;
+                case INDUSTRIAL_KILN -> 1600;
+                case SHAFT_FURNACE -> 1820;
+                default -> 293;
+            };
+        }
+
+        public int maxTemperatureK() {
+            return switch (this) {
+                case SHAFT_FURNACE -> 2100;
+                case INDUSTRIAL_KILN, CONVERTER, GLASS_KILN, BLOOMERY, REDUCTION_FURNACE -> 1950;
+                case SMELTER -> 1750;
+                case LIME_KILN, STEAM_CRACKER, ROASTER -> 1650;
+                case PIT_KILN, CAMPFIRE -> 1000;
+                case TEA_KILN, BREAD_OVEN, COFFEE_ROASTER, STOVE, DISTILLATION_COLUMN -> 700;
+                case STEAMER, STEAMER_BASKET, STILL, HERB_PROCESSING_TABLE, SMOKEHOUSE, CURING_BARN -> 450;
+                case ANVIL, CASTING_TABLE -> 1350;
+                default -> 293;
+            };
+        }
+
+        public boolean usesThermalTemperature() {
+            return requiredTemperatureK() > 293 || powerMode.requiresFuel() || processFamily == ProcessFamily.THERMAL;
+        }
+
+        public int energyBufferCapacity() {
+            if (!powerMode.grid()) {
+                return 0;
+            }
+            return Math.min(16000, Math.max(1600, Math.max(16, energyPerTick) * 40));
         }
 
         public String localizedDisplayName() {

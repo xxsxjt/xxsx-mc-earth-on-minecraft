@@ -56,7 +56,14 @@ public class SupportPartBlock extends Block {
                 .map(controller -> ProcessingMachineBlock.openMachineAt(level, controller, player))
                 .orElseGet(() -> {
                     if (showMissingMessage) {
-                        player.sendOverlayMessage(Component.translatable("message.earth_on_minecraft.support_part.not_connected"));
+                        MachineMultiblock.findCandidateController(level, pos).ifPresentOrElse(controller -> {
+                            if (level.getBlockEntity(controller) instanceof ProcessingMachineBlockEntity machine) {
+                                MachineMultiblock.refreshProjection(level, controller, machine.kind());
+                                player.sendOverlayMessage(MachineMultiblock.formatDiagnosticMessage(level, controller, machine.kind()));
+                            } else {
+                                player.sendOverlayMessage(Component.translatable("message.earth_on_minecraft.support_part.not_connected"));
+                            }
+                        }, () -> player.sendOverlayMessage(Component.translatable("message.earth_on_minecraft.support_part.not_connected")));
                         return InteractionResult.SUCCESS_SERVER;
                     }
                     return InteractionResult.PASS;

@@ -11,6 +11,7 @@ import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.locale.Language;
 import net.minecraft.network.chat.Component;
@@ -37,14 +38,31 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
     private static final int STATUS_Y = 62;
     private static final int STATUS_W = 69;
     private static final int STATUS_H = 11;
+    private static final int TELEMETRY_X = 100;
+    private static final int TELEMETRY_Y = 76;
+    private static final int TELEMETRY_W = 69;
+    private static final int TELEMETRY_H = 12;
     private static final int TANK_X = 58;
     private static final int TANK_Y = 18;
     private static final int TANK_W = 8;
     private static final int TANK_H = 16;
+    private static final int TEMP_X = 68;
+    private static final int TEMP_Y = 18;
+    private static final int TEMP_W = 8;
+    private static final int TEMP_H = 16;
+    private static final int ENERGY_X = 78;
+    private static final int ENERGY_Y = 18;
+    private static final int ENERGY_W = 8;
+    private static final int ENERGY_H = 16;
+    private static final int MANUAL_X = 88;
+    private static final int MANUAL_Y = 18;
+    private static final int MANUAL_W = 12;
+    private static final int MANUAL_H = 16;
 
     private Button redstoneButton;
     private Button routeButton;
     private Button sideConfigButton;
+    private Button manualButton;
 
     public ProcessingMachineScreen(ProcessingMachineMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -73,6 +91,15 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
                 .bounds(leftPos + ROUTE_X, topPos + CONTROLS_Y, 26, ICON_BUTTON_SIZE)
                 .build());
 
+        if (menu.powerMode().manualFallback()) {
+            manualButton = addRenderableWidget(Button.builder(
+                            Component.translatable("screen.earth_on_minecraft.machine.manual.button"),
+                            b -> triggerManualStep())
+                    .bounds(leftPos + MANUAL_X, topPos + MANUAL_Y, MANUAL_W, MANUAL_H)
+                    .tooltip(Tooltip.create(Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip")))
+                    .build());
+        }
+
         addRenderableWidget(Button.builder(Component.empty(), button -> {
                     this.onClose();
                     EarthOnMinecraftClient.openNotebook();
@@ -98,6 +125,8 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         drawMachineIdentity(g);
         drawGridOnlyPowerSlot(g);
         drawTank(g);
+        drawTemperatureGauge(g);
+        drawEnergyGauge(g);
         drawFuel(g);
         drawProgress(g);
     }
@@ -107,6 +136,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         super.extractRenderState(g, mouseX, mouseY, delta);
         drawControlGlyphs(g);
         drawStatus(g);
+        drawTelemetry(g);
         drawTooltips(g, mouseX, mouseY);
     }
 
@@ -132,7 +162,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
     }
 
     private void drawGridOnlyPowerSlot(GuiGraphicsExtractor g) {
-        if (menu.acceptsLocalFuel()) {
+        if (menu.acceptsLocalFuel() || menu.powerMode() == ProcessingMachineBlock.PowerMode.KINETIC) {
             return;
         }
         int x = leftPos + 39;
@@ -157,6 +187,99 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         if (filled > 0) {
             g.fill(x + 1, y + TANK_H - filled, x + TANK_W - 1, y + TANK_H - 1, 0xFF3E7CC4);
         }
+    }
+
+    private void drawTemperatureGauge(GuiGraphicsExtractor g) {
+        int x = leftPos + TEMP_X;
+        int y = topPos + TEMP_Y;
+        EarthGuiSupport.drawInset(g, x, y, TEMP_W, TEMP_H);
+        int ambient = ProcessingMachineBlockEntity.AMBIENT_TEMP_K;
+        int maxTemp = Math.max(ambient + 100, Math.max(menu.maxTemperatureK(), menu.targetTemperatureK()));
+        int current = Math.max(ambient, menu.temperatureK());
+        int innerH = TEMP_H - 2;
+        int filled = Math.min(innerH, Math.max(2, innerH * (current - ambient) / Math.max(1, maxTemp - ambient)));
+        if (current <= ambient) {
+            filled = 2;
+        }
+        int barColor = current >= menu.targetTemperatureK() && menu.targetTemperatureK() > ambient
+                ? 0xFFE86A24
+                : current > ambient + 30 ? 0xFFD99B26 : 0xFF4B779D;
+        g.fill(x + 1, y + TEMP_H - 1 - filled, x + TEMP_W - 1, y + TEMP_H - 1, barColor);
+        int target = menu.targetTemperatureK();
+        if (target > ambient) {
+            int targetOffset = Math.min(innerH - 1, Math.max(1, innerH * (target - ambient) / Math.max(1, maxTemp - ambient)));
+            int markerY = y + TEMP_H - 1 - targetOffset;
+            g.fill(x + 1, markerY, x + TEMP_W - 1, markerY + 1, 0xFFFFE082);
+        }
+    }
+
+    private void drawEnergyGauge(GuiGraphicsExtractor g) {
+        int x = leftPos + ENERGY_X;
+        int y = topPos + ENERGY_Y;
+        EarthGuiSupport.drawInset(g, x, y, ENERGY_W, ENERGY_H);
+        int innerH = ENERGY_H - 2;
+        if (menu.powerMode().grid()) {
+            int cap = Math.max(1, menu.energyCapacity());
+            int filled = Math.min(innerH, innerH * menu.energyStored() / cap);
+            if (filled > 0) {
+                g.fill(x + 1, y + ENERGY_H - 1 - filled, x + ENERGY_W - 1, y + ENERGY_H - 1, 0xFF31A9C9);
+            }
+        } else if (menu.powerMode().manualFallback()) {
+            int ticks = Math.min(160, menu.manualWorkTicks());
+            int filled = menu.driveState() == ProcessingMachineBlockEntity.DriveState.KINETIC_ACTIVE
+                    ? innerH
+                    : Math.min(innerH, innerH * ticks / 160);
+            if (filled > 0) {
+                g.fill(x + 1, y + ENERGY_H - 1 - filled, x + ENERGY_W - 1, y + ENERGY_H - 1, 0xFF5FA85B);
+            }
+        } else if (menu.hasBurningFuel()) {
+            int filled = Math.min(innerH, innerH * menu.burnTime() / Math.max(1, menu.burnTimeTotal()));
+            if (filled > 0) {
+                g.fill(x + 1, y + ENERGY_H - 1 - filled, x + ENERGY_W - 1, y + ENERGY_H - 1, 0xFFD97925);
+            }
+        }
+    }
+
+    private void drawTelemetry(GuiGraphicsExtractor g) {
+        int x = leftPos + TELEMETRY_X;
+        int y = topPos + TELEMETRY_Y;
+        EarthGuiSupport.drawInset(g, x, y, TELEMETRY_W, TELEMETRY_H);
+        String line = telemetryLine();
+        int color = telemetryColor();
+        g.text(font, EarthGuiSupport.fit(font, line, TELEMETRY_W - 6), x + 3, y + 2, color, false);
+    }
+
+    private String telemetryLine() {
+        if (!menu.structureValid() && menu.faultExpectedRole().isPresent()) {
+            return String.format("Δ(%+d,%+d,%+d) %d/%d",
+                    menu.faultDx(), menu.faultDy(), menu.faultDz(),
+                    menu.faultMatchedParts(), Math.max(1, menu.faultTotalParts()));
+        }
+        if (menu.kind().usesThermalTemperature() || menu.targetTemperatureK() > ProcessingMachineBlockEntity.AMBIENT_TEMP_K) {
+            return menu.temperatureK() + "K / " + menu.targetTemperatureK() + "K";
+        }
+        if (menu.powerMode().grid()) {
+            return EarthGuiSupport.compactEnergy(menu.energyStored(), menu.energyCapacity());
+        }
+        return localized(menu.driveState().labelKey()) + " " + menu.temperatureK() + "K";
+    }
+
+    private int telemetryColor() {
+        if (!menu.structureValid()) {
+            return EarthGuiSupport.WARNING;
+        }
+        ProcessingMachineBlockEntity.DriveState ds = menu.driveState();
+        if (ds == ProcessingMachineBlockEntity.DriveState.FUEL_TEMP_LOW
+                || ds == ProcessingMachineBlockEntity.DriveState.NO_POWER) {
+            return EarthGuiSupport.WARNING;
+        }
+        if (ds == ProcessingMachineBlockEntity.DriveState.HEATING) {
+            return 0xFFD99B26;
+        }
+        if (menu.active()) {
+            return 0xFF31A9C9;
+        }
+        return EarthGuiSupport.TEXT;
     }
 
     private void drawFuel(GuiGraphicsExtractor g) {        if (!menu.acceptsLocalFuel() || menu.burnTimeTotal() <= 0) {
@@ -202,6 +325,10 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
 
     private String statusLine() {
         if (!menu.structureValid()) {
+            if (menu.faultExpectedRole().isPresent()) {
+                return Component.translatable("screen.earth_on_minecraft.machine.structure_fault_short",
+                        String.format("(%+d,%+d,%+d)", menu.faultDx(), menu.faultDy(), menu.faultDz())).getString();
+            }
             return localized("screen.earth_on_minecraft.machine.structure_missing_short");
         }
         ItemStack input = menu.getSlot(ProcessingMachineBlockEntity.SLOT_INPUT).getItem();
@@ -224,10 +351,26 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             if (menu.outputsBlocked()) {
                 return localized("screen.earth_on_minecraft.machine.outputs_full_short");
             }
+            ProcessingMachineBlockEntity.DriveState ds = menu.driveState();
+            if (ds == ProcessingMachineBlockEntity.DriveState.FUEL_TEMP_LOW) {
+                return localized("screen.earth_on_minecraft.machine.fuel_temp_low_short");
+            }
+            if (ds == ProcessingMachineBlockEntity.DriveState.HEATING) {
+                return Component.translatable("screen.earth_on_minecraft.machine.heating_short",
+                        menu.temperatureK(), menu.targetTemperatureK()).getString();
+            }
+            if (ds == ProcessingMachineBlockEntity.DriveState.MANUAL_WAIT) {
+                return localized("screen.earth_on_minecraft.machine.manual_wait_short");
+            }
+            if (ds == ProcessingMachineBlockEntity.DriveState.KINETIC_WAIT) {
+                return localized("screen.earth_on_minecraft.machine.kinetic_wait_short");
+            }
             if (menu.active()) {
                 return localized("screen.earth_on_minecraft.machine.running");
             }
-            if (menu.needsExternalPower() && !menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
+            if (menu.needsExternalPower() && !menu.gridPowered() && menu.energyStored() < Math.max(1, menu.energyPerTick())
+                    && !menu.hasBurningFuel() && !fuelSlotHasFuel()
+                    && menu.temperatureK() < menu.targetTemperatureK()) {
                 return localized(menu.acceptsLocalFuel()
                         ? "screen.earth_on_minecraft.machine.missing_power_short"
                         : "screen.earth_on_minecraft.machine.missing_grid_power_short");
@@ -240,6 +383,15 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
 
     private String detailedStatusLine() {
         if (!menu.structureValid()) {
+            if (menu.faultExpectedRole().isPresent()) {
+                BlockPos faultPos = menu.pos().offset(menu.faultDx(), menu.faultDy(), menu.faultDz());
+                String coords = faultPos.getX() + ", " + faultPos.getY() + ", " + faultPos.getZ();
+                Component roleName = Component.translatable(menu.faultExpectedRole().get().labelKey());
+                return Component.translatable("screen.earth_on_minecraft.machine.structure_fault_coord",
+                        coords,
+                        String.format("(%+d, %+d, %+d)", menu.faultDx(), menu.faultDy(), menu.faultDz()),
+                        roleName).getString();
+            }
             return localized("screen.earth_on_minecraft.machine.structure_missing");
         }
         ItemStack input = menu.getSlot(ProcessingMachineBlockEntity.SLOT_INPUT).getItem();
@@ -264,7 +416,24 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             if (menu.outputsBlocked()) {
                 return localized("screen.earth_on_minecraft.machine.outputs_full");
             }
-            if (menu.needsExternalPower() && !menu.gridPowered() && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
+            ProcessingMachineBlockEntity.DriveState ds = menu.driveState();
+            if (ds == ProcessingMachineBlockEntity.DriveState.FUEL_TEMP_LOW) {
+                return Component.translatable("screen.earth_on_minecraft.machine.fuel_temp_low",
+                        menu.maxTemperatureK(), menu.targetTemperatureK()).getString();
+            }
+            if (ds == ProcessingMachineBlockEntity.DriveState.HEATING) {
+                return Component.translatable("screen.earth_on_minecraft.machine.heating",
+                        menu.temperatureK(), menu.targetTemperatureK()).getString();
+            }
+            if (ds == ProcessingMachineBlockEntity.DriveState.MANUAL_WAIT) {
+                return localized("screen.earth_on_minecraft.machine.manual_wait");
+            }
+            if (ds == ProcessingMachineBlockEntity.DriveState.KINETIC_WAIT) {
+                return localized("screen.earth_on_minecraft.machine.kinetic_wait");
+            }
+            if (menu.needsExternalPower() && !menu.gridPowered() && menu.energyStored() < Math.max(1, menu.energyPerTick())
+                    && !menu.hasBurningFuel() && !fuelSlotHasFuel()
+                    && menu.temperatureK() < menu.targetTemperatureK()) {
                 return localized(menu.acceptsLocalFuel()
                         ? "screen.earth_on_minecraft.machine.missing_power"
                         : "screen.earth_on_minecraft.machine.missing_grid_power");
@@ -292,7 +461,17 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         if (menu.active()) {
             return 0xFF207030;
         }
-        if ((!input.isEmpty() || menu.selectedRecipe().isPresent()) && menu.needsExternalPower() && !menu.gridPowered()
+        ProcessingMachineBlockEntity.DriveState ds = menu.driveState();
+        if (ds == ProcessingMachineBlockEntity.DriveState.FUEL_TEMP_LOW
+                || ds == ProcessingMachineBlockEntity.DriveState.MANUAL_WAIT
+                || ds == ProcessingMachineBlockEntity.DriveState.KINETIC_WAIT) {
+            return EarthGuiSupport.WARNING;
+        }
+        if (ds == ProcessingMachineBlockEntity.DriveState.HEATING) {
+            return 0xFFD99B26;
+        }
+        if ((!input.isEmpty() || menu.selectedRecipe().isPresent()) && menu.needsExternalPower()
+                && !menu.gridPowered() && menu.energyStored() < Math.max(1, menu.energyPerTick())
                 && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
             return EarthGuiSupport.WARNING;
         }
@@ -322,22 +501,37 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
                     Component.translatable("screen.earth_on_minecraft.machine.tank.tooltip")
             ), mouseX, mouseY);
         }
+        if (isHovering(TEMP_X, TEMP_Y, TEMP_W, TEMP_H, mouseX, mouseY)) {
+            g.setComponentTooltipForNextFrame(font, temperatureTooltip(), mouseX, mouseY);
+        }
+        if (isHovering(ENERGY_X, ENERGY_Y, ENERGY_W, ENERGY_H, mouseX, mouseY)) {
+            g.setComponentTooltipForNextFrame(font, powerTooltip(), mouseX, mouseY);
+        }
         if (isHovering(80, 76, 18, 18, mouseX, mouseY)
                 && menu.kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE) {
             g.setComponentTooltipForNextFrame(font,
                     List.of(Component.translatable("screen.earth_on_minecraft.machine.reductant.tooltip")), mouseX, mouseY);
         }
         if (isHovering(STATUS_X, STATUS_Y, STATUS_W, STATUS_H, mouseX, mouseY)
+                || isHovering(TELEMETRY_X, TELEMETRY_Y, TELEMETRY_W, TELEMETRY_H, mouseX, mouseY)
                 || isHovering(64, 38, 24, 16, mouseX, mouseY)) {
             List<Component> tooltip = new ArrayList<>();
             tooltip.add(stateTooltip());
             tooltip.add(Component.literal(detailedStatusLine()));
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.temp.readout",
+                    menu.temperatureK(), menu.targetTemperatureK(), menu.maxTemperatureK()));
+            if (menu.powerMode().grid()) {
+                tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.eou.buffer",
+                        menu.energyStored(), menu.energyCapacity(), menu.energyPerTick()));
+            }
+            tooltip.add(Component.translatable(menu.driveState().labelKey()));
             tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.spec",
                     secondsPerOperation(), menu.energyPerTick()));
             tooltip.add(Component.translatable(menu.powerMode().labelKey()));
             if (!menu.structureValid()) {
                 MachineMultiblock.Pattern pattern = MachineMultiblock.patternFor(menu.kind());
                 tooltip.add(Component.translatable(pattern.screenKey()));
+                appendStructureFaultTooltip(tooltip);
             }
             g.setComponentTooltipForNextFrame(font, tooltip, mouseX, mouseY);
         }
@@ -372,6 +566,13 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         }
     }
 
+    private void triggerManualStep() {
+        Minecraft mc = Minecraft.getInstance();
+        if (mc.gameMode != null && menu.powerMode().manualFallback()) {
+            mc.gameMode.handleInventoryButtonClick(menu.containerId, ProcessingMachineMenu.BUTTON_MANUAL_STEP);
+        }
+    }
+
     private void syncButtons() {
         if (redstoneButton != null) {
             redstoneButton.setMessage(Component.empty());
@@ -380,6 +581,10 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             routeButton.visible = menu.routeCount() > 1;
             routeButton.active = menu.routeCount() > 1;
             routeButton.setMessage(routeButtonLabel());
+        }
+        if (manualButton != null) {
+            manualButton.visible = menu.powerMode().manualFallback();
+            manualButton.active = menu.structureValid();
         }
     }
 
@@ -424,6 +629,11 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
     private List<Component> powerTooltip() {
         List<Component> tooltip = new ArrayList<>();
         tooltip.add(Component.translatable(menu.powerMode().labelKey()));
+        tooltip.add(Component.translatable(menu.driveState().labelKey()));
+        if (menu.powerMode().grid()) {
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.eou.buffer",
+                    menu.energyStored(), menu.energyCapacity(), menu.energyPerTick()));
+        }
         tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.spec",
                 secondsPerOperation(), menu.energyPerTick()));
         if (menu.powerMode().passive()) {
@@ -431,10 +641,47 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         } else if (menu.acceptsLocalFuel()) {
             tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.fuel.tooltip"));
             tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.fuel.examples"));
+            ItemStack fuel = menu.getSlot(ProcessingMachineBlockEntity.SLOT_FUEL).getItem();
+            int fuelCap = ProcessingMachineBlockEntity.getFuelMaxTemperatureK(fuel);
+            if (fuelCap > 0) {
+                tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.temp.fuel_cap", fuelCap));
+            }
+        } else if (menu.powerMode().manualFallback()) {
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip"));
         } else {
             tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.grid_only.tooltip"));
         }
         return tooltip;
+    }
+
+    private List<Component> temperatureTooltip() {
+        List<Component> tooltip = new ArrayList<>();
+        tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.temp.readout",
+                menu.temperatureK(), menu.targetTemperatureK(), menu.maxTemperatureK()));
+        tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.temp.tooltip"));
+        ItemStack fuel = menu.getSlot(ProcessingMachineBlockEntity.SLOT_FUEL).getItem();
+        int fuelCap = ProcessingMachineBlockEntity.getFuelMaxTemperatureK(fuel);
+        if (fuelCap > 0) {
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.temp.fuel_cap", fuelCap));
+        }
+        return tooltip;
+    }
+
+    private void appendStructureFaultTooltip(List<Component> tooltip) {
+        menu.faultExpectedRole().ifPresent(role -> {
+            BlockPos faultPos = menu.pos().offset(menu.faultDx(), menu.faultDy(), menu.faultDz());
+            String coords = faultPos.getX() + ", " + faultPos.getY() + ", " + faultPos.getZ();
+            String rel = String.format("(%+d, %+d, %+d)", menu.faultDx(), menu.faultDy(), menu.faultDz());
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.structure_progress",
+                    menu.faultMatchedParts(), Math.max(1, menu.faultTotalParts())));
+            tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.structure_fault_expected",
+                    coords, rel, Component.translatable(role.labelKey())));
+            var level = Minecraft.getInstance().level;
+            if (level != null) {
+                Component actualName = level.getBlockState(faultPos).getBlock().getName();
+                tooltip.add(Component.translatable("screen.earth_on_minecraft.machine.structure_fault_actual", actualName));
+            }
+        });
     }
 
     private List<Component> machineSpecTooltip() {

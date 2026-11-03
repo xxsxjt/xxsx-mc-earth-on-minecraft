@@ -419,6 +419,66 @@ final class EarthGameTests {
                 "the anvil must expose spec routes");
         helper.assertTrue(!ProcessingMachineBlock.recipesFor(ProcessingMachineBlock.Kind.LOOM).isEmpty(),
                 "the loom must expose spec routes");
+
+        // 1. Manual station must NOT advance unmanned, and MUST advance when manually operated.
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos manualPos = origin.offset(1, 1, 1);
+        setAbsent(helper, manualPos.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+        setAbsent(helper, manualPos, EarthOnMinecraft.NOODLE_PRESS.get().defaultBlockState());
+        ProcessingMachineBlockEntity manualMachine = (ProcessingMachineBlockEntity) helper.getLevel().getBlockEntity(manualPos);
+        var manualRecipe = ProcessingMachineBlock.recipesFor(ProcessingMachineBlock.Kind.NOODLE_PRESS).getFirst();
+        manualMachine.setItem(ProcessingMachineBlockEntity.SLOT_INPUT, manualRecipe.inputStack().copyWithCount(4));
+        for (int i = 0; i < manualRecipe.secondaryInputs().size(); i++) {
+            manualMachine.setItem(ProcessingMachineBlockEntity.SLOT_SECONDARY_START + i,
+                    manualRecipe.secondaryInputs().get(i).stack().copyWithCount(4));
+        }
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), manualPos, helper.getLevel().getBlockState(manualPos), manualMachine);
+        helper.assertValueEqual(manualMachine.data().get(0), 0, "unmanned manual machine must not advance progress");
+        helper.assertValueEqual(manualMachine.driveState(), ProcessingMachineBlockEntity.DriveState.MANUAL_WAIT,
+                "unmanned manual machine must report MANUAL_WAIT");
+        manualMachine.triggerManualWork(10);
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), manualPos, helper.getLevel().getBlockState(manualPos), manualMachine);
+        helper.assertValueEqual(manualMachine.data().get(0), 1, "manually cranked machine must advance progress");
+
+        // 2. Kinetic station must NOT advance without kinetic drive, and MUST advance with waterwheel drive.
+        BlockPos kineticPos = origin.offset(3, 1, 1);
+        setAbsent(helper, kineticPos.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+        setAbsent(helper, kineticPos, EarthOnMinecraft.CARPENTRY_BENCH.get().defaultBlockState());
+        ProcessingMachineBlockEntity kineticMachine = (ProcessingMachineBlockEntity) helper.getLevel().getBlockEntity(kineticPos);
+        kineticMachine.setItem(ProcessingMachineBlockEntity.SLOT_INPUT, new ItemStack(Items.OAK_LOG, 4));
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), kineticPos, helper.getLevel().getBlockState(kineticPos), kineticMachine);
+        helper.assertValueEqual(kineticMachine.data().get(0), 0, "unpowered kinetic machine must not advance progress");
+        helper.assertValueEqual(kineticMachine.driveState(), ProcessingMachineBlockEntity.DriveState.KINETIC_WAIT,
+                "unpowered kinetic machine must report KINETIC_WAIT");
+        ItemStack waterwheel = new ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.getValue(
+                Identifier.fromNamespaceAndPath(EarthOnMinecraft.MODID, "waterwheel")));
+        kineticMachine.setItem(ProcessingMachineBlockEntity.SLOT_FUEL, waterwheel);
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), kineticPos, helper.getLevel().getBlockState(kineticPos), kineticMachine);
+        helper.assertValueEqual(kineticMachine.data().get(0), 1, "kinetic machine with waterwheel drive must advance progress");
+
+        // 3. Thermal furnace temperature (K) gate: low-temp wood chips (900 K) cannot reach 1350 K reduction temperature;
+        // high-temp coke (2100 K) preheats from 293 K and advances once temperatureK >= 1350 K.
+        BlockPos thermalPos = origin.offset(5, 1, 1);
+        setAbsent(helper, thermalPos.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+        setAbsent(helper, thermalPos, EarthOnMinecraft.REDUCTION_FURNACE.get().defaultBlockState());
+        ProcessingMachineBlockEntity thermalMachine = (ProcessingMachineBlockEntity) helper.getLevel().getBlockEntity(thermalPos);
+        thermalMachine.setItem(ProcessingMachineBlockEntity.SLOT_INPUT, new ItemStack(EarthOnMinecraft.IRON_CONCENTRATE.get(), 4));
+        thermalMachine.setItem(ProcessingMachineBlockEntity.SLOT_REAGENT, new ItemStack(EarthOnMinecraft.COKE.get(), 4));
+        thermalMachine.setItem(ProcessingMachineBlockEntity.SLOT_FUEL, new ItemStack(EarthOnMinecraft.WOOD_CHIPS.get(), 1));
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), thermalPos, helper.getLevel().getBlockState(thermalPos), thermalMachine);
+        helper.assertValueEqual(thermalMachine.data().get(0), 0, "preheating furnace below required K must not advance progress");
+        helper.assertValueEqual(thermalMachine.driveState(), ProcessingMachineBlockEntity.DriveState.FUEL_TEMP_LOW,
+                "wood chips (900 K) in a 1350 K reduction furnace must report FUEL_TEMP_LOW");
+        thermalMachine.setItem(ProcessingMachineBlockEntity.SLOT_FUEL, new ItemStack(EarthOnMinecraft.COKE.get(), 2));
+        // Force burnTime reset to consume the high-grade coke fuel and heat past 1350 K.
+        thermalMachine.data().set(5, 0);
+        for (int t = 0; t < 60; t++) {
+            ProcessingMachineBlockEntity.serverTick(helper.getLevel(), thermalPos, helper.getLevel().getBlockState(thermalPos), thermalMachine);
+        }
+        helper.assertTrue(thermalMachine.temperatureK() >= 1350,
+                "coke-heated reduction furnace must reach >= 1350 K, got " + thermalMachine.temperatureK());
+        helper.assertTrue(thermalMachine.data().get(0) > 0,
+                "reduction furnace at >= 1350 K must advance recipe progress");
         helper.succeed();
     }
 
@@ -534,6 +594,48 @@ final class EarthGameTests {
         helper.assertFalse(MachineMultiblock.isComplete(helper.getLevel(), origin.offset(controller),
                         ProcessingMachineBlock.Kind.LIME_KILN),
                 "removing a shell block must break the structure");
+        var kilnDiag = MachineMultiblock.diagnose(helper.getLevel(), origin.offset(controller),
+                ProcessingMachineBlock.Kind.LIME_KILN).orElseThrow(
+                () -> helper.assertionException("broken lime kiln must produce a coordinate diagnostic"));
+        helper.assertValueEqual(kilnDiag.worldPos(), origin.offset(brokenShell),
+                "diagnostic must pinpoint the exact missing shell coordinate");
+        helper.assertValueEqual(kilnDiag.expectedRole(), MachineMultiblock.PartRole.CASING,
+                "diagnostic must report the missing casing role");
+
+        // Build a modern 3D layered industrial multiblock (Distillation Column / TALL_COLUMN).
+        BlockPos colController = new BlockPos(5, 1, 5);
+        setAbsent(helper, origin.offset(colController), EarthOnMinecraft.DISTILLATION_COLUMN.get().defaultBlockState());
+        for (MachineMultiblock.PlacedRequirement req
+                : MachineMultiblock.requirementsFor(ProcessingMachineBlock.Kind.DISTILLATION_COLUMN,
+                net.minecraft.core.Direction.NORTH)) {
+            BlockPos pos = colController.offset(req.x(), req.y(), req.z());
+            Block partBlock = switch (req.role()) {
+                case "CONTROL_PANEL" -> EarthOnMinecraft.CONTROL_PANEL.get();
+                case "PIPE" -> EarthOnMinecraft.STEEL_PROCESS_PIPE.get();
+                default -> EarthOnMinecraft.INDUSTRIAL_MACHINE_CASING.get();
+            };
+            setAbsent(helper, origin.offset(pos), partBlock.defaultBlockState());
+        }
+        helper.assertTrue(MachineMultiblock.isComplete(helper.getLevel(), origin.offset(colController),
+                        ProcessingMachineBlock.Kind.DISTILLATION_COLUMN),
+                "the 3D layered distillation column must register as complete");
+        BlockPos topPipe = MachineMultiblock.requirementsFor(
+                        ProcessingMachineBlock.Kind.DISTILLATION_COLUMN, net.minecraft.core.Direction.NORTH)
+                .stream()
+                .filter(req -> "PIPE".equals(req.role()) && req.y() == 3)
+                .map(req -> colController.offset(req.x(), req.y(), req.z()))
+                .findFirst().orElseThrow();
+        setAbsent(helper, origin.offset(topPipe), Blocks.COBBLESTONE.defaultBlockState());
+        helper.assertFalse(MachineMultiblock.isComplete(helper.getLevel(), origin.offset(colController),
+                        ProcessingMachineBlock.Kind.DISTILLATION_COLUMN),
+                "replacing a top reflux pipe with cobblestone must invalidate the distillation column");
+        var colDiag = MachineMultiblock.diagnose(helper.getLevel(), origin.offset(colController),
+                ProcessingMachineBlock.Kind.DISTILLATION_COLUMN).orElseThrow();
+        helper.assertValueEqual(colDiag.worldPos(), origin.offset(topPipe),
+                "distillation column diagnostic must report the exact wrong pipe coordinate");
+        helper.assertTrue(colDiag.wrongBlock(), "cobblestone in a pipe position must be flagged as wrongBlock");
+        helper.assertValueEqual(colDiag.actualBlock(), Blocks.COBBLESTONE,
+                "diagnostic must report the actual wrong block found");
 
         // A single-block station must never claim a multiblock pattern.
         helper.assertValueEqual(MachineMultiblock.patternFor(ProcessingMachineBlock.Kind.ANVIL),

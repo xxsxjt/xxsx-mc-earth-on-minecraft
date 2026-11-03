@@ -44,6 +44,20 @@ public final class EnergyNetwork {
         return false;
     }
 
+    public static int extractUpTo(Level level, BlockPos consumerPos, int maxAmount) {
+        if (maxAmount <= 0) {
+            return 0;
+        }
+        int remaining = maxAmount;
+        for (ElectricEnergyStorage storage : connectedStorages(level, consumerPos)) {
+            remaining -= storage.extractEnergy(remaining, false);
+            if (remaining <= 0) {
+                break;
+            }
+        }
+        return maxAmount - remaining;
+    }
+
     public static int distributeToBuffers(Level level, BlockPos sourcePos, int amount) {
         int remaining = amount;
         for (ElectricEnergyStorage storage : connectedStorages(level, sourcePos)) {
