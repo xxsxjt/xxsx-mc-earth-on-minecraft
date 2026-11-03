@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:pyrite",
+  "kind": "mineral",
+  "formula": "FeS2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 119.97,
+  "constituents": [
+    {
+      "species": "FeS2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "hydrothermal",
+    "sedimentary"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.pyrite",
+  "notes": "Iron disulfide mineral used for roasting to SO2 and hematite calcine."
+}

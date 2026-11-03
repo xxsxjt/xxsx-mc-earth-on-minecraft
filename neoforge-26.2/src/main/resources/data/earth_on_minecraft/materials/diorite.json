@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:diorite",
+  "kind": "rock",
+  "formula": "NaAlSi3O8 + CaAl2Si2O8 + Ca2(Mg,Fe)4Al(Si7Al)O22(OH)2 + SiO2 + Fe3O4",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "NaAlSi3O8",
+      "fraction": 0.45
+    },
+    {
+      "species": "CaAl2Si2O8",
+      "fraction": 0.25
+    },
+    {
+      "species": "Ca2(Mg,Fe)4Al(Si7Al)O22(OH)2",
+      "fraction": 0.2
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.08
+    },
+    {
+      "species": "Fe3O4",
+      "fraction": 0.02
+    }
+  ],
+  "source": [
+    "magmatic",
+    "plutonic"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.diorite",
+  "notes": "Intermediate plutonic rock dominated by andesine plagioclase and hornblende."
+}

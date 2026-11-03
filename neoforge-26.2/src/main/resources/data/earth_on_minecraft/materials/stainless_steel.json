@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:stainless_steel",
+  "kind": "alloy",
+  "formula": "Fe + Cr + Ni + Mn + Si + C",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.71
+    },
+    {
+      "species": "Cr",
+      "fraction": 0.18
+    },
+    {
+      "species": "Ni",
+      "fraction": 0.08
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.02
+    },
+    {
+      "species": "Si",
+      "fraction": 0.008
+    },
+    {
+      "species": "C",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "alloy_steelmaking"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.stainless_steel",
+  "notes": "304-grade austenitic 18/8 Cr-Ni stainless steel batch."
+}

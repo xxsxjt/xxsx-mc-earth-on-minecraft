@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "minecraft:calcite"
+          "Name": "earth_on_minecraft:auriferous_quartz_calcite_halo"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "minecraft:granite"
+          "Name": "earth_on_minecraft:chalcopyrite_granite_halo"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "minecraft:granite"
+          "Name": "earth_on_minecraft:chalcopyrite_granite_halo"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

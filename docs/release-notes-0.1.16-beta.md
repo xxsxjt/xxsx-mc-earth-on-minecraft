@@ -10,7 +10,7 @@
 - Ports the whole mod to NeoForge 26.1.2.124. Five source files needed API fixes; `moddev-gradle` 2.0.148 is used for both 26.1.2 and 26.2.
 - Adds a deposit depletion system. All 37 worldgen lodes now carry a finite reserve (`DepositReserve`), persist it in a `DepositBlockEntity`, report remaining capacity on right-click, and convert to one of 37 new depleted blocks when exhausted.
 - Adds the **Industrial Bore Head** (`bore_head`): scans a 24-block radius, drains lode reserves, emits mining loot, and swaps spent lodes for their depleted form. 20 ticks and 24 EOU per unit.
-- Adds the **Quarry** (`quarry`): yields the bulk rock under it, 40 ticks and 12 EOU per unit. Lodes are excluded and return cobblestone, so a quarry never replaces a bore head.
+- Adds the **Quarry** (`quarry`): works a bounded 5x5 footprint below the preserved support layer, yields normal block drops, and runs for 40 ticks and 12 EOU per unit. Live lodes consume finite reserve units and become depleted host rock rather than producing infinite ore.
 - Implements all six spec multiblocks as real machines: bloomery, bread oven, glass kiln, lime kiln, charcoal pit kiln and shaft furnace, each with its own controller block, layered pattern and routes.
 - Adds a machine fluid tank. Every processing machine accepts and produces the 30 spec fluids through an 8000 mB `ResourceHandler`; 16 fluid-only routes select from tank contents.
 - Route count grows from 641 to **1084**. Five generators fill the families the spec left as placeholders: 83 drink routes, 70 medicine routes, 136 herb propagation routes, 129 crop routes, and 136 herbs obtainable from wild gathering.

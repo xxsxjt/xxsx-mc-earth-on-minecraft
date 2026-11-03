@@ -18,5 +18,7 @@ public class SpecItem extends Item {
     public void appendHoverText(ItemStack stack, TooltipContext context, TooltipDisplay display,
                                 Consumer<Component> lines, TooltipFlag flag) {
         QualityComponents.appendTooltip(stack, lines);
+        EarthOnMinecraftTooltips.addMaterialDetails(stack, lines, flag);
+        EarthOnMinecraftTooltips.addRouteTips(stack, lines);
     }
 }

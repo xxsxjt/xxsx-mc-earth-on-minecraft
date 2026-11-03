@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:cinnabar",
+  "kind": "mineral",
+  "formula": "HgS",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 232.65,
+  "constituents": [
+    {
+      "species": "HgS",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "epithermal"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.cinnabar",
+  "notes": "Mercury(II) sulfide vein mineral."
+}

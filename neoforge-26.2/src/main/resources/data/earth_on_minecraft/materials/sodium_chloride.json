@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:sodium_chloride",
+  "kind": "compound",
+  "formula": "NaCl",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 58.44,
+  "constituents": [
+    {
+      "species": "NaCl",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "evaporite",
+    "brine"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.sodium_chloride",
+  "notes": "Halite salt feedstock for chlor-alkali electrolysis and Solvay soda ash."
+}

@@ -36,12 +36,9 @@ public final class DepositSpec {
         if (bound) {
             return;
         }
-        bound = true;
         for (SpecDepletedBlocks.Entry entry : SpecDepletedBlocks.entries()) {
             String lodeId = entry.lode();
-            Block block = SpecBlocks.BY_ID.containsKey(lodeId)
-                    ? SpecBlocks.BY_ID.get(lodeId).get()
-                    : null;
+            Block block = blockForLode(lodeId);
             if (block == null) {
                 continue;
             }
@@ -54,6 +51,67 @@ public final class DepositSpec {
             BY_BLOCK.put(block, lode);
             BY_ID.put(lodeId, lode);
         }
+        bound = true;
+    }
+
+    private static Block blockForLode(String lodeId) {
+        String blockId = switch (lodeId) {
+            case "magnetite_lens" -> "magnetite_ore";
+            case "poor_magnetite_lens" -> "poor_magnetite_ore";
+            case "rich_magnetite_lens" -> "rich_magnetite_ore";
+            case "andesite_volcanic_belt", "anthracite_deepslate_halo", "auriferous_quartz_calcite_halo",
+                    "basalt_mafic_dike", "bituminous_sandstone_halo", "chalcopyrite_granite_halo",
+                    "diorite_intrusion", "granitic_intrusion", "kimberlite_tuff_halo",
+                    "limestone_calcite_bed", "magnetite_tuff_halo", "sedimentary_sandstone_bed",
+                    "tuff_volcanic_belt" -> lodeId;
+            case "kimberlite_pipe" -> "kimberlite";
+            case "chalcopyrite_vein" -> "chalcopyrite_ore";
+            case "chromite_lens" -> "chromite_ore";
+            case "diamondiferous_kimberlite_pipe" -> "diamondiferous_kimberlite";
+            case "lapis_lazuli_body" -> "lapis_lazuli_ore";
+            case "manganite_lens" -> "manganite_ore";
+            case "sphalerite_lens" -> "sphalerite_ore";
+            case "galena_lens" -> "galena_ore";
+            case "uraninite_lens" -> "uraninite_ore";
+            case "redstone_mineral_body" -> "redstone_mineral_ore";
+            case "anthracite_coal_seam", "auriferous_quartz_vein", "bauxite_laterite_deposit",
+                    "bituminous_coal_seam", "borate_deposit", "cassiterite_placer_deposit",
+                    "cinnabar_vein", "emerald_beryl_vein", "evaporite_salt_bed",
+                    "phosphorite_bed", "rare_earth_carbonatite" -> lodeId;
+            default -> null;
+        };
+        if (blockId == null) {
+            return null;
+        }
+        var specBlock = SpecBlocks.BY_ID.get(blockId);
+        if (specBlock != null) {
+            return specBlock.get();
+        }
+        var lodeBlock = SpecLodeBlocks.BY_ID.get(blockId);
+        if (lodeBlock != null) {
+            return lodeBlock.get();
+        }
+        return switch (blockId) {
+            case "poor_magnetite_ore" -> EarthOnMinecraft.POOR_MAGNETITE_ORE.get();
+            case "magnetite_ore" -> EarthOnMinecraft.MAGNETITE_ORE.get();
+            case "rich_magnetite_ore" -> EarthOnMinecraft.RICH_MAGNETITE_ORE.get();
+            case "chalcopyrite_ore" -> EarthOnMinecraft.CHALCOPYRITE_ORE.get();
+            case "auriferous_quartz_vein" -> EarthOnMinecraft.AURIFEROUS_QUARTZ_VEIN.get();
+            case "bituminous_coal_seam" -> EarthOnMinecraft.BITUMINOUS_COAL_SEAM.get();
+            case "anthracite_coal_seam" -> EarthOnMinecraft.ANTHRACITE_COAL_SEAM.get();
+            case "kimberlite" -> EarthOnMinecraft.KIMBERLITE.get();
+            case "diamondiferous_kimberlite" -> EarthOnMinecraft.DIAMONDIFEROUS_KIMBERLITE.get();
+            case "lapis_lazuli_ore" -> EarthOnMinecraft.LAPIS_LAZULI_ORE.get();
+            case "emerald_beryl_vein" -> EarthOnMinecraft.EMERALD_BERYL_VEIN.get();
+            case "redstone_mineral_ore" -> EarthOnMinecraft.REDSTONE_MINERAL_ORE.get();
+            case "cinnabar_vein" -> EarthOnMinecraft.CINNABAR_VEIN.get();
+            case "bauxite_laterite_deposit" -> EarthOnMinecraft.BAUXITE_LATERITE_DEPOSIT.get();
+            case "phosphorite_bed" -> EarthOnMinecraft.PHOSPHORITE_BED.get();
+            case "evaporite_salt_bed" -> EarthOnMinecraft.EVAPORITE_SALT_BED.get();
+            case "cassiterite_placer_deposit" -> EarthOnMinecraft.CASSITERITE_PLACER_DEPOSIT.get();
+            case "rare_earth_carbonatite" -> EarthOnMinecraft.RARE_EARTH_CARBONATITE.get();
+            default -> null;
+        };
     }
 
     /** Capacity in ore units for one lode block. */
@@ -88,6 +146,10 @@ public final class DepositSpec {
 
     public static boolean isLode(Block block) {
         return BY_BLOCK.containsKey(block);
+    }
+
+    public static boolean isDepleted(Block block) {
+        return SpecDepletedBlocks.BY_ID.values().stream().anyMatch(holder -> holder.get() == block);
     }
 
     public static java.util.Collection<Lode> lodes() {

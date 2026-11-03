@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:steel",
+  "kind": "alloy",
+  "formula": "Fe + C + Mn + Si",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.982
+    },
+    {
+      "species": "C",
+      "fraction": 0.01
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.006
+    },
+    {
+      "species": "Si",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "steelmaking"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.steel",
+  "notes": "Standard medium-high carbon structural and tool steel batch."
+}

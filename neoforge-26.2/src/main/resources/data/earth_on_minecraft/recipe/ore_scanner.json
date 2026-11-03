@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    " C ",
+    "SRS",
+    " S "
+  ],
+  "key": {
+    "C": "earth_on_minecraft:copper_wire",
+    "R": "minecraft:redstone",
+    "S": "earth_on_minecraft:steel_bloom"
+  },
+  "result": {
+    "id": "earth_on_minecraft:ore_scanner",
+    "count": 1
+  }
+}

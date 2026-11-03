@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:sodium_carbonate",
+  "kind": "compound",
+  "formula": "Na2CO3",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 105.99,
+  "constituents": [
+    {
+      "species": "Na2CO3",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "solvay_process"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.sodium_carbonate",
+  "notes": "Soda ash flux for glassmaking, chemical neutralization and detergent builders."
+}

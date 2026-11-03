@@ -16,9 +16,8 @@ import java.util.List;
  * <p>The spec models every lode with {@code depletes: true}, a {@code depleted_block} and a
  * {@code releach_efficiency}. This class carries that state at runtime: a lode starts with a
  * reserve sized from {@code lodes_per_region} / {@code reserve_chunks}, yields its loot while the
- * reserve lasts, and converts to the depleted block when it runs dry. The depleted block still
- * yields {@code depleted_yield} at the spec's releach efficiency, so a worked-out region remains
- * worth processing instead of becoming dead terrain.</p>
+ * reserve lasts, and converts to the depleted block when it runs dry. The depleted form remains
+ * as visible host rock and can be removed by the bounded quarry.</p>
  */
 public final class DepositReserve {
     /** Units of ore a fresh lode holds when the spec gives no better number. */
@@ -86,7 +85,12 @@ public final class DepositReserve {
      * therefore produces exactly what a player with a pickaxe would have got.
      */
     public static List<ItemStack> rollLoot(net.minecraft.server.level.ServerLevel level, BlockPos pos,
-                                           BlockState state) {
+                                            BlockState state) {
         return Block.getDrops(state, level, pos, null);
+    }
+
+    public static List<ItemStack> rollLoot(net.minecraft.server.level.ServerLevel level, BlockPos pos,
+                                            BlockState state, ItemStack tool) {
+        return Block.getDrops(state, level, pos, null, null, tool);
     }
 }

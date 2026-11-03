@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:kanthal",
+  "kind": "alloy",
+  "formula": "Fe + Cr + Al + Si",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.72
+    },
+    {
+      "species": "Cr",
+      "fraction": 0.22
+    },
+    {
+      "species": "Al",
+      "fraction": 0.058
+    },
+    {
+      "species": "Si",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.kanthal",
+  "notes": "FeCrAl high-temperature electric resistance heating alloy."
+}

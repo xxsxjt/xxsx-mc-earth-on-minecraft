@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:cupronickel",
+  "kind": "alloy",
+  "formula": "Cu + Ni + Fe + Mn",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Cu",
+      "fraction": 0.7
+    },
+    {
+      "species": "Ni",
+      "fraction": 0.29
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.005
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.005
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.cupronickel",
+  "notes": "70/30 marine corrosion-resistant cupronickel alloy."
+}

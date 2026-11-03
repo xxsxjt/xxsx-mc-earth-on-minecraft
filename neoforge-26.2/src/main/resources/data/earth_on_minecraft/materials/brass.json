@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:brass",
+  "kind": "alloy",
+  "formula": "Cu + Zn + Pb + Fe",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Cu",
+      "fraction": 0.67
+    },
+    {
+      "species": "Zn",
+      "fraction": 0.32
+    },
+    {
+      "species": "Pb",
+      "fraction": 0.008
+    },
+    {
+      "species": "Fe",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.brass",
+  "notes": "Cartridge/machining alpha-beta brass alloy."
+}

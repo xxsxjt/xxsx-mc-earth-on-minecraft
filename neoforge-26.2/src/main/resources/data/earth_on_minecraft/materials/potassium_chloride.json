@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:potassium_chloride",
+  "kind": "compound",
+  "formula": "KCl",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 74.55,
+  "constituents": [
+    {
+      "species": "KCl",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "evaporite",
+    "brine"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.potassium_chloride",
+  "notes": "Sylvite potash salt for fertilizer and potassium nitrate synthesis."
+}

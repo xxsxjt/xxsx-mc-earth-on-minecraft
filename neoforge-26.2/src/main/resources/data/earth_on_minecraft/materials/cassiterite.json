@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:cassiterite",
+  "kind": "mineral",
+  "formula": "SnO2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 150.71,
+  "constituents": [
+    {
+      "species": "SnO2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "pegmatitic",
+    "placer"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.cassiterite",
+  "notes": "Primary tin oxide mineral."
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:gold_ingot",
+  "kind": "alloy",
+  "formula": "Au + Ag + Cu",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Au",
+      "fraction": 0.995
+    },
+    {
+      "species": "Ag",
+      "fraction": 0.004
+    },
+    {
+      "species": "Cu",
+      "fraction": 0.001
+    }
+  ],
+  "source": [
+    "electrowinning",
+    "smelting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.gold_ingot",
+  "notes": "Refined bullion gold ingot with trace silver and copper."
+}

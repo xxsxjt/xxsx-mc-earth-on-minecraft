@@ -205,7 +205,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             return localized("screen.earth_on_minecraft.machine.structure_missing_short");
         }
         ItemStack input = menu.getSlot(ProcessingMachineBlockEntity.SLOT_INPUT).getItem();
-        if (input.isEmpty()) {
+        if (input.isEmpty() && menu.selectedRecipe().isEmpty()) {
             return localized("screen.earth_on_minecraft.machine.empty_input_short");
         }
         return menu.selectedRecipe().map(recipe -> {
@@ -233,7 +233,9 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
                         : "screen.earth_on_minecraft.machine.missing_grid_power_short");
             }
             return localized("screen.earth_on_minecraft.machine.recipe_ready");
-        }).orElseGet(() -> localized("screen.earth_on_minecraft.machine.unsupported_input_short"));
+        }).orElseGet(() -> localized(input.isEmpty()
+                ? "screen.earth_on_minecraft.machine.empty_input_short"
+                : "screen.earth_on_minecraft.machine.unsupported_input_short"));
     }
 
     private String detailedStatusLine() {
@@ -241,7 +243,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
             return localized("screen.earth_on_minecraft.machine.structure_missing");
         }
         ItemStack input = menu.getSlot(ProcessingMachineBlockEntity.SLOT_INPUT).getItem();
-        if (input.isEmpty()) {
+        if (input.isEmpty() && menu.selectedRecipe().isEmpty()) {
             return localized(menu.acceptsLocalFuel()
                     ? "screen.earth_on_minecraft.machine.empty_input_fuel"
                     : "screen.earth_on_minecraft.machine.empty_input_grid");
@@ -268,7 +270,9 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
                         : "screen.earth_on_minecraft.machine.missing_grid_power");
             }
             return recipeSummary(recipe);
-        }).orElseGet(() -> localized("screen.earth_on_minecraft.machine.unsupported_input"));
+        }).orElseGet(() -> localized(input.isEmpty()
+                ? "screen.earth_on_minecraft.machine.empty_input"
+                : "screen.earth_on_minecraft.machine.unsupported_input"));
     }
 
     private int statusColor() {
@@ -279,7 +283,8 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         if (!input.isEmpty() && !ProcessingMachineBlock.acceptsInput(menu.kind(), input)) {
             return EarthGuiSupport.WARNING;
         }
-        if (!input.isEmpty() && (redstonePaused() || menu.outputsBlocked() || menu.secondaryInputsMissing()
+        if ((!input.isEmpty() || menu.selectedRecipe().isPresent())
+                && (redstonePaused() || menu.outputsBlocked() || menu.secondaryInputsMissing()
                 || menu.fluidInputsMissing()
                 || menu.selectedRecipe().map(recipe -> recipe.requiresCoke() && !hasCokeCharge()).orElse(false))) {
             return EarthGuiSupport.WARNING;
@@ -287,7 +292,7 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         if (menu.active()) {
             return 0xFF207030;
         }
-        if (!input.isEmpty() && menu.needsExternalPower() && !menu.gridPowered()
+        if ((!input.isEmpty() || menu.selectedRecipe().isPresent()) && menu.needsExternalPower() && !menu.gridPowered()
                 && !menu.hasBurningFuel() && !fuelSlotHasFuel()) {
             return EarthGuiSupport.WARNING;
         }

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:invar",
+  "kind": "alloy",
+  "formula": "Fe + Ni + Mn + C",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.635
+    },
+    {
+      "species": "Ni",
+      "fraction": 0.36
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.004
+    },
+    {
+      "species": "C",
+      "fraction": 0.001
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.invar",
+  "notes": "FeNi36 low-thermal-expansion precision instrument alloy."
+}

@@ -10,7 +10,7 @@
     "state_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:calcite"
+        "Name": "earth_on_minecraft:limestone_calcite_bed"
       }
     },
     "target": {

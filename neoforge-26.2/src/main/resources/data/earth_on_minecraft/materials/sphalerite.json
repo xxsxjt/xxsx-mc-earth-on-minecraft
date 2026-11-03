@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:sphalerite",
+  "kind": "mineral",
+  "formula": "ZnS",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 97.44,
+  "constituents": [
+    {
+      "species": "ZnS",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "hydrothermal"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.sphalerite",
+  "notes": "Primary zinc sulfide ore mineral."
+}

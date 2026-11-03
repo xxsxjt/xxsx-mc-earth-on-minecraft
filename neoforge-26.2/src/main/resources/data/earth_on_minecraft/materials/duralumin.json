@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:duralumin",
+  "kind": "alloy",
+  "formula": "Al + Cu + Mg + Mn",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Al",
+      "fraction": 0.935
+    },
+    {
+      "species": "Cu",
+      "fraction": 0.044
+    },
+    {
+      "species": "Mg",
+      "fraction": 0.015
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.006
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.duralumin",
+  "notes": "2024-type precipitation-hardened Al-Cu-Mg structural alloy."
+}

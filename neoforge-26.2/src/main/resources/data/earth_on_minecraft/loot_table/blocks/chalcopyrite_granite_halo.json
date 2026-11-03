@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:chalcopyrite_chunk"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "earth_on_minecraft:blocks/chalcopyrite_granite_halo"
+}

@@ -80,7 +80,32 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!stack.isEmpty() && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
+            if (machine.tryInteractWithFluidItem(player, hand, stack)) {
+                return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            }
+        }
         return openMachine(level, pos, player);
+    }
+
+    /** True when any route of {@code kind} consumes {@code fluidId} as a fluid input. */
+    public static boolean acceptsFluidInput(Kind kind, String fluidId) {
+        if (fluidId == null || fluidId.isEmpty()) {
+            return false;
+        }
+        return recipesFor(kind).stream()
+                .anyMatch(recipe -> recipe.fluidInputs().stream()
+                        .anyMatch(input -> input.fluidId().equals(fluidId)));
+    }
+
+    /** True when any route of {@code kind} produces {@code fluidId} as a fluid output. */
+    public static boolean producesFluidOutput(Kind kind, String fluidId) {
+        if (fluidId == null || fluidId.isEmpty()) {
+            return false;
+        }
+        return recipesFor(kind).stream()
+                .anyMatch(recipe -> recipe.fluidOutputs().stream()
+                        .anyMatch(output -> output.fluidId().equals(fluidId)));
     }
 
     @Override
@@ -358,6 +383,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.SIEVE, EarthOnMinecraft.FELDSPAR_DUST::get, "长石粉筛分除杂", out(EarthOnMinecraft.ALUMINOSILICATE_DUST::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 1), out(EarthOnMinecraft.BASTNASITE_DUST::get, 1)));
         recipes.add(r(Kind.SIEVE, EarthOnMinecraft.CASSITERITE_PLACER_DEPOSIT::get, "锡石砂矿重矿物筛分", out(EarthOnMinecraft.CASSITERITE_DUST::get, 2), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.SIEVE, EarthOnMinecraft.EVAPORITE_SALT_BED::get, "蒸发岩硼钾伴生筛分", out(EarthOnMinecraft.BORATE_MINERAL_DUST::get, 1), out(EarthOnMinecraft.POTASSIUM_CHLORIDE::get, 1), out(EarthOnMinecraft.SALT_DUST::get, 2)));
+        recipes.add(r(Kind.SIEVE, EarthOnMinecraft.BASTNASITE_DUST::get, "稀土矿物伴生独居石与铀筛分", out(EarthOnMinecraft.BASTNASITE_DUST::get, 1), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.URANINITE_DUST::get, 1), out(EarthOnMinecraft.CALCITE_DUST::get, 1)));
+        recipes.add(r(Kind.SIEVE, () -> Items.COAL, "原煤重介质筛分与挥发油样品回收", out(EarthOnMinecraft.COAL_DUST::get, 2), out(EarthOnMinecraft.CRUDE_OIL_SAMPLE::get, 1), out(EarthOnMinecraft.GRAPHITE_DUST::get, 1)));
 
         recipes.add(r(Kind.MAGNETIC_SEPARATOR, EarthOnMinecraft.MAGNETITE_DUST::get, "磁选铁精矿", out(EarthOnMinecraft.IRON_CONCENTRATE::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.MAGNETIC_SEPARATOR, EarthOnMinecraft.HEMATITE_DUST::get, "赤铁矿弱磁分选", out(EarthOnMinecraft.IRON_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
@@ -405,7 +432,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.DIAMOND_GRIT::get, "金刚石砂粒压制", out(() -> Items.DIAMOND, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.QUARTZ_DUST::get, "石英粉压制", out(() -> Items.QUARTZ, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "红石精矿压制", out(() -> Items.REDSTONE, 3)));
-        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.STEEL_BLOOM::get, "钢坯轧制为兼容铁锭", out(() -> Items.IRON_INGOT, 1)));
+        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.STEEL_BLOOM::get, "钢坯轧制为标准钢材与兼容铁锭", out(SpecItems.BY_ID.get("steel")::get, 1), out(() -> Items.IRON_INGOT, 1)));
+        recipes.add(r(Kind.ANVIL, EarthOnMinecraft.STEEL_BLOOM::get, "钢坯锻打成精炼钢材", out(SpecItems.BY_ID.get("steel")::get, 1)));
 
         recipes.add(r(Kind.GAS_SEPARATOR, EarthOnMinecraft.COAL_DUST::get, "煤粉干馏分离", out(EarthOnMinecraft.COKE::get, 1), out(EarthOnMinecraft.COAL_TAR::get, 1), out(EarthOnMinecraft.COAL_GAS_CELL::get, 1)));
         recipes.add(r(Kind.GAS_SEPARATOR, EarthOnMinecraft.COAL_GAS_CELL::get, "煤气净化", out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1), out(EarthOnMinecraft.AMMONIA::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
@@ -413,7 +441,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.GAS_SEPARATOR, () -> Items.GLASS_BOTTLE, "空气压缩分离", out(EarthOnMinecraft.NITROGEN_GAS_CELL::get, 3), out(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1)));
         recipes.add(r(Kind.GAS_SEPARATOR, EarthOnMinecraft.OXYGEN_GAS_CELL::get, "富氧尾气回收", out(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1), out(EarthOnMinecraft.NITROGEN_GAS_CELL::get, 1)));
 
-        recipes.add(r(Kind.DISTILLATION_COLUMN, EarthOnMinecraft.COAL_TAR::get, "煤焦油分馏", out(EarthOnMinecraft.ETHYLENE::get, 1), out(EarthOnMinecraft.POLYMER_RESIN::get, 1), out(EarthOnMinecraft.COKE::get, 1)));
+        recipes.add(r(Kind.DISTILLATION_COLUMN, EarthOnMinecraft.COAL_TAR::get, "煤焦油分馏", out(EarthOnMinecraft.ETHYLENE::get, 1), out(EarthOnMinecraft.POLYMER_RESIN::get, 1), out(EarthOnMinecraft.CRUDE_OIL_SAMPLE::get, 1), out(EarthOnMinecraft.COKE::get, 1)));
         recipes.add(r(Kind.DISTILLATION_COLUMN, EarthOnMinecraft.CRUDE_OIL_SAMPLE::get, "原油常压分馏", out(EarthOnMinecraft.NATURAL_GAS_CELL::get, 1), out(EarthOnMinecraft.NAPHTHA::get, 2), out(EarthOnMinecraft.KEROSENE_FRACTION::get, 1), out(EarthOnMinecraft.DIESEL_FRACTION::get, 1), out(EarthOnMinecraft.LUBRICATING_OIL::get, 1), out(EarthOnMinecraft.ASPHALT::get, 1), out(EarthOnMinecraft.PETROLEUM_COKE::get, 1)));
         recipes.add(r(Kind.DISTILLATION_COLUMN, EarthOnMinecraft.BRINE_CRYSTAL::get, "盐卤浓缩", out(EarthOnMinecraft.SALT_DUST::get, 2), out(EarthOnMinecraft.CALCIUM_CHLORIDE::get, 1)));
         recipes.add(r(Kind.DISTILLATION_COLUMN, EarthOnMinecraft.HYDROCHLORIC_ACID::get, "盐酸精馏", out(EarthOnMinecraft.HYDROCHLORIC_ACID::get, 1), out(EarthOnMinecraft.SALT_DUST::get, 1)));

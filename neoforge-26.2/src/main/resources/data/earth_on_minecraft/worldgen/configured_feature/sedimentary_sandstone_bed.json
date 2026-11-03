@@ -10,7 +10,7 @@
     "state_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:sandstone"
+        "Name": "earth_on_minecraft:sedimentary_sandstone_bed"
       }
     },
     "target": {

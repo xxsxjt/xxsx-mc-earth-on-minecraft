@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:titanium_dioxide",
+  "kind": "compound",
+  "formula": "TiO2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 79.87,
+  "constituents": [
+    {
+      "species": "TiO2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "mineral_separation"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.titanium_dioxide",
+  "notes": "Rutile/anatase titanium dioxide pigment and Kroll-process feedstock."
+}

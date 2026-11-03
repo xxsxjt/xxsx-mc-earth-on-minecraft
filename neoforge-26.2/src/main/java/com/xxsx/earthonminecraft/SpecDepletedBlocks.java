@@ -14,9 +14,9 @@ import java.util.Map;
  * The 37 depleted lode blocks named by {@code spec/eom/worldgen.jsonl}.
  *
  * <p>A lode that a miner has worked dry is replaced by its depleted form. These blocks look
- * like spent host rock, are slightly softer than the ore they came from, and still yield
- * the spec's {@code depleted_yield} when processed, so a worked-out region keeps a small
- * residual value instead of becoming dead terrain.</p>
+ * like spent host rock and remain in the world after the reserve reaches zero. A bounded quarry can
+ * later remove them as ordinary spent-rock blocks, so a worked-out region remains readable and
+ * excavatable instead of silently refilling.</p>
  */
 public final class SpecDepletedBlocks {
     public record Entry(String id, String lode) {
@@ -91,6 +91,18 @@ public final class SpecDepletedBlocks {
 
     public static List<Entry> entries() {
         return ENTRIES;
+    }
+
+    public static boolean isDepleted(Block block) {
+        return BY_ID.values().stream().anyMatch(holder -> holder.get() == block);
+    }
+
+    public static String lodeFor(Block block) {
+        return ENTRIES.stream()
+                .filter(entry -> BY_ID.containsKey(entry.id()) && BY_ID.get(entry.id()).get() == block)
+                .map(Entry::lode)
+                .findFirst()
+                .orElse("");
     }
 
     /**

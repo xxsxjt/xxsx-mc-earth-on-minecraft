@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:sulfuric_acid",
+  "kind": "compound",
+  "formula": "H2SO4",
+  "composition_basis": "ideal_formula",
+  "phase": "liquid",
+  "molar_mass_g_mol": 98.07,
+  "constituents": [
+    {
+      "species": "H2SO4",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "contact_process"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.sulfuric_acid",
+  "notes": "Industrial diprotic mineral acid produced via catalytic SO2 oxidation and absorption."
+}

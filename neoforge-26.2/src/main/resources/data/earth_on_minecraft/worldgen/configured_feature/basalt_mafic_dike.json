@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "minecraft:basalt"
+          "Name": "earth_on_minecraft:basalt_mafic_dike"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "minecraft:basalt"
+          "Name": "earth_on_minecraft:basalt_mafic_dike"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

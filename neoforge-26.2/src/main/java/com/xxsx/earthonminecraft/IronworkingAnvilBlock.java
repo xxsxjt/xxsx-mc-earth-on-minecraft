@@ -68,6 +68,9 @@ public class IronworkingAnvilBlock extends Block {
         if (workpiece.getItem() == EarthOnMinecraft.WROUGHT_IRON.get()) {
             return Optional.of(new ItemStack(net.minecraft.world.item.Items.IRON_INGOT));
         }
+        if (workpiece.getItem() == EarthOnMinecraft.STEEL_BLOOM.get()) {
+            return Optional.of(new ItemStack(SpecItems.BY_ID.get("steel").get()));
+        }
         return Optional.empty();
     }
 }

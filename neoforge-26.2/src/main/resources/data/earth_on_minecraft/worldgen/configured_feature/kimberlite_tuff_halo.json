@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "minecraft:tuff"
+          "Name": "earth_on_minecraft:kimberlite_tuff_halo"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "minecraft:tuff"
+          "Name": "earth_on_minecraft:kimberlite_tuff_halo"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

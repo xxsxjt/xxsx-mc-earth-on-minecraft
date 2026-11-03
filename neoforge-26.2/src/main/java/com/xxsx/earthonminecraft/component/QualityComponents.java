@@ -77,6 +77,14 @@ public final class QualityComponents {
         if (metal != null) {
             lines.accept(sourceLine(metal.alloy().getSerializedName() + " / "
                     + String.format(java.util.Locale.ROOT, "%.2f", metal.workability())));
+            if (!metal.composition().isEmpty()) {
+                String assay = metal.composition().entrySet().stream()
+                        .sorted((a, b) -> Double.compare(b.getValue(), a.getValue()))
+                        .map(entry -> entry.getKey() + " "
+                                + String.format(java.util.Locale.ROOT, "%.1f%%", entry.getValue() * 100.0))
+                        .collect(java.util.stream.Collectors.joining(" · "));
+                lines.accept(sourceLine(assay));
+            }
         }
     }
 

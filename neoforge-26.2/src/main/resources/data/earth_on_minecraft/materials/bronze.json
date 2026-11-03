@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:bronze",
+  "kind": "alloy",
+  "formula": "Cu + Sn + Zn + Pb",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Cu",
+      "fraction": 0.88
+    },
+    {
+      "species": "Sn",
+      "fraction": 0.1
+    },
+    {
+      "species": "Zn",
+      "fraction": 0.015
+    },
+    {
+      "species": "Pb",
+      "fraction": 0.005
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.bronze",
+  "notes": "Standard tin bronze casting and bearing alloy."
+}

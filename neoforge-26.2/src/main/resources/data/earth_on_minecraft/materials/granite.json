@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:granite",
+  "kind": "rock",
+  "formula": "SiO2 + KAlSi3O8 + NaAlSi3O8 + KAl2(AlSi3O10)(OH)2 + Fe3O4",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "SiO2",
+      "fraction": 0.72
+    },
+    {
+      "species": "KAlSi3O8",
+      "fraction": 0.14
+    },
+    {
+      "species": "NaAlSi3O8",
+      "fraction": 0.08
+    },
+    {
+      "species": "KAl2(AlSi3O10)(OH)2",
+      "fraction": 0.04
+    },
+    {
+      "species": "Fe3O4",
+      "fraction": 0.02
+    }
+  ],
+  "source": [
+    "magmatic",
+    "plutonic"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.granite",
+  "notes": "Standardized felsic plutonic rock batch with fixed quartz, alkali feldspar, albite, muscovite and accessory magnetite fractions."
+}

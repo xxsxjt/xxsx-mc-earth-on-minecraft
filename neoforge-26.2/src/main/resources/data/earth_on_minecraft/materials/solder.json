@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:solder",
+  "kind": "alloy",
+  "formula": "Sn + Pb + Sb + Cu",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Sn",
+      "fraction": 0.6
+    },
+    {
+      "species": "Pb",
+      "fraction": 0.38
+    },
+    {
+      "species": "Sb",
+      "fraction": 0.015
+    },
+    {
+      "species": "Cu",
+      "fraction": 0.005
+    }
+  ],
+  "source": [
+    "alloy_melting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.solder",
+  "notes": "Low-melting Sn60/Pb38 electronics and plumbing solder alloy."
+}

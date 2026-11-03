@@ -597,6 +597,30 @@ final class EarthGameTests {
                 ProcessingMachineBlock.matchingRecipes(ProcessingMachineBlock.Kind.CASTING_TABLE,
                         new ItemStack(Items.IRON_INGOT)).isEmpty(),
                 "an ingot must not select the fluid-only casting route");
+
+        // Adjacent fluid-producing machines must auto-transfer into fluid-consuming machines.
+        BlockPos furnacePos = new BlockPos(4, 1, 1);
+        helper.setBlock(furnacePos, EarthOnMinecraft.SHAFT_FURNACE.get());
+        ProcessingMachineBlockEntity furnace = helper.getBlockEntity(furnacePos, ProcessingMachineBlockEntity.class);
+        furnace.tank().fill("earth_on_minecraft:molten_iron", 288);
+        helper.assertTrue(furnace.tryExportFluidToNeighbors(helper.getLevel(), helper.absolutePos(furnacePos)),
+                "shaft furnace must export molten iron into an adjacent casting table");
+        helper.assertValueEqual(machine.tank().amount(), 288,
+                "casting table must receive the exported molten iron");
+        helper.assertTrue(furnace.tank().isEmpty(),
+                "shaft furnace tank must empty after exporting to the casting table");
+
+        // All machine routes must fit within standard 64-item stacks.
+        for (ProcessingMachineBlock.Recipe route : ProcessingMachineBlock.recipes()) {
+            for (ProcessingMachineBlock.Input input : route.inputs()) {
+                helper.assertTrue(input.count() <= 64,
+                        "route input exceeds stack limit 64: " + route.sourceId() + " (" + input.count() + ")");
+            }
+            for (ProcessingMachineBlock.Output output : route.outputs()) {
+                helper.assertTrue(output.count() <= 64,
+                        "route output exceeds stack limit 64: " + route.sourceId() + " (" + output.count() + ")");
+            }
+        }
         helper.succeed();
     }
 

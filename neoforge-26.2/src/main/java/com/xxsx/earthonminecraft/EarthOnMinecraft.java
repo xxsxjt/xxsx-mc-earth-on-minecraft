@@ -186,7 +186,7 @@ public class EarthOnMinecraft {
             BLOCK_ENTITY_TYPES.register("quarry", () -> new BlockEntityType<>(
                     QuarryBlockEntity::new, QUARRY.get()));
 
-    /** Every lode and depleted block carries a finite reserve. */
+    /** Every lode and depleted form carries reserve state, so depletion cannot refill. */
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DepositBlockEntity>> DEPOSIT_BLOCK_ENTITY =
             BLOCK_ENTITY_TYPES.register("deposit", () -> new BlockEntityType<>(
                     DepositBlockEntity::new, depositBlocks().toArray(Block[]::new)));
@@ -470,6 +470,7 @@ public class EarthOnMinecraft {
         EarthDataComponents.COMPONENTS.register(modBus);
         SpecItems.register();
         SpecBlocks.register();
+        SpecLodeBlocks.register();
         SpecDepletedBlocks.register();
         SpecFluids.register(FLUID_TYPES, FLUIDS);
         addLegacyAliases();
@@ -710,8 +711,7 @@ public class EarthOnMinecraft {
     }
 
     /**
-     * Every block that carries a {@link DepositBlockEntity}: the 24 generated lode blocks plus the
-     * 37 depleted forms. Both need the entity so a reserve survives being worked down to nothing.
+     * Every natural ore-bearing block and its depleted form carries a {@link DepositBlockEntity}.
      */
     public static java.util.List<Block> depositBlocks() {
         java.util.List<Block> blocks = new java.util.ArrayList<>();
@@ -719,6 +719,9 @@ public class EarthOnMinecraft {
             blocks.add(holder.get());
         }
         for (DeferredBlock<Block> holder : SpecBlocks.oreBlocks()) {
+            blocks.add(holder.get());
+        }
+        for (DeferredBlock<Block> holder : SpecLodeBlocks.BY_ID.values()) {
             blocks.add(holder.get());
         }
         for (DeferredBlock<Block> holder : SpecDepletedBlocks.BY_ID.values()) {

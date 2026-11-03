@@ -102,9 +102,11 @@ conveyors and hoppers can pull output.
 
 ### Quarry (`quarry`)
 
-`QuarryBlock` + `QuarryBlockEntity`. Yields the block's own item from the rock below (sampled up to
-3 blocks down), 40 ticks and 12 EOU per unit. Lodes are deliberately excluded and return cobblestone,
-so a quarry is never a cheaper bore head. Every site therefore has a floor value.
+`QuarryBlock` + `QuarryBlockEntity`. Works a bounded 5x5 footprint from the second through third
+block below the machine, preserving the immediate support layer. It emits the sampled block's normal
+drops, removes the worked block, and consumes one unit from a live deposit reserve before leaving its
+depleted block behind. It runs for 40 ticks and 12 EOU per unit, so it remains a bulk-rock machine
+without creating infinite ore.
 
 ## Fluid layer
 

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:quicklime",
+  "kind": "compound",
+  "formula": "CaO",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 56.08,
+  "constituents": [
+    {
+      "species": "CaO",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "calcination"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.quicklime",
+  "notes": "Calcium oxide produced by thermal decomposition of limestone/calcite."
+}

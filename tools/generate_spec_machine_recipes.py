@@ -17,7 +17,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1]
 JAVA_ROOT = ROOT / "neoforge-26.2/src/main/java/com/xxsx/earthonminecraft"
 OUTPUT = JAVA_ROOT / "SpecMachineRecipes.java"
 MANIFEST = ROOT / "docs/quality/spec-machine-recipes.json"
-DEFAULT_SPEC = pathlib.Path(r"D:\Codex\WORKSPACES\Projects\mc-agent\spec\eom")
+DEFAULT_SPEC = ROOT.parents[1] / "spec" / "eom"
 
 KIND_BY_MACHINE = {
     "jaw_crusher": "CRUSHER",
@@ -81,6 +81,25 @@ KIND_BY_MACHINE = {
 
 MAX_TOTAL_INPUTS = 5
 FLUID_SCALE = 1.0
+
+
+def normalize_item_batch(
+    item_inputs: list[tuple[str, int]],
+    item_outputs: list[tuple[str, int]],
+) -> tuple[list[tuple[str, int]], list[tuple[str, int]]]:
+    """Scale down per-mille alloy batches so every slot stays within a single 64-item stack."""
+    all_counts = [count for _, count in item_inputs + item_outputs]
+    max_count = max(all_counts, default=0)
+    if max_count <= 64:
+        return item_inputs, item_outputs
+    divisor = max(2, (max_count + 9) // 10)
+    scaled_inputs = [(item, max(1, round(count / divisor))) for item, count in item_inputs]
+    total_in = sum(count for _, count in scaled_inputs)
+    scaled_outputs = [
+        (item, min(64, max(1, round(count / divisor), total_in if len(item_outputs) == 1 else 1)))
+        for item, count in item_outputs
+    ]
+    return scaled_inputs, scaled_outputs
 
 
 def split_inputs(record: dict) -> tuple[list[tuple[str, int]], list[tuple[str, int]]]:
@@ -208,6 +227,7 @@ def main() -> None:
         outputs = record.get("outputs") or []
         item_inputs, fluid_inputs = split_inputs(record)
         item_outputs, fluid_outputs = split_outputs(record)
+        item_inputs, item_outputs = normalize_item_batch(item_inputs, item_outputs)
         # Fluid-only conversions have no primary item. They are still emitted: the block entity
         # selects them from the machine tank contents instead of the input slot.
         if not item_inputs and not fluid_inputs:

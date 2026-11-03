@@ -78,12 +78,6 @@ public class MinerBlockEntity extends BlockEntity implements Container {
             return;
         }
 
-        if (!EnergyNetwork.consume(level, pos, ENERGY_PER_UNIT)) {
-            miner.progress = 0;
-            miner.finishTick(level, pos, state, changed);
-            return;
-        }
-
         miner.progress++;
         changed = true;
 
@@ -99,6 +93,24 @@ public class MinerBlockEntity extends BlockEntity implements Container {
         miner.finishTick(level, pos, state, changed);
     }
 
+    public static boolean fitInto(NonNullList<ItemStack> stacks, ItemStack output) {
+        for (ItemStack existing : stacks) {
+            if (!output.isEmpty() && !existing.isEmpty() && ItemStack.isSameItemSameComponents(existing, output)) {
+                int moved = Math.min(output.getCount(), existing.getMaxStackSize() - existing.getCount());
+                existing.grow(moved);
+                output.shrink(moved);
+            }
+        }
+        for (int i = 0; i < stacks.size() && !output.isEmpty(); i++) {
+            if (stacks.get(i).isEmpty()) {
+                int moved = Math.min(output.getCount(), output.getMaxStackSize());
+                stacks.set(i, output.copyWithCount(moved));
+                output.shrink(moved);
+            }
+        }
+        return output.isEmpty();
+    }
+
     /** Works one unit out of the nearest live lode. Returns true when something was produced. */
     private boolean mineOneUnit(Level level) {
         if (tracked.isEmpty() || !(level instanceof net.minecraft.server.level.ServerLevel server)) {
@@ -109,14 +121,27 @@ public class MinerBlockEntity extends BlockEntity implements Container {
             tracked.remove(0);
             return false;
         }
+        BlockState lodeState = level.getBlockState(lode);
+        List<ItemStack> drops = DepositReserve.rollLoot(server, lode, lodeState);
+        NonNullList<ItemStack> simulated = NonNullList.withSize(items.size(), ItemStack.EMPTY);
+        for (int i = 0; i < items.size(); i++) {
+            simulated.set(i, items.get(i).copy());
+        }
+        for (ItemStack drop : drops) {
+            if (!fitInto(simulated, drop.copy())) {
+                return false;
+            }
+        }
+        if (!EnergyNetwork.consume(level, worldPosition, ENERGY_PER_UNIT)) {
+            progress = TICKS_PER_UNIT - 1;
+            return false;
+        }
         DepositReserve reserve = deposit.reserve();
         if (reserve.extract(1) <= 0) {
             tracked.remove(0);
             return false;
         }
-
-        BlockState lodeState = level.getBlockState(lode);
-        for (ItemStack drop : DepositReserve.rollLoot(server, lode, lodeState)) {
+        for (ItemStack drop : drops) {
             insert(drop);
         }
         deposit.syncReserve();
@@ -140,6 +165,9 @@ public class MinerBlockEntity extends BlockEntity implements Container {
             for (int dy = -SCAN_RADIUS; dy <= SCAN_RADIUS && found.size() < MAX_TRACKED_LODES; dy++) {
                 for (int dz = -SCAN_RADIUS; dz <= SCAN_RADIUS && found.size() < MAX_TRACKED_LODES; dz++) {
                     cursor.set(worldPosition.getX() + dx, worldPosition.getY() + dy, worldPosition.getZ() + dz);
+                    if (!level.hasChunkAt(cursor)) {
+                        continue;
+                    }
                     if (level.getBlockEntity(cursor) instanceof DepositBlockEntity deposit
                             && !deposit.reserve().isEmpty()) {
                         found.add(cursor.immutable());

@@ -281,22 +281,72 @@ public final class MaterialChemistry {
             entry("quality_inspection_module", info("camera + light + control PCB", "tooltip.earth_on_minecraft.chem.detail.electronics")),
             entry("automation_bus", info("shielded Cu data/power bus", "tooltip.earth_on_minecraft.chem.detail.cable")),
             entry("conveyor_drive", info("motor + rubber belt + gearbox", "tooltip.earth_on_minecraft.chem.detail.device")),
-            entry("redstone_io_gateway", info("redstone interface + PLC I/O board", "tooltip.earth_on_minecraft.chem.detail.electronics"))
+            entry("redstone_io_gateway", info("redstone interface + PLC I/O board", "tooltip.earth_on_minecraft.chem.detail.electronics")),
+            entry("steel", info("Fe 98.2% + C 1.0% + Mn 0.6% + Si 0.2%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("pig_iron", info("Fe 94.0% + C 4.2% + Si 1.2% + Mn 0.4% + P 0.2%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("stainless_steel", info("Fe 71.0% + Cr 18.0% + Ni 8.0% + Mn 2.0% + Si 0.8% + C 0.2%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("bronze", info("Cu 88.0% + Sn 10.0% + Zn 1.5% + Pb 0.5%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("brass", info("Cu 67.0% + Zn 32.0% + Pb 0.8% + Fe 0.2%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("cupronickel", info("Cu 70.0% + Ni 29.0% + Fe 0.5% + Mn 0.5%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("duralumin", info("Al 93.5% + Cu 4.4% + Mg 1.5% + Mn 0.6%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("solder", info("Sn 60.0% + Pb 38.0% + Sb 1.5% + Cu 0.5%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("invar", info("Fe 63.5% + Ni 36.0% + Mn 0.4% + C 0.1%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("kanthal", info("Fe 72.0% + Cr 22.0% + Al 5.8% + Si 0.2%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("aluminium", info("Al 99.0% + Si 0.6% + Fe 0.4%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("aluminium_alloy", info("Al 93.5% + Cu 4.4% + Mg 1.5% + Mn 0.6%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("tin", info("Sn 99.8% + Pb 0.1% + Sb 0.1%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("zinc", info("Zn 99.7% + Pb 0.2% + Fe 0.1%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("lead", info("Pb 99.8% + Sb 0.1% + Bi 0.1%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("nickel", info("Ni 99.5% + Co 0.3% + Fe 0.2%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("chromium", info("Cr 99.2% + Fe 0.5% + Si 0.3%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("titanium", info("Ti 99.2% + Fe 0.5% + O 0.3%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("silicon", info("Si 98.8% + Fe 0.6% + Al 0.4% + Ca 0.2%", "tooltip.earth_on_minecraft.chem.detail.semiconductor")),
+            entry("silver", info("Ag 99.6% + Cu 0.3% + Pb 0.1%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("albite", info("NaAlSi3O8", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("anorthite", info("CaAl2Si2O8", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("orthoclase", info("KAlSi3O8", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("muscovite", info("KAl2(AlSi3O10)(OH)2", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("biotite", info("K(Mg,Fe)3(AlSi3O10)(OH)2", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("olivine", info("(Mg,Fe)2SiO4", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("pyroxene", info("(Mg,Fe,Ca)SiO3", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("hornblende", info("Ca2(Mg,Fe)4Al(Si7Al)O22(OH)2", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("kaolinite", info("Al2Si2O5(OH)4", "tooltip.earth_on_minecraft.chem.detail.clay")),
+            entry("quicklime", info("CaO", "tooltip.earth_on_minecraft.chem.detail.base")),
+            entry("coke_fuel", info("C 91.0% + SiO2 5.0% + Al2O3 3.0% + S 1.0%", "tooltip.earth_on_minecraft.chem.detail.coal")),
+            entry("sulfuric_acid_aq", info("H2SO4 98.0% + H2O 2.0%", "tooltip.earth_on_minecraft.chem.detail.acid")),
+            entry("hydrochloric_acid_aq", info("HCl 37.0% + H2O 63.0%", "tooltip.earth_on_minecraft.chem.detail.acid")),
+            entry("nitric_acid_aq", info("HNO3 68.0% + H2O 32.0%", "tooltip.earth_on_minecraft.chem.detail.acid")),
+            entry("phosphoric_acid_aq", info("H3PO4 85.0% + H2O 15.0%", "tooltip.earth_on_minecraft.chem.detail.acid")),
+            entry("sodium_hydroxide_aq", info("NaOH 50.0% + H2O 50.0%", "tooltip.earth_on_minecraft.chem.detail.base"))
     );
     private static final Map<String, Info> VANILLA_INFO = Map.ofEntries(
-            entry("minecraft:stone", info("SiO2 + feldspar group + Mg/Fe clay silicates + CaCO3 traces", "tooltip.earth_on_minecraft.chem.detail.generic_stone")),
-            entry("minecraft:cobblestone", info("variable parent-rock aggregate: SiO2/feldspar/mafic silicates + clay/carbonate quarry fines", "tooltip.earth_on_minecraft.chem.detail.aggregate")),
-            entry("minecraft:deepslate", info("Al-silicates + quartz + mica/chlorite traces", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:cobbled_deepslate", info("deepslate fragments + mica/chlorite traces", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:granite", info("SiO2 + KAlSi3O8 + Na/Ca plagioclase + mica + Fe oxide traces", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:diorite", info("plagioclase + hornblende/pyroxene", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:andesite", info("plagioclase + pyroxene/amphibole + Fe oxides", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:basalt", info("Ca-plagioclase + pyroxene + olivine + magnetite", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:tuff", info("volcanic glass + feldspar + mafic lithic fragments", "tooltip.earth_on_minecraft.chem.detail.mixed_rock")),
-            entry("minecraft:calcite", info("CaCO3", "tooltip.earth_on_minecraft.chem.detail.carbonate")),
-            entry("minecraft:dripstone_block", info("CaCO3 + clay/iron traces", "tooltip.earth_on_minecraft.chem.detail.carbonate")),
-            entry("minecraft:sandstone", info("SiO2 grains + feldspar + calcite cement", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
-            entry("minecraft:blackstone", info("mafic silicates + Fe oxides", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:iron_ingot", info("Fe 98.5% + C 0.8% + Mn 0.5% + Si 0.2%", "tooltip.earth_on_minecraft.chem.detail.alloy")),
+            entry("minecraft:copper_ingot", info("Cu 99.6% + O 0.2% + Ag 0.1% + Fe 0.1%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("minecraft:gold_ingot", info("Au 99.5% + Ag 0.4% + Cu 0.1%", "tooltip.earth_on_minecraft.chem.detail.metal")),
+            entry("minecraft:coal", info("C 78.0% + CHx volatiles 14.0% + SiO2/Al2O3 ash 7.0% + S 1.0%", "tooltip.earth_on_minecraft.chem.detail.coal")),
+            entry("minecraft:charcoal", info("C 88.0% + volatiles 9.0% + K2CO3/CaCO3 ash 3.0%", "tooltip.earth_on_minecraft.chem.detail.coal")),
+            entry("minecraft:quartz", info("SiO2 99.8% + Fe2O3/Al2O3 0.2%", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("minecraft:diamond", info("C(sp3) 99.95% + N 0.05%", "tooltip.earth_on_minecraft.chem.detail.native_element")),
+            entry("minecraft:emerald", info("Be3Al2(SiO3)6 99.2% + Cr2O3 0.6% + V2O3 0.2%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:lapis_lazuli", info("Na6Ca2(Al6Si6O24)(SO4,S)2 75.0% + CaCO3 15.0% + FeS2 10.0%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:redstone", info("Fe2O3 55.0% + MnO2 25.0% + SiO2 15.0% + Cu/HgS 5.0%", "tooltip.earth_on_minecraft.chem.detail.fantasy_mix")),
+            entry("minecraft:amethyst_shard", info("SiO2 99.5% + Fe3+ 0.5%", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("minecraft:flint", info("SiO2(cryptocrystalline) 96.0% + H2O 2.5% + Fe2O3/CaCO3 1.5%", "tooltip.earth_on_minecraft.chem.detail.silicate")),
+            entry("minecraft:brick", info("SiO2 58.0% + Al2O3 28.0% + Fe2O3 9.0% + CaO/K2O 5.0%", "tooltip.earth_on_minecraft.chem.detail.ceramic")),
+            entry("minecraft:glass", info("SiO2 72.0% + Na2O 14.0% + CaO 10.0% + MgO/Al2O3 4.0%", "tooltip.earth_on_minecraft.chem.detail.glass")),
+            entry("minecraft:stone", info("SiO2 52% + Feldspar 26% + Mafic Silicates 14% + CaCO3 8%", "tooltip.earth_on_minecraft.chem.detail.generic_stone")),
+            entry("minecraft:cobblestone", info("SiO2 52% + Feldspar 26% + Mafic Silicates 14% + CaCO3/Clay 8%", "tooltip.earth_on_minecraft.chem.detail.aggregate")),
+            entry("minecraft:deepslate", info("Al2Si2O5(OH)4 42% + SiO2 35% + Muscovite 15% + Fe3O4 5% + C 3%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:cobbled_deepslate", info("Al2Si2O5(OH)4 42% + SiO2 35% + Muscovite 15% + Fe3O4 5% + C 3%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:granite", info("SiO2 72% + KAlSi3O8 14% + NaAlSi3O8 8% + Muscovite 4% + Fe3O4 2%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:diorite", info("NaAlSi3O8 45% + CaAl2Si2O8 25% + Hornblende 20% + SiO2 8% + Fe3O4 2%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:andesite", info("NaAlSi3O8 40% + CaAl2Si2O8 25% + (Mg,Fe)SiO3 22% + SiO2 10% + Fe3O4 3%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:basalt", info("CaAl2Si2O8 44% + (Mg,Fe)SiO3 35% + (Mg,Fe)2SiO4 12% + Fe3O4 7% + TiO2 2%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:tuff", info("SiO2 58% + KAlSi3O8 20% + NaAlSi3O8 12% + (Mg,Fe)SiO3 6% + Fe2O3 4%", "tooltip.earth_on_minecraft.chem.detail.mixed_rock")),
+            entry("minecraft:calcite", info("CaCO3 99.0% + MgCO3 1.0%", "tooltip.earth_on_minecraft.chem.detail.carbonate")),
+            entry("minecraft:dripstone_block", info("CaCO3 96.0% + Clay 2.5% + Fe2O3 1.5%", "tooltip.earth_on_minecraft.chem.detail.carbonate")),
+            entry("minecraft:sandstone", info("SiO2 85% + KAlSi3O8 8% + CaCO3 5% + Fe2O3 2%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
+            entry("minecraft:blackstone", info("(Mg,Fe)SiO3 62% + CaAl2Si2O8 20% + Fe2O3 12% + FeCr2O4 6%", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
             entry("minecraft:clay", info("Al2Si2O5(OH)4 + quartz + Fe oxides", "tooltip.earth_on_minecraft.chem.detail.clay")),
             entry("minecraft:clay_ball", info("Al2Si2O5(OH)4 + quartz + Fe oxides", "tooltip.earth_on_minecraft.chem.detail.clay")),
             entry("minecraft:sand", info("SiO2 + feldspar + heavy mineral traces", "tooltip.earth_on_minecraft.chem.detail.soil")),
@@ -346,6 +396,14 @@ public final class MaterialChemistry {
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.chem.section").withStyle(ChatFormatting.GOLD));
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.chem.form", Component.translatable(formKey(id.getPath()))).withStyle(ChatFormatting.GRAY));
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.chem.formula", info.formula()).withStyle(ChatFormatting.AQUA));
+        MaterialCatalog.find(EarthOnMinecraft.id(id.getPath())).ifPresent(record -> {
+            if (record.constituents().size() > 1) {
+                String assay = record.constituents().stream()
+                        .map(c -> c.species() + " " + String.format(java.util.Locale.ROOT, "%.1f%%", c.fraction() * 100.0))
+                        .collect(java.util.stream.Collectors.joining(" · "));
+                lines.accept(Component.literal("  [" + assay + "]").withStyle(ChatFormatting.DARK_AQUA));
+            }
+        });
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.chem.category", Component.translatable(info.detailKey())).withStyle(ChatFormatting.GRAY));
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.chem.source", Component.translatable(sourceKey(info.detailKey()))).withStyle(ChatFormatting.DARK_GREEN));
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.chem.process", Component.translatable(processKey(info.detailKey()))).withStyle(ChatFormatting.YELLOW));

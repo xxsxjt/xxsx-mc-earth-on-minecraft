@@ -10,18 +10,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 
+import java.util.List;
+
 /**
  * Quarry: the answer to "what if there is no lode here".
  *
- * <p>A bore head is only useful on a deposit. A quarry grinds out bulk rock instead: it reads the
- * block it is sitting on and yields that material's ordinary drops, so a quarry in a limestone bed
- * produces limestone and one on plain stone produces cobblestone. That gives every site a floor
- * value and makes bulk construction materials renewable without hand mining.</p>
+ * <p>A bore head is only useful on a deposit. A quarry grinds out a bounded 5x5 work area instead:
+ * it reads each block below the preserved support layer and yields that material's ordinary drops.
+ * Live deposits consume their finite reserve and become depleted host rock, so the machine does not
+ * turn a mineral body into an infinite source.</p>
  *
  * <p>It is deliberately slower and cheaper per unit than a bore head, because it is extracting
  * nothing rarer than the rock itself.</p>
@@ -30,12 +33,14 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
     public static final int OUTPUT_SLOTS = 9;
     public static final int TICKS_PER_UNIT = 40;
     public static final int ENERGY_PER_UNIT = 12;
+    public static final int WORK_RADIUS = 2;
     /** How far below the quarry it samples to decide what it is cutting. */
     public static final int SAMPLE_DEPTH = 3;
 
     private final NonNullList<ItemStack> items = NonNullList.withSize(OUTPUT_SLOTS, ItemStack.EMPTY);
     private int progress;
     private int outputCount;
+    private boolean active;
 
     public QuarryBlockEntity(BlockPos pos, BlockState state) {
         super(EarthOnMinecraft.QUARRY_BLOCK_ENTITY.get(), pos, state);
@@ -48,16 +53,12 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
             quarry.finishTick(level, pos, state, false);
             return;
         }
-        if (!quarry.canFitOutput()) {
+        BlockPos target = quarry.targetRock(level);
+        if (target == null) {
+            quarry.progress = 0;
             quarry.finishTick(level, pos, state, false);
             return;
         }
-        if (!EnergyNetwork.consume(level, pos, ENERGY_PER_UNIT)) {
-            quarry.progress = 0;
-            quarry.finishTick(level, pos, state, changed);
-            return;
-        }
-
         quarry.progress++;
         changed = true;
 
@@ -67,57 +68,87 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
         }
 
         quarry.progress = 0;
-        if (quarry.cutOneUnit(level)) {
+        if (quarry.cutBlock(level, target)) {
             changed = true;
         }
         quarry.finishTick(level, pos, state, changed);
     }
 
     /** Produces one unit of whatever the rock under the quarry yields. */
-    private boolean cutOneUnit(Level level) {
-        BlockState sampled = sampleRock(level);
+    private boolean cutBlock(Level level, BlockPos target) {
+        BlockState sampled = level.getBlockState(target);
         if (sampled == null || sampled.isAir()) {
             return false;
         }
-        ItemStack yield = dropFor(sampled);
-        if (yield.isEmpty()) {
+        if (!(level instanceof net.minecraft.server.level.ServerLevel server)) {
             return false;
         }
-        insert(yield);
+        DepositBlockEntity deposit = level.getBlockEntity(target) instanceof DepositBlockEntity value
+                ? value : null;
+        List<ItemStack> drops = DepositReserve.rollLoot(server, target, sampled,
+                new ItemStack(Items.DIAMOND_PICKAXE));
+        if (drops.isEmpty()) {
+            return false;
+        }
+        NonNullList<ItemStack> simulated = NonNullList.withSize(items.size(), ItemStack.EMPTY);
+        for (int i = 0; i < items.size(); i++) {
+            simulated.set(i, items.get(i).copy());
+        }
+        for (ItemStack drop : drops) {
+            if (!MinerBlockEntity.fitInto(simulated, drop.copy())) {
+                return false;
+            }
+        }
+        if (!EnergyNetwork.consume(level, worldPosition, ENERGY_PER_UNIT)) {
+            progress = TICKS_PER_UNIT - 1;
+            return false;
+        }
+        boolean depletedLode = deposit != null && deposit.reserve().isEmpty();
+        if (deposit != null && !depletedLode && deposit.reserve().extract(1) <= 0) {
+            return false;
+        }
+        for (ItemStack drop : drops) {
+            insert(drop.copy());
+        }
+        if (deposit != null && !depletedLode && deposit.reserve().isEmpty()) {
+            BlockState depleted = SpecDepletedBlocks.byLode(deposit.reserve().lodeId());
+            if (depleted != null) {
+                level.setBlock(target, depleted, Block.UPDATE_ALL);
+            }
+            deposit.syncReserve();
+        }
+        if (deposit != null) {
+            deposit.syncReserve();
+        }
+        if (deposit == null || depletedLode) {
+            level.setBlock(target, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
+        }
         return true;
     }
 
     /** Looks a few blocks down for the rock body being quarried. */
     private BlockState sampleRock(Level level) {
-        for (int depth = 1; depth <= SAMPLE_DEPTH; depth++) {
-            BlockState state = level.getBlockState(worldPosition.below(depth));
-            if (!state.isAir() && state.getFluidState().isEmpty()) {
-                return state;
+        BlockPos target = targetRock(level);
+        return target == null ? null : level.getBlockState(target);
+    }
+
+    private BlockPos targetRock(Level level) {
+        for (int depth = 2; depth <= SAMPLE_DEPTH; depth++) {
+            for (int dx = -WORK_RADIUS; dx <= WORK_RADIUS; dx++) {
+                for (int dz = -WORK_RADIUS; dz <= WORK_RADIUS; dz++) {
+                    BlockPos target = worldPosition.offset(dx, -depth, dz);
+                    if (!level.hasChunkAt(target)) {
+                        continue;
+                    }
+                    BlockState state = level.getBlockState(target);
+                    if (!state.isAir() && state.getFluidState().isEmpty()
+                            && state.getDestroySpeed(level, target) >= 0.0F) {
+                        return target;
+                    }
+                }
             }
         }
         return null;
-    }
-
-    /**
-     * The bulk material a rock yields. Ores are deliberately excluded: a quarry must not become a
-     * cheaper bore head, so anything with a deposit reserve returns plain stone instead.
-     */
-    private static ItemStack dropFor(BlockState state) {
-        Block block = state.getBlock();
-        if (DepositSpec.isLode(block) || block instanceof DepositBlock) {
-            return new ItemStack(Items.COBBLESTONE);
-        }
-        ItemStack direct = new ItemStack(block.asItem());
-        return direct.isEmpty() ? new ItemStack(Items.COBBLESTONE) : direct;
-    }
-
-    private boolean canFitOutput() {
-        for (ItemStack stack : items) {
-            if (stack.isEmpty() || stack.getCount() < stack.getMaxStackSize()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private void insert(ItemStack drop) {
@@ -139,6 +170,10 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
     }
 
     private void finishTick(Level level, BlockPos pos, BlockState state, boolean changed) {
+        active = progress > 0;
+        if (state.hasProperty(QuarryBlock.ACTIVE) && state.getValue(QuarryBlock.ACTIVE) != active) {
+            level.setBlock(pos, state.setValue(QuarryBlock.ACTIVE, active), Block.UPDATE_CLIENTS);
+        }
         if (changed) {
             setChanged();
         }
@@ -159,6 +194,7 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
         super.saveAdditional(output);
         ContainerHelper.saveAllItems(output, items);
         output.putInt("Progress", progress);
+        output.putBoolean("Active", active);
     }
 
     @Override
@@ -166,6 +202,7 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
         super.loadAdditional(input);
         ContainerHelper.loadAllItems(input, items);
         progress = input.getIntOr("Progress", 0);
+        active = input.getBooleanOr("Active", false);
     }
 
     // ---- Container ----

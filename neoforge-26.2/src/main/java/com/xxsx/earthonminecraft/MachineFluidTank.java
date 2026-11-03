@@ -6,6 +6,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.transfer.ResourceHandler;
 import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.transaction.SnapshotJournal;
 import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 /**
@@ -14,7 +15,10 @@ import net.neoforged.neoforge.transfer.transaction.TransactionContext;
  * <p>The tank holds at most one fluid at a time. It is a {@link ResourceHandler} so pipes and
  * buckets can fill and drain it through {@code Capabilities.Fluid.BLOCK}.</p>
  */
-public class MachineFluidTank implements ResourceHandler<FluidResource> {
+public class MachineFluidTank extends SnapshotJournal<MachineFluidTank.Snapshot>
+        implements ResourceHandler<FluidResource> {
+    protected record Snapshot(Fluid fluid, int amount) {
+    }
     private final int capacity;
     private Fluid fluid;
     private int amount;
@@ -36,6 +40,23 @@ public class MachineFluidTank implements ResourceHandler<FluidResource> {
 
     private void changed() {
         listener.run();
+    }
+
+    @Override
+    protected Snapshot createSnapshot() {
+        return new Snapshot(fluid, amount);
+    }
+
+    @Override
+    protected void revertToSnapshot(Snapshot snapshot) {
+        fluid = snapshot.fluid();
+        amount = snapshot.amount();
+        changed();
+    }
+
+    @Override
+    protected void onRootCommit(Snapshot originalState) {
+        changed();
     }
 
     public int capacity() {
@@ -120,6 +141,7 @@ public class MachineFluidTank implements ResourceHandler<FluidResource> {
         if (newAmount <= 0 || fluidId == null || fluidId.isEmpty()) {
             fluid = null;
             amount = 0;
+            changed();
             return;
         }
         Identifier id = Identifier.tryParse(fluidId);
@@ -127,6 +149,7 @@ public class MachineFluidTank implements ResourceHandler<FluidResource> {
         if (candidate == null) {
             fluid = null;
             amount = 0;
+            changed();
             return;
         }
         fluid = candidate;
@@ -174,9 +197,9 @@ public class MachineFluidTank implements ResourceHandler<FluidResource> {
         if (accepted <= 0) {
             return 0;
         }
+        updateSnapshots(transaction);
         fluid = resource.getFluid();
         amount += accepted;
-        changed();
         return accepted;
     }
 
@@ -189,12 +212,12 @@ public class MachineFluidTank implements ResourceHandler<FluidResource> {
             return 0;
         }
         int removed = Math.min(extracted, amount);
+        updateSnapshots(transaction);
         amount -= removed;
         if (amount <= 0) {
             amount = 0;
             fluid = null;
         }
-        changed();
         return removed;
     }
 }

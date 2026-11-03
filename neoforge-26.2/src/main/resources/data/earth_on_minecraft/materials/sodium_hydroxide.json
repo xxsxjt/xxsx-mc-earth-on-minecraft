@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:sodium_hydroxide",
+  "kind": "compound",
+  "formula": "NaOH",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 40.0,
+  "constituents": [
+    {
+      "species": "NaOH",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "chlor_alkali"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.sodium_hydroxide",
+  "notes": "Caustic soda base from brine electrolysis."
+}

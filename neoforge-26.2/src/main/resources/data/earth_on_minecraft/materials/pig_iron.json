@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:pig_iron",
+  "kind": "alloy",
+  "formula": "Fe + C + Si + Mn + P",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.94
+    },
+    {
+      "species": "C",
+      "fraction": 0.042
+    },
+    {
+      "species": "Si",
+      "fraction": 0.012
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.004
+    },
+    {
+      "species": "P",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "blast_furnace"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.pig_iron",
+  "notes": "High-carbon brittle hot-metal product from shaft/blast furnace reduction prior to decarburization."
+}

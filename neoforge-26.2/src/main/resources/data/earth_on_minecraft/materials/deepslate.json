@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:deepslate",
+  "kind": "rock",
+  "formula": "Al2Si2O5(OH)4 + SiO2 + KAl2(AlSi3O10)(OH)2 + Fe3O4 + C",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Al2Si2O5(OH)4",
+      "fraction": 0.42
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.35
+    },
+    {
+      "species": "KAl2(AlSi3O10)(OH)2",
+      "fraction": 0.15
+    },
+    {
+      "species": "Fe3O4",
+      "fraction": 0.05
+    },
+    {
+      "species": "C",
+      "fraction": 0.03
+    }
+  ],
+  "source": [
+    "metamorphic"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.deepslate",
+  "notes": "Low-to-medium grade metamorphic pelitic slate with fixed aluminosilicate, quartz, mica and graphitic carbon assay."
+}

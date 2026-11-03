@@ -46,7 +46,20 @@ public record MetalBatch(int schemaVersion, Alloy alloy, Map<String, Double> com
 
     public static MetalBatch defaultFor(String alloyName) {
         Alloy alloy = Alloy.byName(alloyName);
-        return new MetalBatch(1, alloy, Map.of(), 0L, 1.0);
+        return new MetalBatch(1, alloy, defaultComposition(alloy), 0L, 1.0);
+    }
+
+    public static Map<String, Double> defaultComposition(Alloy alloy) {
+        return switch (alloy) {
+            case IRON -> Map.of("Fe", 0.985, "C", 0.008, "Mn", 0.005, "Si", 0.002);
+            case STEEL -> Map.of("Fe", 0.982, "C", 0.010, "Mn", 0.006, "Si", 0.002);
+            case BRONZE -> Map.of("Cu", 0.880, "Sn", 0.100, "Zn", 0.015, "Pb", 0.005);
+            case BRASS -> Map.of("Cu", 0.670, "Zn", 0.320, "Pb", 0.008, "Fe", 0.002);
+            case CUPRONICKEL -> Map.of("Cu", 0.700, "Ni", 0.290, "Fe", 0.005, "Mn", 0.005);
+            case STAINLESS_STEEL -> Map.of("Fe", 0.710, "Cr", 0.180, "Ni", 0.080, "Mn", 0.020, "Si", 0.008, "C", 0.002);
+            case ALUMINIUM -> Map.of("Al", 0.990, "Si", 0.006, "Fe", 0.004);
+            case TITANIUM -> Map.of("Ti", 0.992, "Fe", 0.005, "O", 0.003);
+        };
     }
 
     public enum Alloy implements StringRepresentable {

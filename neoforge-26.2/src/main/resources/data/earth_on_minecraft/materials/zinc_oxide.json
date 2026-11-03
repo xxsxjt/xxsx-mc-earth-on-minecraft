@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:zinc_oxide",
+  "kind": "compound",
+  "formula": "ZnO",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 81.38,
+  "constituents": [
+    {
+      "species": "ZnO",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "roasting"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.zinc_oxide",
+  "notes": "Roasted sphalerite calcine for zinc smelting and rubber vulcanization activator."
+}

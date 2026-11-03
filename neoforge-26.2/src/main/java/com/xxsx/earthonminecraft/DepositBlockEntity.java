@@ -29,9 +29,11 @@ public class DepositBlockEntity extends BlockEntity {
     /** The reserve, created at full capacity on first access. */
     public DepositReserve reserve() {
         if (reserve == null) {
-            Identifier lode = DepositSpec.lodeFor(getBlockState().getBlock());
+            Identifier lode = lodeIdForBlock(getBlockState().getBlock());
             int capacity = DepositSpec.capacityFor(lode);
-            reserve = DepositReserve.fresh(lode, capacity);
+            reserve = DepositSpec.isDepleted(getBlockState().getBlock())
+                    ? new DepositReserve(lode, 0, capacity)
+                    : DepositReserve.fresh(lode, capacity);
         }
         return reserve;
     }
@@ -60,6 +62,32 @@ public class DepositBlockEntity extends BlockEntity {
         }
         int capacity = input.getIntOr(CAPACITY_KEY, DepositSpec.capacityFor(lode));
         int remaining = input.getIntOr(REMAINING_KEY, capacity);
+        if (DepositSpec.isDepleted(getBlockState().getBlock())) {
+            String depletedLode = SpecDepletedBlocks.lodeFor(getBlockState().getBlock());
+            if (!depletedLode.isEmpty()) {
+                lode = Identifier.fromNamespaceAndPath(EarthOnMinecraft.MODID, depletedLode);
+                capacity = DepositSpec.capacityFor(lode);
+            }
+            remaining = 0;
+        }
         reserve = new DepositReserve(lode, remaining, capacity);
+    }
+
+    @Override
+    public void setBlockState(BlockState state) {
+        super.setBlockState(state);
+        if (DepositSpec.isDepleted(state.getBlock())) {
+            Identifier lode = lodeIdForBlock(state.getBlock());
+            reserve = new DepositReserve(lode, 0, DepositSpec.capacityFor(lode));
+        }
+    }
+
+    private static Identifier lodeIdForBlock(net.minecraft.world.level.block.Block block) {
+        if (DepositSpec.isDepleted(block)) {
+            String lodePath = SpecDepletedBlocks.lodeFor(block);
+            return Identifier.fromNamespaceAndPath(EarthOnMinecraft.MODID,
+                    lodePath.isEmpty() ? "unknown_lode" : lodePath);
+        }
+        return DepositSpec.lodeFor(block);
     }
 }

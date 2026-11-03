@@ -6,7 +6,7 @@
     "targets": [
       {
         "state": {
-          "Name": "minecraft:diorite"
+          "Name": "earth_on_minecraft:diorite_intrusion"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",
@@ -15,7 +15,7 @@
       },
       {
         "state": {
-          "Name": "minecraft:diorite"
+          "Name": "earth_on_minecraft:diorite_intrusion"
         },
         "target": {
           "predicate_type": "minecraft:tag_match",

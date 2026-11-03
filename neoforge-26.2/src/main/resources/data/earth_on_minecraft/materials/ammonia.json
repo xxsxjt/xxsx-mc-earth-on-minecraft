@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:ammonia",
+  "kind": "compound",
+  "formula": "NH3",
+  "composition_basis": "ideal_formula",
+  "phase": "gas",
+  "molar_mass_g_mol": 17.03,
+  "constituents": [
+    {
+      "species": "NH3",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "haber_bosch"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.ammonia",
+  "notes": "Anhydrous ammonia synthesized from nitrogen and hydrogen."
+}

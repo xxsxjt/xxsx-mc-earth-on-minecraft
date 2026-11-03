@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:uraninite",
+  "kind": "mineral",
+  "formula": "UO2",
+  "composition_basis": "ideal_formula",
+  "phase": "solid",
+  "molar_mass_g_mol": 270.03,
+  "constituents": [
+    {
+      "species": "UO2",
+      "fraction": 1.0
+    }
+  ],
+  "source": [
+    "hydrothermal",
+    "pegmatitic"
+  ],
+  "simplification": "none",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.uraninite",
+  "notes": "Uranium dioxide ore mineral."
+}

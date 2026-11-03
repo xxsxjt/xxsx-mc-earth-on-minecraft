@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:andesite",
+  "kind": "rock",
+  "formula": "NaAlSi3O8 + CaAl2Si2O8 + (Mg,Fe)SiO3 + SiO2 + Fe3O4",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "NaAlSi3O8",
+      "fraction": 0.4
+    },
+    {
+      "species": "CaAl2Si2O8",
+      "fraction": 0.25
+    },
+    {
+      "species": "(Mg,Fe)SiO3",
+      "fraction": 0.22
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.1
+    },
+    {
+      "species": "Fe3O4",
+      "fraction": 0.03
+    }
+  ],
+  "source": [
+    "volcanic",
+    "subduction_arc"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.andesite",
+  "notes": "Intermediate volcanic rock with fixed plagioclase, pyroxene, silica and magnetite assay."
+}

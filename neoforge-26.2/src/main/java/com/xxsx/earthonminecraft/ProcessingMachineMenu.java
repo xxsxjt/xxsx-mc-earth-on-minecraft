@@ -2,6 +2,7 @@ package com.xxsx.earthonminecraft;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -25,6 +26,11 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
     private static final int PLAYER_INV_START = ProcessingMachineBlockEntity.SLOT_COUNT;
     private static final int PLAYER_INV_END = PLAYER_INV_START + 27;
     private static final int HOTBAR_END = PLAYER_INV_END + 9;
+    private static final int MENU_SECONDARY_START = 2;
+    private static final int MENU_SECONDARY_END = 6;
+    private static final int MENU_OUTPUT_START = 6;
+    private static final int MENU_REAGENT = 13;
+    private static final int MACHINE_MENU_END = 14;
 
     private final Container container;
     private final ContainerData data;
@@ -143,36 +149,34 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
         ItemStack stack = slot.getItem();
         moved = stack.copy();
 
-        if (index < ProcessingMachineBlockEntity.SLOT_COUNT) {
+        if (index < MACHINE_MENU_END) {
             if (!moveItemStackTo(stack, PLAYER_INV_START, HOTBAR_END, true)) {
                 return ItemStack.EMPTY;
             }
-        } else if (this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
-                && stack.getItem() == EarthOnMinecraft.COKE.get()
-                && selectedRecipe().map(ProcessingMachineBlock.Recipe::requiresCoke).orElse(false)) {
-            if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_REAGENT,
-                    ProcessingMachineBlockEntity.SLOT_REAGENT + 1, false)) {
+        } else {
+            boolean movedToMachine = false;
+            boolean cokeReagentRoute = this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
+                    && stack.getItem() == EarthOnMinecraft.COKE.get()
+                    && selectedRecipe().map(ProcessingMachineBlock.Recipe::requiresCoke).orElse(false);
+            if (cokeReagentRoute) {
+                movedToMachine = moveItemStackTo(stack, MENU_REAGENT, MENU_REAGENT + 1, false);
+            } else if (ProcessingMachineBlock.acceptsInput(this.kind, stack)) {
+                movedToMachine = moveItemStackTo(stack, 0, 1, false);
+            } else if (acceptsSecondaryInput(stack)) {
+                movedToMachine = moveItemStackTo(stack, MENU_SECONDARY_START, MENU_SECONDARY_END, false);
+            } else if (this.kind.acceptsLocalFuel() && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0) {
+                movedToMachine = moveItemStackTo(stack, 1, 2, false);
+            }
+            if (movedToMachine) {
+                // The required coke route uses the dedicated reagent slot; other coke recipes
+                // are accepted as ordinary secondary inputs by the branch above.
+            } else if (index < PLAYER_INV_START + 27) {
+                if (!moveItemStackTo(stack, PLAYER_INV_START + 27, HOTBAR_END, false)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!moveItemStackTo(stack, PLAYER_INV_START, PLAYER_INV_START + 27, false)) {
                 return ItemStack.EMPTY;
             }
-        } else if (ProcessingMachineBlock.acceptsInput(this.kind, stack)) {
-            if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_INPUT, ProcessingMachineBlockEntity.SLOT_INPUT + 1, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else if (acceptsSecondaryInput(stack)) {
-            if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_SECONDARY_START,
-                    ProcessingMachineBlockEntity.SLOT_SECONDARY_START + ProcessingMachineBlockEntity.SECONDARY_INPUT_SLOTS, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else if (this.kind.acceptsLocalFuel() && ProcessingMachineBlockEntity.getFuelTicks(stack) > 0) {
-            if (!moveItemStackTo(stack, ProcessingMachineBlockEntity.SLOT_FUEL, ProcessingMachineBlockEntity.SLOT_FUEL + 1, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else if (index < PLAYER_INV_END) {
-            if (!moveItemStackTo(stack, PLAYER_INV_END, HOTBAR_END, false)) {
-                return ItemStack.EMPTY;
-            }
-        } else if (!moveItemStackTo(stack, PLAYER_INV_START, PLAYER_INV_END, false)) {
-            return ItemStack.EMPTY;
         }
 
         if (stack.isEmpty()) {
@@ -248,7 +252,22 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
     }
 
     public java.util.Optional<ProcessingMachineBlock.Recipe> selectedRecipe() {
-        return ProcessingMachineBlock.findRecipe(kind, getSlot(ProcessingMachineBlockEntity.SLOT_INPUT).getItem(), selectedRouteIndex());
+        ItemStack input = getSlot(0).getItem();
+        if (!input.isEmpty()) {
+            return ProcessingMachineBlock.findRecipe(kind, input, selectedRouteIndex());
+        }
+        int fluidId = data.get(ProcessingMachineBlockEntity.DATA_TANK_FLUID);
+        var fluid = fluidId < 0 ? null : BuiltInRegistries.FLUID.byId(fluidId);
+        if (fluid == null) {
+            return java.util.Optional.empty();
+        }
+        var id = BuiltInRegistries.FLUID.getKey(fluid);
+        if (id == null) {
+            return java.util.Optional.empty();
+        }
+        List<ProcessingMachineBlock.Recipe> routes = ProcessingMachineBlock.fluidOnlyRecipes(kind, id.toString());
+        return routes.isEmpty() ? java.util.Optional.empty()
+                : java.util.Optional.of(routes.get(Math.floorMod(selectedRouteIndex(), routes.size())));
     }
 
     public boolean outputsBlocked() {
@@ -290,7 +309,11 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
      * block entity performs the exact id check before starting a route.
      */
     private boolean tankHolds(ProcessingMachineBlock.FluidInput fluid) {
-        return tankAmount() >= fluid.amount();
+        int fluidId = data.get(ProcessingMachineBlockEntity.DATA_TANK_FLUID);
+        var actual = fluidId < 0 ? null : BuiltInRegistries.FLUID.byId(fluidId);
+        var actualId = actual == null ? null : BuiltInRegistries.FLUID.getKey(actual);
+        return actualId != null && actualId.toString().equals(fluid.fluidId())
+                && tankAmount() >= fluid.amount();
     }
 
     public boolean usesFluid() {
@@ -353,7 +376,7 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
     private boolean canFitOutputs(List<ItemStack> outputs) {
         List<ItemStack> simulated = new ArrayList<>(ProcessingMachineBlockEntity.OUTPUT_SLOT_COUNT);
         for (int i = 0; i < ProcessingMachineBlockEntity.OUTPUT_SLOT_COUNT; i++) {
-            simulated.add(getSlot(ProcessingMachineBlockEntity.SLOT_OUTPUT_START + i).getItem().copy());
+            simulated.add(getSlot(MENU_OUTPUT_START + i).getItem().copy());
         }
         for (ItemStack output : outputs) {
             if (!fitInto(simulated, output.copy())) {

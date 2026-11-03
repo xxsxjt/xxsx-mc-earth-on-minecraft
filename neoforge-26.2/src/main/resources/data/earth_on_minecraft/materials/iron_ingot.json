@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:iron_ingot",
+  "kind": "alloy",
+  "formula": "Fe + C + Mn + Si",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe",
+      "fraction": 0.985
+    },
+    {
+      "species": "C",
+      "fraction": 0.008
+    },
+    {
+      "species": "Mn",
+      "fraction": 0.005
+    },
+    {
+      "species": "Si",
+      "fraction": 0.002
+    }
+  ],
+  "source": [
+    "metallurgical_smelting"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.iron_ingot",
+  "notes": "Standard stackable structural iron ingot with fixed carbon, manganese and silicon residual assay."
+}

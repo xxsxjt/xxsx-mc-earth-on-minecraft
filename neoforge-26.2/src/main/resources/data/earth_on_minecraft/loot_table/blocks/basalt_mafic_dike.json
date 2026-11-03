@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:basalt"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "earth_on_minecraft:blocks/basalt_mafic_dike"
+}
