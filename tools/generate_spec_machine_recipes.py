@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Emit SpecMachineRecipes.java: spec machine routes for the already-registered machines.
 
-Routes whose primary input is already covered by the curated hard-coded iron-loop table are
-skipped, so approved first-iron routes and their GameTests keep priority. Fluid-only routes are
-emitted too; the block entity selects them from the machine tank contents.
+Routes whose primary input is already covered by the curated early mineral-dressing / first-iron
+table are skipped so approved first-iron routes and their GameTests keep priority. Chemical and
+reaction machines match exact input/output signatures instead of blocking on primary item alone,
+allowing balanced multi-reactant spec reactions (with catalyst, temperature_k, pressure_kpa, and
+equation metadata from reactions.jsonl) to take effect.
 """
 
 from __future__ import annotations
@@ -79,6 +81,97 @@ KIND_BY_MACHINE = {
     "shaft_furnace_controller": "SHAFT_FURNACE",
 }
 
+PRIMARY_CURATED_MACHINES = {
+    "jaw_crusher",
+    "ball_mill",
+    "sieve",
+    "magnetic_separator",
+    "flotation_cell",
+    "ore_roaster",
+    "leaching_tank",
+}
+
+STRICT_STOICHIOMETRIC_MACHINES = {
+    "chemical_reactor",
+    "synthesis_loop",
+    "absorption_tower",
+    "polymerizer",
+    "electrolytic_cell",
+    "steam_cracker",
+    "mixer",
+}
+
+ALLOWED_TRANSCRIBED_IDS = {
+    "machine:electrolytic_cell/080-minecraft:water_bucket",
+    "machine:electrolytic_cell/electrorefine_copper",
+    "machine:chemical_reactor/123-hard_water_sample",
+    "machine:mixer/260-steel_bloom",
+    "machine:mixer/281-hematite_dust",
+    "machine:mixer/353-nuclear_fuel_pellet",
+    "machine:mixer/knead_dough",
+}
+
+REJECTED_LEGACY_IDS = {
+    "machine:crystallizer/157-sodium_hydroxide",
+    "machine:crystallizer/158-ammonium_nitrate",
+    "machine:crystallizer/159-gypsum_dust",
+    "machine:fertilizer_granulator/175-fertilizer_blend",
+    "machine:fertilizer_granulator/176-ammonium_nitrate",
+    "machine:powder_press/204-softened_water",
+    "machine:powder_press/307-acrylic_resin",
+    "machine:powder_press/324-lead_ingot",
+    "machine:flotation_cell/320-galena_dust",
+    "machine:distillation_column/095-hydrochloric_acid",
+    "machine:gas_separator/089-chlorine_gas_cell",
+    "machine:gas_separator/091-oxygen_gas_cell",
+}
+
+CATALYST_MAP = {
+    "Fe": "earth_on_minecraft:iron_catalyst",
+    "Fe2O3": "earth_on_minecraft:iron_catalyst",
+    "Fe/HCl": "earth_on_minecraft:iron_catalyst",
+    "V2O5": "earth_on_minecraft:vanadium_catalyst",
+    "Bi/Mo": "earth_on_minecraft:vanadium_catalyst",
+    "Pt-Rh": "earth_on_minecraft:platinum_group_catalyst",
+    "Pd": "earth_on_minecraft:platinum_group_catalyst",
+    "Ag": "earth_on_minecraft:platinum_group_catalyst",
+    "Rh/I": "earth_on_minecraft:platinum_group_catalyst",
+    "Ni": "earth_on_minecraft:nickel_catalyst",
+    "Cu": "earth_on_minecraft:nickel_catalyst",
+    "Cu/ZnO": "earth_on_minecraft:nickel_catalyst",
+    "AlCl3": "earth_on_minecraft:catalyst",
+    "HgCl2": "earth_on_minecraft:catalyst",
+    "H2SO4": "earth_on_minecraft:sulfuric_acid",
+    "NaOH": "earth_on_minecraft:sodium_hydroxide",
+    "cryolite": "earth_on_minecraft:calcium_fluoride",
+    "Aspergillus niger": "",
+    "Lactobacillus": "",
+}
+
+SPECIFIED_REACTION_OVERRIDES = {
+    "machine:absorption_tower/131-sulfur_dust": ("earth_on_minecraft:vanadium_catalyst", 720, 101, "2S + 3O2 + 2H2O -> 2H2SO4"),
+    "machine:absorption_tower/132-sulfur_dioxide_cell": ("earth_on_minecraft:vanadium_catalyst", 720, 101, "2SO2 + O2 + 2H2O -> 2H2SO4"),
+    "machine:absorption_tower/286-vanadium_catalyst": ("earth_on_minecraft:vanadium_catalyst", 720, 101, "2SO2 + O2 + 2H2O -> 2H2SO4"),
+    "machine:absorption_tower/289-chlorine_gas_cell": ("", 303, 101, "Cl2 + NaOH -> NaClO + HCl"),
+    "machine:absorption_tower/341-carbon_monoxide_cell": ("earth_on_minecraft:iron_catalyst", 673, 1000, "CO + H2O -> CO2 + H2"),
+    "machine:chemical_reactor/101-sulfur_dust": ("earth_on_minecraft:vanadium_catalyst", 720, 101, "2S + 3O2 + 2H2O -> 2H2SO4"),
+    "machine:chemical_reactor/103-nitric_acid": ("", 353, 101, "HNO3 + NH3 -> NH4NO3"),
+    "machine:chemical_reactor/105-lime_dust": ("", 353, 101, "CaO + H2O -> Ca(OH)2"),
+    "machine:chemical_reactor/106-soda_ash": ("", 313, 101, "Na2CO3 + CO2 + H2O -> 2NaHCO3"),
+    "machine:chemical_reactor/107-sulfuric_acid": ("", 323, 101, "H2SO4 + Ca(OH)2 -> CaSO4·2H2O"),
+    "machine:chemical_reactor/109-methanol": ("earth_on_minecraft:platinum_group_catalyst", 873, 101, "CH3OH -> HCHO + H2"),
+    "machine:chemical_reactor/112-sodium_bicarbonate": ("", 433, 101, "2NaHCO3 -> Na2CO3 + CO2 + H2O"),
+    "machine:chemical_reactor/267-metallurgical_silicon": ("", 573, 101, "Si + 2Cl2 + H2 -> SiHCl3 + HCl"),
+    "machine:chemical_reactor/292-hydrogen_gas_cell": ("earth_on_minecraft:platinum_group_catalyst", 323, 200, "2H2 + 2O2 -> 2H2O2"),
+    "machine:chemical_reactor/334-sulfuric_acid": ("", 353, 101, "H2SO4 + 2NH3 -> (NH4)2SO4"),
+    "machine:chemical_reactor/347-yellowcake": ("", 623, 101, "2U3O8 + O2 -> 6UO3"),
+    "machine:chemical_reactor/349-low_enriched_uranium": ("", 900, 101, "UF6 + 2H2O + H2 -> UO2 + 6HF"),
+    "machine:electrolytic_cell/170-salt_dust": ("", 353, 101, "2NaCl + 2H2O -> 2NaOH + Cl2 + H2"),
+    "machine:mixer/155-sodium_hydroxide": ("", 298, 101, "HCl + NaOH -> NaCl + H2O"),
+    "machine:mixer/291-sodium_hypochlorite": ("", 303, 101, "2NaClO + Ca(OH)2 -> Ca(ClO)2 + 2NaOH"),
+    "machine:synthesis_loop/129-natural_gas_cell": ("earth_on_minecraft:nickel_catalyst", 1073, 2000, "CH4 + 2H2O -> CO2 + 4H2"),
+}
+
 MAX_TOTAL_INPUTS = 5
 FLUID_SCALE = 1.0
 
@@ -126,7 +219,10 @@ def split_outputs(record: dict) -> tuple[list[tuple[str, int]], list[tuple[str, 
 
 
 def load(name: str, spec: pathlib.Path):
-    return [json.loads(line) for line in (spec / name).read_text(encoding="utf-8").splitlines() if line.strip()]
+    path = spec / name
+    if not path.exists():
+        return []
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
 def java_string(value: str) -> str:
@@ -171,11 +267,13 @@ def curated_primary_items() -> set[tuple[str, str]]:
             r'\("([a-z0-9_]+)"', entrypoint):
         const_to_slug[match.group(1)] = match.group(2)
 
-    pairs: set[tuple[str, str]] = set()
+    pairs: set[tuple[str, str]] = {
+        ("reduction_furnace", "earth_on_minecraft:iron_concentrate"),
+    }
     for match in re.finditer(r'r(?:WithCoke)?\(Kind\.([A-Z_]+),\s*([^,]+),', body):
         kind = match.group(1)
         machine = next((m for m, k in KIND_BY_MACHINE.items() if k == kind), None)
-        if machine is None:
+        if machine not in PRIMARY_CURATED_MACHINES:
             continue
         source = match.group(2).strip()
         if source.startswith("EarthOnMinecraft."):
@@ -193,6 +291,22 @@ def curated_primary_items() -> set[tuple[str, str]]:
     return pairs
 
 
+def extract_equation(note: str, rx: dict | None) -> str:
+    if rx:
+        rx_note = (rx.get("note") or "").strip()
+        if rx_note:
+            eq = rx_note.split("；")[0].split(";")[0].strip()
+            if "：" in eq:
+                eq = eq.split("：", 1)[1].strip()
+            return eq.replace("→", " -> ")
+    if note and ("->" in note or "→" in note):
+        eq = note.split("；")[0].split(";")[0].strip()
+        if "：" in eq:
+            eq = eq.split("：", 1)[1].strip()
+        return eq.replace("→", " -> ")
+    return ""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--spec", default=str(DEFAULT_SPEC))
@@ -202,16 +316,25 @@ def main() -> None:
     known_fluids = fluid_ids(spec)
     curated = curated_primary_items()
     rows = load("recipes.jsonl", spec)
+    reactions_by_recipe = {
+        rx["recipe"]: rx
+        for rx in load("reactions.jsonl", spec)
+        if isinstance(rx.get("recipe"), str)
+    }
 
     entries = []
     skipped = {"retired": 0, "foreign_machine": 0, "fluid_only": 0, "no_item_input": 0,
                "too_many_inputs": 0, "unknown_item": 0, "unknown_fluid": 0,
-               "curated_route": 0, "no_item_output": 0}
+               "curated_route": 0, "no_item_output": 0, "legacy_unbalanced": 0}
     seen: set[tuple] = set()
 
     for record in rows:
         if record.get("state") == "retired":
             skipped["retired"] += 1
+            continue
+        rec_id = str(record.get("id", ""))
+        if rec_id in REJECTED_LEGACY_IDS:
+            skipped["legacy_unbalanced"] += 1
             continue
         recipe_type = str(record.get("type", ""))
         if recipe_type.startswith("multiblock:"):
@@ -222,6 +345,13 @@ def main() -> None:
             continue
         if machine not in KIND_BY_MACHINE:
             skipped["foreign_machine"] += 1
+            continue
+        if (
+            machine in STRICT_STOICHIOMETRIC_MACHINES
+            and record.get("state") == "transcribed"
+            and rec_id not in ALLOWED_TRANSCRIBED_IDS
+        ):
+            skipped["legacy_unbalanced"] += 1
             continue
         inputs = record.get("inputs") or []
         outputs = record.get("outputs") or []
@@ -251,6 +381,31 @@ def main() -> None:
         if primary and (machine, primary) in curated:
             skipped["curated_route"] += 1
             continue
+
+        rx = reactions_by_recipe.get(rec_id)
+        raw_cat = str(record.get("catalyst") or (rx.get("catalyst") if rx else "") or "").strip()
+        catalyst_item = CATALYST_MAP.get(raw_cat, "")
+        if catalyst_item.startswith("earth_on_minecraft:") and catalyst_item.split(":", 1)[1] not in known:
+            catalyst_item = ""
+        input_item_ids = {item for item, _ in item_inputs}
+        if catalyst_item in input_item_ids:
+            catalyst_item = ""
+
+        temp_k = int(record.get("temperature_k") or (rx.get("temperature_k") if rx else 0) or 0)
+        press_kpa = int(record.get("pressure_kpa") or (rx.get("pressure_kpa") if rx else 101) or 101)
+        note = record.get("note") or ""
+        equation = extract_equation(note, rx)
+        if rec_id in SPECIFIED_REACTION_OVERRIDES:
+            ov_cat, ov_temp, ov_press, ov_eq = SPECIFIED_REACTION_OVERRIDES[rec_id]
+            if not catalyst_item and ov_cat and ov_cat not in input_item_ids:
+                catalyst_item = ov_cat
+            if temp_k <= 0:
+                temp_k = ov_temp
+            if press_kpa <= 101 and ov_press > 101:
+                press_kpa = ov_press
+            if not equation:
+                equation = ov_eq
+
         key = (machine, tuple(item_inputs), tuple(item_outputs), tuple(fluid_inputs), tuple(fluid_outputs))
         if key in seen:
             skipped["curated_route"] += 1
@@ -267,6 +422,10 @@ def main() -> None:
             "outputs": item_outputs,
             "fluidInputs": fluid_inputs,
             "fluidOutputs": fluid_outputs,
+            "catalyst": catalyst_item,
+            "temperatureK": temp_k,
+            "pressureKpa": press_kpa,
+            "equation": equation,
         })
 
     # Authored chains live outside the spec (the spec left these as family placeholders).
@@ -317,6 +476,10 @@ def main() -> None:
                 "outputs": item_outputs,
                 "fluidInputs": [],
                 "fluidOutputs": [],
+                "catalyst": "",
+                "temperatureK": 0,
+                "pressureKpa": 101,
+                "equation": "",
             })
 
     entries.sort(key=lambda entry: (entry["machine"], entry["source"]))
@@ -330,7 +493,8 @@ def main() -> None:
         "    record Route(String kind, String machine, String sourceId, String note, int ticks, int energy,",
         "                 String[] inputs, int[] inputCounts, String[] outputs, int[] outputCounts,",
         "                 String[] fluidInputs, int[] fluidInputAmounts,",
-        "                 String[] fluidOutputs, int[] fluidOutputAmounts) {",
+        "                 String[] fluidOutputs, int[] fluidOutputAmounts,",
+        "                 String catalyst, int temperatureK, int pressureKpa, String equation) {",
         "    }",
         "",
     ]
@@ -354,11 +518,13 @@ def main() -> None:
             fluid_output_amounts = ", ".join(str(amount) for _, amount in entry["fluidOutputs"])
             lines.append(
                 '            batch.add(new Route("%s", "%s", "%s", "%s", %d, %d, new String[]{%s}, new int[]{%s}, '
-                'new String[]{%s}, new int[]{%s}, new String[]{%s}, new int[]{%s}, new String[]{%s}, new int[]{%s}));'
+                'new String[]{%s}, new int[]{%s}, new String[]{%s}, new int[]{%s}, new String[]{%s}, new int[]{%s}, '
+                '"%s", %d, %d, "%s"));'
                 % (entry["kind"], entry["machine"], java_string(entry["source"]),
                    java_string(entry["note"]), entry["ticks"], entry["energy"], inputs, input_counts,
                    outputs, output_counts, fluid_inputs, fluid_input_amounts, fluid_outputs,
-                   fluid_output_amounts)
+                   fluid_output_amounts, java_string(entry["catalyst"]), entry["temperatureK"],
+                   entry["pressureKpa"], java_string(entry["equation"]))
             )
         lines.append("        routes.addAll(batch);")
         lines.append("    }")

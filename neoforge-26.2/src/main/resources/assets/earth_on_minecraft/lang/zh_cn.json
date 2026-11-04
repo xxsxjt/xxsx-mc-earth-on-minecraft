@@ -2519,5 +2519,10 @@
   "tooltip.earth_on_minecraft.assay.class.low_carbon_iron": "低碳熟铁过渡相（C 0.02%%-0.20%%）",
   "tooltip.earth_on_minecraft.assay.class.steel": "钢（C 0.20%%-2.10%%）",
   "tooltip.earth_on_minecraft.assay.class.pig_iron": "生铁 / 铸铁（C > 2.10%%）",
-  "tooltip.earth_on_minecraft.assay.class.non_ferrous": "有色金属 / 合金"
+  "tooltip.earth_on_minecraft.assay.class.non_ferrous": "有色金属 / 合金",
+  "screen.earth_on_minecraft.machine.missing_catalyst_short": "缺少催化剂",
+  "screen.earth_on_minecraft.machine.missing_catalyst": "请在催化剂/还原剂槽放入 %s（催化作用不消耗）。",
+  "screen.earth_on_minecraft.machine.catalyst.tooltip": "需要催化剂：%s（驻留催化，不消耗）。",
+  "screen.earth_on_minecraft.machine.output_tank": "产出罐：%s / %s mB",
+  "screen.earth_on_minecraft.machine.pressure.readout": "工况压力：%s kPa"
 }

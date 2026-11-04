@@ -52,6 +52,7 @@ final class EarthGameTests {
     private static final Identifier MULTIBLOCK_ASSEMBLY = EarthOnMinecraft.id("multiblock_assembly");
     private static final Identifier DEPOSIT_RESERVE = EarthOnMinecraft.id("deposit_reserve");
     private static final Identifier ASSAY_METALLURGY_FORGING = EarthOnMinecraft.id("assay_metallurgy_forging");
+    private static final Identifier CHEMICAL_CATALYST_DUAL_TANKS = EarthOnMinecraft.id("chemical_catalyst_dual_tanks");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
     private static final Map<Identifier, Consumer<GameTestHelper>> TESTS = Map.ofEntries(
@@ -69,7 +70,8 @@ final class EarthGameTests {
             Map.entry(FLUID_LAYER, EarthGameTests::fluidLayer),
             Map.entry(MULTIBLOCK_ASSEMBLY, EarthGameTests::multiblockAssembly),
             Map.entry(DEPOSIT_RESERVE, EarthGameTests::depositReserve),
-            Map.entry(ASSAY_METALLURGY_FORGING, EarthGameTests::assayMetallurgyForging));
+            Map.entry(ASSAY_METALLURGY_FORGING, EarthGameTests::assayMetallurgyForging),
+            Map.entry(CHEMICAL_CATALYST_DUAL_TANKS, EarthGameTests::chemicalCatalystDualTanks));
 
     static {
         TEST_INSTANCE_TYPES.register("direct", () -> DirectGameTestInstance.CODEC);
@@ -103,6 +105,7 @@ final class EarthGameTests {
         event.registerTest(MULTIBLOCK_ASSEMBLY, test(MULTIBLOCK_ASSEMBLY, environment, 100, true, 8));
         event.registerTest(DEPOSIT_RESERVE, test(DEPOSIT_RESERVE, environment, 100, true, 8));
         event.registerTest(ASSAY_METALLURGY_FORGING, test(ASSAY_METALLURGY_FORGING, environment, 60, true, 8));
+        event.registerTest(CHEMICAL_CATALYST_DUAL_TANKS, test(CHEMICAL_CATALYST_DUAL_TANKS, environment, 100, true, 12));
     }
 
     private static GameTestInstance test(Identifier testId, Holder<TestEnvironmentDefinition<?>> environment,
@@ -885,6 +888,165 @@ final class EarthGameTests {
                 .orElseThrow(() -> helper.assertionException("missing metallurgical_silicon assay report"));
         helper.assertTrue(waferReport.scifiHighPurityFactor() > mgSiReport.scifiHighPurityFactor(),
                 "9N silicon wafer must exceed metallurgical silicon in Sci-Fi high-purity factor");
+
+        helper.succeed();
+    }
+
+    private static void chemicalCatalystDualTanks(GameTestHelper helper) {
+        // 1. Verify balanced multi-reactant chemical routes & catalyst metadata (Haber-Bosch, Contact, Ostwald, Chlor-Alkali, Neutralization)
+        var haberRoutes = ProcessingMachineBlock.matchingRecipes(
+                ProcessingMachineBlock.Kind.SYNTHESIS_LOOP,
+                new ItemStack(EarthOnMinecraft.NITROGEN_GAS_CELL.get()));
+        helper.assertTrue(!haberRoutes.isEmpty(), "Synthesis Loop must expose Haber-Bosch nitrogen + hydrogen route");
+        ProcessingMachineBlock.Recipe haber = haberRoutes.getFirst();
+        helper.assertTrue(haber.hasSecondaryInput(), "Haber-Bosch must require secondary H2 reactant");
+        helper.assertValueEqual(haber.primaryCount(), 1, "Haber-Bosch primary N2 count must be 1");
+        helper.assertValueEqual(haber.secondaryInputs().getFirst().count(), 3, "Haber-Bosch secondary H2 count must be 3");
+        helper.assertTrue(haber.hasCatalyst(), "Haber-Bosch must require a catalyst");
+        helper.assertValueEqual(haber.catalystStack().getItem(), EarthOnMinecraft.IRON_CATALYST.get().asItem(),
+                "Haber-Bosch catalyst must be iron_catalyst");
+        helper.assertValueEqual(haber.requiredTemperatureK(), 723, "Haber-Bosch temperature must be 723 K");
+        helper.assertValueEqual(haber.requiredPressureKpa(), 20000, "Haber-Bosch pressure must be 20000 kPa");
+        helper.assertTrue(haber.equation().contains("N2") && haber.equation().contains("3H2"),
+                "Haber-Bosch must carry balanced equation metadata");
+
+        // Ensure 1-input catalyst consumption shortcuts are removed
+        helper.assertTrue(ProcessingMachineBlock.matchingRecipes(
+                        ProcessingMachineBlock.Kind.SYNTHESIS_LOOP,
+                        new ItemStack(EarthOnMinecraft.IRON_CATALYST.get())).isEmpty(),
+                "iron_catalyst must not be a consumed primary input in Synthesis Loop");
+
+        var contactRoutes = ProcessingMachineBlock.matchingRecipes(
+                ProcessingMachineBlock.Kind.CHEMICAL_REACTOR,
+                new ItemStack(EarthOnMinecraft.SULFUR_DUST.get()));
+        helper.assertTrue(!contactRoutes.isEmpty(), "Chemical Reactor must expose Contact Process sulfur route");
+        ProcessingMachineBlock.Recipe contact = contactRoutes.getFirst();
+        helper.assertValueEqual(contact.inputs().size(), 3, "Contact Process must require S + O2 + H2O (3 reactants)");
+        helper.assertTrue(contact.hasCatalyst()
+                        && contact.catalystStack().getItem() == EarthOnMinecraft.VANADIUM_CATALYST.get().asItem(),
+                "Contact Process must require vanadium_catalyst");
+
+        var ostwaldRoutes = ProcessingMachineBlock.matchingRecipes(
+                ProcessingMachineBlock.Kind.CHEMICAL_REACTOR,
+                new ItemStack(EarthOnMinecraft.AMMONIA.get()));
+        ProcessingMachineBlock.Recipe ostwald = ostwaldRoutes.stream()
+                .filter(ProcessingMachineBlock.Recipe::hasCatalyst)
+                .findFirst()
+                .orElseThrow(() -> helper.assertionException("Ostwald catalytic nitric acid route missing"));
+        helper.assertValueEqual(ostwald.catalystStack().getItem(),
+                EarthOnMinecraft.PLATINUM_GROUP_CATALYST.get().asItem(),
+                "Ostwald process must require platinum_group_catalyst");
+        helper.assertValueEqual(ostwald.requiredTemperatureK(), 1120, "Ostwald temperature must be 1120 K");
+
+        var chlorAlkali = ProcessingMachineBlock.matchingRecipes(
+                ProcessingMachineBlock.Kind.ELECTROLYTIC_CELL,
+                new ItemStack(EarthOnMinecraft.SALT_DUST.get())).stream()
+                .filter(ProcessingMachineBlock.Recipe::hasSecondaryInput)
+                .findFirst()
+                .orElseThrow(() -> helper.assertionException("Chlor-alkali multi-reactant route missing"));
+        helper.assertValueEqual(chlorAlkali.primaryCount(), 2, "Chlor-alkali must consume 2 NaCl");
+        helper.assertValueEqual(chlorAlkali.secondaryInputs().getFirst().count(), 2, "Chlor-alkali must consume 2 H2O");
+
+        // 2. Verify non-consumed catalyst gating in SLOT_REAGENT on an assembled Chemical Reactor
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos reactorRel = new BlockPos(3, 1, 3);
+        BlockPos reactorAbs = origin.offset(reactorRel);
+        setAbsent(helper, reactorAbs.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+        setAbsent(helper, reactorAbs, EarthOnMinecraft.CHEMICAL_REACTOR.get().defaultBlockState());
+        for (MachineMultiblock.PlacedRequirement req
+                : MachineMultiblock.requirementsFor(ProcessingMachineBlock.Kind.CHEMICAL_REACTOR, Direction.NORTH)) {
+            BlockPos partAbs = reactorAbs.offset(req.x(), req.y(), req.z());
+            if (req.y() == 0) {
+                setAbsent(helper, partAbs.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+            }
+            Block partBlock = switch (req.role()) {
+                case "CONTROL_PANEL" -> EarthOnMinecraft.CONTROL_PANEL.get();
+                case "PIPE" -> EarthOnMinecraft.STEEL_PROCESS_PIPE.get();
+                default -> EarthOnMinecraft.INDUSTRIAL_MACHINE_CASING.get();
+            };
+            setAbsent(helper, partAbs, partBlock.defaultBlockState());
+        }
+        helper.assertTrue(MachineMultiblock.isComplete(helper.getLevel(), reactorAbs,
+                        ProcessingMachineBlock.Kind.CHEMICAL_REACTOR),
+                "assembled chemical reactor must be structurally complete");
+
+        ProcessingMachineBlockEntity reactor = (ProcessingMachineBlockEntity) helper.getLevel().getBlockEntity(reactorAbs);
+        helper.assertTrue(reactor.canPlaceItem(ProcessingMachineBlockEntity.SLOT_REAGENT,
+                        new ItemStack(EarthOnMinecraft.IRON_CATALYST.get())),
+                "chemical reactor must accept iron_catalyst in SLOT_REAGENT");
+        var reactorHaber = ProcessingMachineBlock.matchingRecipes(
+                ProcessingMachineBlock.Kind.CHEMICAL_REACTOR,
+                new ItemStack(EarthOnMinecraft.NITROGEN_GAS_CELL.get())).stream()
+                .filter(r -> r.hasCatalyst()
+                        && r.catalystStack().getItem() == EarthOnMinecraft.IRON_CATALYST.get().asItem()
+                        && r.outputs().stream().anyMatch(o -> o.item().get().asItem() == EarthOnMinecraft.AMMONIA.get().asItem()))
+                .findFirst()
+                .orElseThrow(() -> helper.assertionException("Chemical Reactor Haber-Bosch route missing"));
+        int haberIdx = ProcessingMachineBlock.matchingRecipes(
+                ProcessingMachineBlock.Kind.CHEMICAL_REACTOR,
+                new ItemStack(EarthOnMinecraft.NITROGEN_GAS_CELL.get())).indexOf(reactorHaber);
+
+        reactor.setItem(ProcessingMachineBlockEntity.SLOT_INPUT,
+                new ItemStack(EarthOnMinecraft.NITROGEN_GAS_CELL.get(), 2));
+        reactor.setItem(ProcessingMachineBlockEntity.SLOT_SECONDARY_START,
+                new ItemStack(EarthOnMinecraft.HYDROGEN_GAS_CELL.get(), 6));
+        reactor.data().set(14, haberIdx);
+        reactor.data().set(ProcessingMachineBlockEntity.DATA_ENERGY_STORED, 16000);
+
+        // Tick without catalyst: must NOT advance and must report DATA_CATALYST_MISSING = 1
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), reactorAbs,
+                helper.getLevel().getBlockState(reactorAbs), reactor);
+        reactor.data().set(14, haberIdx);
+        ProcessingMachineBlockEntity.serverTick(helper.getLevel(), reactorAbs,
+                helper.getLevel().getBlockState(reactorAbs), reactor);
+        helper.assertValueEqual(reactor.data().get(0), 0,
+                "catalytic reaction without catalyst in SLOT_REAGENT must not advance progress");
+        helper.assertValueEqual(reactor.data().get(ProcessingMachineBlockEntity.DATA_CATALYST_MISSING), 1,
+                "missing catalyst must flag DATA_CATALYST_MISSING=1");
+        helper.assertValueEqual(reactor.data().get(ProcessingMachineBlockEntity.DATA_REQUIRED_PRESSURE_KPA), 20000,
+                "Haber-Bosch must sync DATA_REQUIRED_PRESSURE_KPA=20000");
+
+        // Insert 1 iron catalyst and run reaction to completion: catalyst must NOT be consumed!
+        reactor.setItem(ProcessingMachineBlockEntity.SLOT_REAGENT,
+                new ItemStack(EarthOnMinecraft.IRON_CATALYST.get(), 1));
+        int ticksNeeded = reactorHaber.processTicks();
+        for (int t = 0; t < ticksNeeded; t++) {
+            reactor.data().set(ProcessingMachineBlockEntity.DATA_ENERGY_STORED, 16000);
+            ProcessingMachineBlockEntity.serverTick(helper.getLevel(), reactorAbs,
+                    helper.getLevel().getBlockState(reactorAbs), reactor);
+        }
+        helper.assertValueEqual(reactor.getItem(ProcessingMachineBlockEntity.SLOT_REAGENT).getCount(), 1,
+                "catalyst in SLOT_REAGENT must not be consumed after completing reaction");
+        helper.assertValueEqual(reactor.getItem(ProcessingMachineBlockEntity.SLOT_INPUT).getCount(), 1,
+                "1 N2 must be consumed from primary input");
+        helper.assertValueEqual(reactor.getItem(ProcessingMachineBlockEntity.SLOT_SECONDARY_START).getCount(), 3,
+                "3 H2 must be consumed from secondary input");
+        helper.assertValueEqual(reactor.getItem(ProcessingMachineBlockEntity.SLOT_OUTPUT_START).getCount(), 2,
+                "2 NH3 must be produced in output slot");
+
+        // 3. Verify dual tanks (inputTank + outputTank) in a simultaneous fluid-in + fluid-out machine (Shaft Furnace melt_iron)
+        BlockPos furnaceAbs = origin.offset(1, 1, 8);
+        setAbsent(helper, furnaceAbs.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+        setAbsent(helper, furnaceAbs, EarthOnMinecraft.SHAFT_FURNACE.get().defaultBlockState());
+        ProcessingMachineBlockEntity furnace = (ProcessingMachineBlockEntity) helper.getLevel().getBlockEntity(furnaceAbs);
+        furnace.inputTank().fill("earth_on_minecraft:steam", 500);
+        furnace.outputTank().fill("earth_on_minecraft:molten_iron", 288);
+        helper.assertValueEqual(furnace.tankAmount(), 500, "inputTank must hold 500 mB steam");
+        helper.assertValueEqual(furnace.outputTankAmount(), 288, "outputTank must simultaneously hold 288 mB molten_iron");
+        helper.assertValueEqual(furnace.data().get(ProcessingMachineBlockEntity.DATA_OUTPUT_TANK_AMOUNT), 288,
+                "DATA_OUTPUT_TANK_AMOUNT must sync outputTank amount");
+        helper.assertTrue(furnace.data().get(ProcessingMachineBlockEntity.DATA_OUTPUT_TANK_FLUID) >= 0,
+                "DATA_OUTPUT_TANK_FLUID must sync valid fluid registry ID");
+
+        BlockPos castAbs = origin.offset(2, 1, 8);
+        setAbsent(helper, castAbs.below(), Blocks.SMOOTH_STONE.defaultBlockState());
+        setAbsent(helper, castAbs, EarthOnMinecraft.CASTING_TABLE.get().defaultBlockState());
+        ProcessingMachineBlockEntity caster = (ProcessingMachineBlockEntity) helper.getLevel().getBlockEntity(castAbs);
+        helper.assertTrue(furnace.tryExportFluidToNeighbors(helper.getLevel(), furnaceAbs),
+                "dual-tank machine must export from outputTank into neighbor inputTank while keeping its own inputTank intact");
+        helper.assertValueEqual(furnace.tankAmount(), 500, "inputTank steam must remain untouched after exporting outputTank");
+        helper.assertValueEqual(furnace.outputTankAmount(), 0, "outputTank must empty after export");
+        helper.assertValueEqual(caster.tankAmount(), 288, "neighbor inputTank must receive 288 mB molten_iron");
 
         helper.succeed();
     }

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "D:\\AGENT\\WORKSPACES\\Projects\\mc-agent\\spec\\eom",
-  "routes": 1084,
+  "routes": 1191,
   "skipped": {
     "retired": 51,
     "foreign_machine": 0,
@@ -10,7 +10,8 @@
     "too_many_inputs": 0,
     "unknown_item": 0,
     "unknown_fluid": 0,
-    "curated_route": 311,
-    "no_item_output": 0
+    "curated_route": 79,
+    "no_item_output": 0,
+    "legacy_unbalanced": 125
   }
 }

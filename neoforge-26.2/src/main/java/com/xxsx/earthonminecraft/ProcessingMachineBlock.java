@@ -215,6 +215,16 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         return !matchingRecipes(kind, stack).isEmpty();
     }
 
+    /** True when any route of {@code kind} uses {@code stack} as a non-consumed catalyst in {@code SLOT_REAGENT}. */
+    public static boolean acceptsCatalyst(Kind kind, ItemStack stack) {
+        if (stack.isEmpty()) {
+            return false;
+        }
+        return recipesFor(kind).stream()
+                .filter(Recipe::hasCatalyst)
+                .anyMatch(recipe -> stack.getItem() == recipe.catalyst().get().asItem());
+    }
+
     public static Optional<Recipe> findRecipe(Kind kind, ItemStack stack) {
         return findRecipe(kind, stack, 0);
     }
@@ -318,8 +328,12 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
             if (outputs.isEmpty() && fluidOutputs.isEmpty()) {
                 continue;
             }
+            Supplier<? extends ItemLike> catalyst = route.catalyst() == null || route.catalyst().isEmpty()
+                    ? null
+                    : vanillaOrModItem(route.catalyst());
             table.add(new Recipe(kind, inputs, route.note(), outputs, false,
-                    route.ticks(), route.energy(), route.sourceId(), fluidInputs, fluidOutputs));
+                    route.ticks(), route.energy(), route.sourceId(), fluidInputs, fluidOutputs,
+                    catalyst, route.temperatureK(), route.pressureKpa(), route.equation()));
         }
         return table;
     }
@@ -465,9 +479,38 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.STEAM_CRACKER, EarthOnMinecraft.POLYMER_RESIN::get, "混合树脂热裂解回收单体", out(EarthOnMinecraft.ETHYLENE::get, 1), out(EarthOnMinecraft.PROPYLENE::get, 1)));
         recipes.add(r(Kind.STEAM_CRACKER, EarthOnMinecraft.COAL_GAS_CELL::get, "合成气整备用裂解入口", out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1), out(EarthOnMinecraft.CARBON_DIOXIDE_CELL::get, 1), out(EarthOnMinecraft.METHANOL::get, 1)));
 
-        recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.SULFUR_DUST::get, "接触法硫酸近似路线", out(EarthOnMinecraft.SULFURIC_ACID::get, 1)));
-        recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.AMMONIA::get, "奥斯特瓦尔德法硝酸近似路线", out(EarthOnMinecraft.NITRIC_ACID::get, 1), out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1)));
-        recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.NITRIC_ACID::get, "硝酸铵中和", out(EarthOnMinecraft.AMMONIUM_NITRATE::get, 1)));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.SULFUR_DUST::get, 2),
+                in(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 3),
+                in(SpecItems.BY_ID.get("distilled_water")::get, 2)),
+                "接触法制硫酸：2S + 3O2 + 2H2O -> 2H2SO4",
+                List.of(out(EarthOnMinecraft.SULFURIC_ACID::get, 2)),
+                EarthOnMinecraft.VANADIUM_CATALYST::get, 720, 101, "2S + 3O2 + 2H2O -> 2H2SO4"));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.SULFUR_DIOXIDE_CELL::get, 2),
+                in(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1),
+                in(SpecItems.BY_ID.get("distilled_water")::get, 2)),
+                "接触法二氧化硫催化氧化吸收制硫酸：2SO2 + O2 + 2H2O -> 2H2SO4",
+                List.of(out(EarthOnMinecraft.SULFURIC_ACID::get, 2)),
+                EarthOnMinecraft.VANADIUM_CATALYST::get, 720, 101, "2SO2 + O2 + 2H2O -> 2H2SO4"));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.AMMONIA::get, 1),
+                in(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 2)),
+                "奥斯特瓦尔德法氨催化氧化制硝酸：NH3 + 2O2 -> HNO3 + H2O",
+                List.of(out(EarthOnMinecraft.NITRIC_ACID::get, 1), out(SpecItems.BY_ID.get("distilled_water")::get, 1)),
+                EarthOnMinecraft.PLATINUM_GROUP_CATALYST::get, 1120, 500, "NH3 + 2O2 -> HNO3 + H2O"));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.NITRIC_ACID::get, 1),
+                in(EarthOnMinecraft.AMMONIA::get, 1)),
+                "硝酸与氨中和制硝酸铵：HNO3 + NH3 -> NH4NO3",
+                List.of(out(EarthOnMinecraft.AMMONIUM_NITRATE::get, 1)),
+                null, 353, 101, "HNO3 + NH3 -> NH4NO3"));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.HYDROCHLORIC_ACID::get, 1),
+                in(EarthOnMinecraft.SODIUM_HYDROXIDE::get, 1)),
+                "盐酸与烧碱酸碱中和：HCl + NaOH -> NaCl + H2O",
+                List.of(out(EarthOnMinecraft.SALT_DUST::get, 1), out(SpecItems.BY_ID.get("distilled_water")::get, 1)),
+                null, 298, 101, "HCl + NaOH -> NaCl + H2O"));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.PHOSPHATE_ROCK_DUST::get, "磷矿酸解", out(EarthOnMinecraft.PHOSPHORIC_ACID::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 2)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.LIME_DUST::get, "石灰消化", out(EarthOnMinecraft.SLAKED_LIME::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.SODA_ASH::get, "碳酸氢钠转化", out(EarthOnMinecraft.SODIUM_BICARBONATE::get, 1)));
@@ -489,16 +532,38 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CHEMICAL_REACTOR, () -> Items.WATER_BUCKET, "硬水采样与桶回收", out(EarthOnMinecraft.HARD_WATER_SAMPLE::get, 1), out(() -> Items.BUCKET, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.HARD_WATER_SAMPLE::get, "石灰软化硬水", out(EarthOnMinecraft.SOFTENED_WATER::get, 1), out(EarthOnMinecraft.LIME_TREATMENT_RESIDUE::get, 1)));
 
-        recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.NITROGEN_GAS_CELL::get, "哈柏法合成氨近似路线", out(EarthOnMinecraft.AMMONIA::get, 2), out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1)));
-        recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.HYDROGEN_GAS_CELL::get, "氢气循环合成氨/甲醇入口", out(EarthOnMinecraft.AMMONIA::get, 1), out(EarthOnMinecraft.METHANOL::get, 1)));
+        recipes.add(rChem(Kind.SYNTHESIS_LOOP, List.of(
+                in(EarthOnMinecraft.NITROGEN_GAS_CELL::get, 1),
+                in(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 3)),
+                "哈柏-博施法高压催化合成氨：N2 + 3H2 -> 2NH3",
+                List.of(out(EarthOnMinecraft.AMMONIA::get, 2)),
+                EarthOnMinecraft.IRON_CATALYST::get, 723, 20000, "N2 + 3H2 -> 2NH3"));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.NITROGEN_GAS_CELL::get, 1),
+                in(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 3)),
+                "哈柏-博施法催化合成氨：N2 + 3H2 -> 2NH3",
+                List.of(out(EarthOnMinecraft.AMMONIA::get, 2)),
+                EarthOnMinecraft.IRON_CATALYST::get, 723, 20000, "N2 + 3H2 -> 2NH3"));
         recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.COAL_GAS_CELL::get, "煤气合成甲醇", out(EarthOnMinecraft.METHANOL::get, 1), out(EarthOnMinecraft.CARBON_DIOXIDE_CELL::get, 1)));
         recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.AMMONIA::get, "氨和二氧化碳合成尿素", out(EarthOnMinecraft.UREA::get, 1), out(EarthOnMinecraft.CARBON_DIOXIDE_CELL::get, 1)));
         recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.FORMALDEHYDE::get, "甲醛树脂前驱体", out(EarthOnMinecraft.POLYMER_RESIN::get, 1), out(() -> Items.WATER_BUCKET, 1)));
         recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.NATURAL_GAS_CELL::get, "天然气重整制合成气", out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 2), out(EarthOnMinecraft.METHANOL::get, 1), out(EarthOnMinecraft.CARBON_DIOXIDE_CELL::get, 1)));
         recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.ETHYLENE_GLYCOL::get, "聚酯酸料近似合成", out(EarthOnMinecraft.TEREPHTHALIC_ACID::get, 1), out(EarthOnMinecraft.METHANOL::get, 1)));
 
-        recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.SULFUR_DUST::get, "硫燃烧尾气吸收", out(EarthOnMinecraft.SULFUR_DIOXIDE_CELL::get, 1), out(EarthOnMinecraft.SULFURIC_ACID::get, 1)));
-        recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.SULFUR_DIOXIDE_CELL::get, "二氧化硫接触吸收", out(EarthOnMinecraft.SULFURIC_ACID::get, 2)));
+        recipes.add(rChem(Kind.ABSORPTION_TOWER, List.of(
+                in(EarthOnMinecraft.SULFUR_DUST::get, 2),
+                in(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 3),
+                in(SpecItems.BY_ID.get("distilled_water")::get, 2)),
+                "接触法硫氧化吸收制硫酸：2S + 3O2 + 2H2O -> 2H2SO4",
+                List.of(out(EarthOnMinecraft.SULFURIC_ACID::get, 2)),
+                EarthOnMinecraft.VANADIUM_CATALYST::get, 720, 101, "2S + 3O2 + 2H2O -> 2H2SO4"));
+        recipes.add(rChem(Kind.ABSORPTION_TOWER, List.of(
+                in(EarthOnMinecraft.SULFUR_DIOXIDE_CELL::get, 2),
+                in(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1),
+                in(SpecItems.BY_ID.get("distilled_water")::get, 2)),
+                "接触法二氧化硫催化氧化吸收：2SO2 + O2 + 2H2O -> 2H2SO4",
+                List.of(out(EarthOnMinecraft.SULFURIC_ACID::get, 2)),
+                EarthOnMinecraft.VANADIUM_CATALYST::get, 720, 101, "2SO2 + O2 + 2H2O -> 2H2SO4"));
         recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.CHLORINE_GAS_CELL::get, "氯气吸收制盐酸", out(EarthOnMinecraft.HYDROCHLORIC_ACID::get, 1), out(EarthOnMinecraft.CALCIUM_CHLORIDE::get, 1)));
         recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.CARBON_DIOXIDE_CELL::get, "碳酸化吸收", out(EarthOnMinecraft.SODA_ASH::get, 1), out(EarthOnMinecraft.SODIUM_BICARBONATE::get, 1)));
         recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.CELLULOSE_PULP::get, "纸浆漂白洗涤", out(EarthOnMinecraft.BLEACHED_PULP::get, 2), out(EarthOnMinecraft.CALCIUM_CHLORIDE::get, 1)));
@@ -521,8 +586,18 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, "锰系正极材料混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.NICKEL_PRECURSOR::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.NICKEL_PRECURSOR::get, "镍系正极前驱体混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.TAILINGS_DUST::get, "尾粉稳定化处理", out(EarthOnMinecraft.STABILIZED_TAILINGS::get, 1), out(EarthOnMinecraft.SLUDGE_CAKE::get, 1)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.HYDROCHLORIC_ACID::get, "酸性废液中和盐化", out(EarthOnMinecraft.NEUTRAL_SALT::get, 1), out(EarthOnMinecraft.SOFTENED_WATER::get, 1)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.SODIUM_HYDROXIDE::get, "碱性废液中和盐化", out(EarthOnMinecraft.NEUTRAL_SALT::get, 1), out(EarthOnMinecraft.SOFTENED_WATER::get, 1)));
+        recipes.add(rChem(Kind.MIXER, List.of(
+                in(EarthOnMinecraft.HYDROCHLORIC_ACID::get, 1),
+                in(EarthOnMinecraft.SODIUM_HYDROXIDE::get, 1)),
+                "盐酸与烧碱酸碱中和：HCl + NaOH -> NaCl + H2O",
+                List.of(out(EarthOnMinecraft.SALT_DUST::get, 1), out(SpecItems.BY_ID.get("distilled_water")::get, 1)),
+                null, 298, 101, "HCl + NaOH -> NaCl + H2O"));
+        recipes.add(rChem(Kind.MIXER, List.of(
+                in(EarthOnMinecraft.SODIUM_HYDROXIDE::get, 1),
+                in(EarthOnMinecraft.HYDROCHLORIC_ACID::get, 1)),
+                "烧碱与盐酸酸碱中和：NaOH + HCl -> NaCl + H2O",
+                List.of(out(EarthOnMinecraft.NEUTRAL_SALT::get, 1), out(EarthOnMinecraft.SOFTENED_WATER::get, 1)),
+                null, 298, 101, "HCl + NaOH -> NaCl + H2O"));
 
         recipes.add(r(Kind.CRYSTALLIZER, EarthOnMinecraft.SALT_DUST::get, "盐结晶复溶", out(EarthOnMinecraft.BRINE_CRYSTAL::get, 1)));
         recipes.add(r(Kind.CRYSTALLIZER, EarthOnMinecraft.SODIUM_HYDROXIDE::get, "烧碱结晶", out(EarthOnMinecraft.SODIUM_HYDROXIDE::get, 1)));
@@ -540,7 +615,15 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.INDUSTRIAL_KILN, EarthOnMinecraft.ALUMINOSILICATE_DUST::get, "铝硅酸盐烧结成砖", out(() -> Items.BRICK, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.INDUSTRIAL_KILN, EarthOnMinecraft.SLUDGE_CAKE::get, "污泥饼烧结无害化", out(() -> Items.BRICK, 1), out(EarthOnMinecraft.STABILIZED_TAILINGS::get, 1)));
 
-        recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.SALT_DUST::get, "氯碱工业电解", out(EarthOnMinecraft.SODIUM_HYDROXIDE::get, 1), out(EarthOnMinecraft.CHLORINE_GAS_CELL::get, 1), out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1)));
+        recipes.add(rChem(Kind.ELECTROLYTIC_CELL, List.of(
+                in(EarthOnMinecraft.SALT_DUST::get, 2),
+                in(SpecItems.BY_ID.get("distilled_water")::get, 2)),
+                "氯碱工业盐水电解：2NaCl + 2H2O -> 2NaOH + Cl2 + H2",
+                List.of(
+                        out(EarthOnMinecraft.SODIUM_HYDROXIDE::get, 2),
+                        out(EarthOnMinecraft.CHLORINE_GAS_CELL::get, 1),
+                        out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1)),
+                null, 353, 101, "2NaCl + 2H2O -> 2NaOH + Cl2 + H2"));
         recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.ALUMINUM_HYDROXIDE::get, "氢氧化铝电解前处理", out(EarthOnMinecraft.ALUMINA::get, 1), out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1)));
         recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.ALUMINA::get, "氧化铝熔盐电解", out(EarthOnMinecraft.ALUMINUM_INGOT::get, 1), out(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.BAUXITE_DUST::get, "拜耳法铝土矿浸出", out(EarthOnMinecraft.ALUMINUM_HYDROXIDE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 2)));
@@ -666,10 +749,6 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.TITANIUM_SLAG::get, "钒钛系催化剂载体制备", out(EarthOnMinecraft.VANADIUM_CATALYST::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.NICKEL_PRECURSOR::get, "镍基催化剂制备", out(EarthOnMinecraft.NICKEL_CATALYST::get, 1), out(EarthOnMinecraft.ALUMINA::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.GOLD_CONCENTRATE::get, "金精矿铂族伴生回收", out(EarthOnMinecraft.PLATINUM_GROUP_CATALYST::get, 1), out(EarthOnMinecraft.GOLD_CONCENTRATE::get, 1)));
-        recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.IRON_CATALYST::get, "铁催化合成气入口", out(EarthOnMinecraft.AMMONIA::get, 1), out(EarthOnMinecraft.METHANOL::get, 1)));
-        recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.VANADIUM_CATALYST::get, "钒催化二氧化硫吸收", out(EarthOnMinecraft.SULFURIC_ACID::get, 2)));
-        recipes.add(r(Kind.SYNTHESIS_LOOP, EarthOnMinecraft.NICKEL_CATALYST::get, "镍催化加氢入口", out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 1), out(EarthOnMinecraft.INDUSTRIAL_SOLVENT::get, 1)));
-        recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.PLATINUM_GROUP_CATALYST::get, "铂族催化氧化入口", out(EarthOnMinecraft.NITRIC_ACID::get, 1), out(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1)));
 
         recipes.add(r(Kind.ABSORPTION_TOWER, EarthOnMinecraft.CHLORINE_GAS_CELL::get, "氯气吸收制次氯酸盐和盐酸", out(EarthOnMinecraft.SODIUM_HYPOCHLORITE::get, 1), out(EarthOnMinecraft.HYDROCHLORIC_ACID::get, 1)));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.SODIUM_HYDROXIDE::get, "烧碱氯化制漂白液近似路线", out(EarthOnMinecraft.SODIUM_HYPOCHLORITE::get, 1), out(EarthOnMinecraft.NEUTRAL_SALT::get, 1)));
@@ -721,7 +800,12 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.INDUSTRIAL_KILN, EarthOnMinecraft.MAFIC_SILICATE_DUST::get, "镁铁质硅酸盐熔融纤维化", out(EarthOnMinecraft.MINERAL_WOOL::get, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.MINERAL_WOOL::get, "矿物棉整理为隔热纤维", out(() -> Items.STRING, 3), out(() -> Blocks.WHITE_WOOL, 1)));
 
-        recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.SULFURIC_ACID::get, "硫酸铵肥料中和", out(EarthOnMinecraft.AMMONIUM_SULFATE::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 1)));
+        recipes.add(rChem(Kind.CHEMICAL_REACTOR, List.of(
+                in(EarthOnMinecraft.SULFURIC_ACID::get, 1),
+                in(EarthOnMinecraft.AMMONIA::get, 2)),
+                "硫酸与氨中和制硫酸铵：H2SO4 + 2NH3 -> (NH4)2SO4",
+                List.of(out(EarthOnMinecraft.AMMONIUM_SULFATE::get, 1)),
+                null, 353, 101, "H2SO4 + 2NH3 -> (NH4)2SO4"));
         recipes.add(r(Kind.CHEMICAL_REACTOR, EarthOnMinecraft.PHOSPHATE_ROCK_DUST::get, "普通过磷酸钙酸解", out(EarthOnMinecraft.SINGLE_SUPERPHOSPHATE::get, 1), out(EarthOnMinecraft.GYPSUM_DUST::get, 1)));
         recipes.add(r(Kind.FERTILIZER_GRANULATOR, EarthOnMinecraft.AMMONIUM_SULFATE::get, "硫酸铵造粒", out(EarthOnMinecraft.FERTILIZER_BLEND::get, 2)));
         recipes.add(r(Kind.FERTILIZER_GRANULATOR, EarthOnMinecraft.SINGLE_SUPERPHOSPHATE::get, "过磷酸钙造粒", out(EarthOnMinecraft.FERTILIZER_BLEND::get, 2), out(EarthOnMinecraft.GYPSUM_DUST::get, 1)));
@@ -772,6 +856,17 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         return new Recipe(kind, List.of(new Input(input, 1)), note, List.of(outputs), true, 0, 0, "");
     }
 
+    private static Recipe rChem(Kind kind, List<Input> inputs, String note, List<Output> outputs,
+                                @Nullable Supplier<? extends ItemLike> catalyst,
+                                int temperatureK, int pressureKpa, String equation) {
+        return new Recipe(kind, inputs, note, outputs, false, 0, 0, "",
+                List.of(), List.of(), catalyst, temperatureK, pressureKpa, equation);
+    }
+
+    private static Input in(Supplier<? extends ItemLike> item, int count) {
+        return new Input(item, count);
+    }
+
     private static Output out(Supplier<? extends ItemLike> item, int count) {
         return new Output(item, count);
     }
@@ -792,23 +887,49 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
      */
     public record Recipe(Kind kind, List<Input> inputs, String note, List<Output> outputs,
                          boolean requiresCoke, int ticks, int energyPerTick, String sourceId,
-                         List<FluidInput> fluidInputs, List<FluidOutput> fluidOutputs) {
+                         List<FluidInput> fluidInputs, List<FluidOutput> fluidOutputs,
+                         @Nullable Supplier<? extends ItemLike> catalyst,
+                         int recipeTemperatureK, int pressureKpa, String equation) {
         public Recipe {
             inputs = List.copyOf(inputs);
             outputs = List.copyOf(outputs);
             fluidInputs = List.copyOf(fluidInputs);
             fluidOutputs = List.copyOf(fluidOutputs);
+            equation = equation == null ? "" : equation;
+        }
+
+        public Recipe(Kind kind, List<Input> inputs, String note, List<Output> outputs,
+                      boolean requiresCoke, int ticks, int energyPerTick, String sourceId,
+                      List<FluidInput> fluidInputs, List<FluidOutput> fluidOutputs) {
+            this(kind, inputs, note, outputs, requiresCoke, ticks, energyPerTick, sourceId,
+                    fluidInputs, fluidOutputs, null, 0, 101, "");
         }
 
         /** Item-only route. */
         public Recipe(Kind kind, List<Input> inputs, String note, List<Output> outputs,
                       boolean requiresCoke, int ticks, int energyPerTick, String sourceId) {
             this(kind, inputs, note, outputs, requiresCoke, ticks, energyPerTick, sourceId,
-                    List.of(), List.of());
+                    List.of(), List.of(), null, 0, 101, "");
         }
 
         public boolean usesFluid() {
             return !fluidInputs.isEmpty() || !fluidOutputs.isEmpty();
+        }
+
+        public boolean hasCatalyst() {
+            return catalyst != null;
+        }
+
+        public ItemStack catalystStack() {
+            return catalyst == null ? ItemStack.EMPTY : new ItemStack(catalyst.get().asItem(), 1);
+        }
+
+        public int requiredPressureKpa() {
+            return pressureKpa > 0 ? pressureKpa : 101;
+        }
+
+        public boolean hasEquation() {
+            return equation != null && !equation.isEmpty();
         }
 
         public Supplier<? extends ItemLike> input() {
@@ -844,15 +965,18 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         }
 
         public int requiredTemperatureK() {
+            if (recipeTemperatureK > 0) {
+                return recipeTemperatureK;
+            }
             if (kind == Kind.SMELTER || kind == Kind.SHAFT_FURNACE) {
                 for (FluidOutput fluid : fluidOutputs) {
                     String id = fluid.fluidId();
                     if (id.endsWith("molten_tin")) return 510;
                     if (id.endsWith("molten_lead")) return 610;
                     if (id.endsWith("molten_zinc")) return 700;
-                    if (id.endsWith("molten_aluminum")) return 940;
+                    if (id.endsWith("molten_aluminum") || id.endsWith("molten_aluminium")) return 940;
                     if (id.endsWith("molten_bronze") || id.endsWith("molten_brass")) return 1250;
-                    if (id.endsWith("molten_silver") || id.endsWith("molten_gold") || id.endsWith("molten_copper")) return 1360;
+                    if (id.endsWith("molten_silver") || id.endsWith("molten_gold") || id.endsWith("molten_copper") || id.endsWith("molten_blister_copper")) return 1360;
                     if (id.endsWith("molten_iron") || id.endsWith("molten_steel") || id.endsWith("molten_pig_iron")) return 1820;
                 }
             }
@@ -1042,13 +1166,15 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
 
         public int maxTemperatureK() {
             return switch (this) {
+                case ELECTROLYTIC_CELL -> 2300;
                 case SHAFT_FURNACE -> 2100;
                 case INDUSTRIAL_KILN, CONVERTER, GLASS_KILN, BLOOMERY, REDUCTION_FURNACE -> 1950;
                 case SMELTER -> 1750;
                 case LIME_KILN, STEAM_CRACKER, ROASTER -> 1650;
+                case CHEMICAL_REACTOR, SYNTHESIS_LOOP, ABSORPTION_TOWER, POLYMERIZER, LEACHING_TANK -> 1500;
                 case PIT_KILN, CAMPFIRE -> 1000;
                 case TEA_KILN, BREAD_OVEN, COFFEE_ROASTER, STOVE, DISTILLATION_COLUMN -> 700;
-                case STEAMER, STEAMER_BASKET, STILL, HERB_PROCESSING_TABLE, SMOKEHOUSE, CURING_BARN -> 450;
+                case STEAMER, STEAMER_BASKET, STILL, HERB_PROCESSING_TABLE, SMOKEHOUSE, CURING_BARN, MIXER, CRYSTALLIZER, CONDENSER -> 450;
                 case ANVIL, CASTING_TABLE -> 1350;
                 default -> 293;
             };

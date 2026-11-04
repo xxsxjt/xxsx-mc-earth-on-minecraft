@@ -2519,5 +2519,10 @@
   "tooltip.earth_on_minecraft.assay.class.low_carbon_iron": "Low-Carbon Mild Iron (C 0.02%%-0.20%%)",
   "tooltip.earth_on_minecraft.assay.class.steel": "Carbon Steel (C 0.20%%-2.10%%)",
   "tooltip.earth_on_minecraft.assay.class.pig_iron": "Pig / Cast Iron (C > 2.10%%)",
-  "tooltip.earth_on_minecraft.assay.class.non_ferrous": "Non-Ferrous Metal / Alloy"
+  "tooltip.earth_on_minecraft.assay.class.non_ferrous": "Non-Ferrous Metal / Alloy",
+  "screen.earth_on_minecraft.machine.missing_catalyst_short": "Need catalyst",
+  "screen.earth_on_minecraft.machine.missing_catalyst": "Place %s in the catalyst/reagent slot (not consumed).",
+  "screen.earth_on_minecraft.machine.catalyst.tooltip": "Catalyst required: %s (reusable; not consumed).",
+  "screen.earth_on_minecraft.machine.output_tank": "Output Tank: %s / %s mB",
+  "screen.earth_on_minecraft.machine.pressure.readout": "Pressure: %s kPa"
 }

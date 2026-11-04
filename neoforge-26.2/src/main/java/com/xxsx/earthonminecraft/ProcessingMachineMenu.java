@@ -101,8 +101,9 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
         addSlot(new Slot(container, ProcessingMachineBlockEntity.SLOT_REAGENT, 80, 76) {
             @Override
             public boolean mayPlace(ItemStack stack) {
-                return ProcessingMachineMenu.this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
-                        && stack.getItem() == EarthOnMinecraft.COKE.get();
+                return (ProcessingMachineMenu.this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
+                        && stack.getItem() == EarthOnMinecraft.COKE.get())
+                        || ProcessingMachineBlock.acceptsCatalyst(ProcessingMachineMenu.this.kind, stack);
             }
         });
 
@@ -167,7 +168,8 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
             boolean cokeReagentRoute = this.kind == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
                     && stack.getItem() == EarthOnMinecraft.COKE.get()
                     && selectedRecipe().map(ProcessingMachineBlock.Recipe::requiresCoke).orElse(false);
-            if (cokeReagentRoute) {
+            boolean catalystReagentRoute = ProcessingMachineBlock.acceptsCatalyst(this.kind, stack);
+            if (cokeReagentRoute || catalystReagentRoute) {
                 movedToMachine = moveItemStackTo(stack, MENU_REAGENT, MENU_REAGENT + 1, false);
             } else if (ProcessingMachineBlock.acceptsInput(this.kind, stack)) {
                 movedToMachine = moveItemStackTo(stack, 0, 1, false);
@@ -295,6 +297,51 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
 
     public int tankAmount() {
         return data.get(ProcessingMachineBlockEntity.DATA_TANK_AMOUNT);
+    }
+
+    public int outputTankAmount() {
+        return Math.max(0, data.get(ProcessingMachineBlockEntity.DATA_OUTPUT_TANK_AMOUNT));
+    }
+
+    public int outputTankFluidId() {
+        return data.get(ProcessingMachineBlockEntity.DATA_OUTPUT_TANK_FLUID);
+    }
+
+    public boolean catalystMissing() {
+        if (data.get(ProcessingMachineBlockEntity.DATA_CATALYST_MISSING) != 0) {
+            return true;
+        }
+        return selectedRecipe().map(recipe -> {
+            if (!recipe.hasCatalyst()) {
+                return false;
+            }
+            ItemStack reagent = getSlot(MENU_REAGENT).getItem();
+            return reagent.isEmpty() || reagent.getItem() != recipe.catalyst().get().asItem();
+        }).orElse(false);
+    }
+
+    public int requiredPressureKpa() {
+        int synced = data.get(ProcessingMachineBlockEntity.DATA_REQUIRED_PRESSURE_KPA);
+        if (synced > 0) {
+            return synced;
+        }
+        return selectedRecipe().map(ProcessingMachineBlock.Recipe::requiredPressureKpa).orElse(101);
+    }
+
+    public boolean fluidOutputsBlocked() {
+        return selectedRecipe().map(recipe -> {
+            if (recipe.fluidOutputs().isEmpty()) {
+                return false;
+            }
+            int room = tankCapacity() - outputTankAmount();
+            for (ProcessingMachineBlock.FluidOutput out : recipe.fluidOutputs()) {
+                if (out.amount() > room) {
+                    return true;
+                }
+                room -= out.amount();
+            }
+            return false;
+        }).orElse(false);
     }
 
     public int tankCapacity() {

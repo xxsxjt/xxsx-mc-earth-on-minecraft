@@ -54,8 +54,11 @@ public final class RouteGuide {
         Map<Item, RouteInfo> routes = new LinkedHashMap<>();
         for (ProcessingMachineBlock.Recipe recipe : ProcessingMachineBlock.recipes()) {
             // Fluid-only routes are selected from the machine tank and have no item key to index.
-            if (recipe.hasItemInput()) {
-                routes.computeIfAbsent(recipe.input().get().asItem(), ignored -> new RouteInfo()).next.add(recipe);
+            for (ProcessingMachineBlock.Input input : recipe.inputs()) {
+                routes.computeIfAbsent(input.item().get().asItem(), ignored -> new RouteInfo()).next.add(recipe);
+            }
+            if (recipe.hasCatalyst()) {
+                routes.computeIfAbsent(recipe.catalyst().get().asItem(), ignored -> new RouteInfo()).next.add(recipe);
             }
             for (ProcessingMachineBlock.Output output : recipe.outputs()) {
                 routes.computeIfAbsent(output.item().get().asItem(), ignored -> new RouteInfo()).sources.add(recipe);
@@ -78,8 +81,12 @@ public final class RouteGuide {
         addDirectUseTips(stack.getItem(), lines);
 
         if (!route.next().isEmpty()) {
+            ProcessingMachineBlock.Recipe first = route.next().get(0);
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.route.next", joinMachines(route.next(), 4)).withStyle(ChatFormatting.AQUA));
-            lines.accept(Component.translatable("tooltip.earth_on_minecraft.route.outputs", describeOutputs(route.next().get(0))).withStyle(ChatFormatting.GRAY));
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.route.outputs", describeOutputs(first)).withStyle(ChatFormatting.GRAY));
+            if (first.hasEquation()) {
+                lines.accept(Component.literal(first.equation()).withStyle(ChatFormatting.YELLOW));
+            }
             if (uniqueMachineCount(route.next()) > 1) {
                 lines.accept(Component.translatable("tooltip.earth_on_minecraft.route.multiple").withStyle(ChatFormatting.DARK_GRAY));
             }

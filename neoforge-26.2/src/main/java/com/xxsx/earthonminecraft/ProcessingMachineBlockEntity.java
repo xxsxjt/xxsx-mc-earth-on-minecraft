@@ -50,7 +50,11 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     public static final int DATA_FAULT_DZ = 30;
     public static final int DATA_FAULT_ROLE = 31;
     public static final int DATA_FAULT_META = 32;
-    public static final int DATA_COUNT = 33;
+    public static final int DATA_OUTPUT_TANK_AMOUNT = 33;
+    public static final int DATA_OUTPUT_TANK_FLUID = 34;
+    public static final int DATA_CATALYST_MISSING = 35;
+    public static final int DATA_REQUIRED_PRESSURE_KPA = 36;
+    public static final int DATA_COUNT = 37;
     public static final int AMBIENT_TEMP_K = 293;
     /** Fluid tank size in mB. One bucket is 1000 mB and a spec ingot cast is 144 mB. */
     public static final int TANK_CAPACITY = 8000;
@@ -59,6 +63,8 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     private static final String LAYOUT_VERSION_KEY = "SlotLayoutVersion";
     private static final String TANK_AMOUNT_KEY = "TankAmount";
     private static final String TANK_FLUID_KEY = "TankFluid";
+    private static final String OUTPUT_TANK_AMOUNT_KEY = "OutputTankAmount";
+    private static final String OUTPUT_TANK_FLUID_KEY = "OutputTankFluid";
     private static final int[] EMPTY_SLOTS = new int[0];
     private static final int[] MATERIAL_INPUT_SLOTS = createMaterialInputSlots();
     private static final int[] INPUT_SLOTS = createInputSlots();
@@ -98,6 +104,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 case DATA_FAULT_DZ -> faultDz;
                 case DATA_FAULT_ROLE -> faultRoleId;
                 case DATA_FAULT_META -> packFaultMeta(faultWrongBlock, faultMatchedParts, faultTotalParts);
+                case DATA_OUTPUT_TANK_AMOUNT -> outputTankAmount;
+                case DATA_OUTPUT_TANK_FLUID -> outputTank.fluid() == null ? -1 : BuiltInRegistries.FLUID.getId(outputTank.fluid());
+                case DATA_CATALYST_MISSING -> catalystMissing() ? 1 : 0;
+                case DATA_REQUIRED_PRESSURE_KPA -> targetPressureKpa();
                 default -> 0;
             };
         }
@@ -126,6 +136,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                     faultMatchedParts = (value >> 1) & 0x3F;
                     faultTotalParts = (value >> 7) & 0x3F;
                 }
+                case DATA_OUTPUT_TANK_AMOUNT -> outputTankAmount = Math.max(0, value);
                 default -> {
                 }
             }
@@ -156,9 +167,13 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     private ProcessingMachineBlock.Recipe activeRecipe;
     private final SideMode[] sideModes = createDefaultSideModes();
     private final MachineFluidTank tank = new MachineFluidTank(TANK_CAPACITY);
+    private final MachineFluidTank outputTank = new MachineFluidTank(TANK_CAPACITY);
     private int tankAmount;
-    /** Fluid id currently held in the tank; empty when the tank is dry. */
+    /** Fluid id currently held in the input tank; empty when the tank is dry. */
     private String tankFluid = "";
+    private int outputTankAmount;
+    /** Fluid id currently held in the output tank; empty when the tank is dry. */
+    private String outputTankFluid = "";
     private int temperatureK = AMBIENT_TEMP_K;
     private int fuelMaxTempK = AMBIENT_TEMP_K;
     private int energyStored;
@@ -174,8 +189,9 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
 
     public ProcessingMachineBlockEntity(BlockPos pos, BlockState state) {
         super(EarthOnMinecraft.PROCESSING_MACHINE_BLOCK_ENTITY.get(), pos, state);
-        // Pipes and buckets mutate the tank directly, so mirror it into the synced slots here.
+        // Pipes and buckets mutate the tanks directly, so mirror them into the synced slots here.
         tank.setListener(this::syncTankState);
+        outputTank.setListener(this::syncTankState);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, ProcessingMachineBlockEntity machine) {
@@ -262,9 +278,10 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         ProcessingMachineBlock.Recipe recipe = match.get();
         ItemStack reagent = machine.items.get(SLOT_REAGENT);
         boolean hasCokeCharge = !reagent.isEmpty() && reagent.getItem() == EarthOnMinecraft.COKE.get();
+        boolean missingCatalyst = recipe.hasCatalyst() && !hasRequiredCatalyst(recipe, reagent);
         boolean missingPrimary = recipe.hasItemInput() && input.getCount() < Math.max(1, recipe.primaryCount());
         boolean missingSecondary = recipe.hasSecondaryInput() && !machine.hasSecondaryInputs(recipe);
-        if (missingPrimary || missingSecondary || recipe.requiresCoke() && !hasCokeCharge) {
+        if (missingPrimary || missingSecondary || (recipe.requiresCoke() && !hasCokeCharge) || missingCatalyst) {
             if (machine.progress != 0 || machine.activeRecipe != recipe) {
                 machine.progress = 0;
                 changed = true;
@@ -396,15 +413,20 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                 }
             }
             case GRID_ONLY -> {
-                if (machine.coolStep()) {
-                    changed = true;
-                }
                 if (machine.consumeElectric(level, pos, Math.max(1, energyCost))) {
                     machine.gridPowered = true;
                     supplied = true;
                     machine.driveState = DriveState.GRID_ACTIVE;
+                    if (requiredTempK > AMBIENT_TEMP_K) {
+                        machine.heatStep(Math.min(Math.max(kind.maxTemperatureK(), requiredTempK), requiredTempK));
+                    } else {
+                        machine.coolStep();
+                    }
                     changed = true;
                 } else {
+                    if (machine.coolStep()) {
+                        changed = true;
+                    }
                     machine.driveState = DriveState.NO_POWER;
                 }
             }
@@ -544,38 +566,38 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         return tank.holds(requiredFluid, requiredAmount);
     }
 
+    private static boolean hasRequiredCatalyst(ProcessingMachineBlock.Recipe recipe, ItemStack reagent) {
+        if (!recipe.hasCatalyst()) {
+            return true;
+        }
+        return !reagent.isEmpty() && reagent.getItem() == recipe.catalyst().get().asItem();
+    }
+
+    public boolean catalystMissing() {
+        ProcessingMachineBlock.Recipe recipe = activeRecipe != null ? activeRecipe : selectedRecipe();
+        if (recipe == null || !recipe.hasCatalyst()) {
+            return false;
+        }
+        return !hasRequiredCatalyst(recipe, items.get(SLOT_REAGENT));
+    }
+
+    public int targetPressureKpa() {
+        ProcessingMachineBlock.Recipe recipe = activeRecipe != null ? activeRecipe : selectedRecipe();
+        return recipe != null ? recipe.requiredPressureKpa() : 101;
+    }
+
     /**
-     * True when the tank can accept the route's fluid outputs. A route may only add a fluid that
-     * matches whatever is already stored, so a full or mismatched tank blocks the process instead
-     * of voiding the product.
+     * True when the output tank can accept the route's fluid outputs. A route may only add a fluid
+     * that matches whatever is already stored in {@code outputTank}, so a full or mismatched tank
+     * blocks the process instead of voiding the product.
      */
     private boolean canStoreFluidOutputs(ProcessingMachineBlock.Recipe recipe) {
         if (recipe.fluidOutputs().isEmpty()) {
             return true;
         }
-        // A single tank can only hold one fluid, so every output must agree with the stored fluid
-        // (or with the first output if the tank is empty) and must fit in the remaining room.
-        String stored = tank.fluidId();
-        int amount = tank.amount();
-        String consumedFluid = "";
-        int consumedAmount = 0;
-        for (ProcessingMachineBlock.FluidInput input : recipe.fluidInputs()) {
-            if (!consumedFluid.isEmpty() && !consumedFluid.equals(input.fluidId())) {
-                return false;
-            }
-            consumedFluid = input.fluidId();
-            consumedAmount += input.amount();
-        }
-        if (consumedAmount > 0) {
-            if (!stored.equals(consumedFluid) || amount < consumedAmount) {
-                return false;
-            }
-            amount -= consumedAmount;
-        }
-        if (amount == 0) {
-            stored = "";
-        }
-        int room = tank.capacity() - amount;
+        String stored = outputTank.fluidId();
+        int amount = outputTank.amount();
+        int room = outputTank.capacity() - amount;
         for (ProcessingMachineBlock.FluidOutput output : recipe.fluidOutputs()) {
             if (stored.isEmpty()) {
                 stored = output.fluidId();
@@ -599,7 +621,7 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
 
     private void produceFluidOutputs(ProcessingMachineBlock.Recipe recipe) {
         for (ProcessingMachineBlock.FluidOutput output : recipe.fluidOutputs()) {
-            tank.fill(output.fluidId(), output.amount());
+            outputTank.fill(output.fluidId(), output.amount());
         }
         syncTankState();
     }
@@ -607,23 +629,31 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     private void syncTankState() {
         this.tankAmount = tank.amount();
         this.tankFluid = tank.fluidId();
+        this.outputTankAmount = outputTank.amount();
+        this.outputTankFluid = outputTank.fluidId();
         setChanged();
     }
 
     /**
-     * Transfers produced fluid from this machine's tank into an adjacent machine that consumes it,
-     * respecting both machines' side configuration modes.
+     * Transfers produced fluid from this machine's output tank (or input tank when holding a
+     * produced fluid) into an adjacent machine that consumes it, respecting side modes.
      */
     public boolean tryExportFluidToNeighbors(Level level, BlockPos pos) {
-        if (tank.isEmpty()) {
-            return false;
-        }
-        String storedFluid = tank.fluidId();
+        MachineFluidTank sourceTank = null;
         ProcessingMachineBlock.Kind currentKind = kind();
-        if (ProcessingMachineBlock.acceptsFluidInput(currentKind, storedFluid)
-                && !ProcessingMachineBlock.producesFluidOutput(currentKind, storedFluid)) {
+        if (!outputTank.isEmpty()) {
+            sourceTank = outputTank;
+        } else if (!tank.isEmpty()) {
+            String storedInput = tank.fluidId();
+            if (!ProcessingMachineBlock.acceptsFluidInput(currentKind, storedInput)
+                    || ProcessingMachineBlock.producesFluidOutput(currentKind, storedInput)) {
+                sourceTank = tank;
+            }
+        }
+        if (sourceTank == null || sourceTank.isEmpty()) {
             return false;
         }
+        String storedFluid = sourceTank.fluidId();
         boolean movedAny = false;
         for (Direction direction : Direction.values()) {
             if (!sideMode(direction).allowsOutput()) {
@@ -638,16 +668,16 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             if (!ProcessingMachineBlock.acceptsFluidInput(neighbor.kind(), storedFluid)) {
                 continue;
             }
-            int room = neighbor.tank().capacity() - neighbor.tank().amount();
+            int room = neighbor.inputTank().capacity() - neighbor.inputTank().amount();
             if (room <= 0) {
                 continue;
             }
-            int amountToMove = Math.min(tank.amount(), Math.min(576, room));
-            int accepted = neighbor.tank().fill(storedFluid, amountToMove);
+            int amountToMove = Math.min(sourceTank.amount(), Math.min(576, room));
+            int accepted = neighbor.inputTank().fill(storedFluid, amountToMove);
             if (accepted > 0) {
-                tank.drain(storedFluid, accepted);
+                sourceTank.drain(storedFluid, accepted);
                 movedAny = true;
-                if (tank.isEmpty()) {
+                if (sourceTank.isEmpty()) {
                     break;
                 }
             }
@@ -656,12 +686,37 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     }
 
     /**
-     * Handles right-click fluid transfer with vanilla buckets, gas cells, or molten metal ingots
-     * so every fluid route is playable without external pipe mods.
+     * Handles right-click fluid transfer with vanilla buckets, bottles, gas cells, or molten metal
+     * ingots so both inputTank and outputTank are playable without external pipe mods. Drains
+     * outputTank first (or inputTank on fallback) when holding an empty container, and fills
+     * inputTank when holding a fluid carrier.
      */
     public boolean tryInteractWithFluidItem(net.minecraft.world.entity.player.Player player,
                                             net.minecraft.world.InteractionHand hand,
                                             ItemStack stack) {
+        if (stack.is(Items.BUCKET) || stack.is(Items.GLASS_BOTTLE)) {
+            for (MachineFluidTank targetTank : List.of(outputTank, tank)) {
+                if (targetTank.isEmpty()) {
+                    continue;
+                }
+                ItemStack filled = itemForStoredFluid(targetTank.fluidId(), targetTank.amount(), stack.getItem());
+                int drainCost = drainCostForStoredFluid(targetTank.fluidId(), stack.getItem());
+                if (!filled.isEmpty() && drainCost > 0 && targetTank.amount() >= drainCost) {
+                    if (!player.level().isClientSide()) {
+                        targetTank.drain(targetTank.fluidId(), drainCost);
+                        if (!player.getAbilities().instabuild) {
+                            stack.shrink(1);
+                        }
+                        if (stack.isEmpty()) {
+                            player.setItemInHand(hand, filled);
+                        } else if (!player.getInventory().add(filled)) {
+                            player.drop(filled, false);
+                        }
+                    }
+                    return true;
+                }
+            }
+        }
         String fillFluid = fluidCarriedByItem(stack.getItem());
         int fillAmount = fluidAmountForItem(stack.getItem());
         if (fillFluid != null && fillAmount > 0 && ProcessingMachineBlock.acceptsFluidInput(kind(), fillFluid)) {
@@ -679,24 +734,6 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                                 player.drop(remStack, false);
                             }
                         }
-                    }
-                }
-                return true;
-            }
-        }
-        if ((stack.is(Items.BUCKET) || stack.is(Items.GLASS_BOTTLE)) && !tank.isEmpty()) {
-            ItemStack filled = itemForStoredFluid(tank.fluidId(), tank.amount(), stack.getItem());
-            int drainCost = drainCostForStoredFluid(tank.fluidId(), stack.getItem());
-            if (!filled.isEmpty() && drainCost > 0 && tank.amount() >= drainCost) {
-                if (!player.level().isClientSide()) {
-                    tank.drain(tank.fluidId(), drainCost);
-                    if (!player.getAbilities().instabuild) {
-                        stack.shrink(1);
-                    }
-                    if (stack.isEmpty()) {
-                        player.setItemInHand(hand, filled);
-                    } else if (!player.getInventory().add(filled)) {
-                        player.drop(filled, false);
                     }
                 }
                 return true;
@@ -759,12 +796,43 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     }
 
     private static ItemStack itemForStoredFluid(String fluidId, int amount, Item container) {
-        if (container == Items.BUCKET && amount >= 144) {
-            return switch (fluidId) {
-                case "earth_on_minecraft:molten_iron" -> new ItemStack(Items.IRON_INGOT);
-                case "earth_on_minecraft:molten_copper" -> new ItemStack(Items.COPPER_INGOT);
-                default -> ItemStack.EMPTY;
-            };
+        if (container == Items.BUCKET) {
+            if (amount >= 144) {
+                switch (fluidId) {
+                    case "earth_on_minecraft:molten_iron" -> {
+                        return new ItemStack(Items.IRON_INGOT);
+                    }
+                    case "earth_on_minecraft:molten_copper", "earth_on_minecraft:molten_blister_copper" -> {
+                        return new ItemStack(Items.COPPER_INGOT);
+                    }
+                    default -> {
+                    }
+                }
+            }
+            if (amount >= 250 && "earth_on_minecraft:spent_electrolyte".equals(fluidId)) {
+                return new ItemStack(EarthOnMinecraft.ELECTROLYTE.get());
+            }
+            if (amount >= 500 && "earth_on_minecraft:steam".equals(fluidId)) {
+                return new ItemStack(EarthOnMinecraft.SOFTENED_WATER.get());
+            }
+        }
+        if (container == Items.GLASS_BOTTLE) {
+            if (amount >= 250 && "earth_on_minecraft:spent_electrolyte".equals(fluidId)) {
+                return new ItemStack(EarthOnMinecraft.ELECTROLYTE.get());
+            }
+            if (amount >= 500) {
+                return switch (fluidId) {
+                    case "earth_on_minecraft:oxygen" -> new ItemStack(EarthOnMinecraft.OXYGEN_GAS_CELL.get());
+                    case "earth_on_minecraft:hydrogen" -> new ItemStack(EarthOnMinecraft.HYDROGEN_GAS_CELL.get());
+                    case "earth_on_minecraft:nitrogen" -> new ItemStack(EarthOnMinecraft.NITROGEN_GAS_CELL.get());
+                    case "earth_on_minecraft:chlorine" -> new ItemStack(EarthOnMinecraft.CHLORINE_GAS_CELL.get());
+                    case "earth_on_minecraft:carbon_dioxide" -> new ItemStack(EarthOnMinecraft.CARBON_DIOXIDE_CELL.get());
+                    case "earth_on_minecraft:carbon_monoxide" -> new ItemStack(EarthOnMinecraft.CARBON_MONOXIDE_CELL.get());
+                    case "earth_on_minecraft:sulfur_dioxide" -> new ItemStack(EarthOnMinecraft.SULFUR_DIOXIDE_CELL.get());
+                    case "earth_on_minecraft:steam" -> new ItemStack(EarthOnMinecraft.SOFTENED_WATER.get());
+                    default -> ItemStack.EMPTY;
+                };
+            }
         }
         return ItemStack.EMPTY;
     }
@@ -772,14 +840,36 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
     private static int drainCostForStoredFluid(String fluidId, Item container) {
         if (container == Items.BUCKET) {
             return switch (fluidId) {
-                case "earth_on_minecraft:molten_iron", "earth_on_minecraft:molten_copper" -> 144;
+                case "earth_on_minecraft:molten_iron", "earth_on_minecraft:molten_copper",
+                     "earth_on_minecraft:molten_blister_copper" -> 144;
+                case "earth_on_minecraft:spent_electrolyte" -> 250;
+                case "earth_on_minecraft:steam" -> 500;
+                default -> 0;
+            };
+        }
+        if (container == Items.GLASS_BOTTLE) {
+            return switch (fluidId) {
+                case "earth_on_minecraft:spent_electrolyte" -> 250;
+                case "earth_on_minecraft:oxygen", "earth_on_minecraft:hydrogen",
+                     "earth_on_minecraft:nitrogen", "earth_on_minecraft:chlorine",
+                     "earth_on_minecraft:carbon_dioxide", "earth_on_minecraft:carbon_monoxide",
+                     "earth_on_minecraft:sulfur_dioxide", "earth_on_minecraft:steam" -> 500;
                 default -> 0;
             };
         }
         return 0;
     }
+
     public MachineFluidTank tank() {
         return tank;
+    }
+
+    public MachineFluidTank inputTank() {
+        return tank;
+    }
+
+    public MachineFluidTank outputTank() {
+        return outputTank;
     }
 
     public int tankAmount() {
@@ -788,6 +878,14 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
 
     public String tankFluidId() {
         return tank.fluidId();
+    }
+
+    public int outputTankAmount() {
+        return outputTank.amount();
+    }
+
+    public String outputTankFluidId() {
+        return outputTank.fluidId();
     }
 
     private int requiredSecondaryCount(ProcessingMachineBlock.Recipe recipe) {
@@ -1028,8 +1126,9 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             return acceptsSecondaryInput(stack);
         }
         if (slot == SLOT_REAGENT) {
-            return kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
-                    && stack.getItem() == EarthOnMinecraft.COKE.get();
+            return (kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE
+                    && stack.getItem() == EarthOnMinecraft.COKE.get())
+                    || ProcessingMachineBlock.acceptsCatalyst(kind(), stack);
         }
         if (slot == SLOT_FUEL) {
             if (kind().acceptsLocalFuel() && getFuelTicks(stack) > 0) {
@@ -1131,8 +1230,11 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             this.sideModes[i] = SideMode.byId(input.getIntOr("SideMode" + i, SideMode.BOTH.id));
         }
         tank.set(input.getStringOr(TANK_FLUID_KEY, ""), input.getIntOr(TANK_AMOUNT_KEY, 0));
+        outputTank.set(input.getStringOr(OUTPUT_TANK_FLUID_KEY, ""), input.getIntOr(OUTPUT_TANK_AMOUNT_KEY, 0));
         this.tankAmount = tank.amount();
         this.tankFluid = tank.fluidId();
+        this.outputTankAmount = outputTank.amount();
+        this.outputTankFluid = outputTank.fluidId();
     }
 
     @Override
@@ -1155,6 +1257,8 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         }
         output.putString(TANK_FLUID_KEY, tank.fluidId());
         output.putInt(TANK_AMOUNT_KEY, tank.amount());
+        output.putString(OUTPUT_TANK_FLUID_KEY, outputTank.fluidId());
+        output.putInt(OUTPUT_TANK_AMOUNT_KEY, outputTank.amount());
     }
 
     private void migrateLegacyOutputSlots(NonNullList<ItemStack> loaded) {

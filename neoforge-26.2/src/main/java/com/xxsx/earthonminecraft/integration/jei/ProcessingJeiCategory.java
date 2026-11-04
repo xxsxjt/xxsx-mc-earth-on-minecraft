@@ -80,6 +80,12 @@ public class ProcessingJeiCategory implements IRecipeCategory<ProcessingMachineB
             builder.addSlot(RecipeIngredientRole.INPUT, 4 + (slotIndex % 2) * 20, 22 + (slotIndex / 2) * 20)
                     .add(new net.minecraft.world.item.ItemStack(EarthOnMinecraft.COKE.get()))
                     .setStandardSlotBackground();
+            slotIndex++;
+        }
+        if (recipe.hasCatalyst()) {
+            builder.addSlot(RecipeIngredientRole.INPUT, 44, 18)
+                    .add(recipe.catalystStack())
+                    .setStandardSlotBackground();
         }
         int x = 72;
         int y = 12;
@@ -110,8 +116,20 @@ public class ProcessingJeiCategory implements IRecipeCategory<ProcessingMachineB
         graphics.text(font, fit(processLine, 158), 5, 16, accent);
         graphics.text(font, "->", 44, 31, 0xFFF2E4B6);
         graphics.text(font, fit(localized(kind.powerMode().labelKey()), 158), 5, 51, 0xFFFFD782);
-        graphics.text(font, Component.translatable("jei.earth_on_minecraft.processing.spec",
-                Math.max(1, (kind.processTicks() + 19) / 20), kind.energyPerTick()), 5, 62, 0xFFD9EEF4);
+        String specLine = Component.translatable("jei.earth_on_minecraft.processing.spec",
+                Math.max(1, (recipe.processTicks() + 19) / 20), recipe.energyPerTickEffective()).getString();
+        if (recipe.requiredTemperatureK() > 293 || recipe.requiredPressureKpa() > 101) {
+            specLine += " | " + recipe.requiredTemperatureK() + "K " + recipe.requiredPressureKpa() + "kPa";
+        }
+        graphics.text(font, fit(specLine, 158), 5, 62, 0xFFD9EEF4);
+        if (recipe.hasEquation() || recipe.hasCatalyst()) {
+            String cond = recipe.hasEquation() ? recipe.equation() : "";
+            if (recipe.hasCatalyst()) {
+                String catName = recipe.catalystStack().getItemName().getString();
+                cond = cond.isEmpty() ? ("Cat: " + catName) : (cond + " [" + catName + "]");
+            }
+            graphics.text(font, fit(cond, 158), 5, 76, 0xFF9FE6B8);
+        }
         String note = recipeNote(recipe);
         graphics.text(font, fit(note, 158), 5, 90, 0xFFFFF2CC);
     }
