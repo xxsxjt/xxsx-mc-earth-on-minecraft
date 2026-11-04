@@ -1,7 +1,13 @@
 package com.xxsx.earthonminecraft.living;
 
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
+import com.xxsx.earthonminecraft.MaterialCatalog;
 import com.xxsx.earthonminecraft.SettlementFacilities;
+import com.xxsx.earthonminecraft.component.EarthDataComponents;
+import com.xxsx.earthonminecraft.component.Grade;
+import com.xxsx.earthonminecraft.component.MaterialBatch;
+import com.xxsx.earthonminecraft.component.QualityComponents;
+import com.xxsx.earthonminecraft.component.ToolQualityComponent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -10,10 +16,12 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.trading.ItemCost;
 import net.minecraft.world.item.trading.MerchantOffer;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -21,6 +29,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 public final class ResidentProfileManager {
@@ -49,6 +58,10 @@ public final class ResidentProfileManager {
             "xuanhuan_earth:wandering_merchant", EarthOnMinecraft.id("xuanhuan_wandering_merchant"),
             "xuanhuan_earth:spirit_spring_keeper", EarthOnMinecraft.id("xuanhuan_spirit_spring_keeper"),
             "xuanhuan_earth:sect_steward", EarthOnMinecraft.id("xuanhuan_sect_steward"));
+
+    private static final Set<String> TOOL_SUPPLY_IDS = Set.of(
+            "geology_hammer", "ore_scanner", "steel_pickaxe", "steel_axe", "steel_sword",
+            "iron_pickaxe", "copper_pickaxe", "stone_pickaxe", "wooden_pickaxe", "wrench");
 
     private ResidentProfileManager() {
     }
@@ -161,7 +174,7 @@ public final class ResidentProfileManager {
         data.putBoolean(OWNS_CUSTOM_NAME_KEY, ownsCustomName);
 
         savedData.registerResident(level, villager.blockPosition(), uuid, roleId, nameKey, skill);
-        addRoleTrades(villager, roleSelection, settlement);
+        addRoleTrades(villager, roleSelection, settlement, skill, residentSeed);
         return profile;
     }
 
@@ -229,7 +242,7 @@ public final class ResidentProfileManager {
     }
 
     private static void addRoleTrades(Villager villager, SettlementDataManager.RoleSelection roleSelection,
-                                      SettlementSavedData.SettlementSnapshot settlement) {
+                                      SettlementSavedData.SettlementSnapshot settlement, int skill, long residentSeed) {
         if (villager.isBaby()) {
             return;
         }
@@ -238,10 +251,16 @@ public final class ResidentProfileManager {
                 && !tradeRole.settlementProfiles().contains(settlement.profileId())) {
             return;
         }
-        var offers = villager.getOffers();
-        int villagerLevel = villager.getVillagerData().level();
+        MerchantOffers offers = villager.getOffers();
+        if (!tradeRole.trades().isEmpty()) {
+            offers.removeIf(ResidentProfileManager::isVanillaEmeraldFillerOffer);
+        }
+        int villagerLevel = Math.max(1, villager.getVillagerData().level());
+        int effectiveTradeLevel = Math.max(villagerLevel, Math.min(3, settlement.tier()));
+        int tradeIndex = 0;
         for (SettlementDataManager.TradeDefinition trade : tradeRole.trades()) {
-            if (trade.level() > villagerLevel) {
+            tradeIndex++;
+            if (trade.level() > effectiveTradeLevel) {
                 continue;
             }
             var cost = BuiltInRegistries.ITEM.getValue(Identifier.parse(trade.inputId()));
@@ -251,6 +270,9 @@ public final class ResidentProfileManager {
                         trade.inputId(), trade.outputId());
                 continue;
             }
+            ItemStack resultStack = createAssayedTradeSupply(
+                    result, trade.outputCount(), roleSelection.id().getPath(),
+                    settlement.tier(), skill, residentSeed ^ (tradeIndex * 0x9E3779B97F4A7C15L));
             boolean alreadyPresent = offers.stream().anyMatch(offer ->
                     offer.getBaseCostA().is(cost) && offer.getBaseCostA().getCount() == trade.inputCount()
                             && offer.getResult().is(result) && offer.getResult().getCount() == trade.outputCount());
@@ -258,8 +280,63 @@ public final class ResidentProfileManager {
                 continue;
             }
             offers.add(new MerchantOffer(new ItemCost(cost, trade.inputCount()),
-                    new ItemStack(result, trade.outputCount()), trade.maxUses(), trade.xp(), trade.priceMultiplier()));
+                    resultStack, trade.maxUses(), trade.xp(), trade.priceMultiplier()));
         }
+    }
+
+    private static boolean isVanillaEmeraldFillerOffer(MerchantOffer offer) {
+        boolean costEmerald = offer.getBaseCostA().is(Items.EMERALD);
+        boolean resultEmerald = offer.getResult().is(Items.EMERALD);
+        Identifier resultId = BuiltInRegistries.ITEM.getKey(offer.getResult().getItem());
+        return costEmerald || resultEmerald
+                || (resultId != null && "minecraft".equals(resultId.getNamespace()));
+    }
+
+    public static ItemStack createAssayedTradeSupply(
+            Item item, int count, String rolePath, int settlementTier, int residentSkill, long seed) {
+        ItemStack stack = new ItemStack(item, Math.max(1, count));
+        Identifier id = BuiltInRegistries.ITEM.getKey(item);
+        if (id == null || !EarthOnMinecraft.MODID.equals(id.getNamespace())) {
+            return stack;
+        }
+        String local = id.getPath();
+        int clampedTier = Math.max(1, Math.min(4, settlementTier));
+        int clampedSkill = Math.max(1, Math.min(5, residentSkill));
+        double jitter = ((SettlementDataManager.mix(seed) & 0xFFL) / 255.0 - 0.5) * 0.012;
+
+        if (TOOL_SUPPLY_IDS.contains(local) || stack.has(EarthDataComponents.TOOL_QUALITY.get())) {
+            Grade grade = switch (clampedTier) {
+                case 1 -> clampedSkill >= 4 ? Grade.FINE : Grade.COMMON;
+                case 2 -> clampedSkill >= 3 ? Grade.FINE : Grade.COMMON;
+                case 3 -> clampedSkill >= 4 ? Grade.MASTERWORK : Grade.FINE;
+                default -> clampedSkill >= 5 ? Grade.HEIRLOOM : Grade.MASTERWORK;
+            };
+            double roll = Math.max(0.35, Math.min(0.99, 0.48 + clampedTier * 0.09 + clampedSkill * 0.04 + jitter));
+            String smith = rolePath + "_t" + clampedTier + "_s" + clampedSkill;
+            stack.set(EarthDataComponents.TOOL_QUALITY.get(), new ToolQualityComponent(1, grade, smith, roll));
+            return stack;
+        }
+
+        boolean hasCatalog = MaterialCatalog.find(id).isPresent();
+        if (hasCatalog || stack.has(EarthDataComponents.MATERIAL_BATCH.get())
+                || local.endsWith("_chunk") || local.endsWith("_concentrate") || local.endsWith("_dust")
+                || local.endsWith("_catalyst") || local.equals("steel") || local.equals("wrought_iron")
+                || local.equals("coke") || local.equals("firebrick")) {
+            MaterialBatch base = MaterialBatch.defaultFor(local);
+            double tierBoost = (clampedTier - 1) * 0.015 + (clampedSkill - 1) * 0.006 + jitter;
+            double purity = Math.max(0.45, Math.min(0.9995, base.purity() + tierBoost));
+            Grade grade = base.grade();
+            if (clampedTier >= 3 && grade.tier() < Grade.FINE.tier()) {
+                grade = Grade.FINE;
+            }
+            if (clampedTier >= 4 && clampedSkill >= 4 && grade.tier() < Grade.MASTERWORK.tier()) {
+                grade = Grade.MASTERWORK;
+            }
+            stack.set(EarthDataComponents.MATERIAL_BATCH.get(), base.withPurityAndGrade(purity, grade));
+            QualityComponents.resolveMetalBatch(stack).ifPresent(metal ->
+                    stack.set(EarthDataComponents.METAL_BATCH.get(), metal));
+        }
+        return stack;
     }
 
     public static Optional<ResidentSnapshot> read(Entity entity) {

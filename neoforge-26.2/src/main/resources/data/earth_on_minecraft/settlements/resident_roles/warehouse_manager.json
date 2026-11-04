@@ -11,8 +11,59 @@
   "settlement_profiles": [],
   "weight": 3,
   "trades": [
-    { "level": 1, "input": "minecraft:paper", "input_count": 16, "output": "minecraft:emerald", "output_count": 1, "max_uses": 12, "xp": 2 },
-    { "level": 2, "input": "minecraft:emerald", "input_count": 3, "output": "earth_on_minecraft:conveyor_drive", "output_count": 1, "max_uses": 8, "xp": 10 },
-    { "level": 3, "input": "minecraft:emerald", "input_count": 4, "output": "minecraft:chest", "output_count": 4, "max_uses": 8, "xp": 20 }
+    {
+      "level": 1,
+      "input": "minecraft:oak_log",
+      "input_count": 8,
+      "output": "earth_on_minecraft:timber_beam",
+      "output_count": 4,
+      "max_uses": 16,
+      "xp": 2
+    },
+    {
+      "level": 1,
+      "input": "minecraft:bread",
+      "input_count": 6,
+      "output": "minecraft:charcoal",
+      "output_count": 8,
+      "max_uses": 16,
+      "xp": 2
+    },
+    {
+      "level": 2,
+      "input": "minecraft:coal",
+      "input_count": 8,
+      "output": "earth_on_minecraft:coke",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:rye_bread",
+      "input_count": 6,
+      "output": "earth_on_minecraft:firebrick",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 6,
+      "output": "earth_on_minecraft:conveyor_drive",
+      "output_count": 2,
+      "max_uses": 8,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:iron_concentrate",
+      "input_count": 4,
+      "output": "earth_on_minecraft:geology_hammer",
+      "output_count": 1,
+      "max_uses": 8,
+      "xp": 20
+    }
   ]
 }

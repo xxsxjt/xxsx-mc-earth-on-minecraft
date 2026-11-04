@@ -1,7 +1,9 @@
 {
   "replace": false,
   "values": [
-    "earth_on_minecraft:resident/electrician/level_2_2",
-    "earth_on_minecraft:resident/mechanic/level_2_2"
+    "earth_on_minecraft:resident/electrician/level_2_3",
+    "earth_on_minecraft:resident/electrician/level_2_4",
+    "earth_on_minecraft:resident/mechanic/level_2_3",
+    "earth_on_minecraft:resident/mechanic/level_2_4"
   ]
 }

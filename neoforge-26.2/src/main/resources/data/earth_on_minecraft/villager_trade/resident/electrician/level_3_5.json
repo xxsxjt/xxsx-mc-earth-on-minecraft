@@ -1,13 +1,12 @@
 {
   "wants": {
-    "id": "minecraft:emerald",
-    "count": 5
+    "id": "earth_on_minecraft:copper_concentrate",
+    "count": 6
   },
   "gives": {
-    "id": "earth_on_minecraft:ceramic_insulator",
-    "count": 4
+    "id": "earth_on_minecraft:ore_scanner"
   },
-  "max_uses": 8,
+  "max_uses": 6,
   "reputation_discount": 0.05,
   "xp": 20,
   "merchant_predicate": {

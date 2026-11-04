@@ -1,0 +1,187 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 5.0,
+        "max": 7.0
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:copper_wire",
+          "weight": 14,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 8.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:ceramic_insulator",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3.0,
+                "max": 6.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:iron_catalyst",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:iron_catalyst",
+                  "phase": "solid",
+                  "grade": "masterwork",
+                  "purity": 0.994,
+                  "moisture": 0.0,
+                  "particle_size_um": 500,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:vanadium_catalyst",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 2.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:vanadium_catalyst",
+                  "phase": "solid",
+                  "grade": "masterwork",
+                  "purity": 0.995,
+                  "moisture": 0.0,
+                  "particle_size_um": 500,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:conveyor_drive",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:simple_battery_cell",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 4.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:ore_scanner",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:tool_quality": {
+                  "schema_version": 1,
+                  "grade": "masterwork",
+                  "smith": "mechanized_city_grid_lab",
+                  "rolls": 0.92
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:steel_pickaxe",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:tool_quality": {
+                  "schema_version": 1,
+                  "grade": "masterwork",
+                  "smith": "mechanized_city_forge",
+                  "rolls": 0.9
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "earth_on_minecraft:chests/settlement_mechanized_city"
+}

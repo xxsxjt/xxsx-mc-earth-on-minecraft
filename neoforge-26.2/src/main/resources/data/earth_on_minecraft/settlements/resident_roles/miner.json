@@ -1,12 +1,70 @@
 {
   "title_key": "resident.earth_on_minecraft.role.miner",
   "identity_key": "resident.earth_on_minecraft.identity.worker",
-  "vanilla_professions": ["minecraft:mason"],
-  "settlement_profiles": ["earth_on_minecraft:resource_village"],
+  "vanilla_professions": [
+    "minecraft:mason"
+  ],
+  "settlement_profiles": [
+    "earth_on_minecraft:mining_settlement",
+    "earth_on_minecraft:resource_village",
+    "earth_on_minecraft:industrial_town",
+    "earth_on_minecraft:mechanized_city"
+  ],
   "weight": 3,
   "trades": [
-    { "level": 1, "input": "minecraft:torch", "input_count": 16, "output": "minecraft:emerald", "output_count": 1, "max_uses": 16, "xp": 2 },
-    { "level": 2, "input": "minecraft:emerald", "input_count": 2, "output": "earth_on_minecraft:magnetite_chunk", "output_count": 4, "max_uses": 12, "xp": 10 },
-    { "level": 3, "input": "minecraft:emerald", "input_count": 3, "output": "earth_on_minecraft:iron_concentrate", "output_count": 2, "max_uses": 8, "xp": 20 }
+    {
+      "level": 1,
+      "input": "minecraft:charcoal",
+      "input_count": 8,
+      "output": "earth_on_minecraft:magnetite_chunk",
+      "output_count": 4,
+      "max_uses": 16,
+      "xp": 2
+    },
+    {
+      "level": 1,
+      "input": "minecraft:coal",
+      "input_count": 8,
+      "output": "earth_on_minecraft:chalcopyrite_chunk",
+      "output_count": 4,
+      "max_uses": 16,
+      "xp": 2
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 4,
+      "output": "earth_on_minecraft:iron_concentrate",
+      "output_count": 3,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:magnetite_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:firebrick",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:iron_concentrate",
+      "input_count": 4,
+      "output": "earth_on_minecraft:steel",
+      "output_count": 2,
+      "max_uses": 8,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 6,
+      "output": "earth_on_minecraft:steel_pickaxe",
+      "output_count": 1,
+      "max_uses": 6,
+      "xp": 20
+    }
   ]
 }

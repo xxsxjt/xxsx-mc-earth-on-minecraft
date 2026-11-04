@@ -1,10 +1,11 @@
 {
   "wants": {
-    "id": "minecraft:copper_ingot",
-    "count": 8
+    "id": "earth_on_minecraft:copper_concentrate",
+    "count": 4
   },
   "gives": {
-    "id": "minecraft:emerald"
+    "id": "earth_on_minecraft:copper_wire",
+    "count": 6
   },
   "max_uses": 12,
   "reputation_discount": 0.05,

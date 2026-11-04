@@ -1,11 +1,11 @@
 {
   "wants": {
-    "id": "minecraft:emerald",
+    "id": "earth_on_minecraft:iron_concentrate",
     "count": 4
   },
   "gives": {
-    "id": "minecraft:chest",
-    "count": 4
+    "id": "earth_on_minecraft:steel",
+    "count": 2
   },
   "max_uses": 8,
   "reputation_discount": 0.05,
@@ -14,7 +14,7 @@
     "condition": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
-      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:warehouse_manager\"}}"
+      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:miner\"}}"
     }
   }
 }

@@ -1,6 +1,7 @@
 {
   "wants": {
-    "id": "minecraft:emerald"
+    "id": "minecraft:charcoal",
+    "count": 6
   },
   "gives": {
     "id": "earth_on_minecraft:field_geology_notebook"

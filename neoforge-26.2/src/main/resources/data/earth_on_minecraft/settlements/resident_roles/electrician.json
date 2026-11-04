@@ -1,12 +1,70 @@
 {
   "title_key": "resident.earth_on_minecraft.role.electrician",
   "identity_key": "resident.earth_on_minecraft.identity.technician",
-  "vanilla_professions": ["minecraft:toolsmith", "minecraft:cartographer"],
-  "settlement_profiles": ["earth_on_minecraft:mechanized_town"],
+  "vanilla_professions": [
+    "minecraft:toolsmith",
+    "minecraft:cartographer"
+  ],
+  "settlement_profiles": [
+    "earth_on_minecraft:industrial_town",
+    "earth_on_minecraft:mechanized_city",
+    "earth_on_minecraft:mechanized_town"
+  ],
   "weight": 2,
   "trades": [
-    { "level": 1, "input": "minecraft:copper_ingot", "input_count": 8, "output": "minecraft:emerald", "output_count": 1, "max_uses": 12, "xp": 2 },
-    { "level": 2, "input": "minecraft:emerald", "input_count": 2, "output": "earth_on_minecraft:copper_wire", "output_count": 8, "max_uses": 12, "xp": 10 },
-    { "level": 3, "input": "minecraft:emerald", "input_count": 5, "output": "earth_on_minecraft:ceramic_insulator", "output_count": 4, "max_uses": 8, "xp": 20 }
+    {
+      "level": 1,
+      "input": "earth_on_minecraft:copper_concentrate",
+      "input_count": 4,
+      "output": "earth_on_minecraft:copper_wire",
+      "output_count": 6,
+      "max_uses": 12,
+      "xp": 2
+    },
+    {
+      "level": 1,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 4,
+      "output": "earth_on_minecraft:ceramic_insulator",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 2
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:sulfur_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:simple_battery_cell",
+      "output_count": 2,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:salt_dust",
+      "input_count": 8,
+      "output": "earth_on_minecraft:copper_power_cable",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:copper_concentrate",
+      "input_count": 6,
+      "output": "earth_on_minecraft:ore_scanner",
+      "output_count": 1,
+      "max_uses": 6,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:sulfur_dust",
+      "input_count": 8,
+      "output": "earth_on_minecraft:vanadium_catalyst",
+      "output_count": 1,
+      "max_uses": 8,
+      "xp": 20
+    }
   ]
 }

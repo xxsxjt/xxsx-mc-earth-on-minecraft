@@ -619,11 +619,48 @@ def validate_living_world(known_ids: set[str]) -> tuple[int, int, int]:
             require_lang(key, path)
     for path in sorted((settlement_root / "profiles").glob("*.json")):
         data = json.loads(path.read_text(encoding="utf-8-sig"))
+        tier = data.get("tier")
+        if not isinstance(tier, int) or tier not in (1, 2, 3, 4):
+            fail(f"settlement profile must declare tier 1..4 in {path.relative_to(ROOT)}")
         for field in ("display_name_key", "scale_key", "technology_key"):
             require_lang(data[field], path)
         for field in ("name_keys", "industry_keys", "demand_keys", "supply_keys"):
             for key in data.get(field, []):
                 require_lang(key, path)
+
+    required_profiles = {
+        "primitive_hamlet": 1,
+        "mining_settlement": 2,
+        "industrial_town": 3,
+        "mechanized_city": 4,
+        "agricultural_village": 1,
+        "resource_village": 2,
+        "mechanized_town": 4,
+    }
+    for profile_name, expected_tier in required_profiles.items():
+        profile_path = settlement_root / "profiles" / f"{profile_name}.json"
+        if not profile_path.exists():
+            fail(f"missing settlement profile {profile_path.relative_to(ROOT)}")
+        profile_data = json.loads(profile_path.read_text(encoding="utf-8-sig"))
+        if profile_data.get("tier") != expected_tier:
+            fail(f"settlement profile {profile_name} must have tier {expected_tier}")
+
+    required_chest_loot = (
+        "settlement_primitive_hamlet",
+        "settlement_mining_settlement",
+        "settlement_industrial_town",
+        "settlement_mechanized_city",
+    )
+    for chest_table in required_chest_loot:
+        chest_path = RES / "data" / "earth_on_minecraft" / "loot_table" / "chests" / f"{chest_table}.json"
+        if not chest_path.exists():
+            fail(f"missing settlement chest loot table {chest_path.relative_to(ROOT)}")
+        chest_data = json.loads(chest_path.read_text(encoding="utf-8-sig"))
+        for pool in chest_data.get("pools", []):
+            for entry in pool.get("entries", []):
+                item_name = entry.get("name", "")
+                if item_name.startswith("earth_on_minecraft:") and item_name.split(":", 1)[1] not in known_ids:
+                    fail(f"unknown item {item_name} in {chest_path.relative_to(ROOT)}")
 
     required_loot = {
         "villager_work_items": "living/villager_work_items",

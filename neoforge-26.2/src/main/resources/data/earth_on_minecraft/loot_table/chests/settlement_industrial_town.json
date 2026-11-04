@@ -1,0 +1,187 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 4.0,
+        "max": 6.0
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:coke",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 8.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:coke",
+                  "phase": "solid",
+                  "grade": "fine",
+                  "purity": 0.92,
+                  "moisture": 0.0,
+                  "particle_size_um": 1000,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:firebrick",
+          "weight": 14,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 4.0,
+                "max": 8.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:lime_dust",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3.0,
+                "max": 6.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:steel",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 5.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:steel",
+                  "phase": "solid",
+                  "grade": "fine",
+                  "purity": 0.988,
+                  "moisture": 0.0,
+                  "particle_size_um": 1000,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:copper_concentrate",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 5.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:copper_concentrate",
+                  "phase": "solid",
+                  "grade": "fine",
+                  "purity": 0.89,
+                  "moisture": 0.04,
+                  "particle_size_um": 120,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:steel_pickaxe",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:tool_quality": {
+                  "schema_version": 1,
+                  "grade": "fine",
+                  "smith": "industrial_town_foundry",
+                  "rolls": 0.78
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:ore_scanner",
+          "weight": 6,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:tool_quality": {
+                  "schema_version": 1,
+                  "grade": "fine",
+                  "smith": "industrial_town_survey",
+                  "rolls": 0.8
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "earth_on_minecraft:chests/settlement_industrial_town"
+}

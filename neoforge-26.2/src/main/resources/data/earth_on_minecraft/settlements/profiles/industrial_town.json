@@ -1,0 +1,23 @@
+{
+  "tier": 3,
+  "display_name_key": "settlement.earth_on_minecraft.profile.industrial_town",
+  "scale_key": "settlement.earth_on_minecraft.scale.town",
+  "technology_key": "settlement.earth_on_minecraft.technology.industrial",
+  "name_keys": [
+    "settlement.earth_on_minecraft.name.cokevale",
+    "settlement.earth_on_minecraft.name.shaftborough"
+  ],
+  "industry_keys": [
+    "settlement.earth_on_minecraft.industry.metallurgy",
+    "settlement.earth_on_minecraft.industry.coking"
+  ],
+  "demand_keys": [
+    "settlement.earth_on_minecraft.material.coke",
+    "settlement.earth_on_minecraft.material.flux"
+  ],
+  "supply_keys": [
+    "settlement.earth_on_minecraft.material.steel",
+    "settlement.earth_on_minecraft.material.machine_parts"
+  ],
+  "weight": 2
+}

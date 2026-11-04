@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "earth_on_minecraft:resident/water_operator/level_2_2"
+    "earth_on_minecraft:resident/water_operator/level_2_3",
+    "earth_on_minecraft:resident/water_operator/level_2_4"
   ]
 }

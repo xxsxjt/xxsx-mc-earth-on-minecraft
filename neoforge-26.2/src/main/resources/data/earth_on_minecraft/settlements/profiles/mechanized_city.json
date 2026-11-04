@@ -1,0 +1,23 @@
+{
+  "tier": 4,
+  "display_name_key": "settlement.earth_on_minecraft.profile.mechanized_city",
+  "scale_key": "settlement.earth_on_minecraft.scale.city",
+  "technology_key": "settlement.earth_on_minecraft.technology.grid_city",
+  "name_keys": [
+    "settlement.earth_on_minecraft.name.gridpoint",
+    "settlement.earth_on_minecraft.name.volt_harbor"
+  ],
+  "industry_keys": [
+    "settlement.earth_on_minecraft.industry.power_grid",
+    "settlement.earth_on_minecraft.industry.chemical_engineering"
+  ],
+  "demand_keys": [
+    "settlement.earth_on_minecraft.material.reagents",
+    "settlement.earth_on_minecraft.material.crushed_ore"
+  ],
+  "supply_keys": [
+    "settlement.earth_on_minecraft.material.catalysts",
+    "settlement.earth_on_minecraft.material.cable"
+  ],
+  "weight": 1
+}

@@ -406,7 +406,7 @@ final class ApiServices {
 
         private SettlementInfo map(com.xxsx.earthonminecraft.api.SettlementQueryApi.SettlementInfo info) {
             return new SettlementInfo(info.id(), info.dimension(), info.center(), info.profileId(), info.nameKey(),
-                    info.profileNameKey(), info.scaleKey(), info.technologyKey(), info.industryKeys(),
+                    info.tier(), info.tierProgressKey(), info.profileNameKey(), info.scaleKey(), info.technologyKey(), info.industryKeys(),
                     info.demandKeys(), info.supplyKeys(), info.roleCounts(), info.facilityCounts(), info.security(),
                     info.reputation(), info.createdAt(), info.updatedAt());
         }

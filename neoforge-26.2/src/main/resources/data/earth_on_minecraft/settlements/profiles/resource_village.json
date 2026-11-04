@@ -1,4 +1,5 @@
 {
+  "tier": 2,
   "display_name_key": "settlement.earth_on_minecraft.profile.resource_village",
   "scale_key": "settlement.earth_on_minecraft.scale.village",
   "technology_key": "settlement.earth_on_minecraft.technology.mechanized",

@@ -1,12 +1,73 @@
 {
   "title_key": "resident.earth_on_minecraft.role.geologist",
   "identity_key": "resident.earth_on_minecraft.identity.specialist",
-  "vanilla_professions": ["minecraft:cartographer", "minecraft:librarian"],
-  "settlement_profiles": ["earth_on_minecraft:resource_village"],
+  "vanilla_professions": [
+    "minecraft:cartographer",
+    "minecraft:librarian"
+  ],
+  "settlement_profiles": [
+    "earth_on_minecraft:primitive_hamlet",
+    "earth_on_minecraft:agricultural_village",
+    "earth_on_minecraft:mining_settlement",
+    "earth_on_minecraft:resource_village",
+    "earth_on_minecraft:industrial_town",
+    "earth_on_minecraft:mechanized_city"
+  ],
   "weight": 2,
   "trades": [
-    { "level": 1, "input": "minecraft:emerald", "input_count": 1, "output": "earth_on_minecraft:field_geology_notebook", "output_count": 1, "max_uses": 8, "xp": 2 },
-    { "level": 2, "input": "earth_on_minecraft:calcite_dust", "input_count": 8, "output": "minecraft:emerald", "output_count": 1, "max_uses": 12, "xp": 10 },
-    { "level": 3, "input": "minecraft:emerald", "input_count": 3, "output": "earth_on_minecraft:auriferous_quartz_chunk", "output_count": 2, "max_uses": 8, "xp": 20 }
+    {
+      "level": 1,
+      "input": "minecraft:charcoal",
+      "input_count": 6,
+      "output": "earth_on_minecraft:field_geology_notebook",
+      "output_count": 1,
+      "max_uses": 8,
+      "xp": 2
+    },
+    {
+      "level": 1,
+      "input": "minecraft:coal",
+      "input_count": 6,
+      "output": "earth_on_minecraft:geology_hammer",
+      "output_count": 1,
+      "max_uses": 8,
+      "xp": 4
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:calcite_dust",
+      "input_count": 8,
+      "output": "earth_on_minecraft:lime_dust",
+      "output_count": 6,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:sulfur_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:copper_concentrate",
+      "output_count": 3,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 6,
+      "output": "earth_on_minecraft:ore_scanner",
+      "output_count": 1,
+      "max_uses": 6,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:copper_concentrate",
+      "input_count": 4,
+      "output": "earth_on_minecraft:auriferous_quartz_chunk",
+      "output_count": 3,
+      "max_uses": 8,
+      "xp": 20
+    }
   ]
 }

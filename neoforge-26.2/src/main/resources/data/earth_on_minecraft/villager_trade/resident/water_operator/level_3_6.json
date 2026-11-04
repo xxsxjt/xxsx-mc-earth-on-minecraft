@@ -1,13 +1,12 @@
 {
   "wants": {
-    "id": "minecraft:emerald",
-    "count": 3
+    "id": "earth_on_minecraft:sulfur_dust",
+    "count": 8
   },
   "gives": {
-    "id": "earth_on_minecraft:softened_water",
-    "count": 4
+    "id": "earth_on_minecraft:vanadium_catalyst"
   },
-  "max_uses": 8,
+  "max_uses": 6,
   "reputation_discount": 0.05,
   "xp": 20,
   "merchant_predicate": {

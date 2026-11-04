@@ -3,6 +3,7 @@ package com.xxsx.earthonminecraft.living;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
+import com.xxsx.earthonminecraft.SettlementFacilities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
@@ -19,7 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public final class SettlementSavedData extends SavedData {
-    private static final int DATA_VERSION = 2;
+    private static final int DATA_VERSION = 3;
     private static final int DEFAULT_SETTLEMENT_RADIUS = 96;
 
     private static final Codec<SettlementSavedData> CODEC = RecordCodecBuilder.create(instance -> instance.group(
@@ -67,9 +68,24 @@ public final class SettlementSavedData extends SavedData {
         if (!record.profileId.equals(requestedProfileId)) {
             record.profileId = profileId.toString();
             record.nameKey = nameKey;
+            record.tier = Math.max(record.tier, SettlementDataManager.defaultTierForProfile(profileId));
             record.updatedAt = level.getGameTime();
             setDirty();
         }
+        return snapshot(record);
+    }
+
+    public SettlementSnapshot upgradeToTier(ServerLevel level, String settlementId, int targetTier) {
+        SettlementRecord record = settlements.get(settlementId);
+        if (record == null) {
+            return null;
+        }
+        int clamped = Math.max(1, Math.min(4, targetTier));
+        Identifier nextProfile = SettlementDataManager.canonicalProfileForTier(clamped);
+        record.tier = clamped;
+        record.profileId = nextProfile.toString();
+        record.updatedAt = level.getGameTime();
+        setDirty();
         return snapshot(record);
     }
 
@@ -141,6 +157,7 @@ public final class SettlementSavedData extends SavedData {
                     .orElseGet(() -> create(level, pos, dimension));
         }
         if (record.facilityPositions.computeIfAbsent(facilityId, ignored -> new LinkedHashSet<>()).add(pos.asLong())) {
+            evaluateTierProgression(record);
             record.updatedAt = level.getGameTime();
             setDirty();
         }
@@ -183,8 +200,9 @@ public final class SettlementSavedData extends SavedData {
         while (settlements.containsKey(id)) {
             id = baseId + "-" + suffix++;
         }
+        int initialTier = SettlementDataManager.defaultTierForProfile(profileId);
         SettlementRecord record = new SettlementRecord(id, dimension, pos.asLong(), profileId.toString(), nameKey,
-                Map.of(), Map.of(), Map.of(), Map.of(), level.getGameTime(), level.getGameTime(), 50, 0);
+                initialTier, Map.of(), Map.of(), Map.of(), Map.of(), level.getGameTime(), level.getGameTime(), 50, 0);
         settlements.put(id, record);
         setDirty();
         return record;
@@ -199,14 +217,44 @@ public final class SettlementSavedData extends SavedData {
     }
 
     private static boolean isAutoProfile(String profileId) {
-        return profileId.equals(EarthOnMinecraft.id("agricultural_village").toString())
+        return profileId.equals(EarthOnMinecraft.id("primitive_hamlet").toString())
+                || profileId.equals(EarthOnMinecraft.id("mining_settlement").toString())
+                || profileId.equals(EarthOnMinecraft.id("industrial_town").toString())
+                || profileId.equals(EarthOnMinecraft.id("mechanized_city").toString())
+                || profileId.equals(EarthOnMinecraft.id("agricultural_village").toString())
                 || profileId.equals(EarthOnMinecraft.id("resource_village").toString())
                 || profileId.equals(EarthOnMinecraft.id("mechanized_town").toString());
+    }
+
+    private static void evaluateTierProgression(SettlementRecord record) {
+        int mining = record.facilityPositions.getOrDefault(SettlementFacilities.MINING, new LinkedHashSet<>()).size();
+        int workshop = record.facilityPositions.getOrDefault(SettlementFacilities.WORKSHOP, new LinkedHashSet<>()).size();
+        int power = record.facilityPositions.getOrDefault(SettlementFacilities.POWER, new LinkedHashSet<>()).size();
+        int waterworks = record.facilityPositions.getOrDefault(SettlementFacilities.WATERWORKS, new LinkedHashSet<>()).size();
+        int warehouse = record.facilityPositions.getOrDefault(SettlementFacilities.WAREHOUSE, new LinkedHashSet<>()).size();
+
+        int computedTier = 1;
+        if (mining >= 1 && workshop >= 1) {
+            computedTier = 2;
+        }
+        if (mining >= 2 && workshop >= 2) {
+            computedTier = 3;
+        }
+        if (power >= 1 && waterworks >= 1 && warehouse >= 1) {
+            computedTier = 4;
+        }
+        if (computedTier > record.tier) {
+            record.tier = computedTier;
+            if (isAutoProfile(record.profileId)) {
+                record.profileId = SettlementDataManager.canonicalProfileForTier(computedTier).toString();
+            }
+        }
     }
 
     private SettlementSnapshot snapshot(SettlementRecord record) {
         Identifier profileId = Identifier.parse(record.profileId);
         SettlementDataManager.SettlementProfile profile = SettlementDataManager.profile(profileId);
+        int tier = Math.max(1, Math.min(4, Math.max(record.tier, profile.tier())));
         Map<String, Integer> roleCounts = new LinkedHashMap<>();
         record.residentRoles.values().stream().sorted().forEach(role -> roleCounts.merge(role, 1, Integer::sum));
         List<ResidentSummary> residents = record.residentRoles.entrySet().stream()
@@ -218,7 +266,9 @@ public final class SettlementSavedData extends SavedData {
         Map<String, Integer> facilityCounts = new LinkedHashMap<>();
         record.facilityPositions.entrySet().stream().sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> facilityCounts.put(entry.getKey(), entry.getValue().size()));
+        String tierProgressKey = SettlementDataManager.tierProgressKey(tier, facilityCounts);
         return new SettlementSnapshot(record.id, record.dimension, record.center(), record.profileId, record.nameKey,
+                tier, tierProgressKey,
                 profile.displayNameKey(), profile.scaleKey(), profile.technologyKey(), profile.industryKeys(),
                 profile.demandKeys(), profile.supplyKeys(), residents, Map.copyOf(roleCounts), Map.copyOf(facilityCounts),
                 record.security, record.reputation, record.createdAt, record.updatedAt);
@@ -235,11 +285,26 @@ public final class SettlementSavedData extends SavedData {
     }
 
     public record SettlementSnapshot(String id, String dimension, BlockPos center, String profileId, String nameKey,
+                                     int tier, String tierProgressKey,
                                      String profileNameKey, String scaleKey, String technologyKey,
                                      List<String> industryKeys, List<String> demandKeys, List<String> supplyKeys,
                                      List<ResidentSummary> residents, Map<String, Integer> roleCounts,
                                      Map<String, Integer> facilityCounts,
                                      int security, int reputation, long createdAt, long updatedAt) {
+        public SettlementSnapshot(String id, String dimension, BlockPos center, String profileId, String nameKey,
+                                  String profileNameKey, String scaleKey, String technologyKey,
+                                  List<String> industryKeys, List<String> demandKeys, List<String> supplyKeys,
+                                  List<ResidentSummary> residents, Map<String, Integer> roleCounts,
+                                  Map<String, Integer> facilityCounts,
+                                  int security, int reputation, long createdAt, long updatedAt) {
+            this(id, dimension, center, profileId, nameKey,
+                    SettlementDataManager.defaultTierForProfile(Identifier.parse(profileId)),
+                    SettlementDataManager.tierProgressKey(
+                            SettlementDataManager.defaultTierForProfile(Identifier.parse(profileId)), facilityCounts),
+                    profileNameKey, scaleKey, technologyKey, industryKeys, demandKeys, supplyKeys,
+                    residents, roleCounts, facilityCounts, security, reputation, createdAt, updatedAt);
+        }
+
         public int residentCount() {
             return residents.isEmpty()
                     ? roleCounts.values().stream().mapToInt(Integer::intValue).sum()
@@ -250,13 +315,14 @@ public final class SettlementSavedData extends SavedData {
     public record ResidentSummary(String nameKey, String roleId, int skill) {
     }
 
-    private static final class SettlementRecord {
+    public static final class SettlementRecord {
         private static final Codec<SettlementRecord> CODEC = RecordCodecBuilder.create(instance -> instance.group(
                 Codec.STRING.fieldOf("id").forGetter(record -> record.id),
                 Codec.STRING.fieldOf("dimension").forGetter(record -> record.dimension),
                 Codec.LONG.fieldOf("center").forGetter(record -> record.center),
                 Codec.STRING.fieldOf("profile").forGetter(record -> record.profileId),
                 Codec.STRING.fieldOf("name_key").forGetter(record -> record.nameKey),
+                Codec.INT.optionalFieldOf("tier", 0).forGetter(record -> record.tier),
                 Codec.unboundedMap(Codec.STRING, Codec.STRING).optionalFieldOf("resident_roles", Map.of())
                         .forGetter(record -> Map.copyOf(record.residentRoles)),
                 Codec.unboundedMap(Codec.STRING, Codec.STRING).optionalFieldOf("resident_names", Map.of())
@@ -276,6 +342,7 @@ public final class SettlementSavedData extends SavedData {
         private final long center;
         private String profileId;
         private String nameKey;
+        private int tier;
         private final Map<String, String> residentRoles;
         private final Map<String, String> residentNames;
         private final Map<String, Integer> residentSkills;
@@ -286,6 +353,7 @@ public final class SettlementSavedData extends SavedData {
         private int reputation;
 
         private SettlementRecord(String id, String dimension, long center, String profileId, String nameKey,
+                                 int tier,
                                  Map<String, String> residentRoles, Map<String, String> residentNames,
                                  Map<String, Integer> residentSkills, Map<String, List<Long>> facilityPositions,
                                  long createdAt, long updatedAt, int security, int reputation) {
@@ -294,6 +362,8 @@ public final class SettlementSavedData extends SavedData {
             this.center = center;
             this.profileId = profileId;
             this.nameKey = nameKey;
+            int resolvedTier = tier > 0 ? tier : SettlementDataManager.defaultTierForProfile(Identifier.parse(profileId));
+            this.tier = Math.max(1, Math.min(4, resolvedTier));
             this.residentRoles = new LinkedHashMap<>(residentRoles);
             this.residentNames = new LinkedHashMap<>(residentNames);
             this.residentSkills = new LinkedHashMap<>(residentSkills);
@@ -303,6 +373,18 @@ public final class SettlementSavedData extends SavedData {
             this.updatedAt = updatedAt;
             this.security = Math.max(0, Math.min(100, security));
             this.reputation = reputation;
+        }
+
+        public String id() {
+            return id;
+        }
+
+        public String profileId() {
+            return profileId;
+        }
+
+        public int tier() {
+            return tier;
         }
 
         private BlockPos center() {

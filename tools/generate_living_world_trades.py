@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from collections import defaultdict
 from pathlib import Path
 
@@ -37,6 +38,8 @@ def item_stack(item_id: str, count: int) -> dict[str, object]:
 
 
 def main() -> None:
+    if TRADE_DIR.exists():
+        shutil.rmtree(TRADE_DIR)
     tags: dict[tuple[str, int], list[str]] = defaultdict(list)
     trade_count = 0
 

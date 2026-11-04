@@ -31,7 +31,8 @@ public final class SettlementQueryApi {
 
     private static SettlementInfo toInfo(SettlementSavedData.SettlementSnapshot snapshot) {
         return new SettlementInfo(snapshot.id(), snapshot.dimension(), snapshot.center(), snapshot.profileId(),
-                snapshot.nameKey(), snapshot.profileNameKey(), snapshot.scaleKey(), snapshot.technologyKey(),
+                snapshot.nameKey(), snapshot.tier(), snapshot.tierProgressKey(),
+                snapshot.profileNameKey(), snapshot.scaleKey(), snapshot.technologyKey(),
                 snapshot.industryKeys(), snapshot.demandKeys(), snapshot.supplyKeys(), snapshot.roleCounts(),
                 snapshot.facilityCounts(), snapshot.security(), snapshot.reputation(), snapshot.createdAt(),
                 snapshot.updatedAt());
@@ -43,10 +44,22 @@ public final class SettlementQueryApi {
     }
 
     public record SettlementInfo(String id, String dimension, BlockPos center, String profileId,
-                                 String nameKey, String profileNameKey, String scaleKey, String technologyKey,
+                                 String nameKey, int tier, String tierProgressKey,
+                                 String profileNameKey, String scaleKey, String technologyKey,
                                  List<String> industryKeys, List<String> demandKeys, List<String> supplyKeys,
                                  Map<String, Integer> roleCounts, Map<String, Integer> facilityCounts,
                                  int security, int reputation, long createdAt, long updatedAt) {
+        public SettlementInfo(String id, String dimension, BlockPos center, String profileId,
+                              String nameKey, String profileNameKey, String scaleKey, String technologyKey,
+                              List<String> industryKeys, List<String> demandKeys, List<String> supplyKeys,
+                              Map<String, Integer> roleCounts, Map<String, Integer> facilityCounts,
+                              int security, int reputation, long createdAt, long updatedAt) {
+            this(id, dimension, center, profileId, nameKey, 1,
+                    "settlement.earth_on_minecraft.tier.status.tier_1_need_mining",
+                    profileNameKey, scaleKey, technologyKey, industryKeys, demandKeys, supplyKeys,
+                    roleCounts, facilityCounts, security, reputation, createdAt, updatedAt);
+        }
+
         public int residentCount() {
             return roleCounts.values().stream().mapToInt(Integer::intValue).sum();
         }

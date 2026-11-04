@@ -49,7 +49,27 @@ public class SettlementBoardBlockEntity extends BlockEntity implements MenuProvi
         SettlementFacilities.registerBoard(serverLevel, worldPosition, snapshot.id());
         if (firstIndex) {
             SettlementFacilities.indexNearby(serverLevel, worldPosition, 24, 10, snapshot.id());
+            SettlementSavedData.SettlementSnapshot refreshed = savedData.byId(snapshot.id()).orElse(snapshot);
+            if (refreshed.facilityCounts().size() <= 1
+                    && !refreshed.profileId().equals(EarthOnMinecraft.id("arcane_settlement").toString())
+                    && !refreshed.profileId().equals(EarthOnMinecraft.id("cultivation_settlement").toString())) {
+                SettlementFacilities.buildOrRetrofitCompound(serverLevel, worldPosition, refreshed.tier(), refreshed.id());
+            }
         }
+    }
+
+    public SettlementSavedData.SettlementSnapshot buildOrRetrofitTier(int targetTier) {
+        if (!(level instanceof ServerLevel serverLevel)) {
+            return snapshot();
+        }
+        SettlementSavedData.SettlementSnapshot current = snapshot();
+        SettlementSavedData.SettlementSnapshot updated = SettlementFacilities.buildOrRetrofitCompound(
+                serverLevel, worldPosition, targetTier, current.id());
+        if (!updated.id().equals(settlementId)) {
+            settlementId = updated.id();
+            setChanged();
+        }
+        return updated;
     }
 
     public SettlementSavedData.SettlementSnapshot snapshot() {

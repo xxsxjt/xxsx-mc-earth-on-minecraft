@@ -1,20 +1,19 @@
 {
   "wants": {
-    "id": "minecraft:emerald",
+    "id": "earth_on_minecraft:coke",
     "count": 6
   },
   "gives": {
-    "id": "earth_on_minecraft:lubricating_oil",
-    "count": 2
+    "id": "earth_on_minecraft:steel_pickaxe"
   },
-  "max_uses": 8,
+  "max_uses": 6,
   "reputation_discount": 0.05,
   "xp": 20,
   "merchant_predicate": {
     "condition": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
-      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:mechanic\"}}"
+      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:miner\"}}"
     }
   }
 }

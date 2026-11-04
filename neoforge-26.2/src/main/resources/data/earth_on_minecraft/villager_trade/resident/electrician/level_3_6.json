@@ -1,0 +1,19 @@
+{
+  "wants": {
+    "id": "earth_on_minecraft:sulfur_dust",
+    "count": 8
+  },
+  "gives": {
+    "id": "earth_on_minecraft:vanadium_catalyst"
+  },
+  "max_uses": 8,
+  "reputation_discount": 0.05,
+  "xp": 20,
+  "merchant_predicate": {
+    "condition": "minecraft:entity_properties",
+    "entity": "this",
+    "predicate": {
+      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:electrician\"}}"
+    }
+  }
+}

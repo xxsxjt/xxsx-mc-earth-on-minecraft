@@ -51,6 +51,14 @@ public class SettlementBoardMenu extends AbstractContainerMenu {
         return snapshot;
     }
 
+    public int tier() {
+        return snapshot.tier();
+    }
+
+    public String tierProgressKey() {
+        return snapshot.tierProgressKey();
+    }
+
     public static void writePayload(RegistryFriendlyByteBuf buf, BlockPos pos,
                                     SettlementSavedData.SettlementSnapshot snapshot) {
         buf.writeBlockPos(pos);
@@ -59,6 +67,8 @@ public class SettlementBoardMenu extends AbstractContainerMenu {
         buf.writeBlockPos(snapshot.center());
         buf.writeUtf(snapshot.profileId());
         buf.writeUtf(snapshot.nameKey());
+        buf.writeVarInt(snapshot.tier());
+        buf.writeUtf(snapshot.tierProgressKey());
         buf.writeUtf(snapshot.profileNameKey());
         buf.writeUtf(snapshot.scaleKey());
         buf.writeUtf(snapshot.technologyKey());
@@ -78,6 +88,7 @@ public class SettlementBoardMenu extends AbstractContainerMenu {
         return new SettlementSavedData.SettlementSnapshot("", "minecraft:overworld", pos,
                 EarthOnMinecraft.id("agricultural_village").toString(),
                 "settlement.earth_on_minecraft.name.unknown",
+                1, "settlement.earth_on_minecraft.tier.status.tier_1_need_mining",
                 "settlement.earth_on_minecraft.profile.agricultural_village",
                 "settlement.earth_on_minecraft.scale.village",
                 "settlement.earth_on_minecraft.technology.agricultural",
@@ -87,7 +98,8 @@ public class SettlementBoardMenu extends AbstractContainerMenu {
     private static Payload readPayload(RegistryFriendlyByteBuf buf) {
         BlockPos pos = buf.readBlockPos();
         SettlementSavedData.SettlementSnapshot snapshot = new SettlementSavedData.SettlementSnapshot(
-                buf.readUtf(), buf.readUtf(), buf.readBlockPos(), buf.readUtf(), buf.readUtf(), buf.readUtf(),
+                buf.readUtf(), buf.readUtf(), buf.readBlockPos(), buf.readUtf(), buf.readUtf(),
+                Math.max(1, Math.min(4, buf.readVarInt())), buf.readUtf(), buf.readUtf(),
                 buf.readUtf(), buf.readUtf(), readStrings(buf), readStrings(buf), readStrings(buf),
                 readResidents(buf), readCounts(buf), readCounts(buf), buf.readVarInt(), buf.readInt(),
                 buf.readLong(), buf.readLong());

@@ -72,7 +72,8 @@ public class SettlementBoardScreen extends AbstractContainerScreen<SettlementBoa
         Component settlementName = EarthGuiSupport.trim(font, Component.translatable(snapshot.nameKey()), 154);
         g.centeredText(font, settlementName, WIDTH / 2, 7, INK);
         Component subtitle = EarthGuiSupport.trim(font, Component.translatable("screen.earth_on_minecraft.settlement_board.subtitle",
-                Component.translatable(snapshot.scaleKey()), Component.translatable(snapshot.technologyKey())), 154);
+                Component.translatable("screen.earth_on_minecraft.settlement_board.tier", snapshot.tier()),
+                Component.translatable(snapshot.technologyKey())), 154);
         g.centeredText(font, subtitle, WIDTH / 2, 17, MUTED);
 
         switch (tab) {
@@ -91,6 +92,8 @@ public class SettlementBoardScreen extends AbstractContainerScreen<SettlementBoa
             g.setComponentTooltipForNextFrame(font, List.of(
                     Component.translatable("screen.earth_on_minecraft.settlement_board.security", snapshot.security()),
                     Component.translatable("screen.earth_on_minecraft.settlement_board.reputation", snapshot.reputation()),
+                    Component.translatable("screen.earth_on_minecraft.settlement_board.tier_progress",
+                            snapshot.tier(), Component.translatable(snapshot.tierProgressKey())),
                     Component.translatable("screen.earth_on_minecraft.settlement_board.security.tooltip")
             ), mouseX, mouseY);
         }
@@ -99,7 +102,9 @@ public class SettlementBoardScreen extends AbstractContainerScreen<SettlementBoa
     private void drawOverview(GuiGraphicsExtractor g, SettlementSavedData.SettlementSnapshot snapshot) {
         int y = 52;
         g.text(font, Component.translatable("screen.earth_on_minecraft.settlement_board.profile"), 10, y, ACCENT, false);
-        g.text(font, Component.translatable(snapshot.profileNameKey()), 72, y, INK, false);
+        String tierAndProfile = EarthGuiSupport.fit(font,
+                "T" + snapshot.tier() + " · " + Component.translatable(snapshot.profileNameKey()).getString(), 94);
+        g.text(font, Component.literal(tierAndProfile), 72, y, INK, false);
         y += 13;
         g.text(font, Component.translatable("screen.earth_on_minecraft.settlement_board.population"), 10, y, ACCENT, false);
         g.text(font, Integer.toString(snapshot.residentCount()), 72, y, INK, false);

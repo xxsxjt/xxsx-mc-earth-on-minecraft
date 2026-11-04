@@ -1,12 +1,66 @@
 {
   "title_key": "resident.earth_on_minecraft.role.water_operator",
   "identity_key": "resident.earth_on_minecraft.identity.operator",
-  "vanilla_professions": ["minecraft:cleric", "minecraft:fisherman"],
+  "vanilla_professions": [
+    "minecraft:cleric",
+    "minecraft:fisherman"
+  ],
   "settlement_profiles": [],
   "weight": 2,
   "trades": [
-    { "level": 1, "input": "minecraft:charcoal", "input_count": 8, "output": "minecraft:emerald", "output_count": 1, "max_uses": 12, "xp": 2 },
-    { "level": 2, "input": "minecraft:emerald", "input_count": 2, "output": "earth_on_minecraft:activated_carbon", "output_count": 4, "max_uses": 12, "xp": 10 },
-    { "level": 3, "input": "minecraft:emerald", "input_count": 3, "output": "earth_on_minecraft:softened_water", "output_count": 4, "max_uses": 8, "xp": 20 }
+    {
+      "level": 1,
+      "input": "minecraft:charcoal",
+      "input_count": 8,
+      "output": "earth_on_minecraft:activated_carbon",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 2
+    },
+    {
+      "level": 1,
+      "input": "earth_on_minecraft:salt_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:lime_dust",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 2
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:lime_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:softened_water",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:sulfur_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:sulfuric_acid",
+      "output_count": 2,
+      "max_uses": 10,
+      "xp": 10
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:salt_dust",
+      "input_count": 8,
+      "output": "earth_on_minecraft:sodium_hydroxide",
+      "output_count": 3,
+      "max_uses": 8,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:sulfur_dust",
+      "input_count": 8,
+      "output": "earth_on_minecraft:vanadium_catalyst",
+      "output_count": 1,
+      "max_uses": 6,
+      "xp": 20
+    }
   ]
 }

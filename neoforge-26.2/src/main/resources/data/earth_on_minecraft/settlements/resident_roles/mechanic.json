@@ -1,12 +1,73 @@
 {
   "title_key": "resident.earth_on_minecraft.role.mechanic",
   "identity_key": "resident.earth_on_minecraft.identity.technician",
-  "vanilla_professions": ["minecraft:armorer", "minecraft:toolsmith", "minecraft:weaponsmith"],
-  "settlement_profiles": ["earth_on_minecraft:mechanized_town"],
+  "vanilla_professions": [
+    "minecraft:armorer",
+    "minecraft:toolsmith",
+    "minecraft:weaponsmith"
+  ],
+  "settlement_profiles": [
+    "earth_on_minecraft:mining_settlement",
+    "earth_on_minecraft:resource_village",
+    "earth_on_minecraft:industrial_town",
+    "earth_on_minecraft:mechanized_city",
+    "earth_on_minecraft:mechanized_town"
+  ],
   "weight": 3,
   "trades": [
-    { "level": 1, "input": "minecraft:iron_ingot", "input_count": 6, "output": "minecraft:emerald", "output_count": 1, "max_uses": 12, "xp": 2 },
-    { "level": 2, "input": "minecraft:emerald", "input_count": 3, "output": "earth_on_minecraft:rubber_gasket", "output_count": 4, "max_uses": 12, "xp": 10 },
-    { "level": 3, "input": "minecraft:emerald", "input_count": 6, "output": "earth_on_minecraft:lubricating_oil", "output_count": 2, "max_uses": 8, "xp": 20 }
+    {
+      "level": 1,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 4,
+      "output": "earth_on_minecraft:firebrick",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 2
+    },
+    {
+      "level": 1,
+      "input": "earth_on_minecraft:lime_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:wrought_iron",
+      "output_count": 2,
+      "max_uses": 12,
+      "xp": 4
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:iron_concentrate",
+      "input_count": 4,
+      "output": "earth_on_minecraft:steel",
+      "output_count": 2,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 2,
+      "input": "earth_on_minecraft:coke",
+      "input_count": 6,
+      "output": "earth_on_minecraft:rubber_gasket",
+      "output_count": 4,
+      "max_uses": 12,
+      "xp": 10
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:sulfur_dust",
+      "input_count": 6,
+      "output": "earth_on_minecraft:iron_catalyst",
+      "output_count": 1,
+      "max_uses": 8,
+      "xp": 20
+    },
+    {
+      "level": 3,
+      "input": "earth_on_minecraft:steel",
+      "input_count": 3,
+      "output": "earth_on_minecraft:steel_pickaxe",
+      "output_count": 1,
+      "max_uses": 8,
+      "xp": 20
+    }
   ]
 }

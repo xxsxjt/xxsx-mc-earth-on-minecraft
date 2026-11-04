@@ -1,11 +1,11 @@
 {
   "wants": {
-    "id": "minecraft:emerald",
-    "count": 3
+    "id": "earth_on_minecraft:iron_concentrate",
+    "count": 4
   },
   "gives": {
-    "id": "earth_on_minecraft:rubber_gasket",
-    "count": 4
+    "id": "earth_on_minecraft:steel",
+    "count": 2
   },
   "max_uses": 12,
   "reputation_discount": 0.05,

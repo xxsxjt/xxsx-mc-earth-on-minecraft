@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "earth_on_minecraft:resident/mechanic/level_1_1"
+    "earth_on_minecraft:resident/mechanic/level_1_1",
+    "earth_on_minecraft:resident/mechanic/level_1_2"
   ]
 }

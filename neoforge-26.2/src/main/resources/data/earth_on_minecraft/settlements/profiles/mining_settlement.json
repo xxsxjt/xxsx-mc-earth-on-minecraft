@@ -1,0 +1,23 @@
+{
+  "tier": 2,
+  "display_name_key": "settlement.earth_on_minecraft.profile.mining_settlement",
+  "scale_key": "settlement.earth_on_minecraft.scale.village",
+  "technology_key": "settlement.earth_on_minecraft.technology.mining",
+  "name_keys": [
+    "settlement.earth_on_minecraft.name.coppervein",
+    "settlement.earth_on_minecraft.name.slagbrook"
+  ],
+  "industry_keys": [
+    "settlement.earth_on_minecraft.industry.ore_dressing",
+    "settlement.earth_on_minecraft.industry.bloomery_smelting"
+  ],
+  "demand_keys": [
+    "settlement.earth_on_minecraft.material.charcoal",
+    "settlement.earth_on_minecraft.material.support_timber"
+  ],
+  "supply_keys": [
+    "settlement.earth_on_minecraft.material.ore_samples",
+    "settlement.earth_on_minecraft.material.wrought_iron"
+  ],
+  "weight": 3
+}

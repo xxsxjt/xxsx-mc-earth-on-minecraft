@@ -1,0 +1,176 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 4.0,
+        "max": 6.0
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:magnetite_chunk",
+          "weight": 15,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3.0,
+                "max": 6.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:magnetite_chunk",
+                  "phase": "solid",
+                  "grade": "fine",
+                  "purity": 0.84,
+                  "moisture": 0.0,
+                  "particle_size_um": 5000,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:chalcopyrite_chunk",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 5.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:chalcopyrite_chunk",
+                  "phase": "solid",
+                  "grade": "common",
+                  "purity": 0.78,
+                  "moisture": 0.0,
+                  "particle_size_um": 5000,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:iron_concentrate",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 4.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:material_batch": {
+                  "schema_version": 1,
+                  "species_id": "earth_on_minecraft:iron_concentrate",
+                  "phase": "solid",
+                  "grade": "fine",
+                  "purity": 0.955,
+                  "moisture": 0.04,
+                  "particle_size_um": 120,
+                  "temperature_k": 293
+                }
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:sponge_iron",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:wrought_iron",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 3.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:timber_beam",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2.0,
+                "max": 6.0
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "earth_on_minecraft:geology_hammer",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              }
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "earth_on_minecraft:tool_quality": {
+                  "schema_version": 1,
+                  "grade": "fine",
+                  "smith": "mining_settlement_smith",
+                  "rolls": 0.72
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "random_sequence": "earth_on_minecraft:chests/settlement_mining_settlement"
+}

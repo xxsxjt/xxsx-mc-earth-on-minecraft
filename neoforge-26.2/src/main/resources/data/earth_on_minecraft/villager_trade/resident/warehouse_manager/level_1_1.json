@@ -1,12 +1,13 @@
 {
   "wants": {
-    "id": "minecraft:paper",
-    "count": 16
+    "id": "minecraft:oak_log",
+    "count": 8
   },
   "gives": {
-    "id": "minecraft:emerald"
+    "id": "earth_on_minecraft:timber_beam",
+    "count": 4
   },
-  "max_uses": 12,
+  "max_uses": 16,
   "reputation_discount": 0.05,
   "xp": 2,
   "merchant_predicate": {

@@ -1,10 +1,10 @@
 {
   "wants": {
-    "id": "minecraft:emerald",
-    "count": 2
+    "id": "earth_on_minecraft:coke",
+    "count": 6
   },
   "gives": {
-    "id": "earth_on_minecraft:magnetite_chunk",
+    "id": "earth_on_minecraft:rubber_gasket",
     "count": 4
   },
   "max_uses": 12,
@@ -14,7 +14,7 @@
     "condition": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
-      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:miner\"}}"
+      "minecraft:nbt": "{NeoForgeData:{EarthOnMinecraftResidentRoleId:\"earth_on_minecraft:mechanic\"}}"
     }
   }
 }

@@ -8,11 +8,15 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 public final class ResidentWorkBehavior {
-    private static final int WORK_RADIUS = 16;
+    private static final int WORK_RADIUS = 24;
 
     private ResidentWorkBehavior() {
     }
@@ -37,9 +41,42 @@ public final class ResidentWorkBehavior {
         villager.getLookControl().setLookAt(
                 workPos.getX() + 0.5D, workPos.getY() + 0.7D, workPos.getZ() + 0.5D);
         emitRoleEffect(level, villager, role);
+        if (role.equals("warehouse_manager")) {
+            restockSettlementChestIfEmpty(level, workPos, profile);
+        }
     }
 
-    private static String facilityForRole(String role) {
+    private static void restockSettlementChestIfEmpty(
+            ServerLevel level, BlockPos pos, ResidentProfileManager.ResidentSnapshot profile) {
+        BlockEntity be = level.getBlockEntity(pos);
+        if (!(be instanceof RandomizableContainerBlockEntity chest)) {
+            return;
+        }
+        if (chest.getLootTable() != null) {
+            return;
+        }
+        boolean anyItem = false;
+        for (int i = 0; i < chest.getContainerSize(); i++) {
+            if (!chest.getItem(i).isEmpty()) {
+                anyItem = true;
+                break;
+            }
+        }
+        if (anyItem) {
+            return;
+        }
+        int tier = SettlementSavedData.get(level).byId(profile.settlementId())
+                .map(SettlementSavedData.SettlementSnapshot::tier)
+                .orElse(1);
+        List<ItemStack> supplies = SettlementFacilities.deterministicAssayedSuppliesForTier(
+                tier, level.getGameTime() ^ pos.asLong());
+        for (int i = 0; i < Math.min(supplies.size(), chest.getContainerSize()); i++) {
+            chest.setItem(i, supplies.get(i));
+        }
+        chest.setChanged();
+    }
+
+    public static String facilityForRole(String role) {
         return switch (role) {
             case "miner", "geologist" -> SettlementFacilities.MINING;
             case "mechanic" -> SettlementFacilities.WORKSHOP;

@@ -9,6 +9,9 @@ import com.xxsx.earthonminecraft.component.MaterialBatch;
 import com.xxsx.earthonminecraft.component.MetalBatch;
 import com.xxsx.earthonminecraft.component.QualityComponents;
 import com.xxsx.earthonminecraft.component.ToolQualityComponent;
+import com.xxsx.earthonminecraft.living.ResidentProfileManager;
+import com.xxsx.earthonminecraft.living.SettlementDataManager;
+import com.xxsx.earthonminecraft.living.SettlementSavedData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,9 +28,14 @@ import net.minecraft.gametest.framework.TestEnvironmentDefinition;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.npc.villager.Villager;
+import net.minecraft.world.entity.npc.villager.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
@@ -53,6 +61,7 @@ final class EarthGameTests {
     private static final Identifier DEPOSIT_RESERVE = EarthOnMinecraft.id("deposit_reserve");
     private static final Identifier ASSAY_METALLURGY_FORGING = EarthOnMinecraft.id("assay_metallurgy_forging");
     private static final Identifier CHEMICAL_CATALYST_DUAL_TANKS = EarthOnMinecraft.id("chemical_catalyst_dual_tanks");
+    private static final Identifier SETTLEMENT_HIERARCHY_TRADES = EarthOnMinecraft.id("settlement_hierarchy_trades");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
     private static final Map<Identifier, Consumer<GameTestHelper>> TESTS = Map.ofEntries(
@@ -71,7 +80,8 @@ final class EarthGameTests {
             Map.entry(MULTIBLOCK_ASSEMBLY, EarthGameTests::multiblockAssembly),
             Map.entry(DEPOSIT_RESERVE, EarthGameTests::depositReserve),
             Map.entry(ASSAY_METALLURGY_FORGING, EarthGameTests::assayMetallurgyForging),
-            Map.entry(CHEMICAL_CATALYST_DUAL_TANKS, EarthGameTests::chemicalCatalystDualTanks));
+            Map.entry(CHEMICAL_CATALYST_DUAL_TANKS, EarthGameTests::chemicalCatalystDualTanks),
+            Map.entry(SETTLEMENT_HIERARCHY_TRADES, EarthGameTests::settlementHierarchyTrades));
 
     static {
         TEST_INSTANCE_TYPES.register("direct", () -> DirectGameTestInstance.CODEC);
@@ -106,6 +116,7 @@ final class EarthGameTests {
         event.registerTest(DEPOSIT_RESERVE, test(DEPOSIT_RESERVE, environment, 100, true, 8));
         event.registerTest(ASSAY_METALLURGY_FORGING, test(ASSAY_METALLURGY_FORGING, environment, 60, true, 8));
         event.registerTest(CHEMICAL_CATALYST_DUAL_TANKS, test(CHEMICAL_CATALYST_DUAL_TANKS, environment, 100, true, 12));
+        event.registerTest(SETTLEMENT_HIERARCHY_TRADES, test(SETTLEMENT_HIERARCHY_TRADES, environment, 100, true, 12));
     }
 
     private static GameTestInstance test(Identifier testId, Holder<TestEnvironmentDefinition<?>> environment,
@@ -1048,6 +1059,147 @@ final class EarthGameTests {
         helper.assertValueEqual(furnace.outputTankAmount(), 0, "outputTank must empty after export");
         helper.assertValueEqual(caster.tankAmount(), 288, "neighbor inputTank must receive 288 mB molten_iron");
 
+        helper.succeed();
+    }
+
+    private static void settlementHierarchyTrades(GameTestHelper helper) {
+        // 1. Verify 4-tier profile metadata and backward compatibility
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("primitive_hamlet")).tier(), 1,
+                "primitive_hamlet must be Tier 1");
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("agricultural_village")).tier(), 1,
+                "agricultural_village must remain compatible as Tier 1");
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("mining_settlement")).tier(), 2,
+                "mining_settlement must be Tier 2");
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("resource_village")).tier(), 2,
+                "resource_village must remain compatible as Tier 2");
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("industrial_town")).tier(), 3,
+                "industrial_town must be Tier 3");
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("mechanized_city")).tier(), 4,
+                "mechanized_city must be Tier 4");
+        helper.assertValueEqual(SettlementDataManager.profile(EarthOnMinecraft.id("mechanized_town")).tier(), 4,
+                "mechanized_town must remain compatible as Tier 4");
+
+        // 2. Verify progressive Tier 1 -> 2 -> 3 -> 4 physical compound build/retrofit and chest loot tables
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos boardAbs = origin.offset(5, 1, 5);
+        var level = helper.getLevel();
+
+        // Tier 1: primitive_hamlet
+        SettlementSavedData.SettlementSnapshot t1 = SettlementFacilities.buildOrRetrofitCompound(level, boardAbs, 1, "");
+        helper.assertValueEqual(t1.tier(), 1, "Tier 1 compound must report tier=1");
+        helper.assertValueEqual(t1.profileId(), EarthOnMinecraft.id("primitive_hamlet").toString(),
+                "Tier 1 compound must use primitive_hamlet profile");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 0)).getBlock(),
+                EarthOnMinecraft.CAMPFIRE.get(), "Tier 1 compound must place campfire");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(-2, 0, 0)).getBlock(),
+                EarthOnMinecraft.PIT_KILN.get(), "Tier 1 compound must place pit_kiln_controller");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(0, 0, 2)).getBlock(),
+                EarthOnMinecraft.CURING_BARN.get(), "Tier 1 compound must place drying/curing station");
+        BlockPos chestAbs = boardAbs.offset(1, 0, -2);
+        RandomizableContainerBlockEntity chestBe = (RandomizableContainerBlockEntity) level.getBlockEntity(chestAbs);
+        helper.assertTrue(chestBe != null && SettlementFacilities.chestLootTableForTier(1).equals(chestBe.getLootTable()),
+                "Tier 1 supply chest must be assigned settlement_primitive_hamlet loot table");
+
+        // Retrofit to Tier 2: mining_settlement
+        SettlementSavedData.SettlementSnapshot t2 = SettlementFacilities.buildOrRetrofitCompound(level, boardAbs, 2, t1.id());
+        helper.assertValueEqual(t2.tier(), 2, "Tier 2 retrofit must upgrade settlement to tier=2");
+        helper.assertValueEqual(t2.profileId(), EarthOnMinecraft.id("mining_settlement").toString(),
+                "Tier 2 retrofit must update profile to mining_settlement");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 0)).getBlock(),
+                EarthOnMinecraft.BLOOMERY.get(), "Tier 2 compound must place bloomery_controller");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(-2, 0, 0)).getBlock(),
+                EarthOnMinecraft.IRONWORKING_ANVIL.get(), "Tier 2 compound must place ironworking_anvil");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(0, 0, 2)).getBlock(),
+                EarthOnMinecraft.SIEVE.get(), "Tier 2 compound must place sieve");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 2)).getBlock(),
+                EarthOnMinecraft.JAW_CRUSHER.get(), "Tier 2 compound must place jaw_crusher");
+        chestBe = (RandomizableContainerBlockEntity) level.getBlockEntity(chestAbs);
+        helper.assertTrue(chestBe != null && SettlementFacilities.chestLootTableForTier(2).equals(chestBe.getLootTable()),
+                "Tier 2 supply chest must be assigned settlement_mining_settlement loot table");
+
+        // Retrofit to Tier 3: industrial_town
+        SettlementSavedData.SettlementSnapshot t3 = SettlementFacilities.buildOrRetrofitCompound(level, boardAbs, 3, t1.id());
+        helper.assertValueEqual(t3.tier(), 3, "Tier 3 retrofit must upgrade settlement to tier=3");
+        helper.assertValueEqual(t3.profileId(), EarthOnMinecraft.id("industrial_town").toString(),
+                "Tier 3 retrofit must update profile to industrial_town");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 0)).getBlock(),
+                EarthOnMinecraft.SHAFT_FURNACE.get(), "Tier 3 compound must place shaft_furnace_controller");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(-2, 0, 0)).getBlock(),
+                EarthOnMinecraft.INDUSTRIAL_KILN.get(), "Tier 3 compound must place industrial_kiln");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(0, 0, 2)).getBlock(),
+                EarthOnMinecraft.ORE_ROASTER.get(), "Tier 3 compound must place ore_roaster");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 2)).getBlock(),
+                EarthOnMinecraft.BALL_MILL.get(), "Tier 3 compound must place ball_mill");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(-2, 0, 2)).getBlock(),
+                EarthOnMinecraft.LIME_KILN.get(), "Tier 3 compound must place lime_kiln_controller");
+        chestBe = (RandomizableContainerBlockEntity) level.getBlockEntity(chestAbs);
+        helper.assertTrue(chestBe != null && SettlementFacilities.chestLootTableForTier(3).equals(chestBe.getLootTable()),
+                "Tier 3 supply chest must be assigned settlement_industrial_town loot table");
+
+        // Retrofit to Tier 4: mechanized_city
+        SettlementSavedData.SettlementSnapshot t4 = SettlementFacilities.buildOrRetrofitCompound(level, boardAbs, 4, t1.id());
+        helper.assertValueEqual(t4.tier(), 4, "Tier 4 retrofit must upgrade settlement to tier=4");
+        helper.assertValueEqual(t4.profileId(), EarthOnMinecraft.id("mechanized_city").toString(),
+                "Tier 4 retrofit must update profile to mechanized_city");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 0)).getBlock(),
+                EarthOnMinecraft.COMBUSTION_GENERATOR.get(), "Tier 4 compound must place combustion_generator");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(2, 0, 2)).getBlock(),
+                EarthOnMinecraft.BATTERY_BOX.get(), "Tier 4 compound must place battery_box");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(-2, 0, 0)).getBlock(),
+                EarthOnMinecraft.CHEMICAL_REACTOR.get(), "Tier 4 compound must place chemical_reactor");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(0, 0, 2)).getBlock(),
+                EarthOnMinecraft.DISTILLATION_COLUMN.get(), "Tier 4 compound must place distillation_column");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(-2, 0, 2)).getBlock(),
+                EarthOnMinecraft.ELECTROLYTIC_CELL.get(), "Tier 4 compound must place electrolytic_cell");
+        helper.assertValueEqual(level.getBlockState(boardAbs.offset(0, 0, -2)).getBlock(),
+                EarthOnMinecraft.CONVEYOR_BELT.get(), "Tier 4 compound must place conveyor_belt");
+        chestBe = (RandomizableContainerBlockEntity) level.getBlockEntity(chestAbs);
+        helper.assertTrue(chestBe != null && SettlementFacilities.chestLootTableForTier(4).equals(chestBe.getLootTable()),
+                "Tier 4 supply chest must be assigned settlement_mechanized_city loot table");
+
+        // Verify SettlementQueryApi exposes tier and tierProgressKey
+        var apiInfo = EarthOnMinecraftApi.settlements().settlement(level, t4.id())
+                .orElseThrow(() -> helper.assertionException("SettlementQueryApi failed to find settlement"));
+        helper.assertValueEqual(apiInfo.tier(), 4, "SettlementQueryApi must expose tier=4");
+        helper.assertValueEqual(apiInfo.tierProgressKey(), "settlement.earth_on_minecraft.tier.status.tier_4_max",
+                "SettlementQueryApi must expose tier_4_max progress key");
+
+        // 3. Verify industrial/geological villager trade overhaul & dynamic MaterialBatch/ToolQualityComponent stamping
+        Villager villager = EntityType.VILLAGER.create(level, EntitySpawnReason.EVENT);
+        helper.assertTrue(villager != null, "Villager entity must be created");
+        villager.setPos(boardAbs.getX() + 0.5D, boardAbs.getY() + 1.0D, boardAbs.getZ() + 0.5D);
+        Holder<VillagerProfession> cartographer = BuiltInRegistries.VILLAGER_PROFESSION
+                .get(Identifier.withDefaultNamespace("cartographer"))
+                .orElseThrow(() -> helper.assertionException("missing cartographer profession"));
+        villager.setVillagerData(villager.getVillagerData().withProfession(cartographer).withLevel(3));
+        level.addFreshEntity(villager);
+
+        var residentProfile = ResidentProfileManager.ensure(villager);
+        helper.assertValueEqual(residentProfile.settlementId(), t4.id(),
+                "Villager must bind to the Tier 4 settlement");
+        var offers = villager.getOffers();
+        helper.assertTrue(!offers.isEmpty(), "Resident villager must generate industrial/geological trade offers");
+        helper.assertTrue(offers.stream().noneMatch(o ->
+                        o.getBaseCostA().is(Items.EMERALD) || o.getResult().is(Items.EMERALD)),
+                "Resident villager trades must replace generic emerald filler with industrial/geological barter");
+        helper.assertTrue(offers.stream().anyMatch(o ->
+                        o.getResult().has(EarthDataComponents.MATERIAL_BATCH.get())
+                                || o.getResult().has(EarthDataComponents.TOOL_QUALITY.get())),
+                "Resident villager trade outputs must carry dynamic MaterialBatch or ToolQualityComponent");
+
+        // Verify deterministic assayed trade supply helper directly for both material batch and forged tool
+        ItemStack assayedSample = ResidentProfileManager.createAssayedTradeSupply(
+                EarthOnMinecraft.IRON_CONCENTRATE.get(), 2, "miner", 4, 5, 12345L);
+        MaterialBatch sampleBatch = assayedSample.get(EarthDataComponents.MATERIAL_BATCH.get());
+        helper.assertTrue(sampleBatch != null && sampleBatch.purity() > 0.94,
+                "Assayed concentrate trade supply must carry boosted MaterialBatch purity");
+        ItemStack forgedScanner = ResidentProfileManager.createAssayedTradeSupply(
+                SpecItems.BY_ID.get("ore_scanner").get(), 1, "geologist", 4, 5, 67890L);
+        ToolQualityComponent toolQuality = forgedScanner.get(EarthDataComponents.TOOL_QUALITY.get());
+        helper.assertTrue(toolQuality != null && toolQuality.grade().tier() >= Grade.MASTERWORK.tier(),
+                "Tier 4 skilled resident tool supply must carry high-grade ToolQualityComponent");
+
+        villager.discard();
         helper.succeed();
     }
 

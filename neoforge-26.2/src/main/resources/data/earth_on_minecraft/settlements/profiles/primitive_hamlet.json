@@ -1,0 +1,23 @@
+{
+  "tier": 1,
+  "display_name_key": "settlement.earth_on_minecraft.profile.primitive_hamlet",
+  "scale_key": "settlement.earth_on_minecraft.scale.hamlet",
+  "technology_key": "settlement.earth_on_minecraft.technology.primitive",
+  "name_keys": [
+    "settlement.earth_on_minecraft.name.ash_hollow",
+    "settlement.earth_on_minecraft.name.claybank"
+  ],
+  "industry_keys": [
+    "settlement.earth_on_minecraft.industry.foraging",
+    "settlement.earth_on_minecraft.industry.pit_firing"
+  ],
+  "demand_keys": [
+    "settlement.earth_on_minecraft.material.firewood",
+    "settlement.earth_on_minecraft.material.clay"
+  ],
+  "supply_keys": [
+    "settlement.earth_on_minecraft.material.charcoal",
+    "settlement.earth_on_minecraft.material.ceramics"
+  ],
+  "weight": 4
+}

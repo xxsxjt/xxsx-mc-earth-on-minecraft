@@ -1,10 +1,11 @@
 {
   "wants": {
-    "id": "minecraft:torch",
-    "count": 16
+    "id": "minecraft:charcoal",
+    "count": 8
   },
   "gives": {
-    "id": "minecraft:emerald"
+    "id": "earth_on_minecraft:magnetite_chunk",
+    "count": 4
   },
   "max_uses": 16,
   "reputation_discount": 0.05,
