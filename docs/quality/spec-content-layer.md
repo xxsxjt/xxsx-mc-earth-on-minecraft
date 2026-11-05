@@ -86,7 +86,7 @@ Every one of the 37 spec lodes now has a finite reserve that depletes.
 | Per-block state | `DepositBlockEntity` | lazily fills a full reserve on first access, saves/loads |
 | Lode block | `DepositBlock` | right-click reports remaining / capacity |
 | Lookup | `DepositSpec` | block to lode map, bound on `FMLCommonSetupEvent` |
-| Sizing | `SpecLodeReserves` | 37 entries from `reserve_chunks x 12 / lodes_per_region`, clamped 16-512 |
+| Sizing | `SpecLodeReserves` | 37 entries from `reserve_chunks x 12 / lodes_per_region`, clamped 16-512; `DepositSpec.capacityFor` multiplies by `RESERVE_MULTIPLIER = 2` (gameplay knob, since 0.1.17) |
 | Spent form | `SpecDepletedBlocks` | 37 depleted blocks with blockstates, models, items, loot, 32x32 textures, lang |
 
 `tools/generate_depleted_blocks.py`, `generate_lode_reserves.py`, `generate_depleted_lang.py` produce

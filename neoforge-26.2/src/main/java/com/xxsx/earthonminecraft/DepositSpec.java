@@ -17,12 +17,18 @@ import java.util.Map;
 public final class DepositSpec {
     /** Minimum units any lode holds, so a small body is not pointless to work. */
     private static final int MIN_CAPACITY = 16;
+    /**
+     * Gameplay multiplier applied on top of the spec reserve. The spec numbers keep the geological
+     * proportions between lodes; this knob sets how much a single block is worth in play.
+     */
+    public static final int RESERVE_MULTIPLIER = 2;
 
     public record Lode(String id, String blockId, int capacity, String depletedBlockId) {
     }
 
     private static final Map<Block, Lode> BY_BLOCK = new LinkedHashMap<>();
     private static final Map<String, Lode> BY_ID = new LinkedHashMap<>();
+    private static final Map<String, Block> BLOCK_BY_LODE = new LinkedHashMap<>();
     private static boolean bound;
 
     private DepositSpec() {
@@ -50,6 +56,7 @@ public final class DepositSpec {
                     depleted == null ? "" : entry.id());
             BY_BLOCK.put(block, lode);
             BY_ID.put(lodeId, lode);
+            BLOCK_BY_LODE.put(lodeId, block);
         }
         bound = true;
     }
@@ -114,10 +121,15 @@ public final class DepositSpec {
         };
     }
 
-    /** Capacity in ore units for one lode block. */
+    /**
+     * Capacity in ore units for one lode block: the spec share floored at {@link #MIN_CAPACITY},
+     * times {@link #RESERVE_MULTIPLIER}. Blocks whose reserve was already initialised keep their
+     * saved capacity; only newly read blocks use this value.
+     */
     public static int capacityFor(String lodeId) {
         Integer spec = SpecLodeReserves.capacity(lodeId);
-        return spec == null ? DepositReserve.DEFAULT_CAPACITY : Math.max(MIN_CAPACITY, spec);
+        int base = spec == null ? DepositReserve.DEFAULT_CAPACITY : Math.max(MIN_CAPACITY, spec);
+        return base * RESERVE_MULTIPLIER;
     }
 
     public static int capacityFor(Identifier lodeId) {
@@ -146,6 +158,17 @@ public final class DepositSpec {
 
     public static boolean isLode(Block block) {
         return BY_BLOCK.containsKey(block);
+    }
+
+    /** The live block that represents a lode, or {@code null} for an unknown lode id. */
+    public static Block blockOf(String lodeId) {
+        return BLOCK_BY_LODE.get(lodeId);
+    }
+
+    /** Lode id path of a live lode block, or {@code null} when the block is not a live lode. */
+    public static String lodeIdOf(Block block) {
+        Lode lode = BY_BLOCK.get(block);
+        return lode == null ? null : lode.id();
     }
 
     public static boolean isDepleted(Block block) {

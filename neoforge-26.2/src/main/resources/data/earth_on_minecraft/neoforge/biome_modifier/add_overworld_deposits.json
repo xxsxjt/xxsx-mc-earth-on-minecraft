@@ -24,7 +24,13 @@
     "earth_on_minecraft:phosphorite_bed",
     "earth_on_minecraft:evaporite_salt_bed",
     "earth_on_minecraft:cassiterite_placer_deposit",
-    "earth_on_minecraft:rare_earth_carbonatite"
+    "earth_on_minecraft:rare_earth_carbonatite",
+    "earth_on_minecraft:galena_ore",
+    "earth_on_minecraft:sphalerite_ore",
+    "earth_on_minecraft:chromite_ore",
+    "earth_on_minecraft:manganite_ore",
+    "earth_on_minecraft:borate_deposit",
+    "earth_on_minecraft:uraninite_ore"
   ],
   "step": "underground_ores"
 }

@@ -170,7 +170,8 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
         registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.GEOLOGY_HAMMER.get()),
                 lineKey("jei.earth_on_minecraft.ironworking.hammer.0", ChatFormatting.GOLD),
                 lineKey("jei.earth_on_minecraft.ironworking.hammer.1", JEI_BODY),
-                lineKey("jei.earth_on_minecraft.ironworking.hammer.2", JEI_HINT));
+                lineKey("jei.earth_on_minecraft.ironworking.hammer.2", JEI_HINT),
+                lineKey("jei.earth_on_minecraft.ironworking.hammer.3", JEI_BODY));
         registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.IRONWORKING_ANVIL.get()),
                 lineKey("jei.earth_on_minecraft.ironworking.anvil.0", ChatFormatting.GOLD),
                 lineKey("jei.earth_on_minecraft.ironworking.anvil.1", JEI_BODY),

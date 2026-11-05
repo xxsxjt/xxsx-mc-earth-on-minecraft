@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "earth_on_minecraft:lode_surface_signal"
+  ],
+  "step": "underground_decoration"
+}

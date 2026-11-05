@@ -46,6 +46,10 @@ public class DepositBlock extends Block implements EntityBlock {
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
                                           Player player, net.minecraft.world.InteractionHand hand,
                                           BlockHitResult hitResult) {
+        // Prospecting tools run their own logic (the hammer assays this block itself).
+        if (stack.getItem() instanceof GeologyHammerItem || stack.getItem() instanceof OreScannerItem) {
+            return InteractionResult.PASS;
+        }
         return useWithoutItem(state, level, pos, player, hitResult);
     }
 }

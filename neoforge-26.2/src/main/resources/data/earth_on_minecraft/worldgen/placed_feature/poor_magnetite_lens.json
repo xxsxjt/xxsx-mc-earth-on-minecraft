@@ -3,7 +3,7 @@
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 3
+      "chance": 2
     },
     {
       "type": "minecraft:in_square"
@@ -13,10 +13,10 @@
       "height": {
         "type": "minecraft:trapezoid",
         "min_inclusive": {
-          "absolute": -64
+          "absolute": 0
         },
         "max_inclusive": {
-          "absolute": 16
+          "absolute": 112
         }
       }
     },
@@ -25,4 +25,3 @@
     }
   ]
 }
-

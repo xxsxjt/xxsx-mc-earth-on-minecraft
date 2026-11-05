@@ -59,6 +59,7 @@
 - [贴图 AI 提示词](docs/asset-prompts.md)
 - [扩展路线图：核能、电网、自动化和科幻附属边界](docs/earth-on-minecraft-expanded-roadmap.md)
 - [科幻附属路线图](docs/scifi-addon-roadmap.md)
+- [0.1.17 Test Beta release notes](docs/release-notes-0.1.17-beta.md)
 - [0.1.16 Test Beta release notes](docs/release-notes-0.1.16-beta.md)
 - [0.1.15 Test Beta release notes](docs/release-notes-0.1.15-beta.md)
 - [0.1.14 Test Beta release notes](docs/release-notes-0.1.14-beta.md)
@@ -96,9 +97,9 @@ python tools\render_connected_ore_previews.py
 
 - GitHub: https://github.com/xxsxjt/xxsx-mc-earth-on-minecraft
 - `neoforge-26.2/` — 目录名沿用旧版，当前目标为 NeoForge `26.1.2.124` / Minecraft `26.1.2`，Java 25。
-- 构建产物：`neoforge-26.2/build/libs/earth-on-minecraft-neoforge-26.1.2-0.1.16.jar`
+- 构建产物：`neoforge-26.2/build/libs/earth-on-minecraft-neoforge-26.1.2-0.1.17.jar`
 - 测试部署目标：`E:\_dx\_Games\MC\xxxxxx\.minecraft\versions\26.1.2-NeoForge_26.1.2.124\mods`
-- 发布状态：`0.1.16` 是开发中测试版，包含首铁迁移、有限矿床、工业钻头、采石场、多方块机器、流体处理和扩展路线；本轮仅进行静态验证与构建，游戏内行为尚未验证。
+- 发布状态：`0.1.17` 是开发中测试版，在 0.1.16 的首铁迁移、有限矿床、工业钻头、采石场、多方块机器、流体处理和扩展路线之上，加入地表矿苗、地质锤勘探、可筛选的 5×5 区块矿体扫描仪和储量翻倍；已通过静态验证和无窗口 GameTest，未在游戏客户端内实测。
 
 第一版已实现：
 - **硬核化改造第一步（3D 层级多方块 + 四阶段动力/开尔文炉温体系 + 工业遥测 GUI）**：8 类现代多方块设备与 6 座传统窑炉全部升级为严格朝向旋转对齐的 3D 层级蓝图（含腔体空气校验与精确到世界/相对坐标的缺件/错件诊断）；移除假自动动力兜底，实装人力步进、水轮/风车机械动力检测、开尔文（K）真实炉温升降与燃料最高温上限门禁、EOU 电容缓冲，并在机器 GUI 中提供实时温度计、电量条、遥测底栏与多方块坐标级诊断提示。

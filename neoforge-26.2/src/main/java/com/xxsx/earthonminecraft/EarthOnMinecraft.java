@@ -53,6 +53,11 @@ public class EarthOnMinecraft {
     public static final DeferredRegister<MenuType<?>> MENUS = DeferredRegister.create(Registries.MENU, MODID);
     public static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.Keys.FLUID_TYPES, MODID);
     public static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, MODID);
+    public static final DeferredRegister<net.minecraft.world.level.levelgen.feature.Feature<?>> FEATURES =
+            DeferredRegister.create(Registries.FEATURE, MODID);
+    public static final DeferredHolder<net.minecraft.world.level.levelgen.feature.Feature<?>, LodeSurfaceSignalFeature>
+            LODE_SURFACE_SIGNAL = FEATURES.register("lode_surface_signal", () -> new LodeSurfaceSignalFeature(
+            net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration.CODEC));
 
     private static final List<ItemLike> TAB_ITEMS = new ArrayList<>();
     private static final List<DeferredBlock<ProcessingMachineBlock>> MACHINE_BLOCKS = new ArrayList<>();
@@ -480,6 +485,7 @@ public class EarthOnMinecraft {
         MENUS.register(modBus);
         FLUID_TYPES.register(modBus);
         FLUIDS.register(modBus);
+        FEATURES.register(modBus);
         MachineFeedback.register(modBus);
         modBus.addListener(this::registerCapabilities);
         modBus.addListener((net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent event) ->

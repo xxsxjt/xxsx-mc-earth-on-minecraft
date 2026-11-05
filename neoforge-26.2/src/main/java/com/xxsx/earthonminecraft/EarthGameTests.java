@@ -62,6 +62,10 @@ final class EarthGameTests {
     private static final Identifier ASSAY_METALLURGY_FORGING = EarthOnMinecraft.id("assay_metallurgy_forging");
     private static final Identifier CHEMICAL_CATALYST_DUAL_TANKS = EarthOnMinecraft.id("chemical_catalyst_dual_tanks");
     private static final Identifier SETTLEMENT_HIERARCHY_TRADES = EarthOnMinecraft.id("settlement_hierarchy_trades");
+    private static final Identifier PROSPECT_HAMMER_SURVEY = EarthOnMinecraft.id("prospect_hammer_survey");
+    private static final Identifier PROSPECT_SCANNER_FILTER = EarthOnMinecraft.id("prospect_scanner_filter");
+    private static final Identifier DEPOSIT_RESERVE_MULTIPLIER = EarthOnMinecraft.id("deposit_reserve_multiplier");
+    private static final Identifier LODE_SURFACE_SIGNAL = EarthOnMinecraft.id("lode_surface_signal");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
     private static final Map<Identifier, Consumer<GameTestHelper>> TESTS = Map.ofEntries(
@@ -81,7 +85,11 @@ final class EarthGameTests {
             Map.entry(DEPOSIT_RESERVE, EarthGameTests::depositReserve),
             Map.entry(ASSAY_METALLURGY_FORGING, EarthGameTests::assayMetallurgyForging),
             Map.entry(CHEMICAL_CATALYST_DUAL_TANKS, EarthGameTests::chemicalCatalystDualTanks),
-            Map.entry(SETTLEMENT_HIERARCHY_TRADES, EarthGameTests::settlementHierarchyTrades));
+            Map.entry(SETTLEMENT_HIERARCHY_TRADES, EarthGameTests::settlementHierarchyTrades),
+            Map.entry(PROSPECT_HAMMER_SURVEY, EarthGameTests::prospectHammerSurvey),
+            Map.entry(PROSPECT_SCANNER_FILTER, EarthGameTests::prospectScannerFilter),
+            Map.entry(DEPOSIT_RESERVE_MULTIPLIER, EarthGameTests::depositReserveMultiplier),
+            Map.entry(LODE_SURFACE_SIGNAL, EarthGameTests::lodeSurfaceSignal));
 
     static {
         TEST_INSTANCE_TYPES.register("direct", () -> DirectGameTestInstance.CODEC);
@@ -117,6 +125,10 @@ final class EarthGameTests {
         event.registerTest(ASSAY_METALLURGY_FORGING, test(ASSAY_METALLURGY_FORGING, environment, 60, true, 8));
         event.registerTest(CHEMICAL_CATALYST_DUAL_TANKS, test(CHEMICAL_CATALYST_DUAL_TANKS, environment, 100, true, 12));
         event.registerTest(SETTLEMENT_HIERARCHY_TRADES, test(SETTLEMENT_HIERARCHY_TRADES, environment, 100, true, 12));
+        event.registerTest(PROSPECT_HAMMER_SURVEY, test(PROSPECT_HAMMER_SURVEY, environment, 40, true, 8));
+        event.registerTest(PROSPECT_SCANNER_FILTER, test(PROSPECT_SCANNER_FILTER, environment, 40, true, 8));
+        event.registerTest(DEPOSIT_RESERVE_MULTIPLIER, test(DEPOSIT_RESERVE_MULTIPLIER, environment, 40, true, 8));
+        event.registerTest(LODE_SURFACE_SIGNAL, test(LODE_SURFACE_SIGNAL, environment, 20, true));
     }
 
     private static GameTestInstance test(Identifier testId, Holder<TestEnvironmentDefinition<?>> environment,
@@ -555,6 +567,210 @@ final class EarthGameTests {
     /** Writes a block state at an absolute position, bypassing the GameTest structure bounds. */
     private static void setAbsent(GameTestHelper helper, BlockPos absolute, BlockState state) {
         helper.getLevel().setBlock(absolute, state, 3);
+    }
+
+    /**
+     * Live lode samples found by the real chunk walk, restricted to this test's padded area so lodes
+     * placed by neighbouring tests cannot leak into the assertions.
+     */
+    private static List<ProspectingSurvey.Sample> samplesInTestArea(GameTestHelper helper, BlockPos center,
+                                                                    int chunkRadius,
+                                                                    java.util.function.Predicate<String> lodes) {
+        net.minecraft.world.phys.AABB area = helper.getBoundsWithPadding();
+        return ProspectingSurvey.collect(helper.getLevel(), net.minecraft.world.level.ChunkPos.containing(center),
+                        chunkRadius, lodes).stream()
+                .filter(sample -> area.contains(net.minecraft.world.phys.Vec3.atCenterOf(sample.pos())))
+                .toList();
+    }
+
+    private static java.util.Set<String> lodeIds(List<ProspectingSurvey.Sample> samples) {
+        java.util.Set<String> ids = new java.util.TreeSet<>();
+        samples.forEach(sample -> ids.add(sample.lodeId()));
+        return ids;
+    }
+
+    private static void prospectHammerSurvey(GameTestHelper helper) {
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos struck = origin.offset(0, 7, 0);
+        BlockPos ore = origin.offset(7, 1, -7);
+        setAbsent(helper, struck, Blocks.STONE.defaultBlockState());
+        setAbsent(helper, ore, EarthOnMinecraft.RICH_MAGNETITE_ORE.get().defaultBlockState());
+
+        List<ProspectingSurvey.Sample> samples = samplesInTestArea(helper, struck,
+                GeologyHammerItem.SURVEY_CHUNK_RADIUS, ProspectingCatalog::isProspectable);
+        helper.assertTrue(samples.stream().anyMatch(sample -> sample.pos().equals(ore)),
+                "the block-entity walk must find the placed magnetite, got " + samples);
+        List<ProspectingSurvey.Group> groups = ProspectingSurvey.group(samples, struck);
+        helper.assertValueEqual(groups.size(), 1, "exactly one lode in the test area");
+        ProspectingSurvey.Group magnetite = groups.get(0);
+        helper.assertValueEqual(magnetite.lodeId(), "rich_magnetite_lens", "identified lode");
+        helper.assertValueEqual(magnetite.blocks(), 1, "block count");
+        helper.assertValueEqual(magnetite.remaining(), DepositSpec.capacityFor("rich_magnetite_lens"),
+                "an untouched lode reports its full reserve");
+        // +7 east, -7 north: 9.9 blocks to the northeast, 6 blocks below the struck rock.
+        helper.assertValueEqual(ProspectingSurvey.bearing(struck, magnetite.nearest()),
+                ProspectingSurvey.Bearing.NORTHEAST, "bearing (-Z is north)");
+        helper.assertValueEqual(ProspectingSurvey.roundToFive(
+                ProspectingSurvey.horizontalDistance(struck, magnetite.nearest())), 10, "rounded horizontal distance");
+        helper.assertValueEqual(ProspectingSurvey.roundedHeight(struck, magnetite.nearest()), -5,
+                "rounded relative height (negative = deeper)");
+        helper.assertValueEqual(ProspectingSurvey.bearing(struck, struck.offset(-9, -30, 1)),
+                ProspectingSurvey.Bearing.WEST, "bearing west");
+        helper.assertValueEqual(ProspectingSurvey.bearing(struck, struck.offset(1, -30, 1)),
+                ProspectingSurvey.Bearing.HERE, "a lode straight below has no compass bearing");
+
+        List<Component> report = GeologyHammerItem.report(struck, groups);
+        helper.assertValueEqual(report.size(), 2, "report is a title plus one lode line");
+        helper.assertTrue(report.get(1).getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents line
+                        && line.getKey().equals("message.earth_on_minecraft.geology_hammer.entry"),
+                "lode line uses the directional entry");
+        List<Component> quiet = GeologyHammerItem.report(struck, List.of());
+        helper.assertTrue(quiet.size() == 1
+                        && quiet.get(0).getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents q
+                        && q.getKey().equals("message.earth_on_minecraft.geology_hammer.quiet"),
+                "an empty survey reports a steady echo");
+
+        // A real strike costs one durability and starts the cooldown; a second strike is refused.
+        net.minecraft.world.entity.player.Player player = helper.makeMockPlayer(net.minecraft.world.level.GameType.SURVIVAL);
+        ItemStack hammer = new ItemStack(EarthOnMinecraft.GEOLOGY_HAMMER.get());
+        player.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, hammer);
+        var hit = new net.minecraft.world.phys.BlockHitResult(net.minecraft.world.phys.Vec3.atCenterOf(ore),
+                Direction.UP, ore, false);
+        var first = hammer.useOn(new net.minecraft.world.item.context.UseOnContext(player,
+                net.minecraft.world.InteractionHand.MAIN_HAND, hit));
+        helper.assertTrue(first.consumesAction(), "a strike on a lode must be handled, got " + first);
+        helper.assertValueEqual(hammer.getDamageValue(), 1, "a survey costs one durability");
+        helper.assertTrue(player.getCooldowns().isOnCooldown(hammer), "a survey starts the cooldown");
+        hammer.useOn(new net.minecraft.world.item.context.UseOnContext(player,
+                net.minecraft.world.InteractionHand.MAIN_HAND, hit));
+        helper.assertValueEqual(hammer.getDamageValue(), 1, "a strike during cooldown costs nothing");
+        helper.assertValueEqual(hammer.getMaxDamage(), 96, "geology hammer durability");
+        helper.succeed();
+    }
+
+    private static void prospectScannerFilter(GameTestHelper helper) {
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos magnetite = origin.offset(3, 1, 3);
+        BlockPos chalcopyrite = origin.offset(-3, 2, -3);
+        BlockPos granite = origin.offset(5, 1, -5);
+        Block graniteBlock = DepositSpec.blockOf("granitic_intrusion");
+        helper.assertTrue(graniteBlock != null, "granitic intrusion must be a lode block");
+        setAbsent(helper, magnetite, EarthOnMinecraft.MAGNETITE_ORE.get().defaultBlockState());
+        setAbsent(helper, chalcopyrite, EarthOnMinecraft.CHALCOPYRITE_ORE.get().defaultBlockState());
+        setAbsent(helper, granite, graniteBlock.defaultBlockState());
+
+        var copper = lodeIds(samplesInTestArea(helper, origin, OreScannerItem.SURVEY_CHUNK_RADIUS,
+                ProspectingCatalog.Filter.COPPER::accepts));
+        helper.assertValueEqual(copper, java.util.Set.of("chalcopyrite_vein"), "copper target");
+        var iron = lodeIds(samplesInTestArea(helper, origin, OreScannerItem.SURVEY_CHUNK_RADIUS,
+                ProspectingCatalog.Filter.IRON::accepts));
+        helper.assertValueEqual(iron, java.util.Set.of("magnetite_lens"), "iron target");
+        var all = lodeIds(samplesInTestArea(helper, origin, OreScannerItem.SURVEY_CHUNK_RADIUS,
+                ProspectingCatalog.Filter.ALL::accepts));
+        helper.assertValueEqual(all, java.util.Set.of("chalcopyrite_vein", "magnetite_lens"),
+                "the all target skips host-rock strata");
+        helper.assertTrue(ProspectingCatalog.Filter.ALL.accepts("limestone_calcite_bed"),
+                "limestone stays a prospecting target");
+
+        // Every named family must point at lodes that exist, or the target would silently find nothing.
+        for (ProspectingCatalog.Filter filter : ProspectingCatalog.Filter.values()) {
+            for (String lode : filter.lodes()) {
+                helper.assertTrue(DepositSpec.blockOf(lode) != null,
+                        "scanner target " + filter.key() + " names unknown lode " + lode);
+            }
+        }
+
+        ItemStack scanner = new ItemStack(SpecItems.BY_ID.get("ore_scanner").get());
+        helper.assertValueEqual(OreScannerItem.filterOf(scanner), ProspectingCatalog.Filter.ALL, "default target");
+        helper.assertValueEqual(OreScannerItem.cycleFilter(scanner), ProspectingCatalog.Filter.IRON, "first cycle");
+        helper.assertValueEqual(OreScannerItem.cycleFilter(scanner), ProspectingCatalog.Filter.COPPER, "second cycle");
+        helper.assertValueEqual(OreScannerItem.filterOf(scanner.copy()), ProspectingCatalog.Filter.COPPER,
+                "the target is stored on the stack");
+        var tag = scanner.getOrDefault(net.minecraft.core.component.DataComponents.CUSTOM_DATA,
+                net.minecraft.world.item.component.CustomData.EMPTY).copyTag();
+        helper.assertValueEqual(tag.getStringOr(OreScannerItem.FILTER_KEY, ""), "copper", "custom_data key");
+        helper.succeed();
+    }
+
+    private static void depositReserveMultiplier(GameTestHelper helper) {
+        helper.assertValueEqual(DepositSpec.RESERVE_MULTIPLIER, 2, "reserve multiplier");
+        // Spec shares: magnetite 26, poor magnetite 48, bituminous coal 504, cassiterite 16 (floor 16).
+        helper.assertValueEqual(DepositSpec.capacityFor("magnetite_lens"), 52, "magnetite lens capacity");
+        helper.assertValueEqual(DepositSpec.capacityFor("poor_magnetite_lens"), 96, "poor magnetite capacity");
+        helper.assertValueEqual(DepositSpec.capacityFor("bituminous_coal_seam"), 1008, "bituminous seam capacity");
+        helper.assertValueEqual(DepositSpec.capacityFor("cassiterite_placer_deposit"), 32, "floored lode capacity");
+        helper.assertValueEqual(DepositSpec.capacityFor("no_such_lode"), DepositReserve.DEFAULT_CAPACITY * 2,
+                "unknown lode capacity");
+        for (DepositSpec.Lode lode : DepositSpec.lodes()) {
+            helper.assertTrue(DepositSpec.capacityFor(lode.id()) >= 32,
+                    "lode " + lode.id() + " is below the doubled floor");
+        }
+        BlockPos pos = new BlockPos(1, 1, 1);
+        helper.setBlock(pos, EarthOnMinecraft.MAGNETITE_ORE.get());
+        var deposit = helper.getBlockEntity(pos, DepositBlockEntity.class);
+        helper.assertValueEqual(deposit.reserve().capacity(), 52, "a fresh magnetite block uses the new capacity");
+        helper.assertValueEqual(deposit.reserve().remaining(), 52, "a fresh magnetite block starts full");
+        helper.succeed();
+    }
+
+    private static void lodeSurfaceSignal(GameTestHelper helper) {
+        Block magnetiteHalo = DepositSpec.blockOf("magnetite_tuff_halo");
+        for (String lode : List.of("poor_magnetite_lens", "magnetite_lens", "rich_magnetite_lens")) {
+            helper.assertTrue(ProspectingCatalog.surfaceSignalFor(lode).orElse(null) == magnetiteHalo,
+                    lode + " must signal with magnetite tuff halo");
+        }
+        helper.assertTrue(ProspectingCatalog.surfaceSignalFor("cassiterite_placer_deposit").orElse(null)
+                == EarthOnMinecraft.CASSITERITE_PLACER_DEPOSIT.get(), "cassiterite placer crops out as itself");
+        helper.assertTrue(ProspectingCatalog.surfaceSignalFor("chalcopyrite_vein").orElse(null)
+                == DepositSpec.blockOf("chalcopyrite_granite_halo"), "chalcopyrite signals with its granite halo");
+        for (String silent : List.of("magnetite_tuff_halo", "chalcopyrite_granite_halo", "granitic_intrusion",
+                "limestone_calcite_bed", "basalt_mafic_dike")) {
+            helper.assertTrue(ProspectingCatalog.surfaceSignalFor(silent).isEmpty(), silent + " must not signal");
+        }
+        for (DepositSpec.Lode lode : DepositSpec.lodes()) {
+            if (ProspectingCatalog.isMainLode(lode.id())) {
+                helper.assertTrue(ProspectingCatalog.surfaceSignalFor(lode.id()).isPresent(),
+                        "main lode " + lode.id() + " has no surface signal block");
+            }
+        }
+
+        // Six magnetite blocks trigger; five chalcopyrite, any amount of halo or host rock do not.
+        List<LodeSurfaceSignalFeature.Hit> hits = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, -40, 3), "magnetite_lens"));
+        }
+        for (int i = 0; i < 5; i++) {
+            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 20, 9), "chalcopyrite_vein"));
+        }
+        for (int i = 0; i < 12; i++) {
+            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 0, 0), "magnetite_tuff_halo"));
+            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 1, 0), "granitic_intrusion"));
+        }
+        var signals = LodeSurfaceSignalFeature.planSignals(hits);
+        helper.assertValueEqual(signals.size(), 1, "only the magnetite lens qualifies, got " + signals);
+        helper.assertValueEqual(signals.get(0).lodeId(), "magnetite_lens", "signal lode");
+        helper.assertValueEqual(signals.get(0).x(), 2, "signal sits at the lode's x centroid");
+        helper.assertValueEqual(signals.get(0).z(), 3, "signal sits at the lode's z centroid");
+
+        for (String extra : List.of("galena_lens", "uraninite_lens", "cassiterite_placer_deposit")) {
+            for (int i = 0; i < 8; i++) {
+                hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 10, 12), extra));
+            }
+        }
+        helper.assertValueEqual(LodeSurfaceSignalFeature.planSignals(hits).size(),
+                LodeSurfaceSignalFeature.MAX_SIGNALS, "at most three signals per chunk");
+
+        helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.GRASS_BLOCK.defaultBlockState()), "grass");
+        helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.PODZOL.defaultBlockState()), "podzol");
+        helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.DIRT.defaultBlockState()), "dirt");
+        helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.STONE.defaultBlockState()), "stone");
+        helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.GRAVEL.defaultBlockState()), "gravel");
+        for (Block kept : List.of(Blocks.WATER, Blocks.ICE, Blocks.SNOW_BLOCK, Blocks.OAK_LOG, Blocks.OAK_LEAVES,
+                Blocks.COBBLESTONE, Blocks.OAK_PLANKS)) {
+            helper.assertFalse(LodeSurfaceSignalFeature.isNaturalSurface(kept.defaultBlockState()),
+                    kept + " must not be replaced by a surface signal");
+        }
+        helper.succeed();
     }
 
     /**
