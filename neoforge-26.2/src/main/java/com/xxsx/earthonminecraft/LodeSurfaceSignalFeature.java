@@ -26,21 +26,17 @@ import java.util.Optional;
 /**
  * Post-ore pass that marks the surface above real ore bodies.
  *
- * <p>Runs once per chunk after {@code underground_ores}. It reads the lode blocks already placed
- * in the chunk (worldgen leaves a pending block-entity record for each one), and for every main
- * lode with at least {@link #MIN_BLOCKS} blocks puts a signal at the surface above the lode's XZ
- * centroid: a small patch of its halo rock, or a few outcrop blocks of the lode itself. A signal
- * therefore always sits over ore that exists.</p>
+ * <p>Runs once per chunk after {@code underground_ores}. It reads the main-lode blocks already
+ * placed in the chunk with {@link LodeSectionScan} (ore features write chunk sections directly and
+ * leave no block-entity record), and for every main lode with at least {@link #MIN_BLOCKS} blocks
+ * puts a signal at the surface above the lode's XZ centroid: a small patch of its halo rock, or a
+ * few outcrop blocks of the lode itself. A signal therefore always sits over ore that exists.</p>
  */
 public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfiguration> {
     public static final int MIN_BLOCKS = 6;
     public static final int MAX_SIGNALS = 3;
     private static final int HALO_RADIUS = 2;
     private static final float HALO_SKIP_CHANCE = 0.3F;
-
-    /** A lode block found in the chunk. */
-    public record Hit(BlockPos pos, String lodeId) {
-    }
 
     /** A signal to place: which lode, how many blocks backed it, and the surface column. */
     public record Signal(String lodeId, int blocks, int x, int z) {
@@ -55,13 +51,7 @@ public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfigura
         WorldGenLevel level = context.level();
         ChunkPos chunkPos = ChunkPos.containing(context.origin());
         ChunkAccess chunk = level.getChunk(chunkPos.x(), chunkPos.z());
-        List<Hit> hits = new ArrayList<>();
-        for (BlockPos pos : chunk.getBlockEntitiesPos()) {
-            String lodeId = DepositSpec.lodeIdOf(chunk.getBlockState(pos).getBlock());
-            if (lodeId != null) {
-                hits.add(new Hit(pos.immutable(), lodeId));
-            }
-        }
+        List<LodeSectionScan.Hit> hits = LodeSectionScan.scan(chunk, LodeSectionScan.mainLodeBlocks());
         RandomSource random = context.random();
         boolean placed = false;
         for (Signal signal : planSignals(hits)) {
@@ -74,9 +64,9 @@ public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfigura
      * Picks the signals for one chunk: main lodes only (no halos, no host strata), at least
      * {@link #MIN_BLOCKS} blocks each, largest first, at most {@link #MAX_SIGNALS}.
      */
-    public static List<Signal> planSignals(Collection<Hit> hits) {
+    public static List<Signal> planSignals(Collection<LodeSectionScan.Hit> hits) {
         Map<String, long[]> totals = new LinkedHashMap<>();
-        for (Hit hit : hits) {
+        for (LodeSectionScan.Hit hit : hits) {
             if (!ProspectingCatalog.isMainLode(hit.lodeId())) {
                 continue;
             }

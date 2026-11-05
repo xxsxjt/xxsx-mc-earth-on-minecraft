@@ -5,28 +5,39 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.levelgen.Heightmap;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
 
 /**
  * Reads live lode reserves around a point for the geology hammer and the ore scanner.
  *
- * <p>Every lode block carries a {@link DepositBlockEntity}, so a survey walks the block-entity
- * positions of each chunk instead of scanning a cube block by block. Only chunks that are already
- * loaded are read; a survey never loads or generates terrain.</p>
+ * <p>Worldgen ore blocks carry no block entity until something touches them, so a survey reads
+ * block states through {@link LodeSectionScan}. A block whose {@link DepositBlockEntity} already
+ * exists reports its saved reserve; any other block counts at full capacity, and no block entity
+ * is created just to read it. Only chunks that are already loaded are read; a survey never loads
+ * or generates terrain.</p>
  */
 public final class ProspectingSurvey {
-    /** One live lode block. */
-    public record Sample(BlockPos pos, String lodeId, int remaining) {
+    /**
+     * One live lode block. {@code surface} marks a block in the top two layers of its column, such
+     * as an outcrop signal, which says nothing about where the ore body lies.
+     */
+    public record Sample(BlockPos pos, String lodeId, int remaining, boolean surface) {
     }
 
-    /** All samples of one lode, with the block nearest to the survey origin. */
+    /**
+     * All samples of one lode. {@code nearest} is the closest buried block, or the closest surface
+     * block when the lode has no buried block in range; {@code distance} is measured to it.
+     */
     public record Group(String lodeId, int blocks, int remaining, BlockPos nearest, double distance) {
     }
 
@@ -48,44 +59,92 @@ public final class ProspectingSurvey {
      */
     public static List<Sample> collect(Level level, ChunkPos center, int chunkRadius, Predicate<String> lodes) {
         List<Sample> samples = new ArrayList<>();
+        Set<Block> targets = LodeSectionScan.blocksFor(lodes);
+        if (targets.isEmpty()) {
+            return samples;
+        }
         for (int cx = center.x() - chunkRadius; cx <= center.x() + chunkRadius; cx++) {
             for (int cz = center.z() - chunkRadius; cz <= center.z() + chunkRadius; cz++) {
                 LevelChunk chunk = level.getChunkSource().getChunkNow(cx, cz);
                 if (chunk == null) {
                     continue;
                 }
-                for (BlockPos pos : chunk.getBlockEntitiesPos()) {
-                    Block block = chunk.getBlockState(pos).getBlock();
-                    String lodeId = DepositSpec.lodeIdOf(block);
-                    if (lodeId == null || !lodes.test(lodeId)) {
+                for (LodeSectionScan.Hit hit : LodeSectionScan.scan(chunk, targets)) {
+                    int remaining = remainingAt(chunk, hit);
+                    if (remaining <= 0) {
                         continue;
                     }
-                    if (chunk.getBlockEntity(pos) instanceof DepositBlockEntity deposit
-                            && !deposit.reserve().isEmpty()) {
-                        samples.add(new Sample(pos.immutable(), lodeId, deposit.reserve().remaining()));
-                    }
+                    BlockPos pos = hit.pos();
+                    boolean surface = pos.getY()
+                            >= chunk.getHeight(Heightmap.Types.OCEAN_FLOOR, pos.getX(), pos.getZ()) - 1;
+                    samples.add(new Sample(pos, hit.lodeId(), remaining, surface));
                 }
             }
         }
         return samples;
     }
 
-    /** Groups samples by lode, nearest group first. */
-    public static List<Group> group(List<Sample> samples, BlockPos origin) {
-        Map<String, Group> groups = new LinkedHashMap<>();
-        for (Sample sample : samples) {
-            double distance = Math.sqrt(sample.pos().distSqr(origin));
-            groups.merge(sample.lodeId(),
-                    new Group(sample.lodeId(), 1, sample.remaining(), sample.pos(), distance),
-                    (a, b) -> {
-                        boolean bCloser = b.distance() < a.distance();
-                        return new Group(a.lodeId(), a.blocks() + b.blocks(), a.remaining() + b.remaining(),
-                                bCloser ? b.nearest() : a.nearest(), Math.min(a.distance(), b.distance()));
-                    });
+    /**
+     * Reserve left in one lode block. {@link LevelChunk#getBlockEntity(BlockPos)} only checks for an
+     * existing entity (and promotes saved data); it never builds a new one, so an untouched block
+     * reads as full.
+     */
+    private static int remainingAt(LevelChunk chunk, LodeSectionScan.Hit hit) {
+        BlockEntity entity = chunk.getBlockEntity(hit.pos());
+        if (entity instanceof DepositBlockEntity deposit) {
+            return deposit.reserve().remaining();
         }
-        List<Group> result = new ArrayList<>(groups.values());
+        return DepositSpec.capacityFor(hit.lodeId());
+    }
+
+    /**
+     * Groups samples by lode, nearest group first. Every sample counts toward blocks and reserve;
+     * the reported point prefers buried blocks so an outcrop does not hide the body beneath it.
+     */
+    public static List<Group> group(List<Sample> samples, BlockPos origin) {
+        Map<String, Accumulator> groups = new LinkedHashMap<>();
+        for (Sample sample : samples) {
+            groups.computeIfAbsent(sample.lodeId(), Accumulator::new).add(sample, origin);
+        }
+        List<Group> result = new ArrayList<>();
+        groups.values().forEach(accumulator -> result.add(accumulator.toGroup()));
         result.sort(Comparator.comparingDouble(Group::distance).thenComparing(Group::lodeId));
         return result;
+    }
+
+    private static final class Accumulator {
+        private final String lodeId;
+        private int blocks;
+        private int remaining;
+        private BlockPos buried;
+        private double buriedDistance = Double.MAX_VALUE;
+        private BlockPos exposed;
+        private double exposedDistance = Double.MAX_VALUE;
+
+        Accumulator(String lodeId) {
+            this.lodeId = lodeId;
+        }
+
+        void add(Sample sample, BlockPos origin) {
+            blocks++;
+            remaining += sample.remaining();
+            double distance = Math.sqrt(sample.pos().distSqr(origin));
+            if (sample.surface()) {
+                if (distance < exposedDistance) {
+                    exposed = sample.pos();
+                    exposedDistance = distance;
+                }
+            } else if (distance < buriedDistance) {
+                buried = sample.pos();
+                buriedDistance = distance;
+            }
+        }
+
+        Group toGroup() {
+            return buried != null
+                    ? new Group(lodeId, blocks, remaining, buried, buriedDistance)
+                    : new Group(lodeId, blocks, remaining, exposed, exposedDistance);
+        }
     }
 
     /** Rounds a block distance to the nearest multiple of five. */

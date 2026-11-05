@@ -15,15 +15,18 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
 
 /**
  * Stone geology hammer: forges at the stone anvil and prospects by striking rock.
  *
- * <p>Striking any block reports the live lodes in the 3x3 chunks around it: direction, rounded
- * horizontal distance, rounded depth, block count and remaining reserve. Striking a lode block
- * first assays that block. The anvil handles its own forging before this item is asked.</p>
+ * <p>Striking any block reports up to three live lodes in the 3x3 chunks around it: direction,
+ * rounded horizontal distance, rounded depth, block count and remaining reserve. Main ore bodies
+ * take the slots first, then limestone, then halo rock, nearest first within each tier. Striking a
+ * lode block first assays that block. The anvil handles its own forging before this item is
+ * asked.</p>
  */
 public class GeologyHammerItem extends Item {
     public static final int DURABILITY = 96;
@@ -67,10 +70,29 @@ public class GeologyHammerItem extends Item {
         return InteractionResult.SUCCESS_SERVER;
     }
 
-    /** Live prospectable lodes in the 3x3 chunks around the struck block, nearest first. */
+    /** Live prospectable lodes in the 3x3 chunks around the struck block, in report order. */
     public static List<ProspectingSurvey.Group> survey(Level level, BlockPos struck) {
-        return ProspectingSurvey.group(ProspectingSurvey.collect(level, ChunkPos.containing(struck),
-                SURVEY_CHUNK_RADIUS, ProspectingCatalog::isProspectable), struck);
+        return rank(ProspectingSurvey.group(ProspectingSurvey.collect(level, ChunkPos.containing(struck),
+                SURVEY_CHUNK_RADIUS, ProspectingCatalog::isProspectable), struck));
+    }
+
+    /**
+     * Report order: main ore bodies, then limestone, then halo rock; nearest first within a tier.
+     * A halo usually sits right underfoot and would otherwise take the slots of the ore it marks.
+     */
+    public static List<ProspectingSurvey.Group> rank(List<ProspectingSurvey.Group> groups) {
+        List<ProspectingSurvey.Group> ranked = new ArrayList<>(groups);
+        ranked.sort(Comparator.comparingInt((ProspectingSurvey.Group group) -> tier(group.lodeId()))
+                .thenComparingDouble(ProspectingSurvey.Group::distance)
+                .thenComparing(ProspectingSurvey.Group::lodeId));
+        return ranked;
+    }
+
+    private static int tier(String lodeId) {
+        if (ProspectingCatalog.isMainLode(lodeId)) {
+            return 0;
+        }
+        return ProspectingCatalog.LIMESTONE.equals(lodeId) ? 1 : 2;
     }
 
     /** Chat lines for a survey: a title and up to three lodes, or the quiet-echo line. */

@@ -66,6 +66,10 @@ final class EarthGameTests {
     private static final Identifier PROSPECT_SCANNER_FILTER = EarthOnMinecraft.id("prospect_scanner_filter");
     private static final Identifier DEPOSIT_RESERVE_MULTIPLIER = EarthOnMinecraft.id("deposit_reserve_multiplier");
     private static final Identifier LODE_SURFACE_SIGNAL = EarthOnMinecraft.id("lode_surface_signal");
+    private static final Identifier PROSPECT_SECTION_SURVEY = EarthOnMinecraft.id("prospect_section_survey");
+    private static final Identifier LODE_SIGNAL_SECTION_SCAN = EarthOnMinecraft.id("lode_signal_section_scan");
+    private static final Identifier PROSPECT_OUTCROP_DEPTH = EarthOnMinecraft.id("prospect_outcrop_depth");
+    private static final Identifier PROSPECT_HAMMER_RANK = EarthOnMinecraft.id("prospect_hammer_rank");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
     private static final Map<Identifier, Consumer<GameTestHelper>> TESTS = Map.ofEntries(
@@ -89,7 +93,11 @@ final class EarthGameTests {
             Map.entry(PROSPECT_HAMMER_SURVEY, EarthGameTests::prospectHammerSurvey),
             Map.entry(PROSPECT_SCANNER_FILTER, EarthGameTests::prospectScannerFilter),
             Map.entry(DEPOSIT_RESERVE_MULTIPLIER, EarthGameTests::depositReserveMultiplier),
-            Map.entry(LODE_SURFACE_SIGNAL, EarthGameTests::lodeSurfaceSignal));
+            Map.entry(LODE_SURFACE_SIGNAL, EarthGameTests::lodeSurfaceSignal),
+            Map.entry(PROSPECT_SECTION_SURVEY, EarthGameTests::prospectSectionSurvey),
+            Map.entry(LODE_SIGNAL_SECTION_SCAN, EarthGameTests::lodeSignalSectionScan),
+            Map.entry(PROSPECT_OUTCROP_DEPTH, EarthGameTests::prospectOutcropDepth),
+            Map.entry(PROSPECT_HAMMER_RANK, EarthGameTests::prospectHammerRank));
 
     static {
         TEST_INSTANCE_TYPES.register("direct", () -> DirectGameTestInstance.CODEC);
@@ -129,6 +137,10 @@ final class EarthGameTests {
         event.registerTest(PROSPECT_SCANNER_FILTER, test(PROSPECT_SCANNER_FILTER, environment, 40, true, 8));
         event.registerTest(DEPOSIT_RESERVE_MULTIPLIER, test(DEPOSIT_RESERVE_MULTIPLIER, environment, 40, true, 8));
         event.registerTest(LODE_SURFACE_SIGNAL, test(LODE_SURFACE_SIGNAL, environment, 20, true));
+        event.registerTest(PROSPECT_SECTION_SURVEY, test(PROSPECT_SECTION_SURVEY, environment, 40, true, 8));
+        event.registerTest(LODE_SIGNAL_SECTION_SCAN, test(LODE_SIGNAL_SECTION_SCAN, environment, 40, true, 8));
+        event.registerTest(PROSPECT_OUTCROP_DEPTH, test(PROSPECT_OUTCROP_DEPTH, environment, 40, true, 8));
+        event.registerTest(PROSPECT_HAMMER_RANK, test(PROSPECT_HAMMER_RANK, environment, 40, true, 8));
     }
 
     private static GameTestInstance test(Identifier testId, Holder<TestEnvironmentDefinition<?>> environment,
@@ -570,6 +582,21 @@ final class EarthGameTests {
     }
 
     /**
+     * Writes a block state straight into the chunk section, the way vanilla {@code OreFeature} does
+     * during worldgen: no block entity is created and no pending block-entity record is left.
+     */
+    private static void setSectionState(GameTestHelper helper, BlockPos absolute, BlockState state) {
+        net.minecraft.world.level.chunk.LevelChunk chunk = helper.getLevel().getChunkAt(absolute);
+        chunk.getSection(chunk.getSectionIndex(absolute.getY()))
+                .setBlockState(absolute.getX() & 15, absolute.getY() & 15, absolute.getZ() & 15, state, false);
+    }
+
+    private static boolean hasBlockEntity(GameTestHelper helper, BlockPos absolute) {
+        net.minecraft.world.level.chunk.LevelChunk chunk = helper.getLevel().getChunkAt(absolute);
+        return chunk.getBlockEntity(absolute) != null || chunk.getBlockEntitiesPos().contains(absolute);
+    }
+
+    /**
      * Live lode samples found by the real chunk walk, restricted to this test's padded area so lodes
      * placed by neighbouring tests cannot leak into the assertions.
      */
@@ -589,6 +616,144 @@ final class EarthGameTests {
         return ids;
     }
 
+    private static void prospectSectionSurvey(GameTestHelper helper) {
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockState ore = EarthOnMinecraft.CHALCOPYRITE_ORE.get().defaultBlockState();
+        List<BlockPos> placed = new ArrayList<>();
+        for (int y = 1; y <= 4; y++) {
+            placed.add(origin.offset(3, y, -3));
+        }
+        for (BlockPos pos : placed) {
+            setSectionState(helper, pos, ore);
+            helper.assertTrue(helper.getLevel().getBlockState(pos).is(ore.getBlock()), "section write at " + pos);
+            helper.assertFalse(hasBlockEntity(helper, pos),
+                    "a worldgen-style ore block has no block entity or pending record at " + pos);
+        }
+
+        List<ProspectingSurvey.Sample> samples = samplesInTestArea(helper, origin,
+                OreScannerItem.SURVEY_CHUNK_RADIUS, ProspectingCatalog.Filter.COPPER::accepts);
+        helper.assertValueEqual(samples.size(), placed.size(), "the section scan finds every ore block, got " + samples);
+        for (BlockPos pos : placed) {
+            helper.assertTrue(samples.stream().anyMatch(sample -> sample.pos().equals(pos)), "survey misses " + pos);
+        }
+        List<ProspectingSurvey.Group> groups = ProspectingSurvey.group(samples, origin);
+        helper.assertValueEqual(groups.size(), 1, "one lode in the test area");
+        helper.assertValueEqual(groups.get(0).lodeId(), "chalcopyrite_vein", "identified lode");
+        helper.assertValueEqual(groups.get(0).remaining(),
+                DepositSpec.capacityFor("chalcopyrite_vein") * placed.size(),
+                "untouched blocks count at full capacity");
+        for (BlockPos pos : placed) {
+            helper.assertFalse(hasBlockEntity(helper, pos), "a survey must not create a block entity at " + pos);
+        }
+        helper.succeed();
+    }
+
+    private static void lodeSignalSectionScan(GameTestHelper helper) {
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockState ore = EarthOnMinecraft.MAGNETITE_ORE.get().defaultBlockState();
+        List<BlockPos> placed = new ArrayList<>();
+        for (int y = 1; y <= 6; y++) {
+            placed.add(origin.offset(-4, y, 4));
+        }
+        placed.forEach(pos -> setSectionState(helper, pos, ore));
+        helper.assertFalse(hasBlockEntity(helper, placed.get(0)), "worldgen-style ore leaves no block-entity record");
+
+        // One column, so all six blocks sit in one chunk, as the per-chunk worldgen pass sees them.
+        net.minecraft.world.phys.AABB area = helper.getBoundsWithPadding();
+        List<LodeSectionScan.Hit> hits = LodeSectionScan.scan(helper.getLevel().getChunkAt(placed.get(0)),
+                        LodeSectionScan.mainLodeBlocks()).stream()
+                .filter(hit -> area.contains(net.minecraft.world.phys.Vec3.atCenterOf(hit.pos())))
+                .toList();
+        for (BlockPos pos : placed) {
+            helper.assertTrue(hits.contains(new LodeSectionScan.Hit(pos, "magnetite_lens")),
+                    "worldgen scan misses " + pos + ", got " + hits);
+        }
+        var signals = LodeSurfaceSignalFeature.planSignals(hits);
+        helper.assertValueEqual(signals.size(), 1, "six section-written blocks plan one signal, got " + signals);
+        helper.assertValueEqual(signals.get(0).lodeId(), "magnetite_lens", "signal lode");
+        helper.assertValueEqual(signals.get(0).x(), placed.get(0).getX(), "signal column x");
+        helper.assertValueEqual(signals.get(0).z(), placed.get(0).getZ(), "signal column z");
+        helper.succeed();
+    }
+
+    private static void prospectOutcropDepth(GameTestHelper helper) {
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos struck = origin.offset(0, 7, 0);
+        BlockPos outcrop = origin.offset(1, 6, 1);
+        BlockState galena = DepositSpec.blockOf("galena_lens").defaultBlockState();
+        setAbsent(helper, struck, Blocks.STONE.defaultBlockState());
+        setAbsent(helper, outcrop, galena);
+        List<BlockPos> body = new ArrayList<>();
+        for (int dx = 5; dx <= 6; dx++) {
+            for (int dz = 5; dz <= 6; dz++) {
+                for (int y = 1; y <= 2; y++) {
+                    body.add(origin.offset(dx, y, dz));
+                }
+                // Cover rock keeps the body buried in its column's ocean-floor heightmap.
+                setAbsent(helper, origin.offset(dx, 5, dz), Blocks.STONE.defaultBlockState());
+            }
+        }
+        body.forEach(pos -> setSectionState(helper, pos, galena));
+
+        List<ProspectingSurvey.Sample> samples = samplesInTestArea(helper, struck,
+                GeologyHammerItem.SURVEY_CHUNK_RADIUS, ProspectingCatalog::isProspectable);
+        helper.assertValueEqual(samples.size(), body.size() + 1, "outcrop plus body, got " + samples);
+        helper.assertTrue(samples.stream().anyMatch(sample -> sample.pos().equals(outcrop) && sample.surface()),
+                "the outcrop is marked as a surface sample, got " + samples);
+        helper.assertTrue(samples.stream().filter(sample -> body.contains(sample.pos())).noneMatch(
+                ProspectingSurvey.Sample::surface), "the covered body is not a surface sample");
+
+        List<ProspectingSurvey.Group> groups = ProspectingSurvey.group(samples, struck);
+        helper.assertValueEqual(groups.size(), 1, "one lode");
+        ProspectingSurvey.Group lode = groups.get(0);
+        helper.assertValueEqual(lode.blocks(), body.size() + 1, "the outcrop still counts toward blocks");
+        helper.assertValueEqual(lode.remaining(), DepositSpec.capacityFor("galena_lens") * (body.size() + 1),
+                "the outcrop still counts toward reserve");
+        helper.assertTrue(body.contains(lode.nearest()),
+                "the reported point must be in the buried body, got " + lode.nearest());
+        helper.assertTrue(ProspectingSurvey.bearing(struck, lode.nearest()) != ProspectingSurvey.Bearing.HERE,
+                "the hammer points away from the outcrop");
+        helper.assertTrue(ProspectingSurvey.roundedHeight(struck, lode.nearest()) < 0, "the body is reported deeper");
+
+        // Without any buried block the outcrop is the only answer.
+        List<ProspectingSurvey.Group> onlyOutcrop = ProspectingSurvey.group(samples.stream()
+                .filter(ProspectingSurvey.Sample::surface).toList(), struck);
+        helper.assertValueEqual(onlyOutcrop.get(0).nearest(), outcrop, "surface fallback");
+        helper.succeed();
+    }
+
+    private static void prospectHammerRank(GameTestHelper helper) {
+        BlockPos origin = helper.absolutePos(BlockPos.ZERO);
+        BlockPos struck = origin.offset(0, 7, 0);
+        setAbsent(helper, struck, Blocks.STONE.defaultBlockState());
+        setSectionState(helper, origin.offset(1, 5, 0), DepositSpec.blockOf("magnetite_tuff_halo").defaultBlockState());
+        setSectionState(helper, origin.offset(-1, 5, 0),
+                DepositSpec.blockOf("chalcopyrite_granite_halo").defaultBlockState());
+        setSectionState(helper, origin.offset(0, 5, 1),
+                DepositSpec.blockOf("auriferous_quartz_calcite_halo").defaultBlockState());
+        setSectionState(helper, origin.offset(0, 4, -2), DepositSpec.blockOf("limestone_calcite_bed").defaultBlockState());
+        setSectionState(helper, origin.offset(6, 1, 6), EarthOnMinecraft.RICH_MAGNETITE_ORE.get().defaultBlockState());
+
+        List<ProspectingSurvey.Group> groups = ProspectingSurvey.group(samplesInTestArea(helper, struck,
+                GeologyHammerItem.SURVEY_CHUNK_RADIUS, ProspectingCatalog::isProspectable), struck);
+        helper.assertValueEqual(groups.size(), 5, "three halos, limestone and one main lode, got " + groups);
+        helper.assertTrue(ProspectingCatalog.isHalo(groups.get(0).lodeId()), "by distance alone a halo comes first");
+
+        List<ProspectingSurvey.Group> ranked = GeologyHammerItem.rank(groups);
+        helper.assertValueEqual(ranked.get(0).lodeId(), "rich_magnetite_lens", "main lode takes the first slot");
+        helper.assertValueEqual(ranked.get(1).lodeId(), ProspectingCatalog.LIMESTONE, "limestone comes next");
+        helper.assertTrue(ProspectingCatalog.isHalo(ranked.get(2).lodeId()), "the last slot goes to the nearest halo");
+        helper.assertValueEqual(ranked.get(2).lodeId(), groups.get(0).lodeId(), "nearest halo within its tier");
+
+        List<Component> report = GeologyHammerItem.report(struck, ranked);
+        helper.assertValueEqual(report.size(), 1 + GeologyHammerItem.MAX_REPORTED_LODES, "title plus three lodes");
+        helper.assertTrue(report.get(1).getContents() instanceof net.minecraft.network.chat.contents.TranslatableContents line
+                        && line.getArgs().length > 0
+                        && ProspectingSurvey.lodeName("rich_magnetite_lens").equals(line.getArgs()[0]),
+                "the first report line names the main lode, got " + report.get(1));
+        helper.succeed();
+    }
+
     private static void prospectHammerSurvey(GameTestHelper helper) {
         BlockPos origin = helper.absolutePos(BlockPos.ZERO);
         BlockPos struck = origin.offset(0, 7, 0);
@@ -599,7 +764,7 @@ final class EarthGameTests {
         List<ProspectingSurvey.Sample> samples = samplesInTestArea(helper, struck,
                 GeologyHammerItem.SURVEY_CHUNK_RADIUS, ProspectingCatalog::isProspectable);
         helper.assertTrue(samples.stream().anyMatch(sample -> sample.pos().equals(ore)),
-                "the block-entity walk must find the placed magnetite, got " + samples);
+                "the section scan must find the placed magnetite, got " + samples);
         List<ProspectingSurvey.Group> groups = ProspectingSurvey.group(samples, struck);
         helper.assertValueEqual(groups.size(), 1, "exactly one lode in the test area");
         ProspectingSurvey.Group magnetite = groups.get(0);
@@ -735,16 +900,16 @@ final class EarthGameTests {
         }
 
         // Six magnetite blocks trigger; five chalcopyrite, any amount of halo or host rock do not.
-        List<LodeSurfaceSignalFeature.Hit> hits = new ArrayList<>();
+        List<LodeSectionScan.Hit> hits = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, -40, 3), "magnetite_lens"));
+            hits.add(new LodeSectionScan.Hit(new BlockPos(i, -40, 3), "magnetite_lens"));
         }
         for (int i = 0; i < 5; i++) {
-            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 20, 9), "chalcopyrite_vein"));
+            hits.add(new LodeSectionScan.Hit(new BlockPos(i, 20, 9), "chalcopyrite_vein"));
         }
         for (int i = 0; i < 12; i++) {
-            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 0, 0), "magnetite_tuff_halo"));
-            hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 1, 0), "granitic_intrusion"));
+            hits.add(new LodeSectionScan.Hit(new BlockPos(i, 0, 0), "magnetite_tuff_halo"));
+            hits.add(new LodeSectionScan.Hit(new BlockPos(i, 1, 0), "granitic_intrusion"));
         }
         var signals = LodeSurfaceSignalFeature.planSignals(hits);
         helper.assertValueEqual(signals.size(), 1, "only the magnetite lens qualifies, got " + signals);
@@ -754,7 +919,7 @@ final class EarthGameTests {
 
         for (String extra : List.of("galena_lens", "uraninite_lens", "cassiterite_placer_deposit")) {
             for (int i = 0; i < 8; i++) {
-                hits.add(new LodeSurfaceSignalFeature.Hit(new BlockPos(i, 10, 12), extra));
+                hits.add(new LodeSectionScan.Hit(new BlockPos(i, 10, 12), extra));
             }
         }
         helper.assertValueEqual(LodeSurfaceSignalFeature.planSignals(hits).size(),
