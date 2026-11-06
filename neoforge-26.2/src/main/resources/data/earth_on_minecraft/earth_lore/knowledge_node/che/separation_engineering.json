@@ -1,0 +1,39 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/inorganic_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:distillation_column"
+    },
+    {
+      "block": "earth_on_minecraft:distillation_column"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:glass_bottle",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:ethanol",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.separation_engineering",
+  "desc_key": "lore.earth_on_minecraft.che.separation_engineering.desc"
+}

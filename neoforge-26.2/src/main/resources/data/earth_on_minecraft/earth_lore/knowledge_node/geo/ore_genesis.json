@@ -1,0 +1,45 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/mineral_identification"
+    },
+    {
+      "all": "earth_on_minecraft:geo/field_survey"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "ability": "earth_on_minecraft:associated_minerals"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:geologist"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:sample_bag",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:magnetite_ore",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:chalcopyrite_ore",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.ore_genesis",
+  "desc_key": "lore.earth_on_minecraft.geo.ore_genesis.desc"
+}

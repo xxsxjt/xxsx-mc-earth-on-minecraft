@@ -1,0 +1,61 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 6,
+  "gate": "cap",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/combustion_power"
+    },
+    {
+      "all": "earth_on_minecraft:eng/internal_combustion"
+    },
+    {
+      "all": "earth_on_minecraft:eng/energy_storage"
+    },
+    {
+      "all": "earth_on_minecraft:eng/nuclear_engineering"
+    },
+    {
+      "all": "earth_on_minecraft:eng/robotics"
+    },
+    {
+      "all": "earth_on_minecraft:eng/civil_engineering"
+    },
+    {
+      "all": "earth_on_minecraft:eng/timekeeping"
+    },
+    {
+      "all": "earth_on_minecraft:eng/industrial_safety"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "capstone": "earth_lore:eng"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:robotic_arm",
+        "count": 1
+      },
+      {
+        "ingredient": "earth_on_minecraft:nuclear_heat_module",
+        "count": 1
+      },
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 16
+      }
+    ],
+    "ticks": 9600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.systems_engineering",
+  "desc_key": "lore.earth_on_minecraft.eng.systems_engineering.desc"
+}

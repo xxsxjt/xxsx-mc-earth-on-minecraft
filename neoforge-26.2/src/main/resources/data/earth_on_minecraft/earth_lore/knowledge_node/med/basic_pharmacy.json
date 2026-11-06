@@ -1,0 +1,124 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/medicine_basics"
+    },
+    {
+      "all": "earth_on_minecraft:che/organic_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:salicylic_acid"
+    },
+    {
+      "item": "earth_on_minecraft:acetic_anhydride"
+    },
+    {
+      "item": "earth_on_minecraft:acetylsalicylic_acid"
+    },
+    {
+      "item": "earth_on_minecraft:paracetamol"
+    },
+    {
+      "item": "earth_on_minecraft:aspirin"
+    },
+    {
+      "item": "earth_on_minecraft:paracetamol_tablet"
+    },
+    {
+      "item": "earth_on_minecraft:antiseptic_ethanol"
+    },
+    {
+      "item": "earth_on_minecraft:povidone_iodine"
+    },
+    {
+      "item": "earth_on_minecraft:hydrogen_peroxide_solution"
+    },
+    {
+      "item": "earth_on_minecraft:saline_solution"
+    },
+    {
+      "item": "earth_on_minecraft:oral_rehydration_salts"
+    },
+    {
+      "item": "earth_on_minecraft:activated_charcoal_tablet"
+    },
+    {
+      "item": "earth_on_minecraft:antacid_tablet"
+    },
+    {
+      "item": "earth_on_minecraft:laxative"
+    },
+    {
+      "item": "earth_on_minecraft:cough_syrup"
+    },
+    {
+      "item": "earth_on_minecraft:throat_lozenge"
+    },
+    {
+      "item": "earth_on_minecraft:vitamin_tablet"
+    },
+    {
+      "item": "earth_on_minecraft:iron_supplement"
+    },
+    {
+      "item": "earth_on_minecraft:calcium_tablet"
+    },
+    {
+      "item": "earth_on_minecraft:antiseptic"
+    },
+    {
+      "ability": "earth_on_minecraft:med_basic_pharmacy/painkiller"
+    },
+    {
+      "ability": "earth_on_minecraft:med_basic_pharmacy/pharmacy_table"
+    },
+    {
+      "item": "earth_on_minecraft:tablet_press"
+    },
+    {
+      "block": "earth_on_minecraft:tablet_press"
+    },
+    {
+      "ability": "earth_on_minecraft:med_basic_pharmacy/aspirin"
+    },
+    {
+      "ability": "earth_on_minecraft:med_basic_pharmacy/saline"
+    },
+    {
+      "ability": "earth_on_minecraft:med_basic_pharmacy/antiseptic"
+    },
+    {
+      "ability": "earth_on_minecraft:med_basic_pharmacy/activated_charcoal_tablet"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:ethanol",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:salicylic_acid",
+        "count": 1
+      },
+      {
+        "ingredient": "earth_on_minecraft:glass_bottle",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.basic_pharmacy",
+  "desc_key": "lore.earth_on_minecraft.med.basic_pharmacy.desc"
+}

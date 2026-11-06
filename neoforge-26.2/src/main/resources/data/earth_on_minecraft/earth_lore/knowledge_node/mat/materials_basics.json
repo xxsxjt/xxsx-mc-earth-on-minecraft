@@ -1,0 +1,242 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 0,
+  "gate": "root",
+  "requires": [],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:forge"
+    },
+    {
+      "block": "earth_on_minecraft:forge"
+    },
+    {
+      "item": "earth_on_minecraft:anvil"
+    },
+    {
+      "block": "earth_on_minecraft:anvil"
+    },
+    {
+      "item": "earth_on_minecraft:hammer"
+    },
+    {
+      "block": "earth_on_minecraft:hammer"
+    },
+    {
+      "item": "earth_on_minecraft:tongs"
+    },
+    {
+      "block": "earth_on_minecraft:tongs"
+    },
+    {
+      "item": "earth_on_minecraft:grindstone"
+    },
+    {
+      "block": "earth_on_minecraft:grindstone"
+    },
+    {
+      "item": "earth_on_minecraft:wooden_pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:stone_pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:wooden_sword"
+    },
+    {
+      "item": "earth_on_minecraft:stone_sword"
+    },
+    {
+      "item": "earth_on_minecraft:sling"
+    },
+    {
+      "item": "earth_on_minecraft:blowgun"
+    },
+    {
+      "item": "earth_on_minecraft:bow"
+    },
+    {
+      "item": "earth_on_minecraft:leather_armor"
+    },
+    {
+      "item": "earth_on_minecraft:leather_boots"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/sharpness"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/protection"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/efficiency"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/unbreaking"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/mending"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/fire_aspect"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/knockback"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/fortune"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/silk_touch"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/respiration"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/depth_strider"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_materials_basics/frost_walker"
+    },
+    {
+      "item": "earth_on_minecraft:log"
+    },
+    {
+      "item": "earth_on_minecraft:plank"
+    },
+    {
+      "item": "earth_on_minecraft:cut_stone"
+    },
+    {
+      "item": "earth_on_minecraft:thatch"
+    },
+    {
+      "item": "earth_on_minecraft:bamboo"
+    },
+    {
+      "item": "earth_on_minecraft:rattan"
+    },
+    {
+      "item": "earth_on_minecraft:wood_shingle"
+    },
+    {
+      "item": "earth_on_minecraft:wood_floor"
+    },
+    {
+      "item": "earth_on_minecraft:stone_step"
+    },
+    {
+      "item": "earth_on_minecraft:fence"
+    },
+    {
+      "item": "earth_on_minecraft:wattle_fence"
+    },
+    {
+      "item": "earth_on_minecraft:timber_beam"
+    },
+    {
+      "item": "earth_on_minecraft:slate_tile"
+    },
+    {
+      "item": "earth_on_minecraft:chest"
+    },
+    {
+      "item": "earth_on_minecraft:large_chest"
+    },
+    {
+      "item": "earth_on_minecraft:barrel"
+    },
+    {
+      "item": "earth_on_minecraft:crate"
+    },
+    {
+      "item": "earth_on_minecraft:basket"
+    },
+    {
+      "item": "earth_on_minecraft:hamper"
+    },
+    {
+      "item": "earth_on_minecraft:toolbox"
+    },
+    {
+      "item": "earth_on_minecraft:display_case"
+    },
+    {
+      "item": "earth_on_minecraft:safe"
+    },
+    {
+      "item": "earth_on_minecraft:pickling_crock"
+    },
+    {
+      "item": "earth_on_minecraft:granary"
+    },
+    {
+      "item": "earth_on_minecraft:icebox"
+    },
+    {
+      "item": "earth_on_minecraft:canning_rack"
+    },
+    {
+      "item": "earth_on_minecraft:spice_cabinet"
+    },
+    {
+      "item": "earth_on_minecraft:bread_basket"
+    },
+    {
+      "item": "earth_on_minecraft:honey_pot"
+    },
+    {
+      "item": "earth_on_minecraft:water_jug"
+    },
+    {
+      "item": "earth_on_minecraft:lunch_box"
+    },
+    {
+      "item": "earth_on_minecraft:cigarette_case"
+    },
+    {
+      "item": "earth_on_minecraft:humidor"
+    },
+    {
+      "item": "earth_on_minecraft:pipe_stand"
+    },
+    {
+      "item": "earth_on_minecraft:medicine_cabinet"
+    },
+    {
+      "item": "earth_on_minecraft:medicine_box"
+    },
+    {
+      "item": "earth_on_minecraft:sewing_kit"
+    },
+    {
+      "item": "earth_on_minecraft:jewelry_box"
+    },
+    {
+      "item": "earth_on_minecraft:wardrobe"
+    },
+    {
+      "item": "earth_on_minecraft:bookshelf"
+    },
+    {
+      "item": "earth_on_minecraft:mailbox"
+    },
+    {
+      "item": "earth_on_minecraft:backpack"
+    },
+    {
+      "item": "earth_on_minecraft:saddlebag"
+    }
+  ],
+  "literature": [
+    "commonsense"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [],
+    "ticks": 0
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.materials_basics",
+  "desc_key": "lore.earth_on_minecraft.mat.materials_basics.desc"
+}

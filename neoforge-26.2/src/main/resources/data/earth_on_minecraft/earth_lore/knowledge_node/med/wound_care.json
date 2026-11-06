@@ -1,0 +1,58 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/first_aid"
+    },
+    {
+      "all": "earth_on_minecraft:med/sterile_technique"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:styptic_powder"
+    },
+    {
+      "item": "earth_on_minecraft:burn_ointment"
+    },
+    {
+      "item": "earth_on_minecraft:suture_thread"
+    },
+    {
+      "item": "earth_on_minecraft:scalpel"
+    },
+    {
+      "item": "earth_on_minecraft:forceps"
+    },
+    {
+      "item": "earth_on_minecraft:syringe"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:bandage",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:silk_thread",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 1
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.wound_care",
+  "desc_key": "lore.earth_on_minecraft.med.wound_care.desc"
+}

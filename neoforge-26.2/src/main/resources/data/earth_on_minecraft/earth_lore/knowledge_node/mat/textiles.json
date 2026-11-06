@@ -1,0 +1,114 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/materials_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:linen"
+    },
+    {
+      "item": "earth_on_minecraft:cotton_cloth"
+    },
+    {
+      "item": "earth_on_minecraft:wool_cloth"
+    },
+    {
+      "item": "earth_on_minecraft:silk"
+    },
+    {
+      "item": "earth_on_minecraft:leather"
+    },
+    {
+      "item": "earth_on_minecraft:fur"
+    },
+    {
+      "item": "earth_on_minecraft:rope"
+    },
+    {
+      "item": "earth_on_minecraft:felt"
+    },
+    {
+      "item": "earth_on_minecraft:waxed_canvas"
+    },
+    {
+      "item": "earth_on_minecraft:down"
+    },
+    {
+      "item": "earth_on_minecraft:flax_thread"
+    },
+    {
+      "item": "earth_on_minecraft:cotton_thread"
+    },
+    {
+      "item": "earth_on_minecraft:silk_thread"
+    },
+    {
+      "item": "earth_on_minecraft:broadcloth"
+    },
+    {
+      "item": "earth_on_minecraft:canvas"
+    },
+    {
+      "item": "earth_on_minecraft:fishing_net"
+    },
+    {
+      "item": "earth_on_minecraft:straw_hat"
+    },
+    {
+      "item": "earth_on_minecraft:bamboo_hat"
+    },
+    {
+      "item": "earth_on_minecraft:rain_cape"
+    },
+    {
+      "item": "earth_on_minecraft:boots"
+    },
+    {
+      "item": "earth_on_minecraft:clogs"
+    },
+    {
+      "item": "earth_on_minecraft:gloves"
+    },
+    {
+      "item": "earth_on_minecraft:apron"
+    },
+    {
+      "item": "earth_on_minecraft:belt"
+    },
+    {
+      "item": "earth_on_minecraft:cloak"
+    },
+    {
+      "item": "earth_on_minecraft:headscarf"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:shepherd",
+    "minecraft:leatherworker"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:string",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:white_wool",
+        "count": 4
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.textiles",
+  "desc_key": "lore.earth_on_minecraft.mat.textiles.desc"
+}

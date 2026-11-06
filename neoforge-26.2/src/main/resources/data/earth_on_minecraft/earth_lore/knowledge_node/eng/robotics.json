@@ -1,0 +1,53 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/measurement"
+    },
+    {
+      "all": "earth_on_minecraft:eng/control_basics"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:plc_controller"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:robotic_arm"
+    },
+    {
+      "item": "earth_on_minecraft:machine_vision_camera"
+    },
+    {
+      "item": "earth_on_minecraft:automation_bus"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:plc_controller",
+        "count": 1
+      },
+      {
+        "ingredient": "earth_on_minecraft:actuator_module",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 4
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.robotics",
+  "desc_key": "lore.earth_on_minecraft.eng.robotics.desc"
+}

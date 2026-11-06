@@ -1,8 +1,10 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthlore.api.LoreApi;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -54,15 +56,17 @@ public class GeologyHammerItem extends Item {
         }
 
         BlockPos clicked = context.getClickedPos();
+        int readout = player instanceof ServerPlayer sp ? LoreApi.readoutLevel(sp, this) : 1;
         List<Component> lines = new ArrayList<>();
         BlockState state = level.getBlockState(clicked);
-        if (level.getBlockEntity(clicked) instanceof DepositBlockEntity deposit) {
+        if (readout > 0 && level.getBlockEntity(clicked) instanceof DepositBlockEntity deposit) {
             DepositReserve reserve = deposit.reserve();
             lines.add(Component.translatable("message.earth_on_minecraft.geology_hammer.assay",
                     state.getBlock().getName(), reserve.remaining(), reserve.capacity())
                     .withStyle(ChatFormatting.GOLD));
         }
-        lines.addAll(report(clicked, survey(level, clicked)));
+        List<ProspectingSurvey.Group> surveyed = survey(level, clicked);
+        lines.addAll(readout <= 0 ? reportCategoryOnly(surveyed) : report(clicked, surveyed));
         lines.forEach(player::sendSystemMessage);
 
         stack.hurtAndBreak(1, player, context.getHand());
@@ -93,6 +97,16 @@ public class GeologyHammerItem extends Item {
             return 0;
         }
         return ProspectingCatalog.LIMESTONE.equals(lodeId) ? 1 : 2;
+    }
+
+    /** Category-only echo before learning K-GEO-05 (prospecting): only reports presence or absence of lodes. */
+    public static List<Component> reportCategoryOnly(List<ProspectingSurvey.Group> groups) {
+        if (groups.isEmpty()) {
+            return List.of(Component.translatable("message.earth_on_minecraft.geology_hammer.quiet")
+                    .withStyle(ChatFormatting.GRAY));
+        }
+        return List.of(Component.translatable("message.earth_on_minecraft.geology_hammer.category_present")
+                .withStyle(ChatFormatting.YELLOW));
     }
 
     /** Chat lines for a survey: a title and up to three lodes, or the quiet-echo line. */

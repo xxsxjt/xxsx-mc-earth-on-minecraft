@@ -1,9 +1,14 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthlore.api.GateResult;
+import com.xxsx.earthlore.api.LoreApi;
+import com.xxsx.earthlore.gate.RecipeGates;
+import com.xxsx.earthlore.knowledge.KnowledgeService;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -39,6 +44,13 @@ public final class OreScannerItem extends Item {
             return InteractionResult.SUCCESS;
         }
         ItemStack stack = player.getItemInHand(hand);
+        if (player instanceof ServerPlayer serverPlayer && KnowledgeService.running()) {
+            GateResult gate = LoreApi.check(serverPlayer, stack);
+            if (gate.locked()) {
+                serverPlayer.sendOverlayMessage(RecipeGates.lockedMessage(KnowledgeService.graph(), gate));
+                return InteractionResult.FAIL;
+            }
+        }
         if (player.isSecondaryUseActive()) {
             ProspectingCatalog.Filter filter = cycleFilter(stack);
             player.sendSystemMessage(Component.translatable("message.earth_on_minecraft.ore_scanner.filter_set",

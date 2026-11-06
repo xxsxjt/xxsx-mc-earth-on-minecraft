@@ -1,0 +1,87 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 5,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/distilling"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:highball"
+    },
+    {
+      "item": "earth_on_minecraft:gin_tonic"
+    },
+    {
+      "item": "earth_on_minecraft:mojito"
+    },
+    {
+      "item": "earth_on_minecraft:margarita"
+    },
+    {
+      "item": "earth_on_minecraft:bloody_mary"
+    },
+    {
+      "item": "earth_on_minecraft:old_fashioned"
+    },
+    {
+      "item": "earth_on_minecraft:martini"
+    },
+    {
+      "item": "earth_on_minecraft:mulled_wine"
+    },
+    {
+      "item": "earth_on_minecraft:eggnog"
+    },
+    {
+      "item": "earth_on_minecraft:white_russian"
+    },
+    {
+      "item": "earth_on_minecraft:daiquiri"
+    },
+    {
+      "item": "earth_on_minecraft:sidecar"
+    },
+    {
+      "item": "earth_on_minecraft:paloma"
+    },
+    {
+      "item": "earth_on_minecraft:mint_julep"
+    },
+    {
+      "item": "earth_on_minecraft:mocktail"
+    },
+    {
+      "item": "earth_on_minecraft:bar_counter"
+    },
+    {
+      "block": "earth_on_minecraft:bar_counter"
+    },
+    {
+      "ability": "earth_on_minecraft:agr_mixology/highball"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:whisky",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:shot_glass",
+        "count": 2
+      }
+    ],
+    "ticks": 6000
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.mixology",
+  "desc_key": "lore.earth_on_minecraft.agr.mixology.desc"
+}

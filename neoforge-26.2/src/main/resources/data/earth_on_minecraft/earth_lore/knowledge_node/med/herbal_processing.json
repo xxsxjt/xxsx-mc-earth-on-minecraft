@@ -1,0 +1,114 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/materia_medica"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/cleaning"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/cutting"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/stir_frying"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/charring"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/wine_frying"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/vinegar_frying"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/honey_frying"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/ginger_frying"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/salt_frying"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/calcining"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/steaming"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/boiling"
+    },
+    {
+      "item": "earth_on_minecraft:prepared_licorice"
+    },
+    {
+      "item": "earth_on_minecraft:prepared_rehmannia"
+    },
+    {
+      "item": "earth_on_minecraft:ginseng_decoction"
+    },
+    {
+      "item": "earth_on_minecraft:prepared_angelica"
+    },
+    {
+      "item": "earth_on_minecraft:prepared_corydalis"
+    },
+    {
+      "item": "earth_on_minecraft:prepared_eucommia"
+    },
+    {
+      "item": "earth_on_minecraft:calcined_oyster_shell"
+    },
+    {
+      "item": "earth_on_minecraft:charred_hawthorn"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/prepared_rehmannia"
+    },
+    {
+      "item": "earth_on_minecraft:herb_processing_table"
+    },
+    {
+      "block": "earth_on_minecraft:herb_processing_table"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/processed_licorice"
+    },
+    {
+      "ability": "earth_on_minecraft:med_herbal_processing/ginseng_decoction"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:cleric"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:licorice",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:honey",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:rehmannia",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.herbal_processing",
+  "desc_key": "lore.earth_on_minecraft.med.herbal_processing.desc"
+}

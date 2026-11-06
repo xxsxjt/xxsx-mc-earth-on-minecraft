@@ -1,0 +1,43 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/reaction_engineering"
+    },
+    {
+      "all": "earth_on_minecraft:eng/electrical_basics"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:copper_power_cable"
+    }
+  ],
+  "unlocks": [
+    {
+      "ability": "earth_on_minecraft:che_chlor_alkali/electrolysis_brine"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:salt",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:copper_power_cable",
+        "count": 2
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.chlor_alkali",
+  "desc_key": "lore.earth_on_minecraft.che.chlor_alkali.desc"
+}

@@ -1,0 +1,50 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/materials_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:paper"
+    },
+    {
+      "item": "earth_on_minecraft:ink"
+    },
+    {
+      "item": "earth_on_minecraft:book"
+    },
+    {
+      "item": "earth_on_minecraft:scroll"
+    },
+    {
+      "item": "earth_on_minecraft:banknote"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:librarian"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:sugar_cane",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:ink_sac",
+        "count": 1
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.papermaking",
+  "desc_key": "lore.earth_on_minecraft.mat.papermaking.desc"
+}

@@ -1,0 +1,59 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/comminution"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:magnetic_separator"
+    },
+    {
+      "block": "earth_on_minecraft:magnetic_separator"
+    },
+    {
+      "item": "earth_on_minecraft:flotation_cell"
+    },
+    {
+      "block": "earth_on_minecraft:flotation_cell"
+    },
+    {
+      "item": "earth_on_minecraft:thickener"
+    },
+    {
+      "block": "earth_on_minecraft:thickener"
+    },
+    {
+      "item": "earth_on_minecraft:filter_press"
+    },
+    {
+      "block": "earth_on_minecraft:filter_press"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:miner"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:crushed_magnetite",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:chalcopyrite_ore",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.beneficiation",
+  "desc_key": "lore.earth_on_minecraft.mat.beneficiation.desc"
+}

@@ -1,0 +1,44 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/first_aid"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:sickbed"
+    },
+    {
+      "item": "earth_on_minecraft:wheelchair"
+    },
+    {
+      "item": "earth_on_minecraft:operating_table"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:cleric"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:bandage",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:white_wool",
+        "count": 4
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.nursing",
+  "desc_key": "lore.earth_on_minecraft.med.nursing.desc"
+}

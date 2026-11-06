@@ -1,0 +1,158 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/agriculture_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:bread_oven_controller"
+    },
+    {
+      "block": "earth_on_minecraft:bread_oven_controller"
+    },
+    {
+      "item": "earth_on_minecraft:bread"
+    },
+    {
+      "item": "earth_on_minecraft:rye_bread"
+    },
+    {
+      "item": "earth_on_minecraft:baguette"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_rice"
+    },
+    {
+      "item": "earth_on_minecraft:porridge"
+    },
+    {
+      "item": "earth_on_minecraft:noodles"
+    },
+    {
+      "item": "earth_on_minecraft:ramen"
+    },
+    {
+      "item": "earth_on_minecraft:steamed_bun"
+    },
+    {
+      "item": "earth_on_minecraft:baozi"
+    },
+    {
+      "item": "earth_on_minecraft:dumpling"
+    },
+    {
+      "item": "earth_on_minecraft:corn_tortilla"
+    },
+    {
+      "item": "earth_on_minecraft:baked_potato"
+    },
+    {
+      "item": "earth_on_minecraft:fries"
+    },
+    {
+      "item": "earth_on_minecraft:potato_chips"
+    },
+    {
+      "item": "earth_on_minecraft:stew"
+    },
+    {
+      "item": "earth_on_minecraft:soup"
+    },
+    {
+      "item": "earth_on_minecraft:bone_broth"
+    },
+    {
+      "item": "earth_on_minecraft:stir_fry"
+    },
+    {
+      "item": "earth_on_minecraft:fried_egg"
+    },
+    {
+      "item": "earth_on_minecraft:sandwich"
+    },
+    {
+      "item": "earth_on_minecraft:pizza"
+    },
+    {
+      "item": "earth_on_minecraft:burger"
+    },
+    {
+      "item": "earth_on_minecraft:curry"
+    },
+    {
+      "item": "earth_on_minecraft:sushi"
+    },
+    {
+      "item": "earth_on_minecraft:kebab"
+    },
+    {
+      "item": "earth_on_minecraft:pie"
+    },
+    {
+      "item": "earth_on_minecraft:tofu"
+    },
+    {
+      "item": "earth_on_minecraft:dried_tofu"
+    },
+    {
+      "item": "earth_on_minecraft:tofu_pudding"
+    },
+    {
+      "item": "earth_on_minecraft:soy_milk"
+    },
+    {
+      "item": "earth_on_minecraft:rice_noodles"
+    },
+    {
+      "item": "earth_on_minecraft:rice_cake"
+    },
+    {
+      "item": "earth_on_minecraft:zongzi"
+    },
+    {
+      "item": "earth_on_minecraft:mooncake"
+    },
+    {
+      "item": "earth_on_minecraft:tangyuan"
+    },
+    {
+      "item": "earth_on_minecraft:rice_huller"
+    },
+    {
+      "block": "earth_on_minecraft:rice_huller"
+    },
+    {
+      "item": "earth_on_minecraft:noodle_press"
+    },
+    {
+      "block": "earth_on_minecraft:noodle_press"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:butcher"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:flour",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:egg",
+        "count": 2
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.cooking",
+  "desc_key": "lore.earth_on_minecraft.agr.cooking.desc"
+}

@@ -1,0 +1,64 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 6,
+  "gate": "cap",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/irrigation"
+    },
+    {
+      "all": "earth_on_minecraft:agr/apiculture_sericulture"
+    },
+    {
+      "all": "earth_on_minecraft:agr/aquaculture"
+    },
+    {
+      "all": "earth_on_minecraft:agr/food_processing"
+    },
+    {
+      "all": "earth_on_minecraft:agr/sugar_and_oil"
+    },
+    {
+      "all": "earth_on_minecraft:agr/tea_and_coffee"
+    },
+    {
+      "all": "earth_on_minecraft:agr/mixology"
+    },
+    {
+      "all": "earth_on_minecraft:agr/tobacco_curing"
+    },
+    {
+      "all": "earth_on_minecraft:agr/seed_selection"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "capstone": "earth_lore:agr"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:bread",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:wine",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:cheese",
+        "count": 2
+      }
+    ],
+    "ticks": 9600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.agronomy",
+  "desc_key": "lore.earth_on_minecraft.agr.agronomy.desc"
+}

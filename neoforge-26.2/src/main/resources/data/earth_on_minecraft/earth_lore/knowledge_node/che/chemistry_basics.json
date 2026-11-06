@@ -1,0 +1,19 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 0,
+  "gate": "root",
+  "requires": [],
+  "item_requires": [],
+  "unlocks": [],
+  "literature": [
+    "commonsense"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [],
+    "ticks": 0
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.chemistry_basics",
+  "desc_key": "lore.earth_on_minecraft.che.chemistry_basics.desc"
+}

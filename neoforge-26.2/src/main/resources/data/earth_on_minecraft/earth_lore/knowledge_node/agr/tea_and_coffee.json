@@ -1,0 +1,126 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/beverages"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:tea_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:green_tea"
+    },
+    {
+      "item": "earth_on_minecraft:black_tea"
+    },
+    {
+      "item": "earth_on_minecraft:oolong_tea"
+    },
+    {
+      "item": "earth_on_minecraft:white_tea"
+    },
+    {
+      "item": "earth_on_minecraft:yellow_tea"
+    },
+    {
+      "item": "earth_on_minecraft:dark_tea"
+    },
+    {
+      "item": "earth_on_minecraft:pu_er_tea"
+    },
+    {
+      "item": "earth_on_minecraft:scented_tea"
+    },
+    {
+      "item": "earth_on_minecraft:matcha"
+    },
+    {
+      "item": "earth_on_minecraft:milk_tea"
+    },
+    {
+      "item": "earth_on_minecraft:butter_tea"
+    },
+    {
+      "item": "earth_on_minecraft:coffee_bean"
+    },
+    {
+      "item": "earth_on_minecraft:roasted_coffee_bean"
+    },
+    {
+      "item": "earth_on_minecraft:coffee_grounds"
+    },
+    {
+      "item": "earth_on_minecraft:coffee"
+    },
+    {
+      "item": "earth_on_minecraft:espresso"
+    },
+    {
+      "item": "earth_on_minecraft:americano"
+    },
+    {
+      "item": "earth_on_minecraft:latte"
+    },
+    {
+      "item": "earth_on_minecraft:cappuccino"
+    },
+    {
+      "item": "earth_on_minecraft:cold_brew"
+    },
+    {
+      "item": "earth_on_minecraft:cocoa_bean"
+    },
+    {
+      "item": "earth_on_minecraft:cocoa_powder"
+    },
+    {
+      "item": "earth_on_minecraft:coffee_roaster"
+    },
+    {
+      "block": "earth_on_minecraft:coffee_roaster"
+    },
+    {
+      "item": "earth_on_minecraft:coffee_grinder"
+    },
+    {
+      "block": "earth_on_minecraft:coffee_grinder"
+    },
+    {
+      "item": "earth_on_minecraft:tea_kiln"
+    },
+    {
+      "block": "earth_on_minecraft:tea_kiln"
+    },
+    {
+      "ability": "earth_on_minecraft:agr_tea_and_coffee/coffee_roaster"
+    },
+    {
+      "ability": "earth_on_minecraft:agr_tea_and_coffee/tea_kiln"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:tea_leaf",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:coffee_bean",
+        "count": 8
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.tea_and_coffee",
+  "desc_key": "lore.earth_on_minecraft.agr.tea_and_coffee.desc"
+}

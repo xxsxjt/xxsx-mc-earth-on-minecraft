@@ -1,0 +1,66 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/measurement"
+    },
+    {
+      "all": "earth_on_minecraft:mat/binders"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:road"
+    },
+    {
+      "item": "earth_on_minecraft:bridge"
+    },
+    {
+      "item": "earth_on_minecraft:tunnel"
+    },
+    {
+      "item": "earth_on_minecraft:lighthouse"
+    },
+    {
+      "item": "earth_on_minecraft:cable_car"
+    },
+    {
+      "item": "earth_on_minecraft:post_station"
+    },
+    {
+      "item": "earth_on_minecraft:reinforced_concrete"
+    },
+    {
+      "item": "earth_on_minecraft:steel_beam"
+    },
+    {
+      "item": "earth_on_minecraft:insulation"
+    },
+    {
+      "item": "earth_on_minecraft:waterproof_membrane"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:cement_powder",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.civil_engineering",
+  "desc_key": "lore.earth_on_minecraft.eng.civil_engineering.desc"
+}

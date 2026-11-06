@@ -1,0 +1,59 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/cooking"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:vinegar"
+    },
+    {
+      "item": "earth_on_minecraft:rice_vinegar"
+    },
+    {
+      "item": "earth_on_minecraft:soy_sauce"
+    },
+    {
+      "item": "earth_on_minecraft:bean_paste"
+    },
+    {
+      "item": "earth_on_minecraft:miso"
+    },
+    {
+      "item": "earth_on_minecraft:yeast"
+    },
+    {
+      "item": "earth_on_minecraft:fermenting_crock"
+    },
+    {
+      "block": "earth_on_minecraft:fermenting_crock"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:farmer"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:soybean",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:salt",
+        "count": 4
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.fermentation",
+  "desc_key": "lore.earth_on_minecraft.agr.fermentation.desc"
+}

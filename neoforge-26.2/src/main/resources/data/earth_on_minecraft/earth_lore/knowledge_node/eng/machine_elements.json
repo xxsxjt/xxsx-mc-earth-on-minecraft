@@ -1,0 +1,53 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/mechanics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:ox_cart"
+    },
+    {
+      "item": "earth_on_minecraft:bicycle"
+    },
+    {
+      "item": "earth_on_minecraft:tricycle"
+    },
+    {
+      "item": "earth_on_minecraft:sailboat"
+    },
+    {
+      "item": "earth_on_minecraft:ferry"
+    },
+    {
+      "item": "earth_on_minecraft:minecart"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:mechanic"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:iron_ingot",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:oak_planks",
+        "count": 8
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.machine_elements",
+  "desc_key": "lore.earth_on_minecraft.eng.machine_elements.desc"
+}

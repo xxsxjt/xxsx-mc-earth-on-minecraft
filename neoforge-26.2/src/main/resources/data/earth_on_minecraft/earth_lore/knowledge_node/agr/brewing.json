@@ -1,0 +1,81 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/fermentation"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:beer"
+    },
+    {
+      "item": "earth_on_minecraft:lager"
+    },
+    {
+      "item": "earth_on_minecraft:stout"
+    },
+    {
+      "item": "earth_on_minecraft:wheat_beer"
+    },
+    {
+      "item": "earth_on_minecraft:cider"
+    },
+    {
+      "item": "earth_on_minecraft:perry"
+    },
+    {
+      "item": "earth_on_minecraft:wine"
+    },
+    {
+      "item": "earth_on_minecraft:mead"
+    },
+    {
+      "item": "earth_on_minecraft:sake"
+    },
+    {
+      "item": "earth_on_minecraft:huangjiu"
+    },
+    {
+      "item": "earth_on_minecraft:rice_wine"
+    },
+    {
+      "item": "earth_on_minecraft:plum_wine"
+    },
+    {
+      "item": "earth_on_minecraft:cherry_wine"
+    },
+    {
+      "item": "earth_on_minecraft:palm_wine"
+    },
+    {
+      "item": "earth_on_minecraft:kumis"
+    },
+    {
+      "item": "earth_on_minecraft:kvass"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:wheat",
+        "count": 16
+      },
+      {
+        "ingredient": "earth_on_minecraft:yeast",
+        "count": 2
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.brewing",
+  "desc_key": "lore.earth_on_minecraft.agr.brewing.desc"
+}

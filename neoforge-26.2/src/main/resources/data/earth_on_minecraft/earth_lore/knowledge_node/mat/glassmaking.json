@@ -1,0 +1,96 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/ceramics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:glass_batch"
+    },
+    {
+      "item": "earth_on_minecraft:glass_kiln_controller"
+    },
+    {
+      "block": "earth_on_minecraft:glass_kiln_controller"
+    },
+    {
+      "ability": "earth_on_minecraft:mat_glassmaking/glass"
+    },
+    {
+      "item": "earth_on_minecraft:window_frame"
+    },
+    {
+      "item": "earth_on_minecraft:mirror"
+    },
+    {
+      "item": "earth_on_minecraft:glass_bottle"
+    },
+    {
+      "item": "earth_on_minecraft:wine_bottle"
+    },
+    {
+      "item": "earth_on_minecraft:beer_glass"
+    },
+    {
+      "item": "earth_on_minecraft:wine_glass"
+    },
+    {
+      "item": "earth_on_minecraft:shot_glass"
+    },
+    {
+      "item": "earth_on_minecraft:mug"
+    },
+    {
+      "item": "earth_on_minecraft:teapot"
+    },
+    {
+      "item": "earth_on_minecraft:coffee_pot"
+    },
+    {
+      "item": "earth_on_minecraft:cocktail_shaker"
+    },
+    {
+      "item": "earth_on_minecraft:jigger"
+    },
+    {
+      "item": "earth_on_minecraft:wine_jar"
+    },
+    {
+      "item": "earth_on_minecraft:oak_cask"
+    },
+    {
+      "item": "earth_on_minecraft:wine_rack"
+    },
+    {
+      "item": "earth_on_minecraft:flask"
+    },
+    {
+      "item": "earth_on_minecraft:waterskin"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:sand",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:lime",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.glassmaking",
+  "desc_key": "lore.earth_on_minecraft.mat.glassmaking.desc"
+}

@@ -380,6 +380,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.RARE_EARTH_CARBONATITE::get, "稀土碳酸岩破碎", out(EarthOnMinecraft.BASTNASITE_DUST::get, 3), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.CALCITE_DUST::get, 2), out(EarthOnMinecraft.URANINITE_DUST::get, 1), out(EarthOnMinecraft.RARE_EARTH_TAILINGS::get, 1)));
 
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.MAGNETITE_CHUNK::get, "磁铁矿球磨", out(EarthOnMinecraft.MAGNETITE_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CRUSHED_MAGNETITE::get, "磁铁矿碎矿球磨", out(EarthOnMinecraft.MAGNETITE_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CHALCOPYRITE_CHUNK::get, "黄铜矿球磨", out(EarthOnMinecraft.CHALCOPYRITE_DUST::get, 3), out(EarthOnMinecraft.PYRITE_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CINNABAR_CHUNK::get, "辰砂球磨", out(EarthOnMinecraft.CINNABAR_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, () -> Blocks.GRANITE, "花岗岩矿物分离", out(EarthOnMinecraft.QUARTZ_DUST::get, 2), out(EarthOnMinecraft.FELDSPAR_DUST::get, 3), out(EarthOnMinecraft.MICA_DUST::get, 1), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
@@ -844,6 +845,12 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.MACHINE_VISION_CAMERA::get, "视觉检测模块装配", out(EarthOnMinecraft.QUALITY_INSPECTION_MODULE::get, 1), out(EarthOnMinecraft.LED_PHOSPHOR::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.PLC_CONTROLLER::get, "PLC 接入自动化总线和红石网关", out(EarthOnMinecraft.AUTOMATION_BUS::get, 1), out(EarthOnMinecraft.REDSTONE_IO_GATEWAY::get, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.ROBOTIC_ARM::get, "机械臂改装为输送驱动机构", out(EarthOnMinecraft.CONVEYOR_DRIVE::get, 1), out(EarthOnMinecraft.ACTUATOR_MODULE::get, 1)));
+        recipes.add(new Recipe(Kind.GLASS_KILN,
+                List.of(in(() -> Items.GLASS, 4), in(EarthOnMinecraft.BORATE_MINERAL_DUST::get, 1)),
+                "光学硼硅玻璃精熔退火",
+                List.of(out(EarthOnMinecraft.OPTICAL_GLASS::get, 2)),
+                false, 600, 0, "optical_glass_kiln",
+                List.of(), List.of(), null, 1500, 101, "SiO2 + B2O3 -> optical_glass"));
 
         return List.copyOf(recipes);
     }

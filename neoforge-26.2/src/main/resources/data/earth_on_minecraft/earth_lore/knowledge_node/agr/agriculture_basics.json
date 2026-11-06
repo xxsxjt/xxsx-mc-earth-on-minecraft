@@ -1,0 +1,905 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 0,
+  "gate": "root",
+  "requires": [],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:wheat"
+    },
+    {
+      "item": "earth_on_minecraft:rice_paddy"
+    },
+    {
+      "item": "earth_on_minecraft:rice"
+    },
+    {
+      "item": "earth_on_minecraft:maize"
+    },
+    {
+      "item": "earth_on_minecraft:barley"
+    },
+    {
+      "item": "earth_on_minecraft:oat"
+    },
+    {
+      "item": "earth_on_minecraft:rye"
+    },
+    {
+      "item": "earth_on_minecraft:sorghum"
+    },
+    {
+      "item": "earth_on_minecraft:millet"
+    },
+    {
+      "item": "earth_on_minecraft:buckwheat"
+    },
+    {
+      "item": "earth_on_minecraft:proso_millet"
+    },
+    {
+      "item": "earth_on_minecraft:quinoa"
+    },
+    {
+      "item": "earth_on_minecraft:teff"
+    },
+    {
+      "item": "earth_on_minecraft:wild_rice"
+    },
+    {
+      "item": "earth_on_minecraft:job_tears"
+    },
+    {
+      "item": "earth_on_minecraft:potato"
+    },
+    {
+      "item": "earth_on_minecraft:sweet_potato"
+    },
+    {
+      "item": "earth_on_minecraft:cassava"
+    },
+    {
+      "item": "earth_on_minecraft:carrot"
+    },
+    {
+      "item": "earth_on_minecraft:beet"
+    },
+    {
+      "item": "earth_on_minecraft:onion"
+    },
+    {
+      "item": "earth_on_minecraft:garlic"
+    },
+    {
+      "item": "earth_on_minecraft:ginger"
+    },
+    {
+      "item": "earth_on_minecraft:taro"
+    },
+    {
+      "item": "earth_on_minecraft:yam"
+    },
+    {
+      "item": "earth_on_minecraft:radish"
+    },
+    {
+      "item": "earth_on_minecraft:turnip"
+    },
+    {
+      "item": "earth_on_minecraft:lotus_root"
+    },
+    {
+      "item": "earth_on_minecraft:arrowhead"
+    },
+    {
+      "item": "earth_on_minecraft:water_chestnut"
+    },
+    {
+      "item": "earth_on_minecraft:konjac"
+    },
+    {
+      "item": "earth_on_minecraft:soybean"
+    },
+    {
+      "item": "earth_on_minecraft:pea"
+    },
+    {
+      "item": "earth_on_minecraft:chickpea"
+    },
+    {
+      "item": "earth_on_minecraft:lentil"
+    },
+    {
+      "item": "earth_on_minecraft:peanut"
+    },
+    {
+      "item": "earth_on_minecraft:mung_bean"
+    },
+    {
+      "item": "earth_on_minecraft:adzuki_bean"
+    },
+    {
+      "item": "earth_on_minecraft:broad_bean"
+    },
+    {
+      "item": "earth_on_minecraft:lupin"
+    },
+    {
+      "item": "earth_on_minecraft:black_bean"
+    },
+    {
+      "item": "earth_on_minecraft:cabbage"
+    },
+    {
+      "item": "earth_on_minecraft:spinach"
+    },
+    {
+      "item": "earth_on_minecraft:lettuce"
+    },
+    {
+      "item": "earth_on_minecraft:tomato"
+    },
+    {
+      "item": "earth_on_minecraft:cucumber"
+    },
+    {
+      "item": "earth_on_minecraft:pumpkin"
+    },
+    {
+      "item": "earth_on_minecraft:eggplant"
+    },
+    {
+      "item": "earth_on_minecraft:chili"
+    },
+    {
+      "item": "earth_on_minecraft:bell_pepper"
+    },
+    {
+      "item": "earth_on_minecraft:mushroom"
+    },
+    {
+      "item": "earth_on_minecraft:broccoli"
+    },
+    {
+      "item": "earth_on_minecraft:cauliflower"
+    },
+    {
+      "item": "earth_on_minecraft:celery"
+    },
+    {
+      "item": "earth_on_minecraft:asparagus"
+    },
+    {
+      "item": "earth_on_minecraft:leek"
+    },
+    {
+      "item": "earth_on_minecraft:okra"
+    },
+    {
+      "item": "earth_on_minecraft:zucchini"
+    },
+    {
+      "item": "earth_on_minecraft:winter_melon"
+    },
+    {
+      "item": "earth_on_minecraft:luffa"
+    },
+    {
+      "item": "earth_on_minecraft:bitter_melon"
+    },
+    {
+      "item": "earth_on_minecraft:celtuce"
+    },
+    {
+      "item": "earth_on_minecraft:chrysanthemum_greens"
+    },
+    {
+      "item": "earth_on_minecraft:amaranth"
+    },
+    {
+      "item": "earth_on_minecraft:water_spinach"
+    },
+    {
+      "item": "earth_on_minecraft:bamboo_shoot"
+    },
+    {
+      "item": "earth_on_minecraft:sweet_corn"
+    },
+    {
+      "item": "earth_on_minecraft:apple"
+    },
+    {
+      "item": "earth_on_minecraft:pear"
+    },
+    {
+      "item": "earth_on_minecraft:peach"
+    },
+    {
+      "item": "earth_on_minecraft:grape"
+    },
+    {
+      "item": "earth_on_minecraft:citrus"
+    },
+    {
+      "item": "earth_on_minecraft:lemon"
+    },
+    {
+      "item": "earth_on_minecraft:pomelo"
+    },
+    {
+      "item": "earth_on_minecraft:banana"
+    },
+    {
+      "item": "earth_on_minecraft:mango"
+    },
+    {
+      "item": "earth_on_minecraft:coconut"
+    },
+    {
+      "item": "earth_on_minecraft:olive"
+    },
+    {
+      "item": "earth_on_minecraft:date"
+    },
+    {
+      "item": "earth_on_minecraft:fig"
+    },
+    {
+      "item": "earth_on_minecraft:berry"
+    },
+    {
+      "item": "earth_on_minecraft:strawberry"
+    },
+    {
+      "item": "earth_on_minecraft:blueberry"
+    },
+    {
+      "item": "earth_on_minecraft:raspberry"
+    },
+    {
+      "item": "earth_on_minecraft:blackcurrant"
+    },
+    {
+      "item": "earth_on_minecraft:pomegranate"
+    },
+    {
+      "item": "earth_on_minecraft:persimmon"
+    },
+    {
+      "item": "earth_on_minecraft:kiwi"
+    },
+    {
+      "item": "earth_on_minecraft:lychee"
+    },
+    {
+      "item": "earth_on_minecraft:longan"
+    },
+    {
+      "item": "earth_on_minecraft:pineapple"
+    },
+    {
+      "item": "earth_on_minecraft:papaya"
+    },
+    {
+      "item": "earth_on_minecraft:avocado"
+    },
+    {
+      "item": "earth_on_minecraft:hawthorn"
+    },
+    {
+      "item": "earth_on_minecraft:sea_buckthorn"
+    },
+    {
+      "item": "earth_on_minecraft:mulberry"
+    },
+    {
+      "item": "earth_on_minecraft:waxberry"
+    },
+    {
+      "item": "earth_on_minecraft:raw_beef"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_beef"
+    },
+    {
+      "item": "earth_on_minecraft:raw_pork"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_pork"
+    },
+    {
+      "item": "earth_on_minecraft:raw_mutton"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_mutton"
+    },
+    {
+      "item": "earth_on_minecraft:raw_chicken"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_chicken"
+    },
+    {
+      "item": "earth_on_minecraft:raw_fish"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_fish"
+    },
+    {
+      "item": "earth_on_minecraft:raw_rabbit"
+    },
+    {
+      "item": "earth_on_minecraft:cooked_rabbit"
+    },
+    {
+      "item": "earth_on_minecraft:egg"
+    },
+    {
+      "item": "earth_on_minecraft:duck_egg"
+    },
+    {
+      "item": "earth_on_minecraft:goose_egg"
+    },
+    {
+      "item": "earth_on_minecraft:milk"
+    },
+    {
+      "item": "earth_on_minecraft:goat_milk"
+    },
+    {
+      "item": "earth_on_minecraft:shellfish"
+    },
+    {
+      "item": "earth_on_minecraft:shrimp"
+    },
+    {
+      "item": "earth_on_minecraft:crab"
+    },
+    {
+      "item": "earth_on_minecraft:kelp"
+    },
+    {
+      "item": "earth_on_minecraft:nori"
+    },
+    {
+      "item": "earth_on_minecraft:salt"
+    },
+    {
+      "item": "earth_on_minecraft:rock_salt"
+    },
+    {
+      "item": "earth_on_minecraft:sea_salt"
+    },
+    {
+      "item": "earth_on_minecraft:flour"
+    },
+    {
+      "item": "earth_on_minecraft:honey"
+    },
+    {
+      "item": "earth_on_minecraft:spice"
+    },
+    {
+      "item": "earth_on_minecraft:sichuan_pepper"
+    },
+    {
+      "item": "earth_on_minecraft:pepper"
+    },
+    {
+      "item": "earth_on_minecraft:cinnamon"
+    },
+    {
+      "item": "earth_on_minecraft:clove"
+    },
+    {
+      "item": "earth_on_minecraft:nutmeg"
+    },
+    {
+      "item": "earth_on_minecraft:turmeric"
+    },
+    {
+      "item": "earth_on_minecraft:mustard"
+    },
+    {
+      "item": "earth_on_minecraft:lard"
+    },
+    {
+      "item": "earth_on_minecraft:campfire"
+    },
+    {
+      "block": "earth_on_minecraft:campfire"
+    },
+    {
+      "item": "earth_on_minecraft:stove"
+    },
+    {
+      "block": "earth_on_minecraft:stove"
+    },
+    {
+      "item": "earth_on_minecraft:oven"
+    },
+    {
+      "block": "earth_on_minecraft:oven"
+    },
+    {
+      "item": "earth_on_minecraft:steamer"
+    },
+    {
+      "block": "earth_on_minecraft:steamer"
+    },
+    {
+      "item": "earth_on_minecraft:steamer_basket"
+    },
+    {
+      "block": "earth_on_minecraft:steamer_basket"
+    },
+    {
+      "item": "earth_on_minecraft:mill"
+    },
+    {
+      "block": "earth_on_minecraft:mill"
+    },
+    {
+      "item": "earth_on_minecraft:stone_mill"
+    },
+    {
+      "block": "earth_on_minecraft:stone_mill"
+    },
+    {
+      "item": "earth_on_minecraft:hoe"
+    },
+    {
+      "item": "earth_on_minecraft:sickle"
+    },
+    {
+      "item": "earth_on_minecraft:flail"
+    },
+    {
+      "item": "earth_on_minecraft:haystack"
+    },
+    {
+      "item": "earth_on_minecraft:water_bottle"
+    },
+    {
+      "item": "earth_on_minecraft:mineral_water"
+    },
+    {
+      "item": "earth_on_minecraft:coconut_water"
+    },
+    {
+      "item": "earth_on_minecraft:tobacco_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:betel_nut"
+    },
+    {
+      "item": "earth_on_minecraft:betel_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:coca_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:ginseng"
+    },
+    {
+      "item": "earth_on_minecraft:codonopsis"
+    },
+    {
+      "item": "earth_on_minecraft:astragalus"
+    },
+    {
+      "item": "earth_on_minecraft:atractylodes"
+    },
+    {
+      "item": "earth_on_minecraft:atractylodes_lancea"
+    },
+    {
+      "item": "earth_on_minecraft:licorice"
+    },
+    {
+      "item": "earth_on_minecraft:angelica"
+    },
+    {
+      "item": "earth_on_minecraft:ligusticum"
+    },
+    {
+      "item": "earth_on_minecraft:white_peony"
+    },
+    {
+      "item": "earth_on_minecraft:red_peony"
+    },
+    {
+      "item": "earth_on_minecraft:rehmannia"
+    },
+    {
+      "item": "earth_on_minecraft:polygonum_multiflorum"
+    },
+    {
+      "item": "earth_on_minecraft:rhubarb"
+    },
+    {
+      "item": "earth_on_minecraft:coptis"
+    },
+    {
+      "item": "earth_on_minecraft:scutellaria"
+    },
+    {
+      "item": "earth_on_minecraft:phellodendron"
+    },
+    {
+      "item": "earth_on_minecraft:isatis_root"
+    },
+    {
+      "item": "earth_on_minecraft:kudzu_root"
+    },
+    {
+      "item": "earth_on_minecraft:bupleurum"
+    },
+    {
+      "item": "earth_on_minecraft:saposhnikovia"
+    },
+    {
+      "item": "earth_on_minecraft:notopterygium"
+    },
+    {
+      "item": "earth_on_minecraft:angelica_pubescens"
+    },
+    {
+      "item": "earth_on_minecraft:platycodon"
+    },
+    {
+      "item": "earth_on_minecraft:salvia_miltiorrhiza"
+    },
+    {
+      "item": "earth_on_minecraft:panax_notoginseng"
+    },
+    {
+      "item": "earth_on_minecraft:dioscorea"
+    },
+    {
+      "item": "earth_on_minecraft:gastrodia"
+    },
+    {
+      "item": "earth_on_minecraft:pinellia"
+    },
+    {
+      "item": "earth_on_minecraft:arisaema"
+    },
+    {
+      "item": "earth_on_minecraft:aconite"
+    },
+    {
+      "item": "earth_on_minecraft:aconitum"
+    },
+    {
+      "item": "earth_on_minecraft:emodin"
+    },
+    {
+      "item": "earth_on_minecraft:ephedra"
+    },
+    {
+      "item": "earth_on_minecraft:cinnamon_twig"
+    },
+    {
+      "item": "earth_on_minecraft:perilla"
+    },
+    {
+      "item": "earth_on_minecraft:mint"
+    },
+    {
+      "item": "earth_on_minecraft:schizonepeta"
+    },
+    {
+      "item": "earth_on_minecraft:mosla"
+    },
+    {
+      "item": "earth_on_minecraft:honeysuckle"
+    },
+    {
+      "item": "earth_on_minecraft:forsythia"
+    },
+    {
+      "item": "earth_on_minecraft:dandelion"
+    },
+    {
+      "item": "earth_on_minecraft:houttuynia"
+    },
+    {
+      "item": "earth_on_minecraft:purslane"
+    },
+    {
+      "item": "earth_on_minecraft:reed_root"
+    },
+    {
+      "item": "earth_on_minecraft:imperata"
+    },
+    {
+      "item": "earth_on_minecraft:leonurus"
+    },
+    {
+      "item": "earth_on_minecraft:agrimony"
+    },
+    {
+      "item": "earth_on_minecraft:mugwort"
+    },
+    {
+      "item": "earth_on_minecraft:artemisia_annua"
+    },
+    {
+      "item": "earth_on_minecraft:artemisia_capillaris"
+    },
+    {
+      "item": "earth_on_minecraft:plantago"
+    },
+    {
+      "item": "earth_on_minecraft:lysimachia"
+    },
+    {
+      "item": "earth_on_minecraft:sedum"
+    },
+    {
+      "item": "earth_on_minecraft:lophatherum"
+    },
+    {
+      "item": "earth_on_minecraft:lotus_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:mulberry_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:loquat_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:biota_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:eucommia_leaf"
+    },
+    {
+      "item": "earth_on_minecraft:chrysanthemum"
+    },
+    {
+      "item": "earth_on_minecraft:wild_chrysanthemum"
+    },
+    {
+      "item": "earth_on_minecraft:safflower"
+    },
+    {
+      "item": "earth_on_minecraft:sophora_flower"
+    },
+    {
+      "item": "earth_on_minecraft:magnolia_flower"
+    },
+    {
+      "item": "earth_on_minecraft:rose"
+    },
+    {
+      "item": "earth_on_minecraft:goji"
+    },
+    {
+      "item": "earth_on_minecraft:schisandra"
+    },
+    {
+      "item": "earth_on_minecraft:hawthorn_fruit"
+    },
+    {
+      "item": "earth_on_minecraft:dried_tangerine_peel"
+    },
+    {
+      "item": "earth_on_minecraft:green_tangerine_peel"
+    },
+    {
+      "item": "earth_on_minecraft:bitter_orange"
+    },
+    {
+      "item": "earth_on_minecraft:finger_citron"
+    },
+    {
+      "item": "earth_on_minecraft:amomum"
+    },
+    {
+      "item": "earth_on_minecraft:cardamom"
+    },
+    {
+      "item": "earth_on_minecraft:tsaoko"
+    },
+    {
+      "item": "earth_on_minecraft:evodia"
+    },
+    {
+      "item": "earth_on_minecraft:cornus"
+    },
+    {
+      "item": "earth_on_minecraft:rosa_laevigata"
+    },
+    {
+      "item": "earth_on_minecraft:smoked_plum"
+    },
+    {
+      "item": "earth_on_minecraft:papaya_fruit"
+    },
+    {
+      "item": "earth_on_minecraft:jujube_seed"
+    },
+    {
+      "item": "earth_on_minecraft:biota_seed"
+    },
+    {
+      "item": "earth_on_minecraft:peach_seed"
+    },
+    {
+      "item": "earth_on_minecraft:apricot_seed"
+    },
+    {
+      "item": "earth_on_minecraft:cassia_seed"
+    },
+    {
+      "item": "earth_on_minecraft:radish_seed"
+    },
+    {
+      "item": "earth_on_minecraft:mustard_seed"
+    },
+    {
+      "item": "earth_on_minecraft:pepperweed_seed"
+    },
+    {
+      "item": "earth_on_minecraft:foxnut"
+    },
+    {
+      "item": "earth_on_minecraft:lotus_seed"
+    },
+    {
+      "item": "earth_on_minecraft:coix_seed"
+    },
+    {
+      "item": "earth_on_minecraft:euryale"
+    },
+    {
+      "item": "earth_on_minecraft:cinnamon_bark"
+    },
+    {
+      "item": "earth_on_minecraft:eucommia_bark"
+    },
+    {
+      "item": "earth_on_minecraft:magnolia_bark"
+    },
+    {
+      "item": "earth_on_minecraft:moutan_bark"
+    },
+    {
+      "item": "earth_on_minecraft:lycium_bark"
+    },
+    {
+      "item": "earth_on_minecraft:mulberry_bark"
+    },
+    {
+      "item": "earth_on_minecraft:melia_bark"
+    },
+    {
+      "item": "earth_on_minecraft:agarwood"
+    },
+    {
+      "item": "earth_on_minecraft:sandalwood"
+    },
+    {
+      "item": "earth_on_minecraft:sappanwood"
+    },
+    {
+      "item": "earth_on_minecraft:rosewood"
+    },
+    {
+      "item": "earth_on_minecraft:frankincense"
+    },
+    {
+      "item": "earth_on_minecraft:myrrh"
+    },
+    {
+      "item": "earth_on_minecraft:pine_resin"
+    },
+    {
+      "item": "earth_on_minecraft:dragons_blood"
+    },
+    {
+      "item": "earth_on_minecraft:benzoin"
+    },
+    {
+      "item": "earth_on_minecraft:borneol"
+    },
+    {
+      "item": "earth_on_minecraft:camphor"
+    },
+    {
+      "item": "earth_on_minecraft:beeswax"
+    },
+    {
+      "item": "earth_on_minecraft:honeycomb"
+    },
+    {
+      "item": "earth_on_minecraft:cicada_shell"
+    },
+    {
+      "item": "earth_on_minecraft:snake_slough"
+    },
+    {
+      "item": "earth_on_minecraft:turtle_shell"
+    },
+    {
+      "item": "earth_on_minecraft:tortoise_shell"
+    },
+    {
+      "item": "earth_on_minecraft:oyster_shell"
+    },
+    {
+      "item": "earth_on_minecraft:pearl_shell"
+    },
+    {
+      "item": "earth_on_minecraft:abalone_shell"
+    },
+    {
+      "item": "earth_on_minecraft:cuttlebone"
+    },
+    {
+      "item": "earth_on_minecraft:chicken_gizzard"
+    },
+    {
+      "item": "earth_on_minecraft:earthworm_dried"
+    },
+    {
+      "item": "earth_on_minecraft:scorpion_dried"
+    },
+    {
+      "item": "earth_on_minecraft:centipede_dried"
+    },
+    {
+      "item": "earth_on_minecraft:silkworm_dried"
+    },
+    {
+      "item": "earth_on_minecraft:mantis_egg"
+    },
+    {
+      "item": "earth_on_minecraft:gypsum"
+    },
+    {
+      "item": "earth_on_minecraft:talc"
+    },
+    {
+      "item": "earth_on_minecraft:fossil_bone"
+    },
+    {
+      "item": "earth_on_minecraft:magnetite_ore"
+    },
+    {
+      "block": "earth_on_minecraft:magnetite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:hematite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:mirabilite"
+    },
+    {
+      "item": "earth_on_minecraft:cinnabar_ore"
+    },
+    {
+      "item": "earth_on_minecraft:realgar_ore"
+    },
+    {
+      "item": "earth_on_minecraft:alum"
+    },
+    {
+      "item": "earth_on_minecraft:borax_ore"
+    }
+  ],
+  "literature": [
+    "commonsense"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [],
+    "ticks": 0
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.agriculture_basics",
+  "desc_key": "lore.earth_on_minecraft.agr.agriculture_basics.desc"
+}

@@ -1,0 +1,47 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/first_aid"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:vaccine"
+    },
+    {
+      "item": "earth_on_minecraft:latrine"
+    },
+    {
+      "item": "earth_on_minecraft:septic_tank"
+    },
+    {
+      "item": "earth_on_minecraft:face_mask"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:cleric"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:soap",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:lime",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.public_health",
+  "desc_key": "lore.earth_on_minecraft.med.public_health.desc"
+}

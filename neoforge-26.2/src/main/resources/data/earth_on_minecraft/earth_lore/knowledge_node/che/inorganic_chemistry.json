@@ -1,0 +1,71 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/chemistry_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:nitric_acid"
+    },
+    {
+      "item": "earth_on_minecraft:sulfuric_acid"
+    },
+    {
+      "item": "earth_on_minecraft:hydrochloric_acid"
+    },
+    {
+      "item": "earth_on_minecraft:ammonia"
+    },
+    {
+      "item": "earth_on_minecraft:iodine"
+    },
+    {
+      "item": "earth_on_minecraft:potassium_iodide"
+    },
+    {
+      "item": "earth_on_minecraft:potassium_permanganate"
+    },
+    {
+      "item": "earth_on_minecraft:hydrogen_peroxide"
+    },
+    {
+      "item": "earth_on_minecraft:boric_acid"
+    },
+    {
+      "item": "earth_on_minecraft:sodium_bicarbonate"
+    },
+    {
+      "item": "earth_on_minecraft:aluminium_hydroxide"
+    },
+    {
+      "item": "earth_on_minecraft:activated_carbon"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:cleric"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:salt",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:glass_bottle",
+        "count": 4
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.inorganic_chemistry",
+  "desc_key": "lore.earth_on_minecraft.che.inorganic_chemistry.desc"
+}

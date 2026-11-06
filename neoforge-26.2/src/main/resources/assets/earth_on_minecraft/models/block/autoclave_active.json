@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "earth_on_minecraft:block/autoclave_top",
+    "front": "earth_on_minecraft:block/autoclave_front_active",
+    "side": "earth_on_minecraft:block/autoclave_side"
+  }
+}

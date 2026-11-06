@@ -1,0 +1,26 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 0,
+  "gate": "root",
+  "requires": [],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:bandage"
+    },
+    {
+      "ability": "earth_on_minecraft:med_medicine_basics/bandage"
+    }
+  ],
+  "literature": [
+    "commonsense"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [],
+    "ticks": 0
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.medicine_basics",
+  "desc_key": "lore.earth_on_minecraft.med.medicine_basics.desc"
+}

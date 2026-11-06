@@ -1,0 +1,41 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/first_aid"
+    },
+    {
+      "all": "earth_on_minecraft:agr/husbandry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:vet_kit"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:butcher"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:bandage",
+        "count": 2
+      },
+      {
+        "ingredient": "minecraft:wheat",
+        "count": 8
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.veterinary",
+  "desc_key": "lore.earth_on_minecraft.med.veterinary.desc"
+}

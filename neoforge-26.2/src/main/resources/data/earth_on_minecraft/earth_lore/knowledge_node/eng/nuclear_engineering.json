@@ -1,0 +1,80 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 5,
+  "gate": "hard",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/power_grid"
+    },
+    {
+      "all": "earth_on_minecraft:che/radiochemistry"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:transformer_core"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:nuclear_heat_module"
+    },
+    {
+      "item": "earth_on_minecraft:yellowcake"
+    },
+    {
+      "item": "earth_on_minecraft:uranium_trioxide"
+    },
+    {
+      "item": "earth_on_minecraft:uranium_dioxide_powder"
+    },
+    {
+      "item": "earth_on_minecraft:uranium_tetrafluoride"
+    },
+    {
+      "item": "earth_on_minecraft:uranium_hexafluoride_cell"
+    },
+    {
+      "item": "earth_on_minecraft:low_enriched_uranium"
+    },
+    {
+      "item": "earth_on_minecraft:depleted_uranium"
+    },
+    {
+      "item": "earth_on_minecraft:nuclear_fuel_pellet"
+    },
+    {
+      "item": "earth_on_minecraft:nuclear_fuel_rod"
+    },
+    {
+      "item": "earth_on_minecraft:nuclear_fuel_assembly"
+    },
+    {
+      "ability": "earth_on_minecraft:nuclear_fuel_cycle"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:uraninite_ore",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:lead",
+        "count": 8
+      }
+    ],
+    "ticks": 6000
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.nuclear_engineering",
+  "desc_key": "lore.earth_on_minecraft.eng.nuclear_engineering.desc"
+}

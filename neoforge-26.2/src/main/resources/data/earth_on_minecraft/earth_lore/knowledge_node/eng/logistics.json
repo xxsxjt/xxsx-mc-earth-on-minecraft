@@ -1,0 +1,48 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/mechanics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:conveyor_belt"
+    },
+    {
+      "block": "earth_on_minecraft:conveyor_belt"
+    },
+    {
+      "ability": "earth_on_minecraft:eng_logistics/sorter"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:warehouse_manager"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:hopper",
+        "count": 1
+      },
+      {
+        "ingredient": "minecraft:leather",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:iron_ingot",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.logistics",
+  "desc_key": "lore.earth_on_minecraft.eng.logistics.desc"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "earth_on_minecraft:magnetite_chunk",
+    "earth_on_minecraft:magnetite_chunk"
+  ],
+  "result": {
+    "id": "earth_on_minecraft:crushed_magnetite",
+    "count": 2
+  }
+}

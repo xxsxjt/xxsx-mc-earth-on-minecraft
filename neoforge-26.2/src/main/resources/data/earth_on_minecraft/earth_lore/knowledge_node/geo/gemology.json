@@ -1,0 +1,371 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/mineral_identification"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "ability": "earth_on_minecraft:geo_gemology/serpentine_jade"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/zoisite_jade"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/turquoise"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/lapis_lazuli"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/chalcedony"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/agate"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/jasper"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/aventurine"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/opal"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/malachite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/azurite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/chrysocolla"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/fluorite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/iceland_spar"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/rhodonite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/tigers_eye"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/hawks_eye"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/amazonite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/moonstone"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/labradorite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/sunstone"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/sodalite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/prehnite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/obsidian"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/snowflake_obsidian"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/tektite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/diamond"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/corundum"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/ruby"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/sapphire"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/chrysoberyl"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/cats_eye"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/alexandrite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/spinel"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/almandine"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/pyrope"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/spessartine"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/grossular"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/andradite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/uvarovite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/rhodolite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/peridot"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/zircon"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/topaz"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/tourmaline"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/rubellite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/paraiba"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/watermelon"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/beryl"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/emerald"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/aquamarine"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/morganite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/heliodor"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/bixbite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/blue_zoisite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/zoisite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/thulite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/diopside"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/chrome_diopside"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/apatite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/amethyst"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/citrine"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/smoky_quartz"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/rose_quartz"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/rutilated_quartz"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/quartz_cats_eye"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/iolite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/kyanite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/andalusite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/sillimanite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/staurolite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/scapolite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/titanite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/vesuvianite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/axinite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/benitoite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/danburite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/spodumene"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/kunzite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/hiddenite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/dioptase"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/celestine"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/barite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/rhodochrosite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/smithsonite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/cerussite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/hemimorphite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/cuprite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/native_copper"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/native_gold"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/native_silver"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/native_bismuth"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/realgar"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/orpiment"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/cinnabar"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/stibnite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/bismuthinite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/molybdenite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/pyrite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/arsenopyrite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/pyrrhotite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/sphalerite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/galena"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/chalcopyrite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/bornite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/chalcocite"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/amber"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/pearl"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/coral"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/jet"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/shell"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_gemology/bone_carving"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:geologist"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:gem_rough",
+        "count": 3
+      },
+      {
+        "ingredient": "minecraft:paper",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.gemology",
+  "desc_key": "lore.earth_on_minecraft.geo.gemology.desc"
+}

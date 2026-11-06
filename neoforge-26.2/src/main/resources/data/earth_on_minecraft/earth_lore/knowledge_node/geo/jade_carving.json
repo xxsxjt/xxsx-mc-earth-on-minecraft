@@ -1,0 +1,43 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/lapidary"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:gem_cut"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:gem_carving_tool"
+    },
+    {
+      "item": "earth_on_minecraft:seal"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:gem_cut",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:gem_dust",
+        "count": 6
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.jade_carving",
+  "desc_key": "lore.earth_on_minecraft.geo.jade_carving.desc"
+}

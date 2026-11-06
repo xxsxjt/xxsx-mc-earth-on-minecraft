@@ -1,0 +1,63 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 5,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/heat_treatment"
+    },
+    {
+      "all": "earth_on_minecraft:mat/electrometallurgy"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:stainless_steel"
+    },
+    {
+      "item": "earth_on_minecraft:nickel"
+    },
+    {
+      "item": "earth_on_minecraft:chromium"
+    },
+    {
+      "item": "earth_on_minecraft:tungsten"
+    },
+    {
+      "item": "earth_on_minecraft:cobalt"
+    },
+    {
+      "item": "earth_on_minecraft:molybdenum"
+    },
+    {
+      "item": "earth_on_minecraft:monel"
+    },
+    {
+      "item": "earth_on_minecraft:inconel"
+    },
+    {
+      "item": "earth_on_minecraft:platinum"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:chromite_ore",
+        "count": 2
+      }
+    ],
+    "ticks": 6000
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.alloy_steels",
+  "desc_key": "lore.earth_on_minecraft.mat.alloy_steels.desc"
+}

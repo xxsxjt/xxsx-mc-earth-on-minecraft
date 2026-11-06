@@ -65,6 +65,13 @@ public final class SpecBlocks {
                                     .strength(entry.hardness(), entry.hardness() * 2.0F)
                                     .requiresCorrectToolForDrops()
                                     .sound(SoundType.STONE))
+                    : entry.id().equals("survey_stake")
+                    ? EarthOnMinecraft.BLOCKS.registerBlock(entry.id(), SurveyStakeBlock::new,
+                            () -> BlockBehaviour.Properties.of()
+                                    .mapColor(MapColor.WOOD)
+                                    .strength(entry.hardness(), entry.hardness() * 2.0F)
+                                    .requiresCorrectToolForDrops()
+                                    .sound(SoundType.WOOD))
                     : EarthOnMinecraft.BLOCKS.registerSimpleBlock(entry.id(),
                             () -> BlockBehaviour.Properties.of()
                                     .mapColor(MapColor.STONE)

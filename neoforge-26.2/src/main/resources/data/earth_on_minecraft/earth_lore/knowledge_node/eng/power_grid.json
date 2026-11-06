@@ -1,0 +1,43 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/electrical_basics"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:copper_power_cable"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:transformer_core"
+    },
+    {
+      "item": "earth_on_minecraft:grid_switchgear"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:heavy_copper_power_cable",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:refined_copper",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.power_grid",
+  "desc_key": "lore.earth_on_minecraft.eng.power_grid.desc"
+}

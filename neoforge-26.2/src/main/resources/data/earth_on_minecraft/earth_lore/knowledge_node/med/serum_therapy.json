@@ -1,0 +1,42 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/wound_care"
+    },
+    {
+      "all": "earth_on_minecraft:agr/husbandry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:tetanus_antitoxin"
+    },
+    {
+      "item": "earth_on_minecraft:antivenom"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:syringe",
+        "count": 2
+      },
+      {
+        "ingredient": "minecraft:wheat",
+        "count": 16
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.serum_therapy",
+  "desc_key": "lore.earth_on_minecraft.med.serum_therapy.desc"
+}

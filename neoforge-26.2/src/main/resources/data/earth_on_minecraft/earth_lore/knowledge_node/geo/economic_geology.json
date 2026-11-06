@@ -1,0 +1,43 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 3,
+  "gate": "theory",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/stratigraphy"
+    },
+    {
+      "all": "earth_on_minecraft:geo/ore_genesis"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:survey_stake"
+    }
+  ],
+  "unlocks": [
+    {
+      "readout": "earth_on_minecraft:geology_hammer"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:survey_stake",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:sample_bag",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.economic_geology",
+  "desc_key": "lore.earth_on_minecraft.geo.economic_geology.desc"
+}

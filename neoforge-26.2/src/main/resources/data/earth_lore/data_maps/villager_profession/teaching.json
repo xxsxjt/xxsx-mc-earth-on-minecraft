@@ -1,0 +1,128 @@
+{
+  "replace": false,
+  "values": {
+    "minecraft:armorer": [
+      {
+        "node": "earth_on_minecraft:mat/pyrometallurgy"
+      },
+      {
+        "node": "earth_on_minecraft:mat/ironmaking_steelmaking"
+      },
+      {
+        "node": "earth_on_minecraft:mat/armorsmithing"
+      }
+    ],
+    "minecraft:butcher": [
+      {
+        "node": "earth_on_minecraft:agr/husbandry"
+      },
+      {
+        "node": "earth_on_minecraft:agr/cooking"
+      },
+      {
+        "node": "earth_on_minecraft:agr/food_processing"
+      },
+      {
+        "node": "earth_on_minecraft:med/veterinary"
+      }
+    ],
+    "minecraft:cartographer": [
+      {
+        "node": "earth_on_minecraft:geo/mineral_identification"
+      },
+      {
+        "node": "earth_on_minecraft:geo/surveying"
+      }
+    ],
+    "minecraft:cleric": [
+      {
+        "node": "earth_on_minecraft:che/inorganic_chemistry"
+      },
+      {
+        "node": "earth_on_minecraft:med/first_aid"
+      },
+      {
+        "node": "earth_on_minecraft:med/materia_medica"
+      },
+      {
+        "node": "earth_on_minecraft:med/herbal_processing"
+      },
+      {
+        "node": "earth_on_minecraft:med/sterile_technique"
+      },
+      {
+        "node": "earth_on_minecraft:med/nursing"
+      },
+      {
+        "node": "earth_on_minecraft:med/public_health"
+      }
+    ],
+    "minecraft:farmer": [
+      {
+        "node": "earth_on_minecraft:agr/tillage"
+      },
+      {
+        "node": "earth_on_minecraft:agr/soil_science"
+      },
+      {
+        "node": "earth_on_minecraft:agr/irrigation"
+      },
+      {
+        "node": "earth_on_minecraft:agr/apiculture_sericulture"
+      },
+      {
+        "node": "earth_on_minecraft:agr/fermentation"
+      },
+      {
+        "node": "earth_on_minecraft:agr/sugar_and_oil"
+      }
+    ],
+    "minecraft:fisherman": [
+      {
+        "node": "earth_on_minecraft:agr/aquaculture"
+      }
+    ],
+    "minecraft:leatherworker": [
+      {
+        "node": "earth_on_minecraft:mat/textiles"
+      }
+    ],
+    "minecraft:librarian": [
+      {
+        "node": "earth_on_minecraft:eng/timekeeping"
+      },
+      {
+        "node": "earth_on_minecraft:mat/papermaking"
+      }
+    ],
+    "minecraft:mason": [
+      {
+        "node": "earth_on_minecraft:mat/ceramics"
+      },
+      {
+        "node": "earth_on_minecraft:mat/binders"
+      }
+    ],
+    "minecraft:shepherd": [
+      {
+        "node": "earth_on_minecraft:agr/husbandry"
+      },
+      {
+        "node": "earth_on_minecraft:mat/textiles"
+      }
+    ],
+    "minecraft:toolsmith": [
+      {
+        "node": "earth_on_minecraft:mat/smithing"
+      },
+      {
+        "node": "earth_on_minecraft:mat/hardware"
+      }
+    ],
+    "minecraft:weaponsmith": [
+      {
+        "node": "earth_on_minecraft:mat/weaponsmithing"
+      }
+    ]
+  }
+}

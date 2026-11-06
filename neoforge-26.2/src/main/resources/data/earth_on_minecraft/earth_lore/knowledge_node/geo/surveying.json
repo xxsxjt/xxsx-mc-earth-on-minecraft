@@ -1,0 +1,58 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/field_survey"
+    }
+  ],
+  "item_requires": [
+    {
+      "hold": "earth_on_minecraft:survey_stake"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:compass"
+    },
+    {
+      "item": "earth_on_minecraft:magnifying_glass"
+    },
+    {
+      "item": "earth_on_minecraft:telescope"
+    },
+    {
+      "item": "earth_on_minecraft:sextant"
+    },
+    {
+      "item": "earth_on_minecraft:map"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:cartographer"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:survey_stake",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:paper",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:compass",
+        "count": 1
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.surveying",
+  "desc_key": "lore.earth_on_minecraft.geo.surveying.desc"
+}

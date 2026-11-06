@@ -1,5 +1,7 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthlore.api.GateResult;
+import com.xxsx.earthlore.api.LoreMachines;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
@@ -53,6 +55,17 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
             quarry.finishTick(level, pos, state, false);
             return;
         }
+        GateResult loreGate = LoreIntegration.checkMachine(quarry, state.getBlock());
+        if (loreGate.locked()) {
+            LoreMachines.setFault(quarry, "lore_locked", loreGate.missing());
+            if (quarry.progress != 0) {
+                quarry.progress = 0;
+                changed = true;
+            }
+            quarry.finishTick(level, pos, state, changed);
+            return;
+        }
+        LoreMachines.clearFault(quarry);
         BlockPos target = quarry.targetRock(level);
         if (target == null) {
             quarry.progress = 0;
@@ -90,6 +103,20 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
         if (drops.isEmpty()) {
             return false;
         }
+        double yieldFactor = com.xxsx.earthlore.knowledge.KnowledgeService.running()
+                ? LoreMachines.yieldFactor(this, sampled.getBlock()) : 1.0;
+        List<ItemStack> adjustedDrops = new java.util.ArrayList<>(drops.size());
+        for (ItemStack rawDrop : drops) {
+            if (rawDrop.isEmpty()) {
+                continue;
+            }
+            int scaledCount = yieldFactor < 1.0
+                    ? Math.max(1, (int) Math.floor(rawDrop.getCount() * yieldFactor))
+                    : rawDrop.getCount();
+            ItemStack adjusted = LoreIntegration.capMachineOutput(this, rawDrop.copyWithCount(scaledCount), getBlockState().getBlock());
+            adjustedDrops.add(adjusted);
+        }
+        drops = adjustedDrops;
         NonNullList<ItemStack> simulated = NonNullList.withSize(items.size(), ItemStack.EMPTY);
         for (int i = 0; i < items.size(); i++) {
             simulated.set(i, items.get(i).copy());
@@ -109,6 +136,7 @@ public class QuarryBlockEntity extends BlockEntity implements Container {
         }
         for (ItemStack drop : drops) {
             insert(drop.copy());
+            LoreIntegration.awardMachineProduct(this, drop);
         }
         if (deposit != null && !depletedLode && deposit.reserve().isEmpty()) {
             BlockState depleted = SpecDepletedBlocks.byLode(deposit.reserve().lodeId());

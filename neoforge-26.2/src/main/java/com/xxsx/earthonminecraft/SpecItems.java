@@ -1107,7 +1107,11 @@ public final class SpecItems {
         registered = true;
         for (Entry entry : ENTRIES) {
             DeferredItem<Item> item = EarthOnMinecraft.ITEMS.registerItem(entry.id(),
-                    entry.id().equals("ore_scanner") ? OreScannerItem::new : SpecItem::new,
+                    switch (entry.id()) {
+                        case "ore_scanner" -> OreScannerItem::new;
+                        case "hand_lens" -> HandLensItem::new;
+                        default -> SpecItem::new;
+                    },
                     props -> apply(entry, props));
             BY_ID.put(entry.id(), item);
             EarthOnMinecraft.addTabItem(item);

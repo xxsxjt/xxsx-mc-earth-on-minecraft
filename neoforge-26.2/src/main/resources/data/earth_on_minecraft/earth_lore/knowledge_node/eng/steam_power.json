@@ -1,0 +1,48 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/machine_elements"
+    },
+    {
+      "all": "earth_on_minecraft:eng/thermodynamics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:steam_turbine_generator"
+    },
+    {
+      "block": "earth_on_minecraft:steam_turbine_generator"
+    },
+    {
+      "item": "earth_on_minecraft:steam_locomotive"
+    },
+    {
+      "item": "earth_on_minecraft:rail"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:iron_ingot",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:water_bucket",
+        "count": 1
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.steam_power",
+  "desc_key": "lore.earth_on_minecraft.eng.steam_power.desc"
+}

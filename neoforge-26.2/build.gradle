@@ -3,7 +3,7 @@ plugins {
     id 'net.neoforged.moddev' version '2.0.148'
 }
 
-version = '0.1.17'
+version = '0.2.0'
 group = 'com.xxsx.earthonminecraft'
 base.archivesName = 'earth-on-minecraft-neoforge-26.1.2'
 
@@ -56,11 +56,25 @@ repositories {
             includeGroup 'mezz.jei'
         }
     }
+    mavenCentral()
 }
 
 dependencies {
+    implementation files('../../earth_lore/neoforge-26.1.2/build/libs/earth-lore-neoforge-26.1.2-0.1.0.jar')
     compileOnly 'mezz.jei:jei-26.1.2-common-api:29.53.0.112'
     compileOnly 'mezz.jei:jei-26.1.2-neoforge-api:29.53.0.112'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+configurations {
+    testCompileClasspath.extendsFrom compileClasspath
+    testRuntimeClasspath.extendsFrom runtimeClasspath
 }
 
 jar {

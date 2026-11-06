@@ -1,0 +1,39 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/petrochemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:polymerizer"
+    },
+    {
+      "block": "earth_on_minecraft:polymerizer"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:toluene",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:methanol",
+        "count": 2
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.polymer_chemistry",
+  "desc_key": "lore.earth_on_minecraft.che.polymer_chemistry.desc"
+}

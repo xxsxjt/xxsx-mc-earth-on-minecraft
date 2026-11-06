@@ -1,0 +1,46 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/ironmaking_steelmaking"
+    },
+    {
+      "all": "earth_on_minecraft:mat/smithing"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:steel"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:quench_tank"
+    },
+    {
+      "block": "earth_on_minecraft:quench_tank"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:water_bucket",
+        "count": 1
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.heat_treatment",
+  "desc_key": "lore.earth_on_minecraft.mat.heat_treatment.desc"
+}

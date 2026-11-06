@@ -1,0 +1,68 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/materials_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:ceramic_body"
+    },
+    {
+      "item": "earth_on_minecraft:brick"
+    },
+    {
+      "item": "earth_on_minecraft:roof_tile"
+    },
+    {
+      "item": "earth_on_minecraft:clay_brick"
+    },
+    {
+      "item": "earth_on_minecraft:clay_tile"
+    },
+    {
+      "item": "earth_on_minecraft:floor_tile"
+    },
+    {
+      "item": "earth_on_minecraft:drain_pipe"
+    },
+    {
+      "item": "earth_on_minecraft:chimney_pipe"
+    },
+    {
+      "item": "earth_on_minecraft:clay_jar"
+    },
+    {
+      "item": "earth_on_minecraft:amphora"
+    },
+    {
+      "item": "earth_on_minecraft:milk_can"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:mason"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:clay_ball",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:charcoal",
+        "count": 2
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.ceramics",
+  "desc_key": "lore.earth_on_minecraft.mat.ceramics.desc"
+}

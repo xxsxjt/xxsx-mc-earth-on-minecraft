@@ -1,0 +1,58 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/basic_pharmacy"
+    },
+    {
+      "all": "earth_on_minecraft:med/sterile_technique"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:ibuprofen"
+    },
+    {
+      "item": "earth_on_minecraft:glucose_injection"
+    },
+    {
+      "item": "earth_on_minecraft:antihistamine"
+    },
+    {
+      "item": "earth_on_minecraft:motion_sickness_pill"
+    },
+    {
+      "item": "earth_on_minecraft:caffeine_tablet"
+    },
+    {
+      "item": "earth_on_minecraft:melatonin"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:glucose",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:syringe",
+        "count": 1
+      },
+      {
+        "ingredient": "earth_on_minecraft:glass_bottle",
+        "count": 4
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.advanced_pharmacy",
+  "desc_key": "lore.earth_on_minecraft.med.advanced_pharmacy.desc"
+}

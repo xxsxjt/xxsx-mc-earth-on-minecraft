@@ -1,0 +1,47 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/mechanics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:clock"
+    },
+    {
+      "item": "earth_on_minecraft:sundial"
+    },
+    {
+      "item": "earth_on_minecraft:hourglass"
+    },
+    {
+      "item": "earth_on_minecraft:calendar"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:librarian"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:clock",
+        "count": 1
+      },
+      {
+        "ingredient": "minecraft:gold_ingot",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.timekeeping",
+  "desc_key": "lore.earth_on_minecraft.eng.timekeeping.desc"
+}

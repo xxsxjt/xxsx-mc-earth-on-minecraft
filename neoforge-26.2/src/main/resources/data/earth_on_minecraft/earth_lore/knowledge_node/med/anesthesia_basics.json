@@ -1,0 +1,45 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 4,
+  "gate": "hard",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/wound_care"
+    },
+    {
+      "all": "earth_on_minecraft:che/organic_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:diethyl_ether"
+    },
+    {
+      "item": "earth_on_minecraft:chloroform"
+    },
+    {
+      "item": "earth_on_minecraft:nitrous_oxide"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:ethanol",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:sulfuric_acid",
+        "count": 2
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.anesthesia_basics",
+  "desc_key": "lore.earth_on_minecraft.med.anesthesia_basics.desc"
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:optical_glass",
+  "kind": "manufactured",
+  "formula": "SiO2 + B2O3 + Na2O + K2O",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "SiO2",
+      "fraction": 0.7
+    },
+    {
+      "species": "B2O3",
+      "fraction": 0.14
+    },
+    {
+      "species": "Na2O",
+      "fraction": 0.1
+    },
+    {
+      "species": "K2O",
+      "fraction": 0.06
+    }
+  ],
+  "source": [
+    "fining_melt"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.optical_glass",
+  "notes": "Refined borosilicate crown optical glass blank fined for low bubble count."
+}

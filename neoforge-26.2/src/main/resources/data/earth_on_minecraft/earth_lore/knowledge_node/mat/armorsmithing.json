@@ -1,0 +1,59 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/smithing"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:copper_armor"
+    },
+    {
+      "item": "earth_on_minecraft:iron_armor"
+    },
+    {
+      "item": "earth_on_minecraft:steel_armor"
+    },
+    {
+      "item": "earth_on_minecraft:diamond_armor"
+    },
+    {
+      "item": "earth_on_minecraft:chainmail"
+    },
+    {
+      "item": "earth_on_minecraft:plate_armor"
+    },
+    {
+      "item": "earth_on_minecraft:scale_armor"
+    },
+    {
+      "item": "earth_on_minecraft:steel_boots"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:armorer"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:iron_ingot",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:leather",
+        "count": 4
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.armorsmithing",
+  "desc_key": "lore.earth_on_minecraft.mat.armorsmithing.desc"
+}

@@ -1,10 +1,13 @@
 package com.xxsx.earthonminecraft.api.v1;
 
+import com.xxsx.earthonminecraft.DepositSpec;
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
 import com.xxsx.earthonminecraft.MachineMultiblock;
 import com.xxsx.earthonminecraft.MaterialChemistry;
 import com.xxsx.earthonminecraft.MaterialCatalog;
 import com.xxsx.earthonminecraft.ProcessingMachineBlock;
+import com.xxsx.earthonminecraft.ProspectingCatalog;
+import com.xxsx.earthonminecraft.ProspectingSurvey;
 import com.xxsx.earthonminecraft.component.EarthDataComponents;
 import com.xxsx.earthonminecraft.component.Grade;
 import com.xxsx.earthonminecraft.component.MaterialBatch;
@@ -185,6 +188,34 @@ final class ApiServices {
                     blockId, role(blockId), material.formula(), material.categoryKey(),
                     material.sourceKey(), material.processKey(),
                     EarthOnMinecraft.MODID.equals(blockId.getNamespace())));
+        }
+
+        @Override
+        public List<RemoteDepositOutline> queryDeposits(LevelReader level, BlockPos center, int radiusBlocks) {
+            if (!(level instanceof Level realLevel) || center == null || radiusBlocks <= 0) {
+                return List.of();
+            }
+            int clampedRadius = Math.min(256, radiusBlocks);
+            int chunkRadius = Math.max(1, (clampedRadius + 15) >> 4);
+            List<ProspectingSurvey.Sample> samples = ProspectingSurvey.collect(
+                    realLevel, net.minecraft.world.level.ChunkPos.containing(center),
+                    chunkRadius, ProspectingCatalog::isMainLode);
+            return ProspectingSurvey.group(samples, center).stream()
+                    .filter(g -> ProspectingSurvey.horizontalDistance(center, g.nearest()) <= clampedRadius)
+                    .map(g -> {
+                        var block = DepositSpec.blockOf(g.lodeId());
+                        Identifier repId = block != null
+                                ? BuiltInRegistries.BLOCK.getKey(block)
+                                : EarthOnMinecraft.id(g.lodeId());
+                        return new RemoteDepositOutline(
+                                g.lodeId(),
+                                repId,
+                                g.nearest(),
+                                g.blocks(),
+                                g.remaining(),
+                                ProspectingSurvey.horizontalDistance(center, g.nearest()));
+                    })
+                    .toList();
         }
 
         private static DepositRole role(Identifier id) {

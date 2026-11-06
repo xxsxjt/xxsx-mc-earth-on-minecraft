@@ -1,5 +1,11 @@
 package com.xxsx.earthonminecraft.living;
 
+import com.xxsx.earthlore.LoreConfig;
+import com.xxsx.earthlore.data.LoreText;
+import com.xxsx.earthlore.graph.LoreGraph;
+import com.xxsx.earthlore.knowledge.KnowledgeService;
+import com.xxsx.earthlore.registry.LoreContent;
+import com.xxsx.earthlore.study.LiteratureItem;
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
 import com.xxsx.earthonminecraft.MaterialCatalog;
 import com.xxsx.earthonminecraft.SettlementFacilities;
@@ -282,12 +288,40 @@ public final class ResidentProfileManager {
             offers.add(new MerchantOffer(new ItemCost(cost, trade.inputCount()),
                     resultStack, trade.maxUses(), trade.xp(), trade.priceMultiplier()));
         }
+        addRoleTeachingOffers(offers, roleSelection.id(), effectiveTradeLevel);
+    }
+
+    private static void addRoleTeachingOffers(MerchantOffers offers, Identifier roleId, int effectiveTradeLevel) {
+        if (!KnowledgeService.running() || !LoreConfig.allowTeaching()) {
+            return;
+        }
+        for (LoreGraph.Node node : KnowledgeService.graph().nodes()) {
+            int tier = node.tier();
+            if (tier < 1 || tier > 2 || effectiveTradeLevel < tier + 1) {
+                continue;
+            }
+            if (!node.data().teachers().contains(roleId)) {
+                continue;
+            }
+            boolean present = offers.stream().anyMatch(existing -> {
+                LoreText text = existing.getResult().get(LoreContent.LORE_TEXT.get());
+                return text != null && text.nodes().contains(node.id());
+            });
+            if (!present) {
+                int price = Math.max(4, Math.min(24, 4 + 4 * tier));
+                ItemStack notes = LiteratureItem.notesFor(node.id(), node.discipline());
+                offers.add(new MerchantOffer(new ItemCost(Items.EMERALD, price), notes, 3, 5, 0.05F));
+            }
+        }
     }
 
     private static boolean isVanillaEmeraldFillerOffer(MerchantOffer offer) {
+        Identifier resultId = BuiltInRegistries.ITEM.getKey(offer.getResult().getItem());
+        if (resultId != null && "earth_lore".equals(resultId.getNamespace())) {
+            return false;
+        }
         boolean costEmerald = offer.getBaseCostA().is(Items.EMERALD);
         boolean resultEmerald = offer.getResult().is(Items.EMERALD);
-        Identifier resultId = BuiltInRegistries.ITEM.getKey(offer.getResult().getItem());
         return costEmerald || resultEmerald
                 || (resultId != null && "minecraft".equals(resultId.getNamespace()));
     }

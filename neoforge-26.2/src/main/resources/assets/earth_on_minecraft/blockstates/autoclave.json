@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=north,active=false": {
+      "model": "earth_on_minecraft:block/autoclave"
+    },
+    "facing=north,active=true": {
+      "model": "earth_on_minecraft:block/autoclave_active"
+    },
+    "facing=east,active=false": {
+      "model": "earth_on_minecraft:block/autoclave",
+      "y": 90
+    },
+    "facing=east,active=true": {
+      "model": "earth_on_minecraft:block/autoclave_active",
+      "y": 90
+    },
+    "facing=south,active=false": {
+      "model": "earth_on_minecraft:block/autoclave",
+      "y": 180
+    },
+    "facing=south,active=true": {
+      "model": "earth_on_minecraft:block/autoclave_active",
+      "y": 180
+    },
+    "facing=west,active=false": {
+      "model": "earth_on_minecraft:block/autoclave",
+      "y": 270
+    },
+    "facing=west,active=true": {
+      "model": "earth_on_minecraft:block/autoclave_active",
+      "y": 270
+    }
+  }
+}

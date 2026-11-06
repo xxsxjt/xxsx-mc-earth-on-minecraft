@@ -70,6 +70,7 @@ final class EarthGameTests {
     private static final Identifier LODE_SIGNAL_SECTION_SCAN = EarthOnMinecraft.id("lode_signal_section_scan");
     private static final Identifier PROSPECT_OUTCROP_DEPTH = EarthOnMinecraft.id("prospect_outcrop_depth");
     private static final Identifier PROSPECT_HAMMER_RANK = EarthOnMinecraft.id("prospect_hammer_rank");
+    private static final Identifier EARTH_LOOP_LORE_STUDY = EarthOnMinecraft.id("earth_loop_lore_study");
     private static final DeferredRegister<MapCodec<? extends GameTestInstance>> TEST_INSTANCE_TYPES =
             DeferredRegister.create(Registries.TEST_INSTANCE_TYPE, EarthOnMinecraft.MODID);
     private static final Map<Identifier, Consumer<GameTestHelper>> TESTS = Map.ofEntries(
@@ -97,7 +98,8 @@ final class EarthGameTests {
             Map.entry(PROSPECT_SECTION_SURVEY, EarthGameTests::prospectSectionSurvey),
             Map.entry(LODE_SIGNAL_SECTION_SCAN, EarthGameTests::lodeSignalSectionScan),
             Map.entry(PROSPECT_OUTCROP_DEPTH, EarthGameTests::prospectOutcropDepth),
-            Map.entry(PROSPECT_HAMMER_RANK, EarthGameTests::prospectHammerRank));
+            Map.entry(PROSPECT_HAMMER_RANK, EarthGameTests::prospectHammerRank),
+            Map.entry(EARTH_LOOP_LORE_STUDY, EarthGameTests::earthLoopLoreStudy));
 
     static {
         TEST_INSTANCE_TYPES.register("direct", () -> DirectGameTestInstance.CODEC);
@@ -141,6 +143,7 @@ final class EarthGameTests {
         event.registerTest(LODE_SIGNAL_SECTION_SCAN, test(LODE_SIGNAL_SECTION_SCAN, environment, 40, true, 8));
         event.registerTest(PROSPECT_OUTCROP_DEPTH, test(PROSPECT_OUTCROP_DEPTH, environment, 40, true, 8));
         event.registerTest(PROSPECT_HAMMER_RANK, test(PROSPECT_HAMMER_RANK, environment, 40, true, 8));
+        event.registerTest(EARTH_LOOP_LORE_STUDY, test(EARTH_LOOP_LORE_STUDY, environment, 160, true, 8));
     }
 
     private static GameTestInstance test(Identifier testId, Holder<TestEnvironmentDefinition<?>> environment,
@@ -1560,8 +1563,13 @@ final class EarthGameTests {
                 "Villager must bind to the Tier 4 settlement");
         var offers = villager.getOffers();
         helper.assertTrue(!offers.isEmpty(), "Resident villager must generate industrial/geological trade offers");
-        helper.assertTrue(offers.stream().noneMatch(o ->
-                        o.getBaseCostA().is(Items.EMERALD) || o.getResult().is(Items.EMERALD)),
+        helper.assertTrue(offers.stream().noneMatch(o -> {
+                    Identifier outId = BuiltInRegistries.ITEM.getKey(o.getResult().getItem());
+                    if (outId != null && "earth_lore".equals(outId.getNamespace())) {
+                        return false;
+                    }
+                    return o.getBaseCostA().is(Items.EMERALD) || o.getResult().is(Items.EMERALD);
+                }),
                 "Resident villager trades must replace generic emerald filler with industrial/geological barter");
         helper.assertTrue(offers.stream().anyMatch(o ->
                         o.getResult().has(EarthDataComponents.MATERIAL_BATCH.get())
@@ -1581,6 +1589,50 @@ final class EarthGameTests {
                 "Tier 4 skilled resident tool supply must carry high-grade ToolQualityComponent");
 
         villager.discard();
+        helper.succeed();
+    }
+
+    private static void earthLoopLoreStudy(GameTestHelper helper) {
+        var graph = com.xxsx.earthlore.knowledge.KnowledgeService.graph();
+        long eomLoaded = graph.nodes().stream()
+                .filter(n -> EarthOnMinecraft.MODID.equals(n.namespace()))
+                .count();
+        long eomRejected = graph.rejected().keySet().stream()
+                .filter(id -> EarthOnMinecraft.MODID.equals(id.getNamespace()))
+                .count();
+        helper.assertValueEqual((int) eomLoaded, 107, "All 107 Earth on Minecraft knowledge nodes must load");
+        helper.assertValueEqual((int) eomRejected, 0, "Zero Earth on Minecraft knowledge nodes may be rejected");
+
+        // Verify GradeAccess bridge round-trip
+        ItemStack wrought = new ItemStack(EarthOnMinecraft.WROUGHT_IRON.get());
+        wrought.set(EarthDataComponents.MATERIAL_BATCH.get(),
+                MaterialBatch.defaultFor("wrought_iron").withPurityAndGrade(0.96, Grade.MASTERWORK));
+        ItemStack capped = com.xxsx.earthlore.gate.GateService.apply(
+                wrought, new com.xxsx.earthlore.api.GateResult(
+                        com.xxsx.earthlore.api.GateResult.Status.SOFT_CAPPED,
+                        com.xxsx.earthlore.api.Grade.COMMON,
+                        List.of(LoreIntegration.NODE_ANALYTICAL_CHEMISTRY)));
+        helper.assertValueEqual(LoreIntegration.readGrade(capped).orElse(Grade.HEIRLOOM), Grade.COMMON,
+                "Soft gate must cap MaterialBatch grade to COMMON via LoreIntegration");
+
+        // Verify Autoclave 120-tick steam sterilization cycle
+        BlockPos autoclavePos = new BlockPos(2, 1, 2);
+        helper.setBlock(autoclavePos, EarthOnMinecraft.AUTOCLAVE.get().defaultBlockState());
+        AutoclaveBlockEntity autoclave = helper.getBlockEntity(autoclavePos, AutoclaveBlockEntity.class);
+        helper.assertTrue(autoclave != null, "Autoclave must create AutoclaveBlockEntity");
+        autoclave.receiveEnergy(AutoclaveBlockEntity.ENERGY_CAPACITY, false);
+        ItemStack syringe = new ItemStack(SpecItems.BY_ID.get("syringe").get(), 1);
+        ItemStack rem = autoclave.tryInsert(syringe);
+        helper.assertTrue(rem.isEmpty(), "Syringe must be accepted by Autoclave");
+        var level = helper.getLevel();
+        BlockPos absPos = helper.absolutePos(autoclavePos);
+        for (int i = 0; i < AutoclaveBlockEntity.CYCLE_TICKS; i++) {
+            AutoclaveBlockEntity.serverTick(level, absPos, level.getBlockState(absPos), autoclave);
+        }
+        ItemStack sterilized = autoclave.extractOutput();
+        helper.assertTrue(!sterilized.isEmpty(), "Autoclave must output sterilized item after 120 ticks");
+        helper.assertTrue(Boolean.TRUE.equals(sterilized.get(EarthDataComponents.STERILE.get())),
+                "Autoclave output must carry earth_on_minecraft:sterile=true");
         helper.succeed();
     }
 

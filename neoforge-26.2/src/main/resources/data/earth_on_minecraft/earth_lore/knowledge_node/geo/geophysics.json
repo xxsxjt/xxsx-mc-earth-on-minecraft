@@ -1,0 +1,43 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 4,
+  "gate": "hard",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/economic_geology"
+    },
+    {
+      "all": "earth_on_minecraft:eng/electrical_basics"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:copper_power_cable"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:ore_scanner"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:sample_bag",
+        "count": 6
+      },
+      {
+        "ingredient": "earth_on_minecraft:copper_power_cable",
+        "count": 4
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.geophysics",
+  "desc_key": "lore.earth_on_minecraft.geo.geophysics.desc"
+}

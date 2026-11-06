@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SCS",
+    "GFG",
+    "SCS"
+  ],
+  "key": {
+    "S": "earth_on_minecraft:steel",
+    "C": "minecraft:copper_ingot",
+    "G": "minecraft:glass",
+    "F": "minecraft:furnace"
+  },
+  "result": {
+    "id": "earth_on_minecraft:autoclave",
+    "count": 1
+  }
+}

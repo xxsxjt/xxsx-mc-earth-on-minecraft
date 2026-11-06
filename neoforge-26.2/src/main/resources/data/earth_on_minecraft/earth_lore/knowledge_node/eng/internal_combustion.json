@@ -1,0 +1,45 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:eng/steam_power"
+    },
+    {
+      "all": "earth_on_minecraft:che/petrochemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:automobile"
+    },
+    {
+      "item": "earth_on_minecraft:truck"
+    },
+    {
+      "item": "earth_on_minecraft:motorcycle"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:toluene",
+        "count": 2
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.internal_combustion",
+  "desc_key": "lore.earth_on_minecraft.eng.internal_combustion.desc"
+}

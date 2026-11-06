@@ -1,0 +1,76 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 6,
+  "gate": "cap",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/beneficiation"
+    },
+    {
+      "all": "earth_on_minecraft:mat/casting"
+    },
+    {
+      "all": "earth_on_minecraft:mat/weaponsmithing"
+    },
+    {
+      "all": "earth_on_minecraft:mat/armorsmithing"
+    },
+    {
+      "all": "earth_on_minecraft:mat/metal_forming"
+    },
+    {
+      "all": "earth_on_minecraft:mat/nonferrous_metallurgy"
+    },
+    {
+      "all": "earth_on_minecraft:mat/alloy_steels"
+    },
+    {
+      "all": "earth_on_minecraft:mat/binders"
+    },
+    {
+      "all": "earth_on_minecraft:mat/optical_glass"
+    },
+    {
+      "all": "earth_on_minecraft:mat/textiles"
+    },
+    {
+      "all": "earth_on_minecraft:mat/woodworking"
+    },
+    {
+      "all": "earth_on_minecraft:mat/papermaking"
+    },
+    {
+      "all": "earth_on_minecraft:mat/hardware"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "capstone": "earth_lore:mat"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:steel",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:optical_glass",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:inconel",
+        "count": 1
+      }
+    ],
+    "ticks": 9600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.materials_science",
+  "desc_key": "lore.earth_on_minecraft.mat.materials_science.desc"
+}

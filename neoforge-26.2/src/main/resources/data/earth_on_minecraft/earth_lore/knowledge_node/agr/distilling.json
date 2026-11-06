@@ -1,0 +1,78 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/brewing"
+    },
+    {
+      "all": "earth_on_minecraft:che/separation_engineering"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:baijiu"
+    },
+    {
+      "item": "earth_on_minecraft:whisky"
+    },
+    {
+      "item": "earth_on_minecraft:brandy"
+    },
+    {
+      "item": "earth_on_minecraft:rum"
+    },
+    {
+      "item": "earth_on_minecraft:vodka"
+    },
+    {
+      "item": "earth_on_minecraft:gin"
+    },
+    {
+      "item": "earth_on_minecraft:tequila"
+    },
+    {
+      "item": "earth_on_minecraft:plum_brandy"
+    },
+    {
+      "item": "earth_on_minecraft:grappa"
+    },
+    {
+      "item": "earth_on_minecraft:still"
+    },
+    {
+      "block": "earth_on_minecraft:still"
+    },
+    {
+      "ability": "earth_on_minecraft:agr_distilling/still"
+    },
+    {
+      "ability": "earth_on_minecraft:agr_distilling/baijiu"
+    },
+    {
+      "ability": "earth_on_minecraft:agr_distilling/whisky"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:beer",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:huangjiu",
+        "count": 4
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.distilling",
+  "desc_key": "lore.earth_on_minecraft.agr.distilling.desc"
+}

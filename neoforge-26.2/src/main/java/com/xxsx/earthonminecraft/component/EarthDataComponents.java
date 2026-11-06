@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -34,6 +36,10 @@ public final class EarthDataComponents {
             register("material_batch", MaterialBatch.CODEC);
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<MetalBatch>> METAL_BATCH =
             register("metal_batch", MetalBatch.CODEC);
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> STERILE =
+            registerSynced("sterile", Codec.BOOL, ByteBufCodecs.BOOL);
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<OpticalGlassComponent>> OPTICAL_GLASS =
+            registerSynced("optical_glass", OpticalGlassComponent.CODEC, OpticalGlassComponent.STREAM_CODEC);
 
     private EarthDataComponents() {
     }
@@ -42,5 +48,11 @@ public final class EarthDataComponents {
             String name, Codec<T> codec) {
         return COMPONENTS.register(name,
                 () -> DataComponentType.<T>builder().persistent(codec).build());
+    }
+
+    private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> registerSynced(
+            String name, Codec<T> codec, StreamCodec<? super net.minecraft.network.RegistryFriendlyByteBuf, T> streamCodec) {
+        return COMPONENTS.register(name,
+                () -> DataComponentType.<T>builder().persistent(codec).networkSynchronized(streamCodec).build());
     }
 }

@@ -1,0 +1,69 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/inorganic_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:phenol"
+    },
+    {
+      "item": "earth_on_minecraft:benzene"
+    },
+    {
+      "item": "earth_on_minecraft:toluene"
+    },
+    {
+      "item": "earth_on_minecraft:methanol"
+    },
+    {
+      "item": "earth_on_minecraft:ethanol"
+    },
+    {
+      "item": "earth_on_minecraft:acetone"
+    },
+    {
+      "item": "earth_on_minecraft:glycerol"
+    },
+    {
+      "item": "earth_on_minecraft:citric_acid"
+    },
+    {
+      "item": "earth_on_minecraft:lactic_acid"
+    },
+    {
+      "item": "earth_on_minecraft:glucose"
+    },
+    {
+      "item": "earth_on_minecraft:sucrose"
+    },
+    {
+      "item": "earth_on_minecraft:msg"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:ethanol",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:sugar",
+        "count": 4
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.organic_chemistry",
+  "desc_key": "lore.earth_on_minecraft.che.organic_chemistry.desc"
+}

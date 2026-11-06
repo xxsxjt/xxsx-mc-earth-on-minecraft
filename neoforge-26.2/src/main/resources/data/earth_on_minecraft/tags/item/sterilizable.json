@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "earth_on_minecraft:syringe",
+    "earth_on_minecraft:scalpel",
+    "earth_on_minecraft:forceps",
+    "earth_on_minecraft:suture_thread",
+    "earth_on_minecraft:bandage",
+    "earth_on_minecraft:tourniquet",
+    "earth_on_minecraft:medical_kit",
+    "earth_on_minecraft:vet_kit",
+    "earth_on_minecraft:glass_bottle",
+    "earth_on_minecraft:flask",
+    "minecraft:glass_bottle"
+  ]
+}

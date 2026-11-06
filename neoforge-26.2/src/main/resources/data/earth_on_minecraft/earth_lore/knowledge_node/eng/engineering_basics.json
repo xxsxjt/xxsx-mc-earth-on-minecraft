@@ -1,0 +1,221 @@
+{
+  "discipline": "earth_lore:eng",
+  "tier": 0,
+  "gate": "root",
+  "requires": [],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:wheelbarrow"
+    },
+    {
+      "item": "earth_on_minecraft:cart"
+    },
+    {
+      "item": "earth_on_minecraft:sled"
+    },
+    {
+      "item": "earth_on_minecraft:rowboat"
+    },
+    {
+      "item": "earth_on_minecraft:canoe"
+    },
+    {
+      "item": "earth_on_minecraft:bamboo_raft"
+    },
+    {
+      "item": "earth_on_minecraft:signpost"
+    },
+    {
+      "item": "earth_on_minecraft:milestone"
+    },
+    {
+      "item": "earth_on_minecraft:toothbrush"
+    },
+    {
+      "item": "earth_on_minecraft:washbasin"
+    },
+    {
+      "item": "earth_on_minecraft:bathhouse"
+    },
+    {
+      "item": "earth_on_minecraft:water_heater"
+    },
+    {
+      "item": "earth_on_minecraft:bathtub"
+    },
+    {
+      "item": "earth_on_minecraft:shower"
+    },
+    {
+      "item": "earth_on_minecraft:wash_tub"
+    },
+    {
+      "item": "earth_on_minecraft:clothesline"
+    },
+    {
+      "item": "earth_on_minecraft:iron"
+    },
+    {
+      "item": "earth_on_minecraft:broom"
+    },
+    {
+      "item": "earth_on_minecraft:dustpan"
+    },
+    {
+      "item": "earth_on_minecraft:trash_bin"
+    },
+    {
+      "item": "earth_on_minecraft:hammock"
+    },
+    {
+      "item": "earth_on_minecraft:hearth"
+    },
+    {
+      "item": "earth_on_minecraft:fireplace"
+    },
+    {
+      "item": "earth_on_minecraft:chimney"
+    },
+    {
+      "block": "earth_on_minecraft:chimney"
+    },
+    {
+      "item": "earth_on_minecraft:window"
+    },
+    {
+      "item": "earth_on_minecraft:curtain"
+    },
+    {
+      "item": "earth_on_minecraft:door_curtain"
+    },
+    {
+      "item": "earth_on_minecraft:lamp"
+    },
+    {
+      "item": "earth_on_minecraft:oil_lamp"
+    },
+    {
+      "item": "earth_on_minecraft:candle"
+    },
+    {
+      "item": "earth_on_minecraft:lantern"
+    },
+    {
+      "item": "earth_on_minecraft:torch"
+    },
+    {
+      "item": "earth_on_minecraft:rug"
+    },
+    {
+      "item": "earth_on_minecraft:aquarium"
+    },
+    {
+      "item": "earth_on_minecraft:potted_plant"
+    },
+    {
+      "item": "earth_on_minecraft:thread"
+    },
+    {
+      "item": "earth_on_minecraft:millstone"
+    },
+    {
+      "item": "earth_on_minecraft:mortar_pestle"
+    },
+    {
+      "item": "earth_on_minecraft:bucket"
+    },
+    {
+      "item": "earth_on_minecraft:rope_ladder"
+    },
+    {
+      "item": "earth_on_minecraft:fire_striker"
+    },
+    {
+      "item": "earth_on_minecraft:flint_and_steel"
+    },
+    {
+      "item": "earth_on_minecraft:scale"
+    },
+    {
+      "item": "earth_on_minecraft:ruler"
+    },
+    {
+      "item": "earth_on_minecraft:ink_line"
+    },
+    {
+      "item": "earth_on_minecraft:tent"
+    },
+    {
+      "item": "earth_on_minecraft:sleeping_bag"
+    },
+    {
+      "item": "earth_on_minecraft:umbrella"
+    },
+    {
+      "item": "earth_on_minecraft:walking_stick"
+    },
+    {
+      "item": "earth_on_minecraft:brush"
+    },
+    {
+      "item": "earth_on_minecraft:quill"
+    },
+    {
+      "item": "earth_on_minecraft:instrument"
+    },
+    {
+      "item": "earth_on_minecraft:flute"
+    },
+    {
+      "item": "earth_on_minecraft:drum"
+    },
+    {
+      "item": "earth_on_minecraft:zither"
+    },
+    {
+      "item": "earth_on_minecraft:horn"
+    },
+    {
+      "item": "earth_on_minecraft:board_game"
+    },
+    {
+      "item": "earth_on_minecraft:dice"
+    },
+    {
+      "item": "earth_on_minecraft:playing_cards"
+    },
+    {
+      "item": "earth_on_minecraft:banner"
+    },
+    {
+      "item": "earth_on_minecraft:sky_lantern"
+    },
+    {
+      "item": "earth_on_minecraft:mask"
+    },
+    {
+      "item": "earth_on_minecraft:stage"
+    },
+    {
+      "item": "earth_on_minecraft:altar"
+    },
+    {
+      "item": "earth_on_minecraft:gravestone"
+    },
+    {
+      "item": "earth_on_minecraft:monument"
+    }
+  ],
+  "literature": [
+    "commonsense"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [],
+    "ticks": 0
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.eng.engineering_basics",
+  "desc_key": "lore.earth_on_minecraft.eng.engineering_basics.desc"
+}

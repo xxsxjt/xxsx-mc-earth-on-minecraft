@@ -1,0 +1,44 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/tillage"
+    },
+    {
+      "all": "earth_on_minecraft:geo/field_survey"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:waterwheel"
+    },
+    {
+      "item": "earth_on_minecraft:irrigation_channel"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:farmer"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:water_bucket",
+        "count": 2
+      },
+      {
+        "ingredient": "minecraft:oak_planks",
+        "count": 8
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.irrigation",
+  "desc_key": "lore.earth_on_minecraft.agr.irrigation.desc"
+}

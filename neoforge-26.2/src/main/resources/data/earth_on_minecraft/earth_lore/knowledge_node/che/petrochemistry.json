@@ -1,0 +1,45 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/separation_engineering"
+    },
+    {
+      "all": "earth_on_minecraft:che/organic_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:steam_cracker"
+    },
+    {
+      "block": "earth_on_minecraft:steam_cracker"
+    },
+    {
+      "item": "earth_on_minecraft:asphalt"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:benzene",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:glass_bottle",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.petrochemistry",
+  "desc_key": "lore.earth_on_minecraft.che.petrochemistry.desc"
+}

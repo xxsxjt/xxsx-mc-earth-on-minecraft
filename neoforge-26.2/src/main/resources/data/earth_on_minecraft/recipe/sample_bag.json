@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "S S",
+    "P P",
+    " P "
+  ],
+  "key": {
+    "S": "minecraft:string",
+    "P": "minecraft:paper"
+  },
+  "result": {
+    "id": "earth_on_minecraft:sample_bag",
+    "count": 2
+  }
+}

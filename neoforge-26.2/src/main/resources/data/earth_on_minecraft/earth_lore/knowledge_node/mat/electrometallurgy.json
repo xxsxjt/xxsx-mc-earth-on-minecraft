@@ -1,0 +1,61 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/nonferrous_metallurgy"
+    },
+    {
+      "all": "earth_on_minecraft:che/electrochemistry"
+    },
+    {
+      "all": "earth_on_minecraft:eng/electrical_basics"
+    }
+  ],
+  "item_requires": [
+    {
+      "made": "earth_on_minecraft:copper_power_cable"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:electrolytic_cell"
+    },
+    {
+      "block": "earth_on_minecraft:electrolytic_cell"
+    },
+    {
+      "item": "earth_on_minecraft:aluminium"
+    },
+    {
+      "item": "earth_on_minecraft:aluminium_alloy"
+    },
+    {
+      "item": "earth_on_minecraft:titanium"
+    },
+    {
+      "item": "earth_on_minecraft:titanium_alloy"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:bauxite_laterite_deposit",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:copper_power_cable",
+        "count": 4
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.electrometallurgy",
+  "desc_key": "lore.earth_on_minecraft.mat.electrometallurgy.desc"
+}

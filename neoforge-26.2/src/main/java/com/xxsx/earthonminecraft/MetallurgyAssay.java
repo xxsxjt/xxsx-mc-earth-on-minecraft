@@ -4,6 +4,7 @@ import com.xxsx.earthonminecraft.component.EarthDataComponents;
 import com.xxsx.earthonminecraft.component.Grade;
 import com.xxsx.earthonminecraft.component.MaterialBatch;
 import com.xxsx.earthonminecraft.component.MetalBatch;
+import com.xxsx.earthonminecraft.component.OpticalGlassComponent;
 import com.xxsx.earthonminecraft.component.QualityComponents;
 import com.xxsx.earthonminecraft.component.ToolQualityComponent;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -189,12 +190,14 @@ public final class MetallurgyAssay {
             ItemStack reagentSlot,
             int machineTempK) {
         List<ItemStack> rawOutputs = recipe.outputStacks();
+        boolean isOpticalGlass = kind == ProcessingMachineBlock.Kind.GLASS_KILN
+                && rawOutputs.stream().anyMatch(s -> s.getItem() == EarthOnMinecraft.OPTICAL_GLASS.get());
         boolean hasCustomPrimary = !primaryInput.isEmpty() && hasNonDefaultAssay(primaryInput);
         boolean hasCustomSecondary = secondarySlots.stream().anyMatch(s -> !s.isEmpty() && hasNonDefaultAssay(s));
         boolean isToolForging = kind == ProcessingMachineBlock.Kind.ANVIL
                 && rawOutputs.stream().anyMatch(s -> s.has(EarthDataComponents.TOOL_QUALITY.get()));
 
-        if (!hasCustomPrimary && !hasCustomSecondary && !isToolForging) {
+        if (!hasCustomPrimary && !hasCustomSecondary && !isToolForging && !isOpticalGlass) {
             return rawOutputs;
         }
 
@@ -221,6 +224,19 @@ public final class MetallurgyAssay {
         int effectiveTempK = Math.max(machineTempK, inBatch.temperatureK());
 
         // 1. Anvil tool forging: propagate metal batch quality, carbon window & forging temperature into TOOL_QUALITY
+        if (out.getItem() == EarthOnMinecraft.OPTICAL_GLASS.get()) {
+            int bubbles = effectiveTempK >= 1650 ? 1 : (effectiveTempK >= 1560 ? 3 : 8);
+            double n = effectiveTempK >= 1600 ? 1.54 : 1.52;
+            OpticalGlassComponent glass = new OpticalGlassComponent(1, n, bubbles);
+            out.set(EarthDataComponents.OPTICAL_GLASS.get(), glass);
+            Grade baseGrade = effectiveTempK >= 1650 ? Grade.MASTERWORK : (effectiveTempK >= 1560 ? Grade.FINE : Grade.COMMON);
+            Grade cappedGrade = glass.capGrade(baseGrade);
+            MaterialBatch glassBatch = MaterialBatch.defaultFor("optical_glass")
+                    .withPurityAndGrade(bubbles == 0 ? 0.999 : (bubbles <= 5 ? 0.995 : 0.960), cappedGrade)
+                    .withTemperatureK(Math.max(293, effectiveTempK - 200));
+            out.set(EarthDataComponents.MATERIAL_BATCH.get(), glassBatch);
+            return;
+        }
         if (out.has(EarthDataComponents.TOOL_QUALITY.get())) {
             Grade metalGrade = inBatch.grade();
             double roll = 0.55 + 0.08 * metalGrade.tier();

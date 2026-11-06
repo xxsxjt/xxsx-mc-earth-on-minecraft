@@ -1,0 +1,134 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 0,
+  "gate": "root",
+  "requires": [],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:field_geology_notebook"
+    },
+    {
+      "item": "earth_on_minecraft:geology_hammer"
+    },
+    {
+      "item": "earth_on_minecraft:sample_bag"
+    },
+    {
+      "item": "earth_on_minecraft:hand_lens"
+    },
+    {
+      "item": "earth_on_minecraft:survey_stake"
+    },
+    {
+      "block": "earth_on_minecraft:survey_stake"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_geology_basics/magnetite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:chalcopyrite_ore"
+    },
+    {
+      "block": "earth_on_minecraft:chalcopyrite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:auriferous_quartz_vein"
+    },
+    {
+      "block": "earth_on_minecraft:auriferous_quartz_vein"
+    },
+    {
+      "item": "earth_on_minecraft:bituminous_coal_seam"
+    },
+    {
+      "block": "earth_on_minecraft:bituminous_coal_seam"
+    },
+    {
+      "item": "earth_on_minecraft:anthracite_coal_seam"
+    },
+    {
+      "block": "earth_on_minecraft:anthracite_coal_seam"
+    },
+    {
+      "item": "earth_on_minecraft:kimberlite"
+    },
+    {
+      "block": "earth_on_minecraft:kimberlite"
+    },
+    {
+      "item": "earth_on_minecraft:bauxite_laterite_deposit"
+    },
+    {
+      "block": "earth_on_minecraft:bauxite_laterite_deposit"
+    },
+    {
+      "item": "earth_on_minecraft:cassiterite_placer_deposit"
+    },
+    {
+      "block": "earth_on_minecraft:cassiterite_placer_deposit"
+    },
+    {
+      "item": "earth_on_minecraft:rare_earth_carbonatite"
+    },
+    {
+      "block": "earth_on_minecraft:rare_earth_carbonatite"
+    },
+    {
+      "item": "earth_on_minecraft:uraninite_ore"
+    },
+    {
+      "block": "earth_on_minecraft:uraninite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:galena_ore"
+    },
+    {
+      "block": "earth_on_minecraft:galena_ore"
+    },
+    {
+      "item": "earth_on_minecraft:sphalerite_ore"
+    },
+    {
+      "block": "earth_on_minecraft:sphalerite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:chromite_ore"
+    },
+    {
+      "block": "earth_on_minecraft:chromite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:manganite_ore"
+    },
+    {
+      "block": "earth_on_minecraft:manganite_ore"
+    },
+    {
+      "item": "earth_on_minecraft:borate_deposit"
+    },
+    {
+      "block": "earth_on_minecraft:borate_deposit"
+    },
+    {
+      "ability": "earth_on_minecraft:gem_deposits"
+    },
+    {
+      "item": "earth_on_minecraft:gem_rough"
+    },
+    {
+      "item": "earth_on_minecraft:gem_dust"
+    }
+  ],
+  "literature": [
+    "commonsense"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [],
+    "ticks": 0
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.geology_basics",
+  "desc_key": "lore.earth_on_minecraft.geo.geology_basics.desc"
+}

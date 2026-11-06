@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "id": "earth_on_minecraft:crushed_magnetite",
+  "kind": "mixture",
+  "formula": "Fe3O4 + SiO2 + Fe2O3",
+  "composition_basis": "mass_fraction",
+  "phase": "solid",
+  "constituents": [
+    {
+      "species": "Fe3O4",
+      "fraction": 0.74
+    },
+    {
+      "species": "SiO2",
+      "fraction": 0.18
+    },
+    {
+      "species": "Fe2O3",
+      "fraction": 0.08
+    }
+  ],
+  "source": [
+    "crushing"
+  ],
+  "simplification": "game_batch",
+  "certainty": "well_established",
+  "display_key": "material.earth_on_minecraft.crushed_magnetite",
+  "notes": "Coarsely crushed magnetite feed ready for beneficiation and magnetic separation."
+}

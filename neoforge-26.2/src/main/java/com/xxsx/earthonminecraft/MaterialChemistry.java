@@ -33,6 +33,8 @@ public final class MaterialChemistry {
             entry("cassiterite_placer_deposit", info("SnO2 + SiO2 + heavy minerals", "tooltip.earth_on_minecraft.chem.detail.oxide_ore")),
             entry("rare_earth_carbonatite", info("(Ce,La)CO3F + (Ce,La,Nd,Th)PO4 + calcite/apatite", "tooltip.earth_on_minecraft.chem.detail.rare_earth")),
             entry("magnetite_chunk", info("Fe3O4", "tooltip.earth_on_minecraft.chem.detail.oxide_ore")),
+            entry("crushed_magnetite", info("Fe3O4", "tooltip.earth_on_minecraft.chem.detail.oxide_ore")),
+            entry("optical_glass", info("SiO2 + B2O3 + Na2O + BaO", "tooltip.earth_on_minecraft.chem.detail.silicate_mix")),
             entry("chalcopyrite_chunk", info("CuFeS2", "tooltip.earth_on_minecraft.chem.detail.sulfide_ore")),
             entry("auriferous_quartz_chunk", info("SiO2 + Au", "tooltip.earth_on_minecraft.chem.detail.vein")),
             entry("kimberlite_chunk", info("silicate-carbonate volcanic breccia", "tooltip.earth_on_minecraft.chem.detail.mixed_rock")),

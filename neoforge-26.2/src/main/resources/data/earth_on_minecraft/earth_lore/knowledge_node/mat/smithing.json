@@ -1,0 +1,113 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/materials_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:copper_pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:iron_pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:steel_pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:diamond_pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:iron_axe"
+    },
+    {
+      "item": "earth_on_minecraft:steel_axe"
+    },
+    {
+      "item": "earth_on_minecraft:iron_shovel"
+    },
+    {
+      "item": "earth_on_minecraft:iron_hoe"
+    },
+    {
+      "item": "earth_on_minecraft:saw"
+    },
+    {
+      "item": "earth_on_minecraft:file"
+    },
+    {
+      "item": "earth_on_minecraft:chisel"
+    },
+    {
+      "item": "earth_on_minecraft:wrench"
+    },
+    {
+      "item": "earth_on_minecraft:knife"
+    },
+    {
+      "item": "earth_on_minecraft:shears"
+    },
+    {
+      "item": "earth_on_minecraft:needle"
+    },
+    {
+      "item": "earth_on_minecraft:axe"
+    },
+    {
+      "item": "earth_on_minecraft:plane"
+    },
+    {
+      "item": "earth_on_minecraft:pliers"
+    },
+    {
+      "item": "earth_on_minecraft:screwdriver"
+    },
+    {
+      "item": "earth_on_minecraft:shovel"
+    },
+    {
+      "item": "earth_on_minecraft:pickaxe"
+    },
+    {
+      "item": "earth_on_minecraft:rake"
+    },
+    {
+      "item": "earth_on_minecraft:billhook"
+    },
+    {
+      "item": "earth_on_minecraft:padlock"
+    },
+    {
+      "item": "earth_on_minecraft:key"
+    },
+    {
+      "item": "earth_on_minecraft:bell"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:toolsmith"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:iron_ingot",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:coal",
+        "count": 4
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.smithing",
+  "desc_key": "lore.earth_on_minecraft.mat.smithing.desc"
+}

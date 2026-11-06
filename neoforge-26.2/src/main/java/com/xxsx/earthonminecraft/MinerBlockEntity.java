@@ -1,5 +1,7 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthlore.api.GateResult;
+import com.xxsx.earthlore.api.LoreMachines;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
@@ -67,6 +69,17 @@ public class MinerBlockEntity extends BlockEntity implements Container {
             miner.finishTick(level, pos, state, false);
             return;
         }
+        GateResult loreGate = LoreIntegration.checkMachine(miner, state.getBlock());
+        if (loreGate.locked()) {
+            LoreMachines.setFault(miner, "lore_locked", loreGate.missing());
+            if (miner.progress != 0) {
+                miner.progress = 0;
+                changed = true;
+            }
+            miner.finishTick(level, pos, state, changed);
+            return;
+        }
+        LoreMachines.clearFault(miner);
 
         // Drop lodes that ran dry so the head moves on.
         miner.tracked.removeIf(lode ->
@@ -123,6 +136,20 @@ public class MinerBlockEntity extends BlockEntity implements Container {
         }
         BlockState lodeState = level.getBlockState(lode);
         List<ItemStack> drops = DepositReserve.rollLoot(server, lode, lodeState);
+        double yieldFactor = com.xxsx.earthlore.knowledge.KnowledgeService.running()
+                ? LoreMachines.yieldFactor(this, lodeState.getBlock()) : 1.0;
+        List<ItemStack> adjustedDrops = new ArrayList<>(drops.size());
+        for (ItemStack rawDrop : drops) {
+            if (rawDrop.isEmpty()) {
+                continue;
+            }
+            int scaledCount = yieldFactor < 1.0
+                    ? Math.max(1, (int) Math.floor(rawDrop.getCount() * yieldFactor))
+                    : rawDrop.getCount();
+            ItemStack adjusted = LoreIntegration.capMachineOutput(this, rawDrop.copyWithCount(scaledCount), getBlockState().getBlock());
+            adjustedDrops.add(adjusted);
+        }
+        drops = adjustedDrops;
         NonNullList<ItemStack> simulated = NonNullList.withSize(items.size(), ItemStack.EMPTY);
         for (int i = 0; i < items.size(); i++) {
             simulated.set(i, items.get(i).copy());
@@ -143,6 +170,7 @@ public class MinerBlockEntity extends BlockEntity implements Container {
         }
         for (ItemStack drop : drops) {
             insert(drop);
+            LoreIntegration.awardMachineProduct(this, drop);
         }
         deposit.syncReserve();
 

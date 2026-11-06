@@ -1,0 +1,44 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/agriculture_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:plow"
+    },
+    {
+      "item": "earth_on_minecraft:harrow"
+    },
+    {
+      "item": "earth_on_minecraft:winnowing_machine"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:farmer"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:wheat_seeds",
+        "count": 16
+      },
+      {
+        "ingredient": "minecraft:bone_meal",
+        "count": 4
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.tillage",
+  "desc_key": "lore.earth_on_minecraft.agr.tillage.desc"
+}

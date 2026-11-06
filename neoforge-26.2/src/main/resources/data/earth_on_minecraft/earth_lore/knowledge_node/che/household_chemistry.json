@@ -1,0 +1,68 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/inorganic_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:soap"
+    },
+    {
+      "item": "earth_on_minecraft:scented_soap"
+    },
+    {
+      "item": "earth_on_minecraft:toothpaste"
+    },
+    {
+      "item": "earth_on_minecraft:dye"
+    },
+    {
+      "item": "earth_on_minecraft:indigo_dye"
+    },
+    {
+      "item": "earth_on_minecraft:madder_dye"
+    },
+    {
+      "item": "earth_on_minecraft:murex_dye"
+    },
+    {
+      "item": "earth_on_minecraft:tannin"
+    },
+    {
+      "item": "earth_on_minecraft:paint"
+    },
+    {
+      "item": "earth_on_minecraft:match"
+    },
+    {
+      "item": "earth_on_minecraft:firework"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:resident"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:lard",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:lime",
+        "count": 2
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.household_chemistry",
+  "desc_key": "lore.earth_on_minecraft.che.household_chemistry.desc"
+}

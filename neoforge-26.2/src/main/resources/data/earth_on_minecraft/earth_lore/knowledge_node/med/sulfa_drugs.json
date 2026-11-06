@@ -1,0 +1,49 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 4,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/basic_pharmacy"
+    },
+    {
+      "all": "earth_on_minecraft:che/analytical_chemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:sulfanilamide"
+    },
+    {
+      "item": "earth_on_minecraft:antibiotic_ointment"
+    },
+    {
+      "ability": "earth_on_minecraft:med_sulfa_drugs/antibiotic"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:sulfuric_acid",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:ammonia",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:benzene",
+        "count": 1
+      }
+    ],
+    "ticks": 4800
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.sulfa_drugs",
+  "desc_key": "lore.earth_on_minecraft.med.sulfa_drugs.desc"
+}

@@ -1,0 +1,61 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 5,
+  "gate": "cap",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/herbal_processing"
+    },
+    {
+      "all": "earth_on_minecraft:med/advanced_pharmacy"
+    },
+    {
+      "all": "earth_on_minecraft:med/sulfa_drugs"
+    },
+    {
+      "all": "earth_on_minecraft:med/serum_therapy"
+    },
+    {
+      "all": "earth_on_minecraft:med/anesthesia_basics"
+    },
+    {
+      "all": "earth_on_minecraft:med/nursing"
+    },
+    {
+      "all": "earth_on_minecraft:med/public_health"
+    },
+    {
+      "all": "earth_on_minecraft:med/veterinary"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "capstone": "earth_lore:med"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:aspirin",
+        "count": 8
+      },
+      {
+        "ingredient": "earth_on_minecraft:prepared_licorice",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:sulfanilamide",
+        "count": 2
+      }
+    ],
+    "ticks": 9600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.pharmacy_mastery",
+  "desc_key": "lore.earth_on_minecraft.med.pharmacy_mastery.desc"
+}

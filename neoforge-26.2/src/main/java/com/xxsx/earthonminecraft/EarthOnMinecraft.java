@@ -175,6 +175,9 @@ public class EarthOnMinecraft {
     /** Quarry: bulk rock extraction for sites with no ore body. */
     public static final DeferredBlock<QuarryBlock> QUARRY = quarryBlock("quarry");
 
+    /** Autoclave (M-103): steam sterilizer for instruments and flasks. */
+    public static final DeferredBlock<AutoclaveBlock> AUTOCLAVE = autoclaveBlock("autoclave");
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ProcessingMachineBlockEntity>> PROCESSING_MACHINE_BLOCK_ENTITY =
             BLOCK_ENTITY_TYPES.register("processing_machine", () -> new BlockEntityType<>(
                     ProcessingMachineBlockEntity::new,
@@ -190,6 +193,10 @@ public class EarthOnMinecraft {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuarryBlockEntity>> QUARRY_BLOCK_ENTITY =
             BLOCK_ENTITY_TYPES.register("quarry", () -> new BlockEntityType<>(
                     QuarryBlockEntity::new, QUARRY.get()));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AutoclaveBlockEntity>> AUTOCLAVE_BLOCK_ENTITY =
+            BLOCK_ENTITY_TYPES.register("autoclave", () -> new BlockEntityType<>(
+                    AutoclaveBlockEntity::new, AUTOCLAVE.get()));
 
     /** Every lode and depleted form carries reserve state, so depletion cannot refill. */
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DepositBlockEntity>> DEPOSIT_BLOCK_ENTITY =
@@ -469,9 +476,12 @@ public class EarthOnMinecraft {
     public static final DeferredItem<Item> AUTOMATION_BUS = item("automation_bus");
     public static final DeferredItem<Item> CONVEYOR_DRIVE = item("conveyor_drive");
     public static final DeferredItem<Item> REDSTONE_IO_GATEWAY = item("redstone_io_gateway");
+    public static final DeferredItem<Item> OPTICAL_GLASS = item("optical_glass");
+    public static final DeferredItem<Item> CRUSHED_MAGNETITE = item("crushed_magnetite");
     public static final DeferredItem<FieldGeologyNotebookItem> FIELD_GEOLOGY_NOTEBOOK = notebookItem("field_geology_notebook");
 
     public EarthOnMinecraft(IEventBus modBus) {
+        LoreIntegration.init();
         EarthDataComponents.COMPONENTS.register(modBus);
         SpecItems.register();
         SpecBlocks.register();
@@ -711,6 +721,21 @@ public class EarthOnMinecraft {
                         .sound(SoundType.METAL));
         DeferredItem<?> item = ITEMS.registerItem(id,
                 props -> new GuidedBlockItem(block.get(), props, "tooltip.earth_on_minecraft.automation.bore_head"),
+                props -> props);
+        TAB_ITEMS.add(item);
+        return block;
+    }
+
+    private static DeferredBlock<AutoclaveBlock> autoclaveBlock(String id) {
+        DeferredBlock<AutoclaveBlock> block = BLOCKS.registerBlock(id, AutoclaveBlock::new,
+                () -> BlockBehaviour.Properties.of()
+                        .mapColor(MapColor.METAL)
+                        .strength(4.0F, 8.0F)
+                        .noOcclusion()
+                        .requiresCorrectToolForDrops()
+                        .sound(SoundType.METAL));
+        DeferredItem<?> item = ITEMS.registerItem(id,
+                props -> new GuidedBlockItem(block.get(), props, "tooltip.earth_on_minecraft.automation.autoclave"),
                 props -> props);
         TAB_ITEMS.add(item);
         return block;

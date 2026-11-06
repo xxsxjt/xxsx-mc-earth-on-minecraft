@@ -1,0 +1,38 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/husbandry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:fish_pond"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:fisherman"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:cod",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:kelp",
+        "count": 8
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.aquaculture",
+  "desc_key": "lore.earth_on_minecraft.agr.aquaculture.desc"
+}

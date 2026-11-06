@@ -1,0 +1,77 @@
+{
+  "discipline": "earth_lore:mat",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:mat/materials_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:bed"
+    },
+    {
+      "item": "earth_on_minecraft:bunk_bed"
+    },
+    {
+      "item": "earth_on_minecraft:table"
+    },
+    {
+      "item": "earth_on_minecraft:chair"
+    },
+    {
+      "item": "earth_on_minecraft:stool"
+    },
+    {
+      "item": "earth_on_minecraft:bench"
+    },
+    {
+      "item": "earth_on_minecraft:cabinet"
+    },
+    {
+      "item": "earth_on_minecraft:chest_of_drawers"
+    },
+    {
+      "item": "earth_on_minecraft:door"
+    },
+    {
+      "item": "earth_on_minecraft:shutters"
+    },
+    {
+      "item": "earth_on_minecraft:ladder"
+    },
+    {
+      "item": "earth_on_minecraft:stairs"
+    },
+    {
+      "item": "earth_on_minecraft:folding_screen"
+    },
+    {
+      "item": "earth_on_minecraft:birdcage"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:resident"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:oak_planks",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:stick",
+        "count": 8
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.mat.woodworking",
+  "desc_key": "lore.earth_on_minecraft.mat.woodworking.desc"
+}

@@ -1,0 +1,48 @@
+{
+  "discipline": "earth_lore:med",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:med/medicine_basics"
+    },
+    {
+      "all": "earth_on_minecraft:agr/agriculture_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "ability": "earth_on_minecraft:med_materia_medica/herb"
+    },
+    {
+      "ability": "earth_on_minecraft:med_materia_medica/herb_dryer"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:cleric"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:ginseng",
+        "count": 1
+      },
+      {
+        "ingredient": "earth_on_minecraft:licorice",
+        "count": 2
+      },
+      {
+        "ingredient": "minecraft:paper",
+        "count": 2
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.med.materia_medica",
+  "desc_key": "lore.earth_on_minecraft.med.materia_medica.desc"
+}

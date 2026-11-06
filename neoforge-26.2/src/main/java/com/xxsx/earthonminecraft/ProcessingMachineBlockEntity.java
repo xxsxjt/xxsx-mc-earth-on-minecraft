@@ -1,5 +1,7 @@
 package com.xxsx.earthonminecraft;
 
+import com.xxsx.earthlore.api.GateResult;
+import com.xxsx.earthlore.api.LoreMachines;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
@@ -325,6 +327,22 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             machine.finishTick(level, pos, state, changed);
             return;
         }
+        GateResult loreGate = LoreIntegration.checkMachine(machine, state.getBlock(), recipe.outputStacks());
+        if (loreGate.locked()) {
+            LoreMachines.setFault(machine, "lore_locked", loreGate.missing());
+            if (machine.progress != 0) {
+                machine.progress = 0;
+                changed = true;
+            }
+            machine.activeRecipe = recipe;
+            machine.driveState = DriveState.IDLE;
+            if (machine.tickIdleHeat()) {
+                changed = true;
+            }
+            machine.finishTick(level, pos, state, changed);
+            return;
+        }
+        LoreMachines.clearFault(machine);
 
         ProcessingMachineBlock.Kind kind = machine.kind();
         ProcessingMachineBlock.PowerMode powerMode = kind.powerMode();
@@ -519,6 +537,13 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
             ItemStack reagentSnapshot = reagent.copy();
             List<ItemStack> evaluatedOutputs = MetallurgyAssay.evaluateMachineOutputs(
                     kind, recipe, primarySnapshot, secondarySnapshots, reagentSnapshot, machine.temperatureK);
+            List<ItemStack> cappedOutputs = new java.util.ArrayList<>(evaluatedOutputs.size());
+            for (ItemStack rawOut : evaluatedOutputs) {
+                ItemStack capped = LoreIntegration.capMachineOutput(machine, rawOut, state.getBlock());
+                cappedOutputs.add(capped);
+                LoreIntegration.awardMachineProduct(machine, capped);
+            }
+            evaluatedOutputs = cappedOutputs;
             if (recipe.requiresCoke()) {
                 reagent.shrink(1);
                 if (reagent.isEmpty()) {

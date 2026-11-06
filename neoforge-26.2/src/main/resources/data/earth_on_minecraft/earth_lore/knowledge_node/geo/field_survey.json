@@ -1,0 +1,42 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 1,
+  "gate": "theory",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/geology_basics"
+    }
+  ],
+  "item_requires": [
+    {
+      "hold": "earth_on_minecraft:geology_hammer"
+    }
+  ],
+  "unlocks": [
+    {
+      "readout": "earth_on_minecraft:survey_stake"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "earth_on_minecraft:geologist"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:survey_stake",
+        "count": 4
+      },
+      {
+        "ingredient": "minecraft:paper",
+        "count": 2
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.field_survey",
+  "desc_key": "lore.earth_on_minecraft.geo.field_survey.desc"
+}

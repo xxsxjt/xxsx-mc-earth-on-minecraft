@@ -4,7 +4,7 @@ license="AGPL-3.0-only"
 
 [[mods]]
 modId="earth_on_minecraft"
-version="0.1.17"
+version="0.2.0"
 displayName="The Earth / 地球 — Earth Series Core"
 description='''
 【地球现实法则 × 硬核全产业链 × Earth Series 核心底座】
@@ -37,6 +37,13 @@ modId="minecraft"
 type="required"
 versionRange="[26.1.2]"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies.earth_on_minecraft]]
+modId="earth_lore"
+type="required"
+versionRange="[0.1.0,)"
+ordering="AFTER"
 side="BOTH"
 
 [[dependencies.earth_on_minecraft]]

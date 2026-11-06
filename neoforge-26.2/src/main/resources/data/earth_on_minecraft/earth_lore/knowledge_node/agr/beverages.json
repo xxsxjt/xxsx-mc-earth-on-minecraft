@@ -1,0 +1,81 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 1,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/agriculture_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:sparkling_water"
+    },
+    {
+      "item": "earth_on_minecraft:tonic_water"
+    },
+    {
+      "item": "earth_on_minecraft:ginger_ale"
+    },
+    {
+      "item": "earth_on_minecraft:lemonade"
+    },
+    {
+      "item": "earth_on_minecraft:juice"
+    },
+    {
+      "item": "earth_on_minecraft:vegetable_juice"
+    },
+    {
+      "item": "earth_on_minecraft:rice_milk"
+    },
+    {
+      "item": "earth_on_minecraft:almond_milk"
+    },
+    {
+      "item": "earth_on_minecraft:oat_milk"
+    },
+    {
+      "item": "earth_on_minecraft:drinking_yogurt"
+    },
+    {
+      "item": "earth_on_minecraft:cocoa"
+    },
+    {
+      "item": "earth_on_minecraft:hot_chocolate"
+    },
+    {
+      "item": "earth_on_minecraft:juice_press"
+    },
+    {
+      "block": "earth_on_minecraft:juice_press"
+    },
+    {
+      "item": "earth_on_minecraft:carbonator"
+    },
+    {
+      "block": "earth_on_minecraft:carbonator"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "minecraft:apple",
+        "count": 8
+      },
+      {
+        "ingredient": "minecraft:glass_bottle",
+        "count": 4
+      }
+    ],
+    "ticks": 600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.beverages",
+  "desc_key": "lore.earth_on_minecraft.agr.beverages.desc"
+}

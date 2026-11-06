@@ -1,0 +1,58 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 5,
+  "gate": "cap",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/chlor_alkali"
+    },
+    {
+      "all": "earth_on_minecraft:che/ammonia_and_fertilizer"
+    },
+    {
+      "all": "earth_on_minecraft:che/polymer_chemistry"
+    },
+    {
+      "all": "earth_on_minecraft:che/water_chemistry"
+    },
+    {
+      "all": "earth_on_minecraft:che/household_chemistry"
+    },
+    {
+      "all": "earth_on_minecraft:che/analytical_chemistry"
+    },
+    {
+      "all": "earth_on_minecraft:che/radiochemistry"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "capstone": "earth_lore:che"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:sulfuric_acid",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:ammonia",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:benzene",
+        "count": 4
+      }
+    ],
+    "ticks": 9600
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.chemical_systems",
+  "desc_key": "lore.earth_on_minecraft.che.chemical_systems.desc"
+}

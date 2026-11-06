@@ -1,0 +1,35 @@
+{
+  "discipline": "earth_lore:che",
+  "tier": 3,
+  "gate": "theory",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:che/reaction_engineering"
+    },
+    {
+      "all": "earth_on_minecraft:eng/electrical_basics"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:copper_power_cable",
+        "count": 2
+      },
+      {
+        "ingredient": "earth_on_minecraft:salt",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.che.electrochemistry",
+  "desc_key": "lore.earth_on_minecraft.che.electrochemistry.desc"
+}

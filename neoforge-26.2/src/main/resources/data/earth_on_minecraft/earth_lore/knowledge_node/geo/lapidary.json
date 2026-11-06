@@ -1,0 +1,49 @@
+{
+  "discipline": "earth_lore:geo",
+  "tier": 3,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:geo/gemology"
+    }
+  ],
+  "item_requires": [
+    {
+      "hold": "earth_on_minecraft:gem_rough"
+    }
+  ],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:gem_cutter"
+    },
+    {
+      "block": "earth_on_minecraft:gem_cutter"
+    },
+    {
+      "ability": "earth_on_minecraft:geo_lapidary/gem_cutter"
+    },
+    {
+      "item": "earth_on_minecraft:gem_cut"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:gem_rough",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:gem_dust",
+        "count": 4
+      }
+    ],
+    "ticks": 2400
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.geo.lapidary",
+  "desc_key": "lore.earth_on_minecraft.geo.lapidary.desc"
+}

@@ -1,0 +1,77 @@
+{
+  "discipline": "earth_lore:agr",
+  "tier": 2,
+  "gate": "soft",
+  "requires": [
+    {
+      "all": "earth_on_minecraft:agr/husbandry"
+    },
+    {
+      "all": "earth_on_minecraft:agr/cooking"
+    }
+  ],
+  "item_requires": [],
+  "unlocks": [
+    {
+      "item": "earth_on_minecraft:cheese"
+    },
+    {
+      "item": "earth_on_minecraft:butter"
+    },
+    {
+      "item": "earth_on_minecraft:yogurt"
+    },
+    {
+      "item": "earth_on_minecraft:cream"
+    },
+    {
+      "item": "earth_on_minecraft:bacon"
+    },
+    {
+      "item": "earth_on_minecraft:sausage"
+    },
+    {
+      "item": "earth_on_minecraft:ham"
+    },
+    {
+      "item": "earth_on_minecraft:dried_fish"
+    },
+    {
+      "item": "earth_on_minecraft:insect_protein"
+    },
+    {
+      "item": "earth_on_minecraft:smokehouse"
+    },
+    {
+      "block": "earth_on_minecraft:smokehouse"
+    },
+    {
+      "item": "earth_on_minecraft:pasteurizer"
+    },
+    {
+      "block": "earth_on_minecraft:pasteurizer"
+    }
+  ],
+  "literature": [
+    "notes"
+  ],
+  "teachers": [
+    "minecraft:butcher"
+  ],
+  "research": {
+    "items": [
+      {
+        "ingredient": "earth_on_minecraft:milk",
+        "count": 4
+      },
+      {
+        "ingredient": "earth_on_minecraft:salt",
+        "count": 4
+      }
+    ],
+    "ticks": 1200
+  },
+  "fail_codes": [],
+  "name_key": "lore.earth_on_minecraft.agr.food_processing",
+  "desc_key": "lore.earth_on_minecraft.agr.food_processing.desc"
+}

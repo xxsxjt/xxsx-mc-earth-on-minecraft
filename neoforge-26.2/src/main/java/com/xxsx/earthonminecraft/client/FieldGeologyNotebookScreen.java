@@ -1,5 +1,6 @@
 package com.xxsx.earthonminecraft.client;
 
+import com.xxsx.earthonminecraft.LoreIntegration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
@@ -26,7 +27,8 @@ public class FieldGeologyNotebookScreen extends Screen {
     private static final int GOLD = 0xFF956215;
     private static final int LINE_HEIGHT = 12;
 
-    private final List<Page> pages = createLocalizedPages();
+    private List<Page> pages = createLocalizedPages();
+    private boolean stratigraphyKnown = LoreIntegration.knowsClient(LoreIntegration.NODE_STRATIGRAPHY);
     private final List<Button> tabButtons = new ArrayList<>();
     private final List<Button> sectionButtons = new ArrayList<>();
 
@@ -84,6 +86,11 @@ public class FieldGeologyNotebookScreen extends Screen {
 
     @Override
     protected void init() {
+        boolean currentKnown = LoreIntegration.knowsClient(LoreIntegration.NODE_STRATIGRAPHY);
+        if (currentKnown != this.stratigraphyKnown) {
+            this.stratigraphyKnown = currentKnown;
+            this.pages = createLocalizedPages();
+        }
         this.tabButtons.clear();
         this.sectionButtons.clear();
         this.section = sectionForPage(this.page);
@@ -378,6 +385,7 @@ public class FieldGeologyNotebookScreen extends Screen {
 
     private static List<Page> createLocalizedPages() {
         Language language = Language.getInstance();
+        boolean knowsStratigraphy = LoreIntegration.knowsClient(LoreIntegration.NODE_STRATIGRAPHY);
         List<Page> result = new ArrayList<>();
         for (PageSpec spec : PAGE_SPECS) {
             String base = "handbook.earth_on_minecraft.page." + spec.key();
@@ -385,11 +393,51 @@ public class FieldGeologyNotebookScreen extends Screen {
             String title = language.getOrDefault(base + ".title");
             String lines = language.getOrDefault(base + ".lines");
             if (shortTitle.equals(base + ".short") || title.equals(base + ".title") || lines.equals(base + ".lines")) {
-                return isChineseLanguage() ? createPages() : createEnglishPages();
+                List<Page> fallback = isChineseLanguage() ? createPages() : createEnglishPages();
+                return knowsStratigraphy ? fallback : maskStratigraphyPages(fallback);
             }
-            result.add(page(shortTitle, title, spec.color(), lines.split("\n", -1)));
+            Page built = page(shortTitle, title, spec.color(), lines.split("\n", -1));
+            result.add(!knowsStratigraphy && isGeologyDepositSpec(spec.key()) ? maskDepositPage(built) : built);
         }
         return List.copyOf(result);
+    }
+
+    private static boolean isGeologyDepositSpec(String key) {
+        return "rocks".equals(key) || "natural_deposits".equals(key) || "valuables".equals(key);
+    }
+
+    private static List<Page> maskStratigraphyPages(List<Page> rawPages) {
+        List<Page> masked = new ArrayList<>(rawPages.size());
+        for (int i = 0; i < rawPages.size(); i++) {
+            Page p = rawPages.get(i);
+            if (i >= 6 && i <= 8) {
+                masked.add(maskDepositPage(p));
+            } else {
+                masked.add(p);
+            }
+        }
+        return List.copyOf(masked);
+    }
+
+    private static Page maskDepositPage(Page original) {
+        List<Entry> entries = new ArrayList<>();
+        entries.add(new Entry(tr("screen.earth_on_minecraft.notebook.stratigraphy_locked"), 0, RED, true));
+        for (Entry entry : original.entries) {
+            if (entry.text.isBlank() || entry.heading) {
+                entries.add(entry);
+                continue;
+            }
+            int colonIdx = entry.text.indexOf('：');
+            if (colonIdx < 0) {
+                colonIdx = entry.text.indexOf(':');
+            }
+            if (colonIdx > 0 && colonIdx < 24) {
+                String depositName = entry.text.substring(0, colonIdx + 1);
+                entries.add(new Entry(depositName + " " + tr("screen.earth_on_minecraft.notebook.stratigraphy_redacted"),
+                        entry.indent, MUTED, false));
+            }
+        }
+        return new Page(original.shortTitle, original.title, original.color, List.copyOf(entries));
     }
 
     private static List<Page> createPages() {

@@ -65,6 +65,9 @@ public final class QualityComponents {
         if (TOOL_QUALITY_ITEMS.contains(id)) {
             properties = properties.component(EarthDataComponents.TOOL_QUALITY.get(), ToolQualityComponent.DEFAULT);
         }
+        if ("optical_glass".equals(id)) {
+            properties = properties.component(EarthDataComponents.OPTICAL_GLASS.get(), OpticalGlassComponent.DEFAULT);
+        }
         return properties;
     }
 
@@ -125,6 +128,21 @@ public final class QualityComponents {
     }
 
     public static void appendTooltip(ItemStack stack, Consumer<Component> lines) {
+        Boolean sterile = stack.get(EarthDataComponents.STERILE.get());
+        if (Boolean.TRUE.equals(sterile)) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.sterile")
+                    .withStyle(ChatFormatting.GREEN));
+        }
+        OpticalGlassComponent opticalGlass = stack.get(EarthDataComponents.OPTICAL_GLASS.get());
+        if (opticalGlass != null) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.optical_glass",
+                    String.format(Locale.ROOT, "%.2f", opticalGlass.refractiveIndex()),
+                    opticalGlass.bubbleCount()).withStyle(ChatFormatting.AQUA));
+            if (opticalGlass.hasHighBubbles()) {
+                lines.accept(Component.translatable("tooltip.earth_on_minecraft.optical_glass.bubbles_high")
+                        .withStyle(ChatFormatting.RED));
+            }
+        }
         FoodQuality food = stack.get(EarthDataComponents.FOOD_QUALITY.get());
         if (food != null) {
             lines.accept(gradeLine(food.grade()));
@@ -167,10 +185,13 @@ public final class QualityComponents {
         }
         if (batch != null) {
             lines.accept(gradeLine(batch.grade()));
-            String tempNote = batch.temperatureK() > 300 ? " · " + batch.temperatureK() + " K" : "";
-            lines.accept(Component.translatable("tooltip.earth_on_minecraft.assay.purity",
-                    Component.literal(formatPercent(batch.purity()) + " wt%"),
-                    Component.literal(batch.speciesId() + tempNote)).withStyle(ChatFormatting.AQUA));
+            if (com.xxsx.earthonminecraft.LoreIntegration.knowsClient(
+                    com.xxsx.earthonminecraft.LoreIntegration.NODE_ANALYTICAL_CHEMISTRY)) {
+                String tempNote = batch.temperatureK() > 300 ? " · " + batch.temperatureK() + " K" : "";
+                lines.accept(Component.translatable("tooltip.earth_on_minecraft.assay.purity",
+                        Component.literal(formatPercent(batch.purity()) + " wt%"),
+                        Component.literal(batch.speciesId() + tempNote)).withStyle(ChatFormatting.AQUA));
+            }
         }
         if (metal != null) {
             String classKey = "tooltip.earth_on_minecraft.assay.class." + metal.ironCarbonClass();
@@ -178,7 +199,8 @@ public final class QualityComponents {
                     Component.translatable(classKey),
                     Component.literal(String.format(Locale.ROOT, "%.0f%%", metal.workability() * 100.0)),
                     Component.translatable(metal.maxGradeCap().translationKey())).withStyle(ChatFormatting.GRAY));
-            if (!metal.composition().isEmpty()) {
+            if (!metal.composition().isEmpty() && com.xxsx.earthonminecraft.LoreIntegration.knowsClient(
+                    com.xxsx.earthonminecraft.LoreIntegration.NODE_ANALYTICAL_CHEMISTRY)) {
                 String assay = metal.composition().entrySet().stream()
                         .sorted((a, b) -> Double.compare(b.getValue(), a.getValue()))
                         .map(entry -> entry.getKey() + " "
@@ -187,7 +209,8 @@ public final class QualityComponents {
                 lines.accept(Component.translatable("tooltip.earth_on_minecraft.assay.composition",
                         Component.literal(assay)).withStyle(ChatFormatting.DARK_GRAY));
             }
-        } else {
+        } else if (com.xxsx.earthonminecraft.LoreIntegration.knowsClient(
+                com.xxsx.earthonminecraft.LoreIntegration.NODE_ANALYTICAL_CHEMISTRY)) {
             Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
             MaterialCatalog.find(id).ifPresent(record -> {
                 if (!record.constituents().isEmpty()) {
