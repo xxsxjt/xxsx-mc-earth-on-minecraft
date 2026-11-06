@@ -128,6 +128,12 @@ public final class RouteGuide {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.cassiterite").withStyle(ChatFormatting.YELLOW));
         } else if (item == EarthOnMinecraft.RARE_EARTH_CARBONATITE.get().asItem()) {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.rare_earth").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.REDSTONE_MINERAL_ORE.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.redstone_source").withStyle(ChatFormatting.YELLOW));
+        } else if (item == EarthOnMinecraft.CINNABAR_VEIN.get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.cinnabar_redstone").withStyle(ChatFormatting.YELLOW));
+        } else if (SpecBlocks.BY_ID.containsKey("manganite_ore") && item == SpecBlocks.BY_ID.get("manganite_ore").get().asItem()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.deposit.manganite_redstone").withStyle(ChatFormatting.YELLOW));
         } else if (item == EarthOnMinecraft.COAL_DUST.get().asItem()) {
             lines.accept(Component.translatable("tooltip.earth_on_minecraft.fuel.coal_dust").withStyle(ChatFormatting.YELLOW));
         } else if (item == EarthOnMinecraft.COKE.get().asItem()) {

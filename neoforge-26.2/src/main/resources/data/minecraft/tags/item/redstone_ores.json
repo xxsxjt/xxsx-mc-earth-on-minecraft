@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "earth_on_minecraft:redstone_mineral_ore",
-    "earth_on_minecraft:cinnabar_vein"
+    "earth_on_minecraft:cinnabar_vein",
+    "earth_on_minecraft:manganite_ore"
   ]
 }

@@ -370,7 +370,9 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.AURIFEROUS_QUARTZ_VEIN::get, "含金石英脉粗碎", out(EarthOnMinecraft.AURIFEROUS_QUARTZ_CHUNK::get, 3), out(EarthOnMinecraft.QUARTZ_DUST::get, 2)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.KIMBERLITE::get, "金伯利岩粗碎", out(EarthOnMinecraft.KIMBERLITE_CHUNK::get, 4), out(EarthOnMinecraft.TAILINGS_DUST::get, 2)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.DIAMONDIFEROUS_KIMBERLITE::get, "含钻金伯利岩粗碎", out(EarthOnMinecraft.KIMBERLITE_CHUNK::get, 4), out(EarthOnMinecraft.DIAMOND_GRIT::get, 1)));
-        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.CINNABAR_VEIN::get, "辰砂矿脉粗碎", out(EarthOnMinecraft.CINNABAR_CHUNK::get, 4), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.CINNABAR_VEIN::get, "辰砂矿脉粗碎与伴生导电粉分离", out(EarthOnMinecraft.CINNABAR_CHUNK::get, 4), out(() -> Items.REDSTONE, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.REDSTONE_MINERAL_ORE::get, "赤铁软锰伴生矿粗碎", out(EarthOnMinecraft.REDSTONE_CONCENTRATE::get, 2), out(() -> Items.REDSTONE, 3), out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1), out(EarthOnMinecraft.HEMATITE_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, SpecBlocks.BY_ID.get("manganite_ore")::get, "水锰矿粗碎与伴生导电粉分离", out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 3), out(() -> Items.REDSTONE, 2), out(EarthOnMinecraft.HEMATITE_DUST::get, 1)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.BITUMINOUS_COAL_SEAM::get, "烟煤含煤岩破碎与挥发分回收", out(EarthOnMinecraft.COAL_DUST::get, 4), out(EarthOnMinecraft.COAL_TAR::get, 1), out(EarthOnMinecraft.COAL_GAS_CELL::get, 1), out(EarthOnMinecraft.CRUDE_OIL_SAMPLE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.ANTHRACITE_COAL_SEAM::get, "无烟煤含煤岩破碎与高碳富集", out(EarthOnMinecraft.COAL_DUST::get, 7), out(EarthOnMinecraft.GRAPHITE_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.BAUXITE_LATERITE_DEPOSIT::get, "铝土矿风化壳破碎", out(EarthOnMinecraft.BAUXITE_DUST::get, 5), out(EarthOnMinecraft.HEMATITE_DUST::get, 1), out(EarthOnMinecraft.KAOLIN_DUST::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
@@ -382,7 +384,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.MAGNETITE_CHUNK::get, "磁铁矿球磨", out(EarthOnMinecraft.MAGNETITE_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CRUSHED_MAGNETITE::get, "磁铁矿碎矿球磨", out(EarthOnMinecraft.MAGNETITE_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CHALCOPYRITE_CHUNK::get, "黄铜矿球磨", out(EarthOnMinecraft.CHALCOPYRITE_DUST::get, 3), out(EarthOnMinecraft.PYRITE_DUST::get, 1)));
-        recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CINNABAR_CHUNK::get, "辰砂球磨", out(EarthOnMinecraft.CINNABAR_DUST::get, 3), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.CINNABAR_CHUNK::get, "辰砂球磨", out(EarthOnMinecraft.CINNABAR_DUST::get, 3), out(() -> Items.REDSTONE, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
+        recipes.add(r(Kind.BALL_MILL, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "铁锰导电精矿细磨", out(() -> Items.REDSTONE, 4), out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1), out(EarthOnMinecraft.HEMATITE_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, () -> Blocks.GRANITE, "花岗岩矿物分离", out(EarthOnMinecraft.QUARTZ_DUST::get, 2), out(EarthOnMinecraft.FELDSPAR_DUST::get, 3), out(EarthOnMinecraft.MICA_DUST::get, 1), out(EarthOnMinecraft.MONAZITE_SAND::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, () -> Blocks.DIORITE, "闪长岩矿物分离", out(EarthOnMinecraft.FELDSPAR_DUST::get, 3), out(EarthOnMinecraft.MAFIC_SILICATE_DUST::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.BALL_MILL, () -> Blocks.ANDESITE, "安山岩矿物分离", out(EarthOnMinecraft.FELDSPAR_DUST::get, 2), out(EarthOnMinecraft.MAFIC_SILICATE_DUST::get, 3), out(EarthOnMinecraft.MAGNETITE_DUST::get, 1)));
@@ -423,7 +426,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.FLOTATION_CELL, EarthOnMinecraft.PYRITE_DUST::get, "黄铁矿浮选", out(EarthOnMinecraft.SULFUR_DUST::get, 1), out(EarthOnMinecraft.IRON_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.FLOTATION_CELL, EarthOnMinecraft.GOLD_DUST::get, "金粉富集", out(EarthOnMinecraft.GOLD_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.FLOTATION_CELL, EarthOnMinecraft.LAPIS_LAZULI_ORE::get, "青金石浮选", out(EarthOnMinecraft.LAPIS_CONCENTRATE::get, 2), out(EarthOnMinecraft.CALCITE_DUST::get, 1), out(EarthOnMinecraft.PYRITE_DUST::get, 1)));
-        recipes.add(r(Kind.FLOTATION_CELL, EarthOnMinecraft.REDSTONE_MINERAL_ORE::get, "红石矿物富集", out(EarthOnMinecraft.REDSTONE_CONCENTRATE::get, 2), out(EarthOnMinecraft.SILICA_DUST::get, 1)));
+        recipes.add(r(Kind.FLOTATION_CELL, EarthOnMinecraft.REDSTONE_MINERAL_ORE::get, "赤铁软锰伴生矿浮选富集", out(EarthOnMinecraft.REDSTONE_CONCENTRATE::get, 2), out(EarthOnMinecraft.SILICA_DUST::get, 1)));
 
         recipes.add(r(Kind.ROASTER, EarthOnMinecraft.COPPER_CONCENTRATE::get, "铜精矿焙烧", out(EarthOnMinecraft.ROASTED_COPPER_CONCENTRATE::get, 1), out(EarthOnMinecraft.SULFUR_DUST::get, 2)));
         recipes.add(r(Kind.ROASTER, EarthOnMinecraft.PYRITE_DUST::get, "黄铁矿焙烧", out(EarthOnMinecraft.HEMATITE_DUST::get, 1), out(EarthOnMinecraft.SULFUR_DUST::get, 2)));
@@ -443,7 +446,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
 
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.AURIFEROUS_QUARTZ_CHUNK::get, "含金石英浸出", out(EarthOnMinecraft.GOLD_CONCENTRATE::get, 1), out(EarthOnMinecraft.SILICA_DUST::get, 2), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.EMERALD_BERYL_VEIN::get, "绿柱石浸出富集", out(EarthOnMinecraft.BERYL_CONCENTRATE::get, 2), out(EarthOnMinecraft.QUARTZ_DUST::get, 1), out(EarthOnMinecraft.MICA_DUST::get, 1)));
-        recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "红石矿物浸出", out(() -> Items.REDSTONE, 4), out(EarthOnMinecraft.SILICA_DUST::get, 1)));
+        recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "铁锰导电精矿浸出提纯", out(() -> Items.REDSTONE, 4), out(EarthOnMinecraft.SILICA_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.MERCURY_DROPLET::get, "汞齐法金回收的安全化近似", out(EarthOnMinecraft.GOLD_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.BRINE_CRYSTAL::get, "盐卤锂钾富集", out(EarthOnMinecraft.LITHIUM_SALT::get, 1), out(EarthOnMinecraft.POTASSIUM_CHLORIDE::get, 1), out(EarthOnMinecraft.SALT_DUST::get, 1)));
         recipes.add(r(Kind.LEACHING_TANK, EarthOnMinecraft.MAFIC_SILICATE_DUST::get, "镁铁质硅酸盐镍伴生浸出", out(EarthOnMinecraft.NICKEL_PRECURSOR::get, 1), out(EarthOnMinecraft.IRON_CONCENTRATE::get, 1), out(EarthOnMinecraft.TAILINGS_DUST::get, 1)));
@@ -455,12 +458,12 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.LAPIS_CONCENTRATE::get, "青金石湿法提纯", out(() -> Items.LAPIS_LAZULI, 3), out(EarthOnMinecraft.CALCITE_DUST::get, 1)));
         recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.BERYL_CONCENTRATE::get, "绿柱石宝石分选", out(() -> Items.EMERALD, 1), out(EarthOnMinecraft.ALUMINOSILICATE_DUST::get, 2)));
         recipes.add(r(Kind.ELECTROLYTIC_CELL, () -> Items.WATER_BUCKET, "水电解气体回收", out(EarthOnMinecraft.HYDROGEN_GAS_CELL::get, 2), out(EarthOnMinecraft.OXYGEN_GAS_CELL::get, 1), out(() -> Items.BUCKET, 1)));
-        recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "红石伴生锰氧化物电积", out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1), out(() -> Items.REDSTONE, 2)));
+        recipes.add(r(Kind.ELECTROLYTIC_CELL, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "铁锰导电精矿锰氧化物电积", out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1), out(() -> Items.REDSTONE, 2)));
 
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.COAL_DUST::get, "煤粉压块", out(() -> Items.COAL, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.DIAMOND_GRIT::get, "金刚石砂粒压制", out(() -> Items.DIAMOND, 1)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.QUARTZ_DUST::get, "石英粉压制", out(() -> Items.QUARTZ, 1)));
-        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "红石精矿压制", out(() -> Items.REDSTONE, 3)));
+        recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.REDSTONE_CONCENTRATE::get, "铁锰导电精矿压制", out(() -> Items.REDSTONE, 3)));
         recipes.add(r(Kind.POWDER_PRESS, EarthOnMinecraft.STEEL_BLOOM::get, "钢坯轧制为标准钢材与兼容铁锭", out(SpecItems.BY_ID.get("steel")::get, 1), out(() -> Items.IRON_INGOT, 1)));
         recipes.add(r(Kind.ANVIL, EarthOnMinecraft.STEEL_BLOOM::get, "钢坯锻打成精炼钢材", out(SpecItems.BY_ID.get("steel")::get, 1)));
 
@@ -584,7 +587,8 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.CARBON_BLACK::get, "炭黑补强与黑色涂料基料", out(EarthOnMinecraft.PAINT_BASE::get, 1), out(() -> Items.BLACK_DYE, 2)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.PAINT_BASE::get, "通用涂料调和", out(() -> Items.WHITE_DYE, 1), out(() -> Items.RED_DYE, 1), out(() -> Items.BLACK_DYE, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.GRAPHITE_DUST::get, "石墨负极浆料混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.BATTERY_CARBON::get, 1)));
-        recipes.add(r(Kind.MIXER, EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, "锰系正极材料混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.NICKEL_PRECURSOR::get, 1)));
+        recipes.add(r(Kind.MIXER, EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, "锰系正极与铁锰导电粉混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.NICKEL_PRECURSOR::get, 1), out(() -> Items.REDSTONE, 2)));
+        recipes.add(r(Kind.MIXER, EarthOnMinecraft.CINNABAR_DUST::get, "辰砂-铁锰复合导电粉调配", out(() -> Items.REDSTONE, 4), out(EarthOnMinecraft.REDSTONE_CONCENTRATE::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.NICKEL_PRECURSOR::get, "镍系正极前驱体混合", out(EarthOnMinecraft.ELECTRODE_SHEET::get, 1), out(EarthOnMinecraft.MANGANESE_OXIDE_DUST::get, 1)));
         recipes.add(r(Kind.MIXER, EarthOnMinecraft.TAILINGS_DUST::get, "尾粉稳定化处理", out(EarthOnMinecraft.STABILIZED_TAILINGS::get, 1), out(EarthOnMinecraft.SLUDGE_CAKE::get, 1)));
         recipes.add(rChem(Kind.MIXER, List.of(

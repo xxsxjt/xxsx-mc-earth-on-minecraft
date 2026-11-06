@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    "earth_on_minecraft:redstone_concentrate"
+  ],
+  "result": {
+    "id": "minecraft:redstone",
+    "count": 2
+  }
+}
