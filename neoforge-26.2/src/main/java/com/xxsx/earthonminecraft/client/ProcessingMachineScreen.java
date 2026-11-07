@@ -42,21 +42,21 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
     private static final int TELEMETRY_Y = 76;
     private static final int TELEMETRY_W = 69;
     private static final int TELEMETRY_H = 12;
-    private static final int TANK_X = 58;
+    private static final int TANK_X = 38;
     private static final int TANK_Y = 18;
     private static final int TANK_W = 8;
-    private static final int TANK_H = 16;
-    private static final int TEMP_X = 68;
+    private static final int TANK_H = 15;
+    private static final int TEMP_X = 48;
     private static final int TEMP_Y = 18;
     private static final int TEMP_W = 8;
-    private static final int TEMP_H = 16;
-    private static final int ENERGY_X = 78;
+    private static final int TEMP_H = 15;
+    private static final int ENERGY_X = 58;
     private static final int ENERGY_Y = 18;
     private static final int ENERGY_W = 8;
-    private static final int ENERGY_H = 16;
-    private static final int MANUAL_X = 88;
+    private static final int ENERGY_H = 15;
+    private static final int MANUAL_X = 68;
     private static final int MANUAL_Y = 18;
-    private static final int MANUAL_W = 12;
+    private static final int MANUAL_W = 30;
     private static final int MANUAL_H = 16;
 
     private Button redstoneButton;
@@ -96,7 +96,6 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
                             Component.translatable("screen.earth_on_minecraft.machine.manual.button"),
                             b -> triggerManualStep())
                     .bounds(leftPos + MANUAL_X, topPos + MANUAL_Y, MANUAL_W, MANUAL_H)
-                    .tooltip(Tooltip.create(Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip")))
                     .build());
         }
 
@@ -519,6 +518,14 @@ public class ProcessingMachineScreen extends AbstractContainerScreen<ProcessingM
         }
         if (isHovering(ENERGY_X, ENERGY_Y, ENERGY_W, ENERGY_H, mouseX, mouseY)) {
             g.setComponentTooltipForNextFrame(font, powerTooltip(), mouseX, mouseY);
+        }
+        if (menu.powerMode().manualFallback() && isHovering(MANUAL_X, MANUAL_Y, MANUAL_W, MANUAL_H, mouseX, mouseY)) {
+            g.setComponentTooltipForNextFrame(font, List.of(
+                    Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip"),
+                    Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip.0"),
+                    Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip.1"),
+                    Component.translatable("screen.earth_on_minecraft.machine.manual.tooltip.2")
+            ), mouseX, mouseY);
         }
         if (isHovering(80, 76, 18, 18, mouseX, mouseY)) {
             if (menu.kind() == ProcessingMachineBlock.Kind.REDUCTION_FURNACE) {

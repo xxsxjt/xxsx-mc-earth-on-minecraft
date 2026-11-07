@@ -2,7 +2,12 @@ package com.xxsx.earthonminecraft;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -38,6 +43,7 @@ public class IronworkingAnvilBlock extends Block {
         Optional<ItemStack> result = forgeResult(workpiece, activeHammer, hearthTempK);
         if (result.isEmpty()) {
             if (!level.isClientSide()) {
+                player.swing(hammerHand, true);
                 player.sendSystemMessage(Component.translatable("message.earth_on_minecraft.anvil.invalid_workpiece"));
             }
             return InteractionResult.SUCCESS;
@@ -58,11 +64,22 @@ public class IronworkingAnvilBlock extends Block {
             popResource(level, pos, output);
         }
         activeHammer.hurtAndBreak(1, player, hammerHand == InteractionHand.MAIN_HAND
-                ? net.minecraft.world.entity.EquipmentSlot.MAINHAND
-                : net.minecraft.world.entity.EquipmentSlot.OFFHAND);
+                ? EquipmentSlot.MAINHAND
+                : EquipmentSlot.OFFHAND);
+        level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS,
+                0.85F, 0.95F + level.getRandom().nextFloat() * 0.10F);
+        if (level instanceof ServerLevel serverLevel) {
+            serverLevel.sendParticles(ParticleTypes.CRIT,
+                    pos.getX() + 0.5D, pos.getY() + 1.02D, pos.getZ() + 0.5D,
+                    10, 0.18D, 0.08D, 0.18D, 0.12D);
+            serverLevel.sendParticles(ParticleTypes.LAVA,
+                    pos.getX() + 0.5D, pos.getY() + 1.02D, pos.getZ() + 0.5D,
+                    4, 0.12D, 0.05D, 0.12D, 0.02D);
+        }
+        player.swing(hammerHand, true);
         player.sendSystemMessage(Component.translatable("message.earth_on_minecraft.anvil.forged",
                 output.getHoverName()));
-        return InteractionResult.SUCCESS_SERVER;
+        return InteractionResult.SUCCESS;
     }
 
     public static Optional<ItemStack> forgeResult(ItemStack workpiece) {

@@ -4,9 +4,12 @@ import java.util.EnumMap;
 import java.util.Map;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
@@ -118,6 +121,50 @@ public final class MachineFeedback {
     public static void playComplete(Level level, BlockPos pos, ProcessingMachineBlock.Kind kind) {
         float pitch = 0.94F + kind.ordinal() % 5 * 0.025F;
         level.playSound(null, pos, COMPLETE_SOUND.get(), SoundSource.BLOCKS, 0.42F, pitch);
+    }
+
+    public static void emitManualCrank(Level level, BlockPos pos, BlockState state, ProcessingMachineBlock.Kind kind) {
+        RandomSource random = level.getRandom();
+        if (kind == ProcessingMachineBlock.Kind.ANVIL) {
+            level.playSound(null, pos, SoundEvents.ANVIL_USE, SoundSource.BLOCKS,
+                    0.80F, 0.95F + random.nextFloat() * 0.10F);
+        } else {
+            level.playSound(null, pos, SoundEvents.GRINDSTONE_USE, SoundSource.BLOCKS,
+                    0.55F, 1.15F + random.nextFloat() * 0.10F);
+            DeferredHolder<SoundEvent, SoundEvent> runSound = RUN_SOUNDS.get(kind);
+            if (runSound != null) {
+                level.playSound(null, pos, runSound.get(), SoundSource.BLOCKS,
+                        0.32F, 1.0F + random.nextFloat() * 0.08F);
+            }
+        }
+        if (level instanceof ServerLevel serverLevel) {
+            double x = pos.getX() + 0.5D;
+            double y = pos.getY() + 0.85D;
+            double z = pos.getZ() + 0.5D;
+            if (state.hasProperty(ProcessingMachineBlock.FACING)) {
+                var facing = state.getValue(ProcessingMachineBlock.FACING);
+                x += facing.getStepX() * 0.28D;
+                z += facing.getStepZ() * 0.28D;
+            }
+            serverLevel.sendParticles(ParticleTypes.CRIT, x, y, z, 6, 0.16D, 0.10D, 0.16D, 0.08D);
+            serverLevel.sendParticles(ParticleTypes.SMOKE, x, y, z, 3, 0.14D, 0.08D, 0.14D, 0.02D);
+            if (kind == ProcessingMachineBlock.Kind.ANVIL) {
+                serverLevel.sendParticles(ParticleTypes.LAVA, x, y + 0.1D, z, 3, 0.12D, 0.05D, 0.12D, 0.02D);
+            }
+            serverLevel.sendParticles(particle(kind), x, y, z, 2, 0.12D, 0.08D, 0.12D, 0.01D);
+        }
+    }
+
+    public static void emitBatteryCrank(Level level, BlockPos pos) {
+        level.playSound(null, pos, SoundEvents.COPPER_BULB_TURN_ON, SoundSource.BLOCKS,
+                0.60F, 1.18F + level.getRandom().nextFloat() * 0.08F);
+        if (level instanceof ServerLevel serverLevel) {
+            double x = pos.getX() + 0.5D;
+            double y = pos.getY() + 0.85D;
+            double z = pos.getZ() + 0.5D;
+            serverLevel.sendParticles(ParticleTypes.CRIT, x, y, z, 5, 0.15D, 0.10D, 0.15D, 0.06D);
+            serverLevel.sendParticles(ParticleTypes.SMOKE, x, y, z, 2, 0.12D, 0.06D, 0.12D, 0.01D);
+        }
     }
 
     private static DeferredHolder<SoundEvent, SoundEvent> sound(String path) {

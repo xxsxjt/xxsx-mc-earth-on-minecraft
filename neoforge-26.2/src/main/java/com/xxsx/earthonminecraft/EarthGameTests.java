@@ -655,8 +655,10 @@ final class EarthGameTests {
         BlockPos origin = helper.absolutePos(BlockPos.ZERO);
         BlockState ore = EarthOnMinecraft.MAGNETITE_ORE.get().defaultBlockState();
         List<BlockPos> placed = new ArrayList<>();
-        for (int y = 1; y <= 6; y++) {
-            placed.add(origin.offset(-4, y, 4));
+        for (int dx = -1; dx <= 1; dx++) {
+            for (int y = 1; y <= 6; y++) {
+                placed.add(origin.offset(-4 + dx, y, 4));
+            }
         }
         placed.forEach(pos -> setSectionState(helper, pos, ore));
         helper.assertFalse(hasBlockEntity(helper, placed.get(0)), "worldgen-style ore leaves no block-entity record");
@@ -672,9 +674,9 @@ final class EarthGameTests {
                     "worldgen scan misses " + pos + ", got " + hits);
         }
         var signals = LodeSurfaceSignalFeature.planSignals(hits);
-        helper.assertValueEqual(signals.size(), 1, "six section-written blocks plan one signal, got " + signals);
+        helper.assertValueEqual(signals.size(), 1, "18 section-written blocks plan one signal, got " + signals);
         helper.assertValueEqual(signals.get(0).lodeId(), "magnetite_lens", "signal lode");
-        helper.assertValueEqual(signals.get(0).x(), placed.get(0).getX(), "signal column x");
+        helper.assertValueEqual(signals.get(0).x(), origin.offset(-4, 0, 4).getX(), "signal column x");
         helper.assertValueEqual(signals.get(0).z(), placed.get(0).getZ(), "signal column z");
         helper.succeed();
     }
@@ -902,15 +904,15 @@ final class EarthGameTests {
             }
         }
 
-        // Six magnetite blocks trigger; five chalcopyrite, any amount of halo or host rock do not.
+        // MIN_BLOCKS (18) magnetite blocks trigger; 17 chalcopyrite, any amount of halo or host rock do not.
         List<LodeSectionScan.Hit> hits = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
-            hits.add(new LodeSectionScan.Hit(new BlockPos(i, -40, 3), "magnetite_lens"));
+        for (int i = 0; i < LodeSurfaceSignalFeature.MIN_BLOCKS; i++) {
+            hits.add(new LodeSectionScan.Hit(new BlockPos(2, -40 + i, 3), "magnetite_lens"));
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < LodeSurfaceSignalFeature.MIN_BLOCKS - 1; i++) {
             hits.add(new LodeSectionScan.Hit(new BlockPos(i, 20, 9), "chalcopyrite_vein"));
         }
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 24; i++) {
             hits.add(new LodeSectionScan.Hit(new BlockPos(i, 0, 0), "magnetite_tuff_halo"));
             hits.add(new LodeSectionScan.Hit(new BlockPos(i, 1, 0), "granitic_intrusion"));
         }
@@ -921,12 +923,12 @@ final class EarthGameTests {
         helper.assertValueEqual(signals.get(0).z(), 3, "signal sits at the lode's z centroid");
 
         for (String extra : List.of("galena_lens", "uraninite_lens", "cassiterite_placer_deposit")) {
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < LodeSurfaceSignalFeature.MIN_BLOCKS + 2; i++) {
                 hits.add(new LodeSectionScan.Hit(new BlockPos(i, 10, 12), extra));
             }
         }
         helper.assertValueEqual(LodeSurfaceSignalFeature.planSignals(hits).size(),
-                LodeSurfaceSignalFeature.MAX_SIGNALS, "at most three signals per chunk");
+                LodeSurfaceSignalFeature.MAX_SIGNALS, "at most one signal per chunk");
 
         helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.GRASS_BLOCK.defaultBlockState()), "grass");
         helper.assertTrue(LodeSurfaceSignalFeature.isNaturalSurface(Blocks.PODZOL.defaultBlockState()), "podzol");

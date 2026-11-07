@@ -33,10 +33,11 @@ import java.util.Optional;
  * few outcrop blocks of the lode itself. A signal therefore always sits over ore that exists.</p>
  */
 public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfiguration> {
-    public static final int MIN_BLOCKS = 6;
-    public static final int MAX_SIGNALS = 3;
-    private static final int HALO_RADIUS = 1;
-    private static final float HALO_SKIP_CHANCE = 0.65F;
+    public static final int MIN_BLOCKS = 18;
+    public static final int MAX_SIGNALS = 1;
+    public static final float SIGNAL_CHANCE = 0.40F;
+    public static final int MIN_SURFACE_BLOCKS = 2;
+    public static final int MAX_SURFACE_BLOCKS = 3;
 
     /** A signal to place: which lode, how many blocks backed it, and the surface column. */
     public record Signal(String lodeId, int blocks, int x, int z) {
@@ -52,9 +53,13 @@ public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfigura
         ChunkPos chunkPos = ChunkPos.containing(context.origin());
         ChunkAccess chunk = level.getChunk(chunkPos.x(), chunkPos.z());
         List<LodeSectionScan.Hit> hits = LodeSectionScan.scan(chunk, LodeSectionScan.mainLodeBlocks());
+        List<Signal> planned = planSignals(hits);
         RandomSource random = context.random();
+        if (planned.isEmpty() || random.nextFloat() >= SIGNAL_CHANCE) {
+            return false;
+        }
         boolean placed = false;
-        for (Signal signal : planSignals(hits)) {
+        for (Signal signal : planned) {
             placed |= placeSignal(level, chunkPos, signal, random);
         }
         return placed;
@@ -65,26 +70,7 @@ public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfigura
      * {@link #MIN_BLOCKS} blocks each, largest first, at most {@link #MAX_SIGNALS}.
      */
     public static List<Signal> planSignals(Collection<LodeSectionScan.Hit> hits) {
-        Map<String, long[]> totals = new LinkedHashMap<>();
-        for (LodeSectionScan.Hit hit : hits) {
-            if (!ProspectingCatalog.isMainLode(hit.lodeId())) {
-                continue;
-            }
-            long[] total = totals.computeIfAbsent(hit.lodeId(), id -> new long[3]);
-            total[0]++;
-            total[1] += hit.pos().getX();
-            total[2] += hit.pos().getZ();
-        }
-        List<Signal> signals = new ArrayList<>();
-        totals.forEach((lodeId, total) -> {
-            if (total[0] >= MIN_BLOCKS) {
-                signals.add(new Signal(lodeId, (int) total[0],
-                        (int) Math.floor((double) total[1] / total[0]),
-                        (int) Math.floor((double) total[2] / total[0])));
-            }
-        });
-        signals.sort(Comparator.comparingInt(Signal::blocks).reversed().thenComparing(Signal::lodeId));
-        return signals.size() > MAX_SIGNALS ? new ArrayList<>(signals.subList(0, MAX_SIGNALS)) : signals;
+        return LodeSectionScan.planSignals(hits);
     }
 
     private static boolean placeSignal(WorldGenLevel level, ChunkPos chunk, Signal signal, RandomSource random) {
@@ -93,33 +79,28 @@ public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfigura
             return false;
         }
         BlockState state = block.get().defaultBlockState();
-        boolean placed = false;
-        if (ProspectingCatalog.signalsWithHalo(signal.lodeId())) {
-            for (int dx = -HALO_RADIUS; dx <= HALO_RADIUS; dx++) {
-                for (int dz = -HALO_RADIUS; dz <= HALO_RADIUS; dz++) {
-                    if (dx * dx + dz * dz > HALO_RADIUS * HALO_RADIUS + 1 || random.nextFloat() < HALO_SKIP_CHANCE) {
-                        continue;
-                    }
-                    BlockPos top = surface(level, chunk, signal.x() + dx, signal.z() + dz);
-                    if (top == null) {
-                        continue;
-                    }
-                    boolean topReplaced = replace(level, top, state);
-                    placed |= topReplaced;
-                }
+        int targetBlocks = MIN_SURFACE_BLOCKS + random.nextInt(MAX_SURFACE_BLOCKS - MIN_SURFACE_BLOCKS + 1);
+        int[][] offsets = {
+                {0, 0}, {1, 0}, {-1, 0}, {0, 1}, {0, -1},
+                {1, 1}, {-1, 1}, {1, -1}, {-1, -1}
+        };
+        for (int i = 1; i < offsets.length; i++) {
+            int j = i + random.nextInt(offsets.length - i);
+            int[] tmp = offsets[i];
+            offsets[i] = offsets[j];
+            offsets[j] = tmp;
+        }
+        int replaced = 0;
+        for (int[] offset : offsets) {
+            if (replaced >= targetBlocks) {
+                break;
             }
-        } else {
-            int count = 1 + random.nextInt(2);
-            for (int i = 0; i < count; i++) {
-                int dx = i == 0 ? 0 : random.nextInt(3) - 1;
-                int dz = i == 0 ? 0 : random.nextInt(3) - 1;
-                BlockPos top = surface(level, chunk, signal.x() + dx, signal.z() + dz);
-                if (top != null) {
-                    placed |= replace(level, top, state);
-                }
+            BlockPos top = surface(level, chunk, signal.x() + offset[0], signal.z() + offset[1]);
+            if (top != null && replace(level, top, state)) {
+                replaced++;
             }
         }
-        return placed;
+        return replaced > 0;
     }
 
     /** Top solid block of a column inside this chunk, or {@code null} outside it. */

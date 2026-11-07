@@ -8,8 +8,12 @@ import net.minecraft.world.level.chunk.ChunkAccess;
 import net.minecraft.world.level.chunk.LevelChunkSection;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -58,6 +62,38 @@ public final class LodeSectionScan {
             }
         }
         return blocks;
+    }
+
+    /**
+     * Picks the surface signals for one chunk: main lodes only (no halos, no host strata), at least
+     * {@link LodeSurfaceSignalFeature#MIN_BLOCKS} blocks each, largest first, at most
+     * {@link LodeSurfaceSignalFeature#MAX_SIGNALS}.
+     */
+    public static List<LodeSurfaceSignalFeature.Signal> planSignals(Collection<Hit> hits) {
+        Map<String, long[]> totals = new LinkedHashMap<>();
+        for (Hit hit : hits) {
+            if (!ProspectingCatalog.isMainLode(hit.lodeId())) {
+                continue;
+            }
+            long[] total = totals.computeIfAbsent(hit.lodeId(), id -> new long[3]);
+            total[0]++;
+            total[1] += hit.pos().getX();
+            total[2] += hit.pos().getZ();
+        }
+        List<LodeSurfaceSignalFeature.Signal> signals = new ArrayList<>();
+        totals.forEach((lodeId, total) -> {
+            if (total[0] >= LodeSurfaceSignalFeature.MIN_BLOCKS) {
+                signals.add(new LodeSurfaceSignalFeature.Signal(lodeId, (int) total[0],
+                        (int) Math.floor((double) total[1] / total[0]),
+                        (int) Math.floor((double) total[2] / total[0])));
+            }
+        });
+        signals.sort(Comparator.comparingInt(LodeSurfaceSignalFeature.Signal::blocks)
+                .reversed()
+                .thenComparing(LodeSurfaceSignalFeature.Signal::lodeId));
+        return signals.size() > LodeSurfaceSignalFeature.MAX_SIGNALS
+                ? new ArrayList<>(signals.subList(0, LodeSurfaceSignalFeature.MAX_SIGNALS))
+                : signals;
     }
 
     /** Every block of {@code targets} in {@code chunk}, bottom section first. */

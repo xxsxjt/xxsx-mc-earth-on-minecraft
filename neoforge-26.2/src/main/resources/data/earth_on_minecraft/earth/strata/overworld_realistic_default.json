@@ -11,8 +11,17 @@
   "layers": [
     {
       "name": "surface_regolith_and_weathering",
-      "y_range": [48, 192],
-      "host_blocks": ["minecraft:dirt", "minecraft:clay", "minecraft:sand", "minecraft:gravel", "minecraft:red_sand"],
+      "y_range": [
+        40,
+        84
+      ],
+      "host_blocks": [
+        "minecraft:dirt",
+        "minecraft:clay",
+        "minecraft:sand",
+        "minecraft:gravel",
+        "minecraft:red_sand"
+      ],
       "background_features": [],
       "deposit_features": [
         "earth_on_minecraft:bauxite_laterite_deposit",
@@ -22,8 +31,16 @@
     },
     {
       "name": "sedimentary_basin",
-      "y_range": [0, 176],
-      "host_blocks": ["minecraft:sandstone", "minecraft:calcite", "minecraft:stone", "minecraft:deepslate"],
+      "y_range": [
+        -16,
+        36
+      ],
+      "host_blocks": [
+        "minecraft:sandstone",
+        "minecraft:calcite",
+        "minecraft:stone",
+        "minecraft:deepslate"
+      ],
       "background_features": [
         "earth_on_minecraft:sedimentary_sandstone_bed",
         "earth_on_minecraft:limestone_calcite_bed",
@@ -38,8 +55,16 @@
     },
     {
       "name": "felsic_intrusive_and_hydrothermal_belt",
-      "y_range": [-24, 160],
-      "host_blocks": ["minecraft:granite", "minecraft:diorite", "minecraft:calcite", "minecraft:tuff"],
+      "y_range": [
+        -40,
+        32
+      ],
+      "host_blocks": [
+        "minecraft:granite",
+        "minecraft:diorite",
+        "minecraft:calcite",
+        "minecraft:tuff"
+      ],
       "background_features": [
         "earth_on_minecraft:granitic_intrusion",
         "earth_on_minecraft:diorite_intrusion",
@@ -56,8 +81,16 @@
     },
     {
       "name": "mafic_volcanic_and_iron_belt",
-      "y_range": [-64, 48],
-      "host_blocks": ["minecraft:basalt", "minecraft:andesite", "minecraft:tuff", "minecraft:deepslate"],
+      "y_range": [
+        -64,
+        32
+      ],
+      "host_blocks": [
+        "minecraft:basalt",
+        "minecraft:andesite",
+        "minecraft:tuff",
+        "minecraft:deepslate"
+      ],
       "background_features": [
         "earth_on_minecraft:andesite_volcanic_belt",
         "earth_on_minecraft:tuff_volcanic_belt",
@@ -73,8 +106,14 @@
     },
     {
       "name": "metamorphic_basement",
-      "y_range": [-64, 40],
-      "host_blocks": ["minecraft:deepslate", "minecraft:cobbled_deepslate"],
+      "y_range": [
+        -64,
+        24
+      ],
+      "host_blocks": [
+        "minecraft:deepslate",
+        "minecraft:cobbled_deepslate"
+      ],
       "background_features": [
         "earth_on_minecraft:anthracite_deepslate_halo"
       ],
@@ -88,8 +127,15 @@
     },
     {
       "name": "mantle_derived_pipes",
-      "y_range": [-64, 64],
-      "host_blocks": ["minecraft:deepslate", "minecraft:tuff", "minecraft:stone"],
+      "y_range": [
+        -64,
+        24
+      ],
+      "host_blocks": [
+        "minecraft:deepslate",
+        "minecraft:tuff",
+        "minecraft:stone"
+      ],
       "background_features": [
         "earth_on_minecraft:kimberlite_tuff_halo"
       ],

@@ -1,28 +1,27 @@
 {
-  "type": "minecraft:disk",
+  "type": "minecraft:ore",
   "config": {
-    "half_height": 1,
-    "radius": {
-      "type": "minecraft:uniform",
-      "min_inclusive": 3,
-      "max_inclusive": 5
-    },
-    "state_provider": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "earth_on_minecraft:bituminous_coal_seam"
+    "discard_chance_on_air_exposure": 0.8,
+    "size": 22,
+    "targets": [
+      {
+        "state": {
+          "Name": "earth_on_minecraft:bituminous_coal_seam"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:stone_ore_replaceables"
+        }
+      },
+      {
+        "state": {
+          "Name": "earth_on_minecraft:bituminous_coal_seam"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
       }
-    },
-    "target": {
-      "type": "minecraft:matching_blocks",
-      "blocks": [
-        "minecraft:stone",
-        "minecraft:deepslate",
-        "minecraft:tuff",
-        "minecraft:andesite",
-        "minecraft:diorite",
-        "minecraft:granite"
-      ]
-    }
+    ]
   }
 }

@@ -79,8 +79,10 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
                 && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
             if (!level.isClientSide()) {
                 machine.triggerManualWork(40);
+                MachineFeedback.emitManualCrank(level, pos, state, this.kind);
+                player.swing(InteractionHand.MAIN_HAND, true);
             }
-            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         }
         return openMachine(level, pos, player);
     }
@@ -89,25 +91,37 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
         if (!stack.isEmpty() && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
             if (machine.tryInteractWithFluidItem(player, hand, stack)) {
-                return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+                if (!level.isClientSide()) {
+                    player.swing(hand, true);
+                }
+                return InteractionResult.SUCCESS;
             }
-            if ((stack.getItem() instanceof HandCrankItem || Ae2CrankCompat.isAe2CrankItem(stack))
-                    && machine.canCrankTurn()) {
+            if (((stack.getItem() instanceof HandCrankItem || Ae2CrankCompat.isAe2CrankItem(stack))
+                    && machine.canCrankTurn())
+                    || (this.kind == Kind.ANVIL && EarthMedicalAndWeaponSupport.isAnvilHammer(stack))) {
                 if (!level.isClientSide()) {
                     machine.applyCrankTurn(HandCrankItem.CRANK_WORK_TICKS);
+                    MachineFeedback.emitManualCrank(level, pos, state, this.kind);
                     if (stack.isDamageableItem()) {
                         stack.hurtAndBreak(1, player, hand);
                     }
+                    player.swing(hand, true);
+                    player.sendOverlayMessage(net.minecraft.network.chat.Component.translatable(
+                            "message.earth_on_minecraft.hand_crank.turned",
+                            machine.getDisplayName(),
+                            machine.manualWorkTicks()).withStyle(net.minecraft.ChatFormatting.GREEN));
                 }
-                return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+                return InteractionResult.SUCCESS;
             }
         }
         if (player.isShiftKeyDown() && this.kind.powerMode().manualFallback()
                 && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
             if (!level.isClientSide()) {
                 machine.triggerManualWork(40);
+                MachineFeedback.emitManualCrank(level, pos, state, this.kind);
+                player.swing(hand, true);
             }
-            return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            return InteractionResult.SUCCESS;
         }
         return openMachine(level, pos, player);
     }

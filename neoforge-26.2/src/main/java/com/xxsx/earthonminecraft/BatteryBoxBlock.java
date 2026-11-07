@@ -45,6 +45,26 @@ public class BatteryBoxBlock extends Block implements EntityBlock {
 
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if ((stack.getItem() instanceof HandCrankItem || Ae2CrankCompat.isAe2CrankItem(stack))
+                && level.getBlockEntity(pos) instanceof BatteryBoxBlockEntity battery
+                && battery.getEnergyStored() < battery.getEnergyCapacity()) {
+            if (!level.isClientSide()) {
+                int accepted = battery.receiveEnergy(HandCrankItem.CRANK_ENERGY_EOU, false);
+                MachineFeedback.emitBatteryCrank(level, pos);
+                if (accepted > 0) {
+                    if (stack.isDamageableItem()) {
+                        stack.hurtAndBreak(1, player, hand);
+                    }
+                    player.sendOverlayMessage(net.minecraft.network.chat.Component.translatable(
+                            "message.earth_on_minecraft.hand_crank.battery",
+                            accepted,
+                            battery.getEnergyStored(),
+                            battery.getEnergyCapacity()).withStyle(net.minecraft.ChatFormatting.AQUA));
+                }
+                player.swing(hand, true);
+            }
+            return InteractionResult.SUCCESS;
+        }
         return open(level, pos, player);
     }
 

@@ -137,6 +137,11 @@ public class ProcessingMachineMenu extends AbstractContainerMenu {
         }
         if (container instanceof ProcessingMachineBlockEntity machine && id == BUTTON_MANUAL_STEP) {
             machine.triggerManualWork(40);
+            if (machine.getLevel() != null) {
+                MachineFeedback.emitManualCrank(
+                        machine.getLevel(), machine.getBlockPos(), machine.getBlockState(), machine.kind());
+            }
+            player.swing(net.minecraft.world.InteractionHand.MAIN_HAND, true);
             return true;
         }
         if (container instanceof ProcessingMachineBlockEntity machine

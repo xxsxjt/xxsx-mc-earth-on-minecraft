@@ -19,7 +19,6 @@
     "earth_on_minecraft:flotation_cell",
     "earth_on_minecraft:gas_separator",
     "earth_on_minecraft:gem_cutter",
-    "earth_on_minecraft:glass_kiln_controller",
     "earth_on_minecraft:industrial_kiln",
     "earth_on_minecraft:industrial_machine_casing",
     "earth_on_minecraft:kimberlite",
@@ -31,7 +30,6 @@
     "earth_on_minecraft:powder_press",
     "earth_on_minecraft:rare_earth_carbonatite",
     "earth_on_minecraft:rich_magnetite_ore",
-    "earth_on_minecraft:shaft_furnace_controller",
     "earth_on_minecraft:smelter",
     "earth_on_minecraft:steam_cracker",
     "earth_on_minecraft:steam_turbine_generator",
@@ -39,6 +37,8 @@
     "earth_on_minecraft:synthesis_loop",
     "earth_on_minecraft:tablet_press",
     "earth_on_minecraft:thickener",
-    "earth_on_minecraft:water_treatment_unit"
+    "earth_on_minecraft:water_treatment_unit",
+    "earth_on_minecraft:autoclave",
+    "earth_on_minecraft:uraninite_ore"
   ]
 }

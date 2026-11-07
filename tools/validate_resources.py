@@ -344,6 +344,13 @@ def registry_ids() -> tuple[list[str], list[str], list[str]]:
             match.group(1)
             for match in re.finditer(r'new Entry\("([a-z0-9_]+)"', lode_blocks)
         )
+    depleted_blocks_path = JAVA_ROOT / "SpecDepletedBlocks.java"
+    if depleted_blocks_path.exists():
+        depleted_blocks = depleted_blocks_path.read_text(encoding="utf-8")
+        block_ids.extend(
+            match.group(1)
+            for match in re.finditer(r'new Entry\("([a-z0-9_]+)"', depleted_blocks)
+        )
     direct_item_ids = [
         match.group(1)
         for match in re.finditer(r'DeferredItem<[^>]+>\s+\w+\s*=\s*\w+\("([a-z0-9_]+)"', java)

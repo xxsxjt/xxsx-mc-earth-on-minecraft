@@ -28,7 +28,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:calcite_dust",
+          "name": "earth_on_minecraft:tailings_dust",
           "functions": [
             {
               "function": "minecraft:set_count",

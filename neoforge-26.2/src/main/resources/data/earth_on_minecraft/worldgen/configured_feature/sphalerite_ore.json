@@ -1,17 +1,9 @@
 {
+  "type": "minecraft:ore",
   "config": {
-    "discard_chance_on_air_exposure": 0.45,
-    "size": 16,
+    "discard_chance_on_air_exposure": 0.8,
+    "size": 14,
     "targets": [
-      {
-        "state": {
-          "Name": "earth_on_minecraft:sphalerite_ore"
-        },
-        "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "minecraft:deepslate_ore_replaceables"
-        }
-      },
       {
         "state": {
           "Name": "earth_on_minecraft:sphalerite_ore"
@@ -20,8 +12,16 @@
           "predicate_type": "minecraft:tag_match",
           "tag": "minecraft:stone_ore_replaceables"
         }
+      },
+      {
+        "state": {
+          "Name": "earth_on_minecraft:sphalerite_ore"
+        },
+        "target": {
+          "predicate_type": "minecraft:tag_match",
+          "tag": "minecraft:deepslate_ore_replaceables"
+        }
       }
     ]
-  },
-  "type": "minecraft:ore"
+  }
 }
