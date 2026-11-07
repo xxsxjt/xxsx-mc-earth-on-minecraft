@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:dandelion",
+    "minecraft:sugar",
+    "minecraft:charcoal"
+  ],
+  "result": {
+    "id": "earth_on_minecraft:aspirin",
+    "count": 2
+  }
+}

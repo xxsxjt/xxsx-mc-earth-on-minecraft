@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SWS",
+    "SWS"
+  ],
+  "key": {
+    "S": "minecraft:stick",
+    "W": "minecraft:string"
+  },
+  "result": {
+    "id": "earth_on_minecraft:splint",
+    "count": 2
+  }
+}

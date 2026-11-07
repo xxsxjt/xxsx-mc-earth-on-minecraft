@@ -457,6 +457,14 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
                     supplied = true;
                     machine.driveState = DriveState.GRID_ACTIVE;
                     changed = true;
+                } else if (isKineticDriveItem(machine.items.get(SLOT_FUEL))) {
+                    supplied = true;
+                    machine.driveState = DriveState.KINETIC_ACTIVE;
+                } else if (machine.manualWorkTicks > 0) {
+                    machine.manualWorkTicks--;
+                    supplied = true;
+                    machine.driveState = DriveState.MANUAL_ACTIVE;
+                    changed = true;
                 } else {
                     if (machine.burnTime <= 0 && machine.tryConsumeFuel()) {
                         changed = true;
@@ -1069,6 +1077,32 @@ public class ProcessingMachineBlockEntity extends BaseContainerBlockEntity imple
         }
         this.manualWorkTicks = Math.min(160, Math.max(0, this.manualWorkTicks) + Math.max(1, ticks));
         setChanged();
+    }
+
+    public boolean supportsCrankAttachment() {
+        return kind().powerMode().manualFallback() || energyCapacity() > 0;
+    }
+
+    public boolean canCrankTurn() {
+        if (kind().powerMode().manualFallback() && this.manualWorkTicks < 160) {
+            return true;
+        }
+        return energyCapacity() > 0 && this.energyStored < energyCapacity();
+    }
+
+    public void applyCrankTurn(int ticks) {
+        boolean updated = false;
+        if (kind().powerMode().manualFallback()) {
+            this.manualWorkTicks = Math.min(160, Math.max(0, this.manualWorkTicks) + Math.max(1, ticks));
+            updated = true;
+        }
+        if (energyCapacity() > 0 && this.energyStored < energyCapacity()) {
+            this.energyStored = Math.min(energyCapacity(), Math.max(0, this.energyStored) + Math.max(1, ticks * 3));
+            updated = true;
+        }
+        if (updated) {
+            setChanged();
+        }
     }
 
     public boolean hasKineticDrive(Level level, BlockPos pos) {

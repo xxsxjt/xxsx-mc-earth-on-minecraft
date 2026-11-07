@@ -57,8 +57,17 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        Item ae2Crank = net.minecraft.core.registries.BuiltInRegistries.ITEM
+                .getOptional(Identifier.fromNamespaceAndPath("ae2", "crank"))
+                .orElse(null);
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
             registration.addCraftingStation(recipeTypeFor(kind), machineFor(kind));
+            if (kind.powerMode().manualFallback()) {
+                registration.addCraftingStation(recipeTypeFor(kind), EarthOnMinecraft.HAND_CRANK.get());
+                if (ae2Crank != null) {
+                    registration.addCraftingStation(recipeTypeFor(kind), ae2Crank);
+                }
+            }
         }
         registration.addCraftingStation(IronworkingJeiCategory.RECIPE_TYPE, EarthOnMinecraft.IRONWORKING_ANVIL.get());
     }
@@ -243,7 +252,10 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
                 Component.translatable(kind.displayNameKey()).withStyle(ChatFormatting.GOLD),
                 Component.translatable(kind.descriptionKey()).withStyle(JEI_BODY),
                 lineKey("tooltip.earth_on_minecraft.machine.use", ChatFormatting.AQUA),
-                lineKey("tooltip.earth_on_minecraft.machine.fuel", ChatFormatting.YELLOW),
+                Component.translatable(kind.powerMode().labelKey()).withStyle(ChatFormatting.YELLOW),
+                kind.powerMode().manualFallback()
+                        ? lineKey("tooltip.earth_on_minecraft.machine.crank_hint", ChatFormatting.GOLD)
+                        : lineKey("tooltip.earth_on_minecraft.machine.fuel", ChatFormatting.YELLOW),
                 Component.translatable(MachineMultiblock.patternFor(kind).descriptionKey()).withStyle(ChatFormatting.GREEN),
                 lineKey("tooltip.earth_on_minecraft.machine.redstone", ChatFormatting.GREEN),
                 lineKey("tooltip.earth_on_minecraft.machine.routes", JEI_HINT, ProcessingMachineBlock.recipesFor(kind).size()));

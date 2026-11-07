@@ -258,6 +258,7 @@ public class EarthOnMinecraft {
     public static final DeferredItem<Item> SPONGE_IRON = item("sponge_iron");
     public static final DeferredItem<Item> WROUGHT_IRON = item("wrought_iron");
     public static final DeferredItem<GeologyHammerItem> GEOLOGY_HAMMER = item("geology_hammer", GeologyHammerItem::new);
+    public static final DeferredItem<HandCrankItem> HAND_CRANK = customItem("hand_crank", HandCrankItem::new);
     public static final DeferredItem<?> IRONWORKING_ANVIL_ITEM = itemForBlock(
             "ironworking_anvil", IRONWORKING_ANVIL, "tooltip.earth_on_minecraft.ironworking_anvil");
     public static final DeferredItem<Item> COPPER_CONCENTRATE = item("copper_concentrate");
@@ -525,6 +526,7 @@ public class EarthOnMinecraft {
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.Fluid.BLOCK, PROCESSING_MACHINE_BLOCK_ENTITY.get(),
                 (machine, side) -> machine.tank());
+        Ae2CrankCompat.register(event);
     }
 
     private static void addLegacyAliases() {
@@ -646,6 +648,12 @@ public class EarthOnMinecraft {
 
     private static DeferredItem<GeologyHammerItem> item(String id, java.util.function.Function<Item.Properties, GeologyHammerItem> factory) {
         DeferredItem<GeologyHammerItem> item = ITEMS.registerItem(id, factory, props -> props);
+        TAB_ITEMS.add(item);
+        return item;
+    }
+
+    private static <T extends Item> DeferredItem<T> customItem(String id, java.util.function.Function<Item.Properties, T> factory) {
+        DeferredItem<T> item = ITEMS.registerItem(id, factory, props -> props);
         TAB_ITEMS.add(item);
         return item;
     }

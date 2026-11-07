@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "W",
+    "S"
+  ],
+  "key": {
+    "W": "earth_on_minecraft:wrought_iron",
+    "S": "minecraft:stick"
+  },
+  "result": {
+    "id": "earth_on_minecraft:dagger",
+    "count": 1
+  }
+}

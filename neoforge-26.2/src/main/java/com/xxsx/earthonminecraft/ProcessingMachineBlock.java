@@ -91,6 +91,16 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
             if (machine.tryInteractWithFluidItem(player, hand, stack)) {
                 return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
             }
+            if ((stack.getItem() instanceof HandCrankItem || Ae2CrankCompat.isAe2CrankItem(stack))
+                    && machine.canCrankTurn()) {
+                if (!level.isClientSide()) {
+                    machine.applyCrankTurn(HandCrankItem.CRANK_WORK_TICKS);
+                    if (stack.isDamageableItem()) {
+                        stack.hurtAndBreak(1, player, hand);
+                    }
+                }
+                return level.isClientSide() ? InteractionResult.SUCCESS : InteractionResult.SUCCESS_SERVER;
+            }
         }
         if (player.isShiftKeyDown() && this.kind.powerMode().manualFallback()
                 && level.getBlockEntity(pos) instanceof ProcessingMachineBlockEntity machine) {
@@ -436,6 +446,33 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
 
         recipes.add(rWithCoke(Kind.REDUCTION_FURNACE, EarthOnMinecraft.IRON_CONCENTRATE::get,
                 "铁精矿焦炭还原；需要焦炭装料", out(EarthOnMinecraft.SPONGE_IRON::get, 1), out(EarthOnMinecraft.SLAG::get, 1)));
+        recipes.add(new Recipe(Kind.REDUCTION_FURNACE,
+                List.of(in(EarthOnMinecraft.IRON_CONCENTRATE::get, 1), in(() -> Items.CHARCOAL, 1)),
+                "铁精矿木炭快速还原（前期免焦炭高产路线）",
+                List.of(out(EarthOnMinecraft.SPONGE_IRON::get, 2), out(EarthOnMinecraft.SLAG::get, 1)),
+                false, 120, 48, "fast_charcoal_iron_concentrate",
+                List.of(), List.of(), null, 1150, 101, "Fe3O4 + 2C(charcoal) -> 2 sponge_iron + slag"));
+        recipes.add(new Recipe(Kind.REDUCTION_FURNACE,
+                List.of(in(EarthOnMinecraft.MAGNETITE_DUST::get, 1), in(() -> Items.CHARCOAL, 1)),
+                "磁铁矿粉木炭快速直接还原（免焦炭）",
+                List.of(out(EarthOnMinecraft.SPONGE_IRON::get, 2), out(EarthOnMinecraft.SLAG::get, 1)),
+                false, 120, 48, "fast_charcoal_magnetite_dust",
+                List.of(), List.of(), null, 1150, 101, "Fe3O4 + C -> 2 sponge_iron"));
+        recipes.add(new Recipe(Kind.REDUCTION_FURNACE,
+                List.of(in(EarthOnMinecraft.HEMATITE_DUST::get, 1), in(() -> Items.CHARCOAL, 1)),
+                "赤铁矿粉木炭快速直接还原（免焦炭）",
+                List.of(out(EarthOnMinecraft.SPONGE_IRON::get, 2), out(EarthOnMinecraft.SLAG::get, 1)),
+                false, 120, 48, "fast_charcoal_hematite_dust",
+                List.of(), List.of(), null, 1150, 101, "Fe2O3 + C -> 2 sponge_iron"));
+        recipes.add(r(Kind.SMELTER, EarthOnMinecraft.SPONGE_IRON::get,
+                "海绵铁熔炼炉快速精炼（高产熟铁坯）",
+                out(EarthOnMinecraft.WROUGHT_IRON::get, 2), out(EarthOnMinecraft.SLAG::get, 1)));
+        recipes.add(r(Kind.ANVIL, EarthOnMinecraft.WROUGHT_IRON::get,
+                "熟铁坯锻砧台锻造标准熟铁剑",
+                out(SpecItems.BY_ID.get("iron_sword")::get, 1)));
+        recipes.add(r(Kind.ANVIL, () -> Items.IRON_INGOT,
+                "铁锭锻砧台锻造重型战锤",
+                out(SpecItems.BY_ID.get("war_hammer")::get, 1)));
         recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.ROASTED_COPPER_CONCENTRATE::get, "焙烧铜精矿还原", out(() -> Items.COPPER_INGOT, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.GOLD_CONCENTRATE::get, "金精矿熔炼", out(() -> Items.GOLD_INGOT, 1), out(EarthOnMinecraft.SLAG::get, 1)));
         recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.COAL_DUST::get, "煤粉压焦近似处理", out(() -> Items.COAL, 1)));
@@ -1281,7 +1318,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
      * </ul>
      */
     public enum PowerMode {
-        LOCAL_OR_GRID(true, true, false, false, false, "screen.earth_on_minecraft.machine.power.local_or_grid"),
+        LOCAL_OR_GRID(true, true, false, true, false, "screen.earth_on_minecraft.machine.power.local_or_grid"),
         HEAT_OR_GRID(true, true, true, false, false, "screen.earth_on_minecraft.machine.power.heat_or_grid"),
         GRID_ONLY(true, false, false, false, false, "screen.earth_on_minecraft.machine.power.grid_only"),
         MANUAL_OR_HEAT(false, true, false, true, false, "screen.earth_on_minecraft.machine.power.manual_or_heat"),

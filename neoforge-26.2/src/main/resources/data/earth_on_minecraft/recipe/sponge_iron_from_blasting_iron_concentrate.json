@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "group": "sponge_iron",
+  "ingredient": "earth_on_minecraft:iron_concentrate",
+  "result": {
+    "id": "earth_on_minecraft:sponge_iron",
+    "count": 2
+  },
+  "experience": 0.5,
+  "cookingtime": 80
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "  S",
+    " SS",
+    "CI "
+  ],
+  "key": {
+    "S": "minecraft:stick",
+    "C": "minecraft:cobblestone",
+    "I": "minecraft:flint"
+  },
+  "result": {
+    "id": "earth_on_minecraft:hand_crank",
+    "count": 1
+  }
+}

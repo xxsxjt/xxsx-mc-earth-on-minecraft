@@ -24,11 +24,11 @@ public class IronworkingAnvilBlock extends Block {
     protected InteractionResult useItemOn(ItemStack hammer, BlockState state, Level level, BlockPos pos,
                                           Player player, InteractionHand hand, BlockHitResult hitResult) {
         InteractionHand hammerHand = hand;
-        if (player.getItemInHand(hammerHand).getItem() != EarthOnMinecraft.GEOLOGY_HAMMER.get()) {
+        if (!EarthMedicalAndWeaponSupport.isAnvilHammer(player.getItemInHand(hammerHand))) {
             hammerHand = hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
         }
         ItemStack activeHammer = player.getItemInHand(hammerHand);
-        if (activeHammer.getItem() != EarthOnMinecraft.GEOLOGY_HAMMER.get()) {
+        if (!EarthMedicalAndWeaponSupport.isAnvilHammer(activeHammer)) {
             return InteractionResult.PASS;
         }
         InteractionHand workpieceHand = hammerHand == InteractionHand.MAIN_HAND
@@ -47,6 +47,10 @@ public class IronworkingAnvilBlock extends Block {
         }
 
         ItemStack output = result.get();
+        if ((workpiece.is(EarthOnMinecraft.SPONGE_IRON.get()) || workpiece.is(EarthOnMinecraft.WROUGHT_IRON.get()))
+                && (hearthTempK >= 950 || activeHammer.getItem() != EarthOnMinecraft.GEOLOGY_HAMMER.get())) {
+            output.grow(1);
+        }
         workpiece.shrink(1);
         if (workpiece.isEmpty()) {
             player.setItemInHand(workpieceHand, output);

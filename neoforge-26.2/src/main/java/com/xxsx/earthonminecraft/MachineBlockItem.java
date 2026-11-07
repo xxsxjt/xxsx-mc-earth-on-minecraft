@@ -29,6 +29,9 @@ public class MachineBlockItem extends BlockItem {
         lines.accept(Component.translatable(kind.descriptionKey()).withStyle(ChatFormatting.GRAY));
         lines.accept(Component.translatable("tooltip.earth_on_minecraft.machine.use").withStyle(ChatFormatting.AQUA));
         lines.accept(Component.translatable(kind.powerMode().labelKey()).withStyle(ChatFormatting.YELLOW));
+        if (kind.powerMode().manualFallback()) {
+            lines.accept(Component.translatable("tooltip.earth_on_minecraft.machine.crank_hint").withStyle(ChatFormatting.GOLD));
+        }
         lines.accept(Component.translatable("screen.earth_on_minecraft.machine.spec",
                 Math.max(1, (kind.processTicks() + 19) / 20), kind.energyPerTick()).withStyle(ChatFormatting.AQUA));
         lines.accept(Component.translatable(MachineMultiblock.patternFor(kind).descriptionKey()).withStyle(ChatFormatting.GREEN));

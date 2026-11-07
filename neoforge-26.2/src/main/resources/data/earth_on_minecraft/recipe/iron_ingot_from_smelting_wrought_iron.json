@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 140,
+  "experience": 0.4,
+  "ingredient": "earth_on_minecraft:wrought_iron",
+  "result": {
+    "id": "minecraft:iron_ingot",
+    "count": 1
+  }
+}

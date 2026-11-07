@@ -1134,7 +1134,10 @@ public final class SpecItems {
                             GemComponent.ColorGrade.MEDIUM, 1.0, GemComponent.Treatment.NONE,
                             GemComponent.Cut.ROUGH, "", 0));
             case "earth_on_minecraft:tool_quality" -> props.component(EarthDataComponents.TOOL_QUALITY.get(),
-                    ToolQualityComponent.DEFAULT);
+                    ToolQualityComponent.DEFAULT) != null
+                    ? EarthMedicalAndWeaponSupport.applyWeaponAttributes(entry.id(),
+                            props.component(EarthDataComponents.TOOL_QUALITY.get(), ToolQualityComponent.DEFAULT))
+                    : props;
             case "earth_on_minecraft:material_batch" -> props.component(EarthDataComponents.MATERIAL_BATCH.get(),
                     MaterialBatch.defaultFor(entry.id()));
             case "earth_on_minecraft:metal_batch" -> props.component(EarthDataComponents.METAL_BATCH.get(),

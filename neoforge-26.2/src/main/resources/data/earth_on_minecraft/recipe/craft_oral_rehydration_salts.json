@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "earth_on_minecraft:salt_dust",
+    "minecraft:sugar",
+    "minecraft:paper"
+  ],
+  "result": {
+    "id": "earth_on_minecraft:oral_rehydration_salts",
+    "count": 2
+  }
+}

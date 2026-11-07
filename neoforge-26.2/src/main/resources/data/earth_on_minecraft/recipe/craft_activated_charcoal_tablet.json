@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:charcoal",
+    "minecraft:sugar",
+    "minecraft:clay_ball"
+  ],
+  "result": {
+    "id": "earth_on_minecraft:activated_charcoal_tablet",
+    "count": 3
+  }
+}
