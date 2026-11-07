@@ -35,8 +35,8 @@ import java.util.Optional;
 public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfiguration> {
     public static final int MIN_BLOCKS = 6;
     public static final int MAX_SIGNALS = 3;
-    private static final int HALO_RADIUS = 2;
-    private static final float HALO_SKIP_CHANCE = 0.3F;
+    private static final int HALO_RADIUS = 1;
+    private static final float HALO_SKIP_CHANCE = 0.65F;
 
     /** A signal to place: which lode, how many blocks backed it, and the surface column. */
     public record Signal(String lodeId, int blocks, int x, int z) {
@@ -106,13 +106,10 @@ public final class LodeSurfaceSignalFeature extends Feature<NoneFeatureConfigura
                     }
                     boolean topReplaced = replace(level, top, state);
                     placed |= topReplaced;
-                    if (random.nextBoolean() && topReplaced) {
-                        placed |= replace(level, top.below(), state);
-                    }
                 }
             }
         } else {
-            int count = 1 + random.nextInt(3);
+            int count = 1 + random.nextInt(2);
             for (int i = 0; i < count; i++) {
                 int dx = i == 0 ? 0 : random.nextInt(3) - 1;
                 int dz = i == 0 ? 0 : random.nextInt(3) - 1;

@@ -138,6 +138,7 @@ public final class DepositSpec {
 
     /** The lode a block belongs to, or a synthetic one so the reserve still works. */
     public static Identifier lodeFor(Block block) {
+        bind();
         Lode lode = BY_BLOCK.get(block);
         if (lode != null) {
             return Identifier.fromNamespaceAndPath(EarthOnMinecraft.MODID, lode.id());
@@ -148,6 +149,7 @@ public final class DepositSpec {
 
     /** The depleted block for a lode id, or {@code null} when the spec names none. */
     public static net.minecraft.world.level.block.state.BlockState byLode(Identifier lodeId) {
+        bind();
         Lode lode = BY_ID.get(lodeId.getPath());
         if (lode == null || lode.depletedBlockId().isEmpty()) {
             return null;
@@ -157,16 +159,19 @@ public final class DepositSpec {
     }
 
     public static boolean isLode(Block block) {
+        bind();
         return BY_BLOCK.containsKey(block);
     }
 
     /** The live block that represents a lode, or {@code null} for an unknown lode id. */
     public static Block blockOf(String lodeId) {
+        bind();
         return BLOCK_BY_LODE.get(lodeId);
     }
 
     /** Lode id path of a live lode block, or {@code null} when the block is not a live lode. */
     public static String lodeIdOf(Block block) {
+        bind();
         Lode lode = BY_BLOCK.get(block);
         return lode == null ? null : lode.id();
     }
@@ -176,6 +181,7 @@ public final class DepositSpec {
     }
 
     public static java.util.Collection<Lode> lodes() {
+        bind();
         return BY_ID.values();
     }
 }
