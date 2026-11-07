@@ -284,7 +284,9 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         if (recipes == null) {
             List<Recipe> table = new ArrayList<>(createRecipes());
             table.addAll(createSpecRecipes());
-            recipes = List.copyOf(table);
+            recipes = table.stream()
+                    .filter(PlayableContentFilter::isPlayableRecipe)
+                    .toList();
         }
         return recipes;
     }
@@ -893,6 +895,134 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
                 false, 600, 0, "optical_glass_kiln",
                 List.of(), List.of(), null, 1500, 101, "SiO2 + B2O3 -> optical_glass"));
 
+        // ---- Early-to-mid playable progression loop closures ----
+        // 1. Borate deposit comminution for optical glass
+        recipes.add(r(Kind.CRUSHER, SpecBlocks.BY_ID.get("borate_deposit")::get,
+                "硼砂矿床破碎富集", out(EarthOnMinecraft.BORATE_MINERAL_DUST::get, 3), out(EarthOnMinecraft.SALT_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, SpecBlocks.BY_ID.get("chromite_ore")::get,
+                "铬铁矿破碎", out(EarthOnMinecraft.CHROMITE_DUST::get, 3), out(EarthOnMinecraft.MAFIC_SILICATE_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, SpecBlocks.BY_ID.get("galena_ore")::get,
+                "方铅矿破碎", out(EarthOnMinecraft.GALENA_DUST::get, 3), out(EarthOnMinecraft.PYRITE_DUST::get, 1)));
+        recipes.add(r(Kind.CRUSHER, SpecBlocks.BY_ID.get("sphalerite_ore")::get,
+                "闪锌矿破碎", out(EarthOnMinecraft.SPHALERITE_DUST::get, 3), out(EarthOnMinecraft.PYRITE_DUST::get, 1)));
+        recipes.add(r(Kind.ROASTER, EarthOnMinecraft.SPHALERITE_DUST::get,
+                "闪锌矿氧化焙烧", out(EarthOnMinecraft.ZINC_OXIDE::get, 2), out(EarthOnMinecraft.SULFUR_DUST::get, 1)));
+        recipes.add(r(Kind.REDUCTION_FURNACE, EarthOnMinecraft.GALENA_DUST::get,
+                "方铅矿直接还原炼铅", out(EarthOnMinecraft.LEAD_INGOT::get, 1), out(EarthOnMinecraft.SLAG::get, 1)));
+
+        // 2. Jade & gemstone rough extraction + grinding wheels & carving tool on Anvil
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.EMERALD_BERYL_VEIN::get,
+                "绿柱石玉脉粗碎提取玉石原石", out(SpecItems.BY_ID.get("gem_rough")::get, 2), out(EarthOnMinecraft.QUARTZ_DUST::get, 2)));
+        recipes.add(r(Kind.CRUSHER, EarthOnMinecraft.LAPIS_LAZULI_ORE::get,
+                "青金石矿脉粗碎", out(() -> Items.LAPIS_LAZULI, 2), out(SpecItems.BY_ID.get("gem_rough")::get, 1), out(EarthOnMinecraft.CALCITE_DUST::get, 1)));
+        recipes.add(r(Kind.ANVIL, () -> Items.EMERALD,
+                "绿宝石解理整形为玉石毛坯", out(SpecItems.BY_ID.get("gem_rough")::get, 2)));
+        recipes.add(r(Kind.ANVIL, () -> Items.AMETHYST_SHARD,
+                "紫水晶整形为宝石毛坯", out(SpecItems.BY_ID.get("gem_rough")::get, 1)));
+        recipes.add(new Recipe(Kind.ANVIL,
+                List.of(in(() -> Items.IRON_INGOT, 1), in(EarthOnMinecraft.SILICA_DUST::get, 2)),
+                "锻打粗磨砂轮（硅砂烧结包镶）",
+                List.of(out(SpecItems.BY_ID.get("grinding_wheel_coarse")::get, 1)),
+                false, 80, 0, "early_grinding_wheel_coarse"));
+        recipes.add(new Recipe(Kind.ANVIL,
+                List.of(in(() -> Items.IRON_INGOT, 1), in(EarthOnMinecraft.QUARTZ_DUST::get, 2)),
+                "锻打细磨砂轮（细石英砂）",
+                List.of(out(SpecItems.BY_ID.get("grinding_wheel_fine")::get, 1)),
+                false, 80, 0, "early_grinding_wheel_fine"));
+        recipes.add(new Recipe(Kind.ANVIL,
+                List.of(in(() -> Items.IRON_INGOT, 1), in(EarthOnMinecraft.DIAMOND_GRIT::get, 1)),
+                "锻打金刚石抛光轮",
+                List.of(out(SpecItems.BY_ID.get("grinding_wheel_polish")::get, 1)),
+                false, 100, 0, "early_grinding_wheel_polish"));
+        recipes.add(new Recipe(Kind.ANVIL,
+                List.of(in(EarthOnMinecraft.WROUGHT_IRON::get, 1), in(EarthOnMinecraft.QUARTZ_DUST::get, 1)),
+                "锻打玉雕砣刀",
+                List.of(out(SpecItems.BY_ID.get("gem_carving_tool")::get, 1)),
+                false, 80, 0, "early_gem_carving_tool"));
+        recipes.add(r(Kind.ANVIL, () -> Items.COPPER_INGOT,
+                "铜锭手工延展拉制铜线", out(EarthOnMinecraft.COPPER_WIRE::get, 3)));
+
+        // 3. Masonry, textile & leather early loop closures
+        recipes.add(r(Kind.CARPENTRY_BENCH, () -> Blocks.DIRT,
+                "夯筑夯土块（窑炉基础砌体）", out(SpecBlocks.BY_ID.get("packed_earth")::get, 2)));
+        recipes.add(r(Kind.MILL, () -> Items.WHEAT,
+                "原版小麦研磨成面粉与植物纤维", out(SpecItems.BY_ID.get("flour")::get, 2), out(EarthOnMinecraft.CELLULOSE_FIBER::get, 1)));
+        recipes.add(r(Kind.STONE_MILL, () -> Items.WHEAT,
+                "石磨细磨原版小麦成面粉", out(SpecItems.BY_ID.get("flour")::get, 2)));
+        recipes.add(r(Kind.NOODLE_PRESS, SpecItems.BY_ID.get("flour")::get,
+                "面粉揉制面团", out(SpecItems.BY_ID.get("dough")::get, 2)));
+        recipes.add(r(Kind.LOOM, EarthOnMinecraft.CELLULOSE_FIBER::get,
+                "植物纤维纺制亚麻线", out(SpecItems.BY_ID.get("flax_thread")::get, 2)));
+        recipes.add(r(Kind.LOOM, () -> Items.STRING,
+                "原版线纺制紧实亚麻线", out(SpecItems.BY_ID.get("flax_thread")::get, 2)));
+        recipes.add(r(Kind.LOOM, () -> Blocks.WHITE_WOOL,
+                "羊毛织造急救绷带", out(SpecItems.BY_ID.get("bandage")::get, 3)));
+        recipes.add(r(Kind.TANNERY, () -> Items.LEATHER,
+                "原版皮革鞣制整理", out(SpecItems.BY_ID.get("leather")::get, 2)));
+
+        // 4. Functional herbal medicines & tablet pressing (all 10 real medicines craftable early)
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(SpecItems.BY_ID.get("honeysuckle")::get, 1), in(SpecItems.BY_ID.get("beeswax")::get, 1)),
+                "金银花蜂蜡熬制抗菌药膏",
+                List.of(out(SpecItems.BY_ID.get("antibiotic_ointment")::get, 2)),
+                false, 80, 0, "early_antibiotic_ointment_honeysuckle"));
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(SpecItems.BY_ID.get("coptis")::get, 1), in(() -> Items.HONEYCOMB, 1)),
+                "黄连蜜蜡熬制抗菌药膏",
+                List.of(out(SpecItems.BY_ID.get("antibiotic_ointment")::get, 2)),
+                false, 80, 0, "early_antibiotic_ointment_coptis"));
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(SpecItems.BY_ID.get("artemisia_annua")::get, 1), in(SpecItems.BY_ID.get("beeswax")::get, 1)),
+                "青蒿蜂蜡熬制清凉烫伤膏",
+                List.of(out(SpecItems.BY_ID.get("burn_ointment")::get, 2)),
+                false, 80, 0, "early_burn_ointment_artemisia"));
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(SpecItems.BY_ID.get("licorice")::get, 1), in(() -> Items.HONEYCOMB, 1)),
+                "甘草蜜蜡熬制烫伤膏",
+                List.of(out(SpecItems.BY_ID.get("burn_ointment")::get, 2)),
+                false, 80, 0, "early_burn_ointment_licorice"));
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(EarthOnMinecraft.SALT_DUST::get, 1), in(() -> Items.GLASS_BOTTLE, 1)),
+                "精盐煮沸配制无菌生理盐水",
+                List.of(out(SpecItems.BY_ID.get("saline_solution")::get, 2)),
+                false, 60, 0, "early_saline_solution"));
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(EarthOnMinecraft.GYPSUM_DUST::get, 2), in(SpecItems.BY_ID.get("bandage")::get, 1)),
+                "熟石膏绷带调配正骨石膏夹",
+                List.of(out(SpecItems.BY_ID.get("plaster")::get, 2)),
+                false, 80, 0, "early_plaster_herb_table"));
+        recipes.add(new Recipe(Kind.HERB_PROCESSING_TABLE,
+                List.of(in(() -> Items.STICK, 2), in(SpecItems.BY_ID.get("bandage")::get, 1)),
+                "木条绷带绑扎急救夹板",
+                List.of(out(SpecItems.BY_ID.get("splint")::get, 2)),
+                false, 60, 0, "early_splint_herb_table"));
+
+        recipes.add(new Recipe(Kind.TABLET_PRESS,
+                List.of(in(() -> Items.CHARCOAL, 1), in(() -> Items.SUGAR, 1)),
+                "木炭粉加糖辅料压制活性炭解毒片",
+                List.of(out(SpecItems.BY_ID.get("activated_charcoal_tablet")::get, 3)),
+                false, 40, 3, "early_press_charcoal_tablet"));
+        recipes.add(new Recipe(Kind.TABLET_PRESS,
+                List.of(in(SpecItems.BY_ID.get("licorice")::get, 1), in(() -> Items.SUGAR, 1)),
+                "草本水杨苷提取压制阿司匹林镇痛片",
+                List.of(out(SpecItems.BY_ID.get("aspirin")::get, 2)),
+                false, 40, 3, "early_press_aspirin"));
+        recipes.add(new Recipe(Kind.TABLET_PRESS,
+                List.of(in(SpecItems.BY_ID.get("hawthorn_fruit")::get, 1), in(() -> Items.SUGAR, 1)),
+                "山楂果酸压制复合维生素片",
+                List.of(out(SpecItems.BY_ID.get("vitamin_tablet")::get, 3)),
+                false, 40, 3, "early_press_vitamin_hawthorn"));
+        recipes.add(new Recipe(Kind.TABLET_PRESS,
+                List.of(in(() -> Items.APPLE, 1), in(() -> Items.SUGAR, 1)),
+                "鲜果提取物压制维生素片",
+                List.of(out(SpecItems.BY_ID.get("vitamin_tablet")::get, 2)),
+                false, 40, 3, "early_press_vitamin_apple"));
+        recipes.add(new Recipe(Kind.TABLET_PRESS,
+                List.of(in(EarthOnMinecraft.SALT_DUST::get, 1), in(() -> Items.SUGAR, 1)),
+                "氯化钠与糖定量压制口服补液盐",
+                List.of(out(SpecItems.BY_ID.get("oral_rehydration_salts")::get, 3)),
+                false, 40, 3, "early_press_ors"));
+
         return List.copyOf(recipes);
     }
 
@@ -1109,7 +1239,7 @@ public class ProcessingMachineBlock extends Block implements EntityBlock {
         CURING_BARN("烘房", "烘房：用温和热风长期脱水，保留风味并延长保存。", 600, 0, PowerMode.HEAT_ONLY, ProcessFamily.THERMAL),
         FERMENTING_CROCK("发酵缸", "发酵：酒、醋、酱与腌菜，按游戏日计时，不需要电。", 2400, 0, PowerMode.PASSIVE, ProcessFamily.REACTION),
         FILTER_PRESS("压滤机", "压滤：把浆料压成滤饼，滤布磨损后需要更换。", 120, 32, PowerMode.MANUAL_OR_GRID, ProcessFamily.WET_PROCESS),
-        GEM_CUTTER("宝石切割机", "切磨：按解理与硬度切出刻面，切割角度决定成品净度。", 60, 6, PowerMode.GRID_ONLY, ProcessFamily.FORMING),
+        GEM_CUTTER("宝石切割机", "切磨：按解理与硬度切出刻面，切割角度决定成品净度。", 60, 6, PowerMode.LOCAL_OR_GRID, ProcessFamily.FORMING),
         HERB_PROCESSING_TABLE("药材处理台", "炮制：把草药洗净、切制、干燥或炒制，改变药性。", 120, 0, PowerMode.HEAT_ONLY, ProcessFamily.MIXING),
         LOOM("织布机", "纺织：把纤维纺成线，把线织成布，手摇或水轮驱动。", 100, 0, PowerMode.KINETIC, ProcessFamily.FORMING),
         MILL("磨坊", "磨粉：手摇、水轮或畜力驱动，把谷物与矿物磨成粉。", 60, 0, PowerMode.KINETIC, ProcessFamily.COMMINUTION),

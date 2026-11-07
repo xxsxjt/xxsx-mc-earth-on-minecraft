@@ -22,6 +22,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ToolMaterial;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
 
@@ -36,7 +37,7 @@ import java.util.function.Consumer;
 public final class EarthMedicalAndWeaponSupport {
     private static final Identifier BASE_ATTACK_DAMAGE_ID = Identifier.withDefaultNamespace("base_attack_damage");
     private static final Identifier BASE_ATTACK_SPEED_ID = Identifier.withDefaultNamespace("base_attack_speed");
-    private static final Identifier WEAPON_REACH_ID = EarthOnMinecraft.id("weapon_reach_bonus");
+    private static final Identifier WEAPON_REACH_ID = Identifier.fromNamespaceAndPath("earth_on_minecraft", "weapon_reach_bonus");
 
     public record WeaponSpec(double attackDamageBonus, double attackSpeedDelta, double reachBonus, String roleKey) {
     }
@@ -109,11 +110,37 @@ public final class EarthMedicalAndWeaponSupport {
     private EarthMedicalAndWeaponSupport() {
     }
 
+    public static Map<String, WeaponSpec> weapons() {
+        return WEAPONS;
+    }
+
+    public static Map<String, MedicineSpec> medicines() {
+        return MEDICINES;
+    }
+
     public static Item.Properties applyWeaponAttributes(String id, Item.Properties props) {
         WeaponSpec spec = WEAPONS.get(id);
         if (spec == null) {
             return props;
         }
+        props = switch (id) {
+            case "copper_pickaxe" -> props.pickaxe(ToolMaterial.COPPER, 1.0F, -2.8F);
+            case "iron_pickaxe" -> props.pickaxe(ToolMaterial.IRON, 1.5F, -2.8F);
+            case "steel_pickaxe" -> props.pickaxe(ToolMaterial.DIAMOND, 1.5F, -2.7F).durability(850);
+            case "iron_axe" -> props.axe(ToolMaterial.IRON, 5.0F, -3.0F);
+            case "steel_axe" -> props.axe(ToolMaterial.DIAMOND, 5.5F, -2.9F).durability(850);
+            case "battle_axe" -> props.axe(ToolMaterial.DIAMOND, 5.0F, -3.0F).durability(720);
+            case "wooden_sword" -> props.sword(ToolMaterial.WOOD, 3.0F, -2.4F);
+            case "stone_sword" -> props.sword(ToolMaterial.STONE, 3.0F, -2.4F);
+            case "copper_sword" -> props.sword(ToolMaterial.COPPER, 3.0F, -2.3F);
+            case "iron_sword" -> props.sword(ToolMaterial.IRON, 3.5F, -2.4F);
+            case "steel_sword" -> props.sword(ToolMaterial.DIAMOND, 4.0F, -2.2F).durability(900);
+            case "diamond_sword" -> props.sword(ToolMaterial.DIAMOND, 4.0F, -2.2F);
+            case "dagger" -> props.sword(ToolMaterial.IRON, 2.2F, -1.5F).durability(320);
+            case "spear" -> props.durability(420);
+            case "war_hammer" -> props.pickaxe(ToolMaterial.IRON, 4.5F, -3.1F).durability(680);
+            default -> props;
+        };
         ItemAttributeModifiers.Builder builder = ItemAttributeModifiers.builder()
                 .add(Attributes.ATTACK_DAMAGE,
                         new AttributeModifier(BASE_ATTACK_DAMAGE_ID, spec.attackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),

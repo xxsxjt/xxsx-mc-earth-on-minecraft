@@ -824,7 +824,9 @@ public class EarthOnMinecraft {
                 CreativeModeTab.builder()
                         .title(Component.translatable("itemGroup.earth_on_minecraft"))
                         .icon(() -> new ItemStack(MAGNETITE_CHUNK.get()))
-                        .displayItems((params, output) -> TAB_ITEMS.forEach(output::accept))
+                        .displayItems((params, output) -> TAB_ITEMS.stream()
+                                .filter(PlayableContentFilter::isPlayableItem)
+                                .forEach(output::accept))
                         .build()));
     }
 

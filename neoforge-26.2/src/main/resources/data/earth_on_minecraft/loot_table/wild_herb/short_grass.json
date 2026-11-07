@@ -7,52 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:abalone_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:aconite",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:aconitum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:agrimony",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:alum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:amomum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:angelica",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:angelica_pubescens",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:apricot_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:arisaema",
           "weight": 1
         },
         {
@@ -62,22 +17,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:artemisia_capillaris",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:astragalus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:atractylodes",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:atractylodes_lancea",
           "weight": 1
         },
         {
@@ -87,77 +27,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:biota_leaf",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:biota_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:bitter_orange",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:borax_ore",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:bupleurum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:cardamom",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:cassia_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:centipede_dried",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:chicken_gizzard",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:chrysanthemum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:cicada_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:cinnabar_ore",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:cinnamon_twig",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:codonopsis",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:coix_seed",
           "weight": 1
         },
         {
@@ -167,67 +37,12 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:cornus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:corydalis",
           "weight": 1
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:cuttlebone",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:dandelion",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:dioscorea",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:dried_tangerine_peel",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:earthworm_dried",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:emodin",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:ephedra",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:eucommia_leaf",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:euryale",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:evodia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:finger_citron",
+          "name": "earth_on_minecraft:eucommia_bark",
           "weight": 1
         },
         {
@@ -237,32 +52,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:fossil_bone",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:foxnut",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:gastrodia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:ginseng",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:goji",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:green_tangerine_peel",
           "weight": 1
         },
         {
@@ -277,32 +67,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:hematite_ore",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:honeycomb",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:honeysuckle",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:houttuynia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:imperata",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:isatis_root",
           "weight": 1
         },
         {
@@ -312,92 +77,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:kudzu_root",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:leonurus",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:licorice",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:ligusticum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:lophatherum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:loquat_leaf",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:lotus_leaf",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:lotus_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:lysimachia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:magnolia_flower",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mantis_egg",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mint",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mirabilite",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mosla",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mugwort",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mulberry_leaf",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:mustard_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:notopterygium",
           "weight": 1
         },
         {
@@ -407,102 +87,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "earth_on_minecraft:panax_notoginseng",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:papaya_fruit",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:peach_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:pearl_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:pepperweed_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:perilla",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:phellodendron",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:pinellia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:plantago",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:platycodon",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:polygonum_multiflorum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:purslane",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:radish_seed",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:realgar_ore",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:red_peony",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:reed_root",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
           "name": "earth_on_minecraft:rehmannia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:rhubarb",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:rosa_laevigata",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:rose",
           "weight": 1
         },
         {
@@ -513,86 +98,6 @@
         {
           "type": "minecraft:item",
           "name": "earth_on_minecraft:salvia_miltiorrhiza",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:saposhnikovia",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:schisandra",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:schizonepeta",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:scorpion_dried",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:scutellaria",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:sedum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:silkworm_dried",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:smoked_plum",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:snake_slough",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:sophora_flower",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:talc",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:tortoise_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:tsaoko",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:turtle_shell",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:white_peony",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "earth_on_minecraft:wild_chrysanthemum",
           "weight": 1
         }
       ]

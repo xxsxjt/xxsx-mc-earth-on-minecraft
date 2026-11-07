@@ -2,23 +2,30 @@ package com.xxsx.earthonminecraft.integration.jei;
 
 import com.xxsx.earthonminecraft.EarthOnMinecraft;
 import com.xxsx.earthonminecraft.MachineMultiblock;
+import com.xxsx.earthonminecraft.PlayableContentFilter;
 import com.xxsx.earthonminecraft.ProcessingMachineBlock;
 import com.xxsx.earthonminecraft.RouteGuide;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.types.IRecipeType;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IIngredientManager;
+import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 @JeiPlugin
@@ -37,6 +44,9 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
     public void registerCategories(IRecipeCategoryRegistration registration) {
         var guiHelper = registration.getJeiHelpers().getGuiHelper();
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
+            if (!PlayableContentFilter.isActiveMachine(kind) || ProcessingMachineBlock.recipesFor(kind).isEmpty()) {
+                continue;
+            }
             registration.addRecipeCategories(new ProcessingJeiCategory(guiHelper, kind, recipeTypeFor(kind), machineFor(kind)));
         }
         registration.addRecipeCategories(new IronworkingJeiCategory(guiHelper));
@@ -45,7 +55,13 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
-            registration.addRecipes(recipeTypeFor(kind), ProcessingMachineBlock.recipesFor(kind));
+            if (!PlayableContentFilter.isActiveMachine(kind)) {
+                continue;
+            }
+            List<ProcessingMachineBlock.Recipe> list = ProcessingMachineBlock.recipesFor(kind);
+            if (!list.isEmpty()) {
+                registration.addRecipes(recipeTypeFor(kind), list);
+            }
         }
         registerIronworkingRecipes(registration);
         registerHandbookInfo(registration);
@@ -61,6 +77,9 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
                 .getOptional(Identifier.fromNamespaceAndPath("ae2", "crank"))
                 .orElse(null);
         for (ProcessingMachineBlock.Kind kind : ProcessingMachineBlock.Kind.values()) {
+            if (!PlayableContentFilter.isActiveMachine(kind) || ProcessingMachineBlock.recipesFor(kind).isEmpty()) {
+                continue;
+            }
             registration.addCraftingStation(recipeTypeFor(kind), machineFor(kind));
             if (kind.powerMode().manualFallback()) {
                 registration.addCraftingStation(recipeTypeFor(kind), EarthOnMinecraft.HAND_CRANK.get());
@@ -70,6 +89,22 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
             }
         }
         registration.addCraftingStation(IronworkingJeiCategory.RECIPE_TYPE, EarthOnMinecraft.IRONWORKING_ANVIL.get());
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        IIngredientManager ingredientManager = jeiRuntime.getIngredientManager();
+        List<ItemStack> hidden = new ArrayList<>();
+        for (ItemStack stack : ingredientManager.getAllItemStacks()) {
+            Identifier id = BuiltInRegistries.ITEM.getKey(stack.getItem());
+            if (id != null && EarthOnMinecraft.MODID.equals(id.getNamespace())
+                    && !PlayableContentFilter.isPlayableItemPath(id.getPath())) {
+                hidden.add(stack);
+            }
+        }
+        if (!hidden.isEmpty()) {
+            ingredientManager.removeIngredientsAtRuntime(VanillaTypes.ITEM_STACK, hidden);
+        }
     }
 
     public static IRecipeType<ProcessingMachineBlock.Recipe> recipeTypeFor(ProcessingMachineBlock.Kind kind) {
@@ -248,6 +283,9 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
     }
 
     private static void registerMachine(IRecipeRegistration registration, ItemLike item, ProcessingMachineBlock.Kind kind) {
+        if (!PlayableContentFilter.isActiveMachine(kind) || ProcessingMachineBlock.recipesFor(kind).isEmpty()) {
+            return;
+        }
         registration.addItemStackInfo(new ItemStack(item.asItem()),
                 Component.translatable(kind.displayNameKey()).withStyle(ChatFormatting.GOLD),
                 Component.translatable(kind.descriptionKey()).withStyle(JEI_BODY),
@@ -274,10 +312,6 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
                 lineKey("tooltip.earth_on_minecraft.energy.cable", ChatFormatting.GOLD),
                 lineKey("jei.earth_on_minecraft.energy.cable.0", JEI_BODY),
                 lineKey("jei.earth_on_minecraft.energy.cable.1", ChatFormatting.AQUA));
-        registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.HEAVY_COPPER_POWER_CABLE.get()),
-                lineKey("tooltip.earth_on_minecraft.energy.cable", ChatFormatting.GOLD),
-                lineKey("jei.earth_on_minecraft.energy.cable.0", JEI_BODY),
-                lineKey("jei.earth_on_minecraft.energy.cable.1", ChatFormatting.AQUA));
         registration.addItemStackInfo(new ItemStack(EarthOnMinecraft.BATTERY_BOX.get()),
                 lineKey("tooltip.earth_on_minecraft.energy.battery", ChatFormatting.GOLD),
                 lineKey("jei.earth_on_minecraft.energy.battery.0", JEI_BODY),
@@ -287,6 +321,9 @@ public class EarthOnMinecraftJeiPlugin implements IModPlugin {
     private static void registerRouteInfo(IRecipeRegistration registration) {
         for (Map.Entry<Item, RouteGuide.RouteInfo> entry : RouteGuide.buildRoutesByItem().entrySet()) {
             Item item = entry.getKey();
+            if (!PlayableContentFilter.isPlayableItem(item)) {
+                continue;
+            }
             RouteGuide.RouteInfo info = entry.getValue();
             java.util.List<Component> lines = new java.util.ArrayList<>();
             lines.add(lineKey("jei.earth_on_minecraft.route.header", ChatFormatting.GOLD));
